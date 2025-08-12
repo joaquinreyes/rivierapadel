@@ -46,7 +46,7 @@ class _NotificationScreenState extends ConsumerState<NotificationScreen> {
                 ),
               Text(
                 "NOTIFICATION".trU(context),
-                style: AppTextStyles.panchangBold18,
+                style: AppTextStyles.balooBold18,
               ),
               SizedBox(height: 40.h),
               // const _ClearAllBtn(),

@@ -29,28 +29,28 @@ class __LevelAssessmentTab extends ConsumerState<_LevelAssessmentTab> {
   Widget build(BuildContext context) {
     return SingleChildScrollView(
       child: Container(
-        margin: EdgeInsets.symmetric(horizontal: 40.w),
+        margin: EdgeInsets.symmetric(horizontal: 35.w),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            SizedBox(height: 45.h),
+            SizedBox(height: 20.h),
             Align(
               alignment: Alignment.centerLeft,
               child: Text(
-                'LEVEL_ASSESSMENT'.trU(context),
+                'LEVEL_ASSESSMENT'.tr(context),
                 textAlign: TextAlign.center,
-                style: AppTextStyles.panchangMedium15,
+                style: AppTextStyles.balooMedium20.copyWith(height: 1),
               ),
             ),
-            SizedBox(height: 25.h),
+            SizedBox(height: 8.h),
             Align(
               alignment: Alignment.centerLeft,
               child: Text(
                 "${widget.index + 1}. ${widget.levelQuesiton.question}",
-                style: AppTextStyles.panchangMedium14,
+                style: AppTextStyles.sansRegular16,
               ),
             ),
-            SizedBox(height: 25.h),
+            SizedBox(height: 20.h),
             for (var i = 0;
                 i < (widget.levelQuesiton.options?.length ?? 0);
                 i++) ...[
@@ -58,7 +58,7 @@ class __LevelAssessmentTab extends ConsumerState<_LevelAssessmentTab> {
                 widget.levelQuesiton.options![i],
               ),
             ],
-            SizedBox(height: 37.h),
+            SizedBox(height: 50.h),
             Align(
               alignment: Alignment.centerRight,
               child: SizedBox(
@@ -66,8 +66,8 @@ class __LevelAssessmentTab extends ConsumerState<_LevelAssessmentTab> {
                 child: MainButton(
                   enabled: _canProceed,
                   label: widget.isLastQuestion
-                      ? "FINISH".tr(context)
-                      : 'NEXT'.tr(context),
+                      ? "FINISH".tr(context).capitalEnabled(context, canProceed: _canProceed)
+                      : 'NEXT'.tr(context).capitalEnabled(context, canProceed: _canProceed),
                   showArrow: true,
                   onTap: () async {
                     if (_canProceed) {
@@ -93,16 +93,16 @@ class __LevelAssessmentTab extends ConsumerState<_LevelAssessmentTab> {
           widget.registerModel.levelAnswers[widget.index] = option.value;
         });
       },
-      borderRadius: BorderRadius.circular(5.r),
+      borderRadius: BorderRadius.circular(100.r),
       child: Container(
         width: 311.w,
         padding: EdgeInsets.all(10.h),
         margin: EdgeInsets.symmetric(
-          vertical: 10.h,
+          vertical: 5.h,
         ),
         decoration: BoxDecoration(
-          color: selected ? AppColors.green5 : AppColors.darkGreen5,
-          borderRadius: BorderRadius.circular(5.r),
+          color: selected ? AppColors.darkBlue : AppColors.optionBgColor05,
+          borderRadius: BorderRadius.circular(100.r),
         ),
         child: Row(
           children: [
@@ -112,8 +112,8 @@ class __LevelAssessmentTab extends ConsumerState<_LevelAssessmentTab> {
               child: Text(
                 option.text ?? "",
                 style: !selected
-                    ? AppTextStyles.helveticaLight14
-                    : AppTextStyles.panchangMedium13.copyWith(
+                    ? AppTextStyles.sansRegular14
+                    : AppTextStyles.sansMedium16.copyWith(
                         color: AppColors.white,
                       ),
               ),

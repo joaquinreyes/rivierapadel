@@ -71,7 +71,7 @@ class CustomTextField extends StatefulWidget {
     this.maxLines,
     this.minLines,
     this.autofocus,
-    this.fillColor = AppColors.lightPink,
+    this.fillColor = AppColors.backgroundColor,
     this.initialValue,
     this.borderColor,
     this.isForPopup = false,
@@ -89,8 +89,8 @@ class _CustomTextFieldState extends State<CustomTextField> {
   Widget build(BuildContext context) {
     TextStyle style = widget.style ??
         (widget.isForPopup
-            ? AppTextStyles.helveticaLight12
-            : AppTextStyles.helveticaLight16);
+            ? AppTextStyles.sansRegular13.copyWith(color: AppColors.white)
+            : AppTextStyles.sansRegular18);
     return GestureDetector(
       behavior: HitTestBehavior.opaque,
       onTap: () {
@@ -124,20 +124,20 @@ class _CustomTextFieldState extends State<CustomTextField> {
           fillColor: widget.isForPopup ? AppColors.white25 : widget.fillColor,
           contentPadding: widget.contentPadding ??
               (!widget.isForPopup
-                  ? EdgeInsets.symmetric(vertical: 8.h)
-                  : const EdgeInsets.all(8)),
+                  ? EdgeInsets.symmetric(vertical: 5.h)
+                  : EdgeInsets.symmetric(horizontal: 12.w,vertical: 6.h)),
           alignLabelWithHint: true,
           labelText: widget.labelText,
           labelStyle: widget.isForPopup
-              ? AppTextStyles.panchangBold18
-              : AppTextStyles.panchangBold26,
+              ? AppTextStyles.balooBold18
+              : AppTextStyles.balooMedium19,
           helperText: widget.helperText,
           hintText: widget.hintText,
           hintStyle: widget.hintTextStyle ??
               (widget.isForPopup
-                  ? AppTextStyles.helveticaLight12
+                  ? AppTextStyles.sansRegular13
                       .copyWith(color: AppColors.white55)
-                  : AppTextStyles.helveticaLight16
+                  : AppTextStyles.gothamLight16
                       .copyWith(color: AppColors.darkGreen70)),
           prefix: widget.prefix,
           prefixIcon: widget.prefixIcon,
@@ -163,7 +163,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
                   ? _popupTextFieldBorder()
                   : UnderlineInputBorder(
                       borderSide: BorderSide(
-                        color: widget.borderColor ?? AppColors.green,
+                        color: widget.borderColor ?? AppColors.darkBlue,
                       ),
                     )),
         ),
@@ -176,7 +176,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
       borderSide: const BorderSide(
         color: Colors.transparent,
       ),
-      borderRadius: BorderRadius.circular(0.r),
+      borderRadius: BorderRadius.circular(100.r),
     );
   }
 

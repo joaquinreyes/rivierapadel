@@ -103,7 +103,7 @@ class _SplashBody extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-        color: AppColors.lightPink,
+        color: AppColors.backgroundColor,
         child: const Center(child: _Logo()),
       ),
     );

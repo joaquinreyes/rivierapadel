@@ -93,7 +93,7 @@ class _ChatScreenState extends ConsumerState<ChatScreen> {
         ),
         Text(
           "CHAT".tr(context),
-          style: AppTextStyles.panchangBold18
+          style: AppTextStyles.balooBold18
               .copyWith(height: 0.9, color: AppColors.darkGreen),
           textAlign: TextAlign.center,
         ),
@@ -209,16 +209,16 @@ class _ChatScreenState extends ConsumerState<ChatScreen> {
                                             const EdgeInsets.only(bottom: 5),
                                         child: Text(
                                           "$name (${role.trU(context)})",
-                                          style: AppTextStyles.panchangBold11
+                                          style: AppTextStyles.balooBold11
                                               .copyWith(
                                                   color: isPlayer
-                                                      ? AppColors.green
+                                                      ? AppColors.darkBlue
                                                       : AppColors.blue35),
                                           textAlign: TextAlign.start,
                                         )),
                                   Text(
                                     value,
-                                    style: AppTextStyles.helveticaLight14
+                                    style: AppTextStyles.gothamLight14
                                         .copyWith(color: AppColors.darkGreen),
                                     textAlign: TextAlign.start,
                                   )
@@ -227,7 +227,7 @@ class _ChatScreenState extends ConsumerState<ChatScreen> {
                           SizedBox(width: 5.w),
                           Text(
                             time,
-                            style: AppTextStyles.helveticaLight12
+                            style: AppTextStyles.gothamLight12
                                 .copyWith(color: AppColors.darkGreen70),
                             textAlign: TextAlign.center,
                           ),

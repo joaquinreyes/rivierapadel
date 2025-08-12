@@ -23,7 +23,7 @@ class WaitingForApproval extends StatelessWidget {
         ),
         child: Text(
           "WAITING_FOR_APPROVAL".tr(context),
-          style: AppTextStyles.panchangBold10,
+          style: AppTextStyles.balooBold10,
         ),
       ),
     );

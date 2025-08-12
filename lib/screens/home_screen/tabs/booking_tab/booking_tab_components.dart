@@ -60,7 +60,7 @@ class _DateSelectorWidgetState extends ConsumerState<_DateSelectorWidget> {
     return Container(
       height: (width / height) > 0.6 ? 110.h : 71.h,
       margin: EdgeInsets.only(left: 6.w, top: 15.h, bottom: 7.h, right: 6.w),
-      padding: EdgeInsets.only(left: 5.w, right: 0),
+      padding: EdgeInsets.only(left: 0.w, right: 0),
       child: _buildDateListView(context, selectedDate.dateTime, blockCoaches),
     );
   }
@@ -95,7 +95,7 @@ class _DateSelectorWidgetState extends ConsumerState<_DateSelectorWidget> {
     final backgroundColor = isSelected
         ? isBlocked
         ? AppColors.darkGreen25
-        : AppColors.green
+        : AppColors.darkBlue
         : isBlocked
         ? AppColors.darkGreen5
         : AppColors.darkGreen5;
@@ -111,7 +111,7 @@ class _DateSelectorWidgetState extends ConsumerState<_DateSelectorWidget> {
           clipBehavior: Clip.none,
           decoration: BoxDecoration(
             color: backgroundColor,
-            borderRadius: BorderRadius.circular(5.r),
+            borderRadius: BorderRadius.circular(12.r),
           ),
           child: _buildDateContent(date, isSelected,isBlocked),
         ),
@@ -144,8 +144,8 @@ class _DateSelectorWidgetState extends ConsumerState<_DateSelectorWidget> {
     final textColor = isSelected
         ? AppColors.white
         : isBlocked
-        ? AppColors.darkGreen5
-        : AppColors.darkGreen70;
+        ? AppColors.darkBlue.withOpacity(0.70)
+        : AppColors.darkBlue.withOpacity(0.70);
     return Column(
       mainAxisSize: MainAxisSize.min,
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -154,24 +154,26 @@ class _DateSelectorWidgetState extends ConsumerState<_DateSelectorWidget> {
         SizedBox(height: 5.h),
         Text(
           date.format(DateFormat.ABBR_WEEKDAY),
-          style: AppTextStyles.helveticaLight13.copyWith(
+          style: AppTextStyles.sansRegular15.copyWith(
             // color: AppColors.white,
             color: textColor,
           ),
         ),
         Text(
           '${date.day}',
-          style: AppTextStyles.panchangBold12.copyWith(
+          style: AppTextStyles.sansMedium15.copyWith(
             color: textColor,
+              height: 1,
           ),
         ),
         Text(
           date.format(DateFormat.ABBR_MONTH),
-          style: AppTextStyles.helveticaLight13.copyWith(
+          style: AppTextStyles.sansRegular15.copyWith(
             color: textColor,
+            height: 1,
           ),
         ),
-        SizedBox(height: 10.h),
+        SizedBox(height: 5.h),
       ],
     );
   }
@@ -217,6 +219,7 @@ class _Duration extends ConsumerWidget {
     bool isServiceSelected = (selectedDuration == duration);
     return _DurationAndSportContainer(
       isSelected: isServiceSelected,
+      radius: 100.r,
       text: "$duration min",
       onTap: () {
         ref.read(_selectedDuration.notifier).state = duration;
@@ -232,11 +235,12 @@ class _Duration extends ConsumerWidget {
 
 class _DurationAndSportContainer extends StatelessWidget {
   const _DurationAndSportContainer(
-      {required this.isSelected, required this.text, required this.onTap});
+      {required this.isSelected, required this.text, required this.onTap,this.radius});
 
   final bool isSelected;
   final Function() onTap;
   final String text;
+  final double? radius;
 
   @override
   Widget build(BuildContext context) {
@@ -249,16 +253,16 @@ class _DurationAndSportContainer extends StatelessWidget {
         margin: EdgeInsets.all(4.h),
         padding: EdgeInsets.all(8.h),
         decoration: BoxDecoration(
-          color: isSelected ? AppColors.green : Colors.transparent,
-          borderRadius: BorderRadius.circular(5.r),
+          color: isSelected ? AppColors.darkBlue : Colors.transparent,
+          borderRadius: BorderRadius.circular(radius ?? 5.r),
         ),
         alignment: Alignment.center,
         child: Text(
           text,
           textAlign: TextAlign.center,
           style: isSelected
-              ? AppTextStyles.helveticaRegular12.copyWith(color: Colors.white)
-              : AppTextStyles.helveticaLight12,
+              ? AppTextStyles.sansMedium14.copyWith(color: Colors.white,height: 1)
+              : AppTextStyles.sansRegular13.copyWith(color: AppColors.clay70,height: 1),
         ),
       ),
     );
@@ -331,7 +335,7 @@ class __TimeslotsState extends ConsumerState<_Timeslots> {
           flex: 8,
           child: Container(
             height: 40.w,
-            margin: EdgeInsets.symmetric(vertical: 1.5.h),
+            margin: EdgeInsets.symmetric(vertical: 1.h),
             child: Row(
               children: [
                 for (int colIndex = 0;
@@ -367,14 +371,13 @@ class __TimeslotsState extends ConsumerState<_Timeslots> {
           // padding: EdgeInsets.symmetric(vertical: 12.h, horizontal: 4.w),
           alignment: Alignment.center,
           decoration: BoxDecoration(
-            color: selected ? AppColors.yellow : AppColors.white,
+            color: selected ? AppColors.oak : AppColors.white,
             boxShadow: const [kBoxShadow],
             borderRadius: borderRadius,
           ),
           child: Text(
-            timeSlotChunked[rowIndex][colIndex].format("HH:mm"),
-            style: AppTextStyles.helveticaLight13
-                .copyWith(color: AppColors.darkGreen),
+            timeSlotChunked[rowIndex][colIndex].format("h:mm a").toLowerCase(),
+            style: selected ? AppTextStyles.sansMedium15.copyWith(color: AppColors.white) : AppTextStyles.sansRegular15,
           ),
         ),
       ),
@@ -384,7 +387,7 @@ class __TimeslotsState extends ConsumerState<_Timeslots> {
   BorderRadius? _getBorderRadius(
       int rowIndex, int colIndex, List<List<DateTime>> timeSlotChunked) {
     return BorderRadius.all(
-      Radius.circular(7.r),
+      Radius.circular(12.r),
     );
   }
 
@@ -435,11 +438,11 @@ class __AvailableTimeslotState extends ConsumerState<_AvailableTimeslot> {
         final startTime = timeslot;
         final endTime = startTime.add(Duration(minutes: selectedDuration));
         final String formattedTime =
-            "${startTime.format("EEE d MMM")} | ${startTime.format("HH:mm")} - ${endTime.format("HH:mm")}";
+            "${startTime.format("EEE d MMM")} | ${startTime.format("h:mm")} - ${endTime.format("h:mm a").toLowerCase()}";
         return Column(
           children: [
             Padding(
-              padding: EdgeInsets.only(top: 10.h, right: 10.w, left: 10.w),
+              padding: EdgeInsets.only(top: 10.h, left: 10.w),
               child: Row(
                 children: [
                   Expanded(
@@ -449,12 +452,15 @@ class __AvailableTimeslotState extends ConsumerState<_AvailableTimeslot> {
                       children: [
                         Text(
                           courts.values.toList()[index],
-                          style: AppTextStyles.helveticaRegular14,
+                          style: AppTextStyles.sansMedium15,
                         ),
                         SizedBox(height: 2.h),
-                        Text(
-                          formattedTime,
-                          style: AppTextStyles.helveticaLight13,
+                        Padding(
+                          padding: EdgeInsets.only(left: 10.w),
+                          child: Text(
+                            formattedTime,
+                            style: AppTextStyles.sansRegular15.copyWith(height: 1),
+                          ),
                         ),
                       ],
                     ),
@@ -465,11 +471,10 @@ class __AvailableTimeslotState extends ConsumerState<_AvailableTimeslot> {
                     showArrow: true,
                     applyShadow: true,
                     height: 35.h,
-                    width: 105.w,
+                    width: 85.w,
+                    padding: EdgeInsets.only(left: 7.w,right: 7.w),
                     label: "BOOK".tr(context),
-                    labelStyle: AppTextStyles.panchangMedium10.copyWith(
-                      color: AppColors.darkGreen,
-                    ),
+                    labelStyle: AppTextStyles.balooMedium14,
                     onTap: () async {
                       final booking = widget.data.getBooking(
                           selectedDate.dateTime,
@@ -505,12 +510,14 @@ class __AvailableTimeslotState extends ConsumerState<_AvailableTimeslot> {
                 ],
               ),
             ),
-            const SizedBox(height: 10),
-            Container(
-              height: 0.7.h,
-              margin: EdgeInsets.symmetric(horizontal: 10.w),
-              color: AppColors.darkGreen5,
-            ),
+            if (index != courts.length - 1) ...[
+              const SizedBox(height: 10),
+              Container(
+                height: 0.7.h,
+                margin: EdgeInsets.symmetric(horizontal: 10.w),
+                color: AppColors.darkGreen5,
+              ),
+            ]
           ],
         );
       },
@@ -546,13 +553,13 @@ class _Selector extends ConsumerWidget {
           clipBehavior: Clip.none,
           padding: EdgeInsets.symmetric(vertical: 12.h),
           decoration: BoxDecoration(
-            color: isServiceSelected ? AppColors.green : Colors.transparent,
+            color: isServiceSelected ? AppColors.darkBlue : Colors.transparent,
             borderRadius: BorderRadius.circular(5.r),
           ),
           alignment: Alignment.center,
           child: Text(title,
               textAlign: TextAlign.center,
-              style: AppTextStyles.panchangBold13.copyWith(
+              style: AppTextStyles.balooBold13.copyWith(
                 fontSize: isServiceSelected ? 14 : 13,
                 color:
                     isServiceSelected ? AppColors.white : AppColors.darkGreen70,
@@ -592,13 +599,13 @@ class _CoachDurationList extends ConsumerWidget {
           margin: EdgeInsets.all(4.h),
           padding: EdgeInsets.symmetric(vertical: 7.h, horizontal: 2.w),
           decoration: BoxDecoration(
-            color: isServiceSelected ? AppColors.green : Colors.transparent,
+            color: isServiceSelected ? AppColors.darkBlue : Colors.transparent,
             borderRadius: BorderRadius.circular(5.r),
           ),
           alignment: Alignment.center,
           child: Text("${lessonVariants.duration ?? 0} ${"MINS".tr(context)}",
               textAlign: TextAlign.center,
-              style: AppTextStyles.helveticaRegular12.copyWith(
+              style: AppTextStyles.gothamRegular12.copyWith(
                 fontWeight:
                     isServiceSelected ? FontWeight.w400 : FontWeight.w300,
                 color:
@@ -722,7 +729,7 @@ class __TimeslotsLessonState extends ConsumerState<_TimeslotsLesson> {
           child: Text(
             timeSlotChunked[rowIndex][colIndex]
                 .format(DateFormat.HOUR24_MINUTE),
-            style: AppTextStyles.helveticaLight13
+            style: AppTextStyles.gothamLight13
                 .copyWith(color: AppColors.darkGreen),
           ),
         ),
@@ -861,13 +868,13 @@ class __AvailableTimeslotLessonState
                         children: [
                           Text(
                             lessons.values.toList()[index],
-                            style: AppTextStyles.helveticaRegular14
+                            style: AppTextStyles.gothamRegular14
                                 .copyWith(color: AppColors.darkGreen),
                           ),
                           SizedBox(height: 2.h),
                           Text(
                             formattedTime,
-                            style: AppTextStyles.helveticaLight13
+                            style: AppTextStyles.gothamLight13
                                 .copyWith(color: AppColors.darkGreen),
                           ),
                         ],
@@ -881,7 +888,7 @@ class __AvailableTimeslotLessonState
                       height: 35.h,
                       width: 105.w,
                       label: "BOOK".tr(context),
-                      labelStyle: AppTextStyles.panchangMedium10.copyWith(
+                      labelStyle: AppTextStyles.balooMedium10.copyWith(
                         color: AppColors.darkGreen,
                       ),
                       onTap: () async {
@@ -969,9 +976,9 @@ class _VoucherCardWidget extends StatelessWidget {
     final price = (voucher.price ?? 0);
 
     return Container(
-      padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 16),
+      padding: EdgeInsets.symmetric(vertical: 15.h, horizontal: 15.w),
       decoration: BoxDecoration(
-        color: AppColors.darkGreen90,
+        color: AppColors.oak35,
         borderRadius: BorderRadius.circular(12.sp),
       ),
       child: Column(
@@ -980,28 +987,28 @@ class _VoucherCardWidget extends StatelessWidget {
           Text(
             "$credits ${"CREDITS".tr(context)}",
             style:
-                AppTextStyles.helveticaBold14.copyWith(color: AppColors.white),
+                AppTextStyles.balooMedium14.copyWith(height: 1),
           ),
-          const SizedBox(height: 8),
+          SizedBox(height: 9.5.h),
           Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
                 "${"PRICE".tr(context)} ${Utils.formatPrice(price)}",
-                style: AppTextStyles.helveticaRegular13
-                    .copyWith(color: AppColors.white),
+                style: AppTextStyles.sansMedium14.copyWith(height: 1),
               ),
-              SizedBox(width: 12.w),
+              SizedBox(width: 20.w),
               MainButton(
-                  width: 70.w,
+                  width: 65.w,
                   height: 25.h,
+                  padding: EdgeInsets.zero,
                   onTap: () {
                     onTap();
                   },
-                  color: AppColors.white95,
-                  borderRadius: 5.r,
-                  labelStyle: AppTextStyles.helveticaRegular13
-                      .copyWith(color: AppColors.darkGreen),
-                  label: 'BUY'.trU(context))
+                  color: AppColors.white,
+                  borderRadius: 8.r,
+                  labelStyle: AppTextStyles.balooMedium15,
+                  label: 'BUY'.tr(context))
             ],
           )
         ],
@@ -1022,46 +1029,50 @@ class _VoucherConfirmDialog extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         children: [
           Text(
-            'VOUCHER_INFORMATION'.tr(context),
+            'VOUCHER_INFORMATION'.trU(context),
             style: AppTextStyles.popupHeaderTextStyle,
             textAlign: TextAlign.center,
           ),
-          const SizedBox(height: 10),
+          SizedBox(height: 5.h),
           Text(
             "VOUCHER_DESCRIPTION".tr(context),
             style: AppTextStyles.popupBodyTextStyle,
             textAlign: TextAlign.center,
           ),
-          const SizedBox(height: 20),
+          SizedBox(height: 20.h),
           Container(
             width: double.infinity,
-            padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 20),
+            margin: EdgeInsets.symmetric(horizontal: 3.w),
+            padding: EdgeInsets.all(15.h),
             decoration: BoxDecoration(
-              color: Colors.white,
-              borderRadius: BorderRadius.circular(8),
+              color: AppColors.white,
+              borderRadius: BorderRadius.circular(12.r),
             ),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                    "${"GET".tr(context)} ${voucher.value} ${"CREDITS".tr(context)}",
-                    style: AppTextStyles.panchangMedium12),
+                    "${"GET".tr(context)} ${voucher.value} ${"CREDITS".tr(context).toLowerCase()}",
+                    style: AppTextStyles.balooMedium16),
                 const SizedBox(height: 4),
                 Text(
                     "${"PRICE".tr(context)} ${Utils.formatPrice(voucher.price ?? 0)}",
-                    style: AppTextStyles.panchangMedium12),
+                    style: AppTextStyles.sansRegular15),
               ],
             ),
           ),
-          SizedBox(height: 25.h),
-          SizedBox(
-            width: double.infinity,
-            child: MainButton(
-              isForPopup: true,
-              onTap: () {
-                Navigator.pop(context, true);
-              },
-              label: "PAY_VOUCHER".tr(context),
+          SizedBox(height: 41.h),
+          Padding(
+            padding: EdgeInsets.symmetric(horizontal: 8.w),
+            child: SizedBox(
+              width: double.infinity,
+              child: MainButton(
+                isForPopup: true,
+                onTap: () {
+                  Navigator.pop(context, true);
+                },
+                label: "PAY_VOUCHER".trU(context),
+              ),
             ),
           )
         ],
@@ -1237,7 +1248,7 @@ class _FilterRow extends ConsumerWidget {
           SizedBox(height: 5.h),
           Text(
             'LOCATION'.trU(context),
-            style: AppTextStyles.panchangBold15,
+            style: AppTextStyles.balooBold15,
           ),
           SizedBox(height: 20.h),
           Flexible(
@@ -1297,21 +1308,21 @@ class _FilterRow extends ConsumerWidget {
           SizedBox(height: 5.h),
           Text(
             'DATE'.trU(context),
-            style: AppTextStyles.panchangBold15,
+            style: AppTextStyles.balooBold15,
           ),
           SizedBox(height: 20.h),
           SfDateRangePickerTheme(
             data: const SfDateRangePickerThemeData().copyWith(
-                headerTextStyle: AppTextStyles.panchangBold16.copyWith(
+                headerTextStyle: AppTextStyles.balooBold16.copyWith(
                   color: AppColors.darkGreen,
                 ),
-                viewHeaderTextStyle: AppTextStyles.panchangBold18.copyWith(
+                viewHeaderTextStyle: AppTextStyles.balooBold18.copyWith(
                   color: AppColors.darkGreen,
                 ),
-                disabledDatesTextStyle: AppTextStyles.panchangBold14.copyWith(
+                disabledDatesTextStyle: AppTextStyles.balooBold14.copyWith(
                   color: AppColors.darkGreen,
                 ),
-                todayTextStyle: AppTextStyles.panchangBold14.copyWith(
+                todayTextStyle: AppTextStyles.balooBold14.copyWith(
                   color: AppColors.darkGreen,
                 ),
                 todayHighlightColor: AppColors.green5,
@@ -1323,18 +1334,18 @@ class _FilterRow extends ConsumerWidget {
               selectionShape: DateRangePickerSelectionShape.circle,
               initialSelectedRange: range,
               enablePastDates: false,
-              endRangeSelectionColor: AppColors.green,
-              startRangeSelectionColor: AppColors.green,
+              endRangeSelectionColor: AppColors.darkBlue,
+              startRangeSelectionColor: AppColors.darkBlue,
               rangeSelectionColor: AppColors.green25,
               monthCellStyle: DateRangePickerMonthCellStyle(
-                textStyle: AppTextStyles.panchangBold14.copyWith(
+                textStyle: AppTextStyles.balooBold14.copyWith(
                   color: AppColors.darkGreen,
                 ),
               ),
-              selectionTextStyle: AppTextStyles.panchangBold14.copyWith(
+              selectionTextStyle: AppTextStyles.balooBold14.copyWith(
                 color: AppColors.white,
               ),
-              rangeTextStyle: AppTextStyles.panchangBold14.copyWith(
+              rangeTextStyle: AppTextStyles.balooBold14.copyWith(
                 color: AppColors.white,
               ),
               monthViewSettings: DateRangePickerMonthViewSettings(
@@ -1342,23 +1353,23 @@ class _FilterRow extends ConsumerWidget {
                 viewHeaderHeight: 52.h,
                 firstDayOfWeek: 1,
                 viewHeaderStyle: DateRangePickerViewHeaderStyle(
-                  textStyle: AppTextStyles.helveticaRegular16.copyWith(
+                  textStyle: AppTextStyles.gothamRegular16.copyWith(
                     color: AppColors.darkGreen,
                   ),
                 ),
               ),
               headerHeight: 52.h,
               yearCellStyle: DateRangePickerYearCellStyle(
-                todayTextStyle: AppTextStyles.panchangBold16.copyWith(
+                todayTextStyle: AppTextStyles.balooBold16.copyWith(
                   color: AppColors.darkGreen,
                 ),
-                disabledDatesTextStyle: AppTextStyles.panchangBold16.copyWith(
+                disabledDatesTextStyle: AppTextStyles.balooBold16.copyWith(
                   color: AppColors.darkGreen,
                 ),
-                textStyle: AppTextStyles.panchangBold16.copyWith(
+                textStyle: AppTextStyles.balooBold16.copyWith(
                   color: AppColors.darkGreen,
                 ),
-                leadingDatesTextStyle: AppTextStyles.panchangBold16.copyWith(
+                leadingDatesTextStyle: AppTextStyles.balooBold16.copyWith(
                   color: AppColors.darkGreen,
                 ),
               ),
@@ -1389,7 +1400,7 @@ class _FilterRow extends ConsumerWidget {
             width: double.infinity,
             constraints: BoxConstraints(maxHeight: 440.h),
             decoration: const BoxDecoration(
-              color: AppColors.lightPink,
+              color: AppColors.backgroundColor,
               borderRadius: BorderRadius.only(
                 topLeft: Radius.circular(20),
                 topRight: Radius.circular(20),
@@ -1439,7 +1450,7 @@ class _FilterRow extends ConsumerWidget {
           SizedBox(height: 5.h),
           Text(
             'COACHES'.trU(context),
-            style: AppTextStyles.panchangBold15,
+            style: AppTextStyles.balooBold15,
           ),
           SizedBox(height: 20.h),
           Flexible(
@@ -1521,7 +1532,7 @@ class _FilterRow extends ConsumerWidget {
             Expanded(
               child: Text(
                 label,
-                style: AppTextStyles.helveticaRegular12,
+                style: AppTextStyles.gothamRegular12,
               ),
             ),
             if (allowArrow)
@@ -1600,7 +1611,7 @@ class _CoachSelection extends ConsumerWidget {
           width: 80.w,
           clipBehavior: Clip.none,
           decoration: BoxDecoration(
-            color: isSelected ? AppColors.green : AppColors.darkGreen5,
+            color: isSelected ? AppColors.darkBlue : AppColors.darkGreen5,
             borderRadius: BorderRadius.circular(5.r),
           ),
           child: _buildCoachContent(slots, isSelected),
@@ -1640,7 +1651,7 @@ class _CoachSelection extends ConsumerWidget {
         Flexible(
           child: Text(
             coachName,
-            style: AppTextStyles.panchangBold9.copyWith(
+            style: AppTextStyles.balooBold9.copyWith(
                 color: isSelected ? Colors.white : AppColors.darkGreen),
             textAlign: TextAlign.center,
           ),

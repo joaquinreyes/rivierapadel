@@ -48,7 +48,7 @@ class __OpenMatchState extends ConsumerState<_OpenMatch> {
         SizedBox(height: 15.h),
         Text(
           "SELECT_MATCH_LEVEL".tr(context),
-          style: AppTextStyles.panchangMedium12.copyWith(
+          style: AppTextStyles.balooMedium12.copyWith(
             color: AppColors.white,
           ),
         ),
@@ -71,7 +71,7 @@ class __OpenMatchState extends ConsumerState<_OpenMatch> {
                 if (matchLevel.isNotEmpty) ...[
                   Text(
                     "${matchLevel.first} - ${matchLevel.last}",
-                    style: AppTextStyles.helveticaLight13.copyWith(
+                    style: AppTextStyles.gothamLight13.copyWith(
                       color: AppColors.white,
                     ),
                   ),
@@ -95,13 +95,13 @@ class __OpenMatchState extends ConsumerState<_OpenMatch> {
         RichText(
           text: TextSpan(
             text: "ARE_YOU_GOING_WITH_SOMEONE_ELSE".tr(context),
-            style: AppTextStyles.panchangMedium12.copyWith(
+            style: AppTextStyles.balooMedium12.copyWith(
               color: AppColors.white,
             ),
             children: [
               TextSpan(
                 text: " ${"OPTIONAL".tr(context)}",
-                style: AppTextStyles.helveticaLight13.copyWith(
+                style: AppTextStyles.gothamLight13.copyWith(
                   color: AppColors.white,
                 ),
               ),
@@ -141,13 +141,13 @@ class __OpenMatchState extends ConsumerState<_OpenMatch> {
         RichText(
           text: TextSpan(
             text: "LEAVE_A_NOTE".tr(context),
-            style: AppTextStyles.panchangMedium12.copyWith(
+            style: AppTextStyles.balooMedium12.copyWith(
               color: AppColors.white,
             ),
             children: [
               TextSpan(
                 text: " ${"OPTIONAL".tr(context)}",
-                style: AppTextStyles.helveticaLight13.copyWith(
+                style: AppTextStyles.gothamLight13.copyWith(
                   color: AppColors.white,
                 ),
               ),
@@ -163,10 +163,10 @@ class __OpenMatchState extends ConsumerState<_OpenMatch> {
           },
           hintText: 'TYPE_HERE'.tr(context),
           hintTextStyle:
-              AppTextStyles.helveticaLight12.copyWith(color: AppColors.white55),
+              AppTextStyles.gothamLight12.copyWith(color: AppColors.white55),
           contentPadding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 6.h),
           borderColor: Colors.transparent,
-          style: AppTextStyles.panchangMedium10,
+          style: AppTextStyles.balooMedium10,
           isForPopup: true,
         ),
       ],
@@ -192,8 +192,8 @@ class __OpenMatchState extends ConsumerState<_OpenMatch> {
               child: Text(
             text,
             style: isSelected
-                ? AppTextStyles.helveticaRegular12
-                : AppTextStyles.helveticaLight12
+                ? AppTextStyles.gothamRegular12
+                : AppTextStyles.gothamLight12
                     .copyWith(color: AppColors.white),
           )),
         ),
@@ -246,7 +246,7 @@ class __OpenMatchState extends ConsumerState<_OpenMatch> {
                   ),
                   child: Text(
                     e.toString(),
-                    style: AppTextStyles.helveticaRegular12.copyWith(
+                    style: AppTextStyles.gothamRegular12.copyWith(
                       color: isSelected ? AppColors.darkGreen : AppColors.white,
                     ),
                   ),
@@ -290,7 +290,7 @@ Widget _selectionRowContainer(
         children: [
           Text(
             text,
-            style: AppTextStyles.helveticaRegular12.copyWith(
+            style: AppTextStyles.gothamRegular12.copyWith(
               color: isSelected ? AppColors.darkGreen : AppColors.white,
             ),
           ),

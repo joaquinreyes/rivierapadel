@@ -19,7 +19,7 @@ class WebHeader extends StatelessWidget {
         width: MediaQuery.of(context).size.width,
         margin: EdgeInsets.symmetric(horizontal: 20.w),
         decoration: const BoxDecoration(
-          color: AppColors.lightPink,
+          color: AppColors.backgroundColor,
           boxShadow: [
             BoxShadow(
               color: Color(0x0C000000),
@@ -46,7 +46,7 @@ class WebHeader extends StatelessWidget {
                 },
                 child: Text(
                   "SIGN_OUT".tr(context),
-                  style: AppTextStyles.panchangMedium10,
+                  style: AppTextStyles.balooMedium10,
                 ),
               ),
             )

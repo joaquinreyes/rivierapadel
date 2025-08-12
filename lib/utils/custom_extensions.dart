@@ -66,6 +66,12 @@ extension StringExtension on String {
     return result;
   }
 }
+extension TrWithEnabledExtension on String {
+  String capitalEnabled(BuildContext context, {required bool canProceed}) {
+    final translated = this.tr(context);
+    return canProceed ? translated.trU(context) : translated;
+  }
+}
 
 extension ListExtension on List {
   String? get(int index) {

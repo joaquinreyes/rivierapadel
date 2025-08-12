@@ -23,8 +23,8 @@ class OpenMatchParticipantRowWithBG extends StatelessWidget {
     this.bgColor,
     this.onRelease,
     this.maxPlayers = 4,
-    this.availableSlotIconColor = AppColors.green,
-    this.textColor = AppColors.green,
+    this.availableSlotIconColor = AppColors.darkBlue,
+    this.textColor = AppColors.darkBlue,
     this.onPlayerTap,
   });
   final Color availableSlotbackGroundColor;
@@ -89,8 +89,8 @@ class OpenMatchParticipantRow extends StatefulWidget {
     this.currentCustomerID = -1,
     this.onRelease,
     this.maxPlayers = 4,
-    this.availableSlotIconColor = AppColors.green,
-    this.textColor = AppColors.green,
+    this.availableSlotIconColor = AppColors.darkBlue,
+    this.textColor = AppColors.darkBlue,
     this.onPlayerTap,
   });
 
@@ -166,7 +166,7 @@ class _OpenMatchParticipantRowState extends State<OpenMatchParticipantRow> {
             maxLines: 1,
             stepGranularity: 1,
             textAlign: TextAlign.center,
-            style: AppTextStyles.helveticaBold14.copyWith(
+            style: AppTextStyles.gothamBold14.copyWith(
               color: widget.textColor,
             ),
           ),

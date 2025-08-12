@@ -105,12 +105,12 @@ class UserLessonsEventsCard extends ConsumerWidget {
               Expanded(
                 child: Text(
                   coachName,
-                  style: AppTextStyles.helveticaBold14.copyWith(color: textColor),
+                  style: AppTextStyles.gothamBold14.copyWith(color: textColor),
                 ),
               ),
               Text(
                 locationName,
-                style: AppTextStyles.helveticaBold13.copyWith(color: textColor),
+                style: AppTextStyles.gothamBold13.copyWith(color: textColor),
                 textAlign: TextAlign.right,
               ),
             ],
@@ -129,17 +129,17 @@ class UserLessonsEventsCard extends ConsumerWidget {
                   children: [
                     Text(
                       lessonName,
-                      style: AppTextStyles.helveticaLight13.copyWith(color: textColor),
+                      style: AppTextStyles.gothamLight13.copyWith(color: textColor),
                     ),
                     SizedBox(height: 4.h),
                     Text(
                       courtName,
-                      style: AppTextStyles.helveticaLight13.copyWith(color: textColor),
+                      style: AppTextStyles.gothamLight13.copyWith(color: textColor),
                     ),
                     SizedBox(height: 4.h),
                     Text(
                       "${"PAID".tr(context)} $price",
-                      style: AppTextStyles.helveticaLight13.copyWith(color: textColor),
+                      style: AppTextStyles.gothamLight13.copyWith(color: textColor),
                     ),
                   ],
                 ),
@@ -151,17 +151,17 @@ class UserLessonsEventsCard extends ConsumerWidget {
                   children: [
                     Text(
                       "$duration$pax",
-                      style: AppTextStyles.helveticaLight13.copyWith(color: textColor),
+                      style: AppTextStyles.gothamLight13.copyWith(color: textColor),
                     ),
                     SizedBox(height: 4.h),
                     Text(
                       time,
-                      style: AppTextStyles.helveticaLight13.copyWith(color: textColor),
+                      style: AppTextStyles.gothamLight13.copyWith(color: textColor),
                     ),
                     SizedBox(height: 4.h),
                     Text(
                       date,
-                      style: AppTextStyles.helveticaLight13.copyWith(color: textColor),
+                      style: AppTextStyles.gothamLight13.copyWith(color: textColor),
                     ),
                   ],
                 ),

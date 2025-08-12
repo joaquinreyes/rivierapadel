@@ -135,7 +135,7 @@ class _DataBodyState extends ConsumerState<_DataBody> {
               ),
               Text(
                 "${"EVENT".trU(context)}\n ${"INFORMATION".trU(context)}",
-                style: AppTextStyles.panchangBold13.copyWith(height: 0.9),
+                style: AppTextStyles.balooBold13.copyWith(height: 0.9),
                 textAlign: TextAlign.center,
               ),
               SizedBox(height: 50.h),
@@ -148,7 +148,7 @@ class _DataBodyState extends ConsumerState<_DataBody> {
                 alignment: Alignment.centerLeft,
                 child: Text(
                     "${"PLAYERS".tr(context)} ${service.players?.length ?? 0} / ${service.getMaximumCapacity}",
-                    style: AppTextStyles.panchangBold13
+                    style: AppTextStyles.balooBold13
                         .copyWith(color: AppColors.darkGreen)),
               ),
               SizedBox(height: 10.h),

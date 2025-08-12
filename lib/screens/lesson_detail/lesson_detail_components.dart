@@ -20,7 +20,7 @@ class _InfoCard extends StatelessWidget {
         vertical: 15.h,
       ),
       decoration: BoxDecoration(
-        color: AppColors.green,
+        color: AppColors.darkBlue,
         borderRadius: BorderRadius.circular(5),
       ),
       child: Column(
@@ -32,7 +32,7 @@ class _InfoCard extends StatelessWidget {
                 flex: 10,
                 child: Text(
                   (lesson.service?.lesson?.lessonName ?? "").capitalizeFirst,
-                  style: AppTextStyles.helveticaBold14
+                  style: AppTextStyles.gothamBold14
                       .copyWith(color: AppColors.white),
                 ),
               ),
@@ -42,7 +42,7 @@ class _InfoCard extends StatelessWidget {
                     (lesson.service?.location?.locationName ?? "")
                         .capitalizeFirst,
                     textAlign: TextAlign.end,
-                    style: AppTextStyles.helveticaBold12
+                    style: AppTextStyles.gothamBold12
                         .copyWith(color: AppColors.white)),
               ),
             ],
@@ -64,18 +64,18 @@ class _InfoCard extends StatelessWidget {
                   children: [
                     Text(
                       'SLOTS'.trU(context),
-                      style: AppTextStyles.panchangBold9
+                      style: AppTextStyles.balooBold9
                           .copyWith(color: AppColors.white),
                     ),
                     // SizedBox(height: 4.h),
                     Text(
                       "${'MAX'.tr(context)} ${lesson.getMaximumCapacity.toString() ?? ""} ${'PLAYERS'.tr(context)}",
-                      style: AppTextStyles.helveticaLight11
+                      style: AppTextStyles.gothamLight11
                           .copyWith(color: AppColors.white),
                     ),
                     Text(
                       "${'MIN'.tr(context)} ${lesson.getMinimumCapacity.toString() ?? ""} ${'PLAYERS'.tr(context)}",
-                      style: AppTextStyles.helveticaLight11
+                      style: AppTextStyles.gothamLight11
                           .copyWith(color: AppColors.white),
                     ),
                   ],
@@ -108,13 +108,13 @@ class _InfoCard extends StatelessWidget {
         Text(
           text1,
           style:
-              AppTextStyles.helveticaLight12.copyWith(color: AppColors.white),
+              AppTextStyles.gothamLight12.copyWith(color: AppColors.white),
         ),
         SizedBox(height: 2.h),
         Text(
           text2,
           style:
-              AppTextStyles.helveticaLight12.copyWith(color: AppColors.white),
+              AppTextStyles.gothamLight12.copyWith(color: AppColors.white),
         ),
       ],
     );
@@ -149,7 +149,7 @@ class _LessonVariantInfoCard extends StatelessWidget {
     return Container(
       padding: EdgeInsets.symmetric(horizontal: 15.h, vertical: 15.h),
       decoration: BoxDecoration(
-        color: AppColors.green,
+        color: AppColors.darkBlue,
         borderRadius: BorderRadius.circular(5),
       ),
       child: Column(
@@ -160,7 +160,7 @@ class _LessonVariantInfoCard extends StatelessWidget {
               Expanded(
                 child: Text(
                   coachName,
-                  style: AppTextStyles.helveticaBold14
+                  style: AppTextStyles.gothamBold14
                       .copyWith(color: AppColors.white),
                 ),
               ),
@@ -168,7 +168,7 @@ class _LessonVariantInfoCard extends StatelessWidget {
                 child: Text(
                   location,
                   textAlign: TextAlign.end,
-                  style: AppTextStyles.helveticaBold14
+                  style: AppTextStyles.gothamBold14
                       .copyWith(color: AppColors.white),
                 ),
               ),
@@ -186,19 +186,19 @@ class _LessonVariantInfoCard extends StatelessWidget {
                   children: [
                     Text(
                       lessonType,
-                      style: AppTextStyles.helveticaLight13
+                      style: AppTextStyles.gothamLight13
                           .copyWith(color: AppColors.white),
                     ),
                     SizedBox(height: 4.h),
                     Text(
                       court,
-                      style: AppTextStyles.helveticaLight13
+                      style: AppTextStyles.gothamLight13
                           .copyWith(color: AppColors.white),
                     ),
                     SizedBox(height: 4.h),
                     Text(
                       "Paid $paid",
-                      style: AppTextStyles.helveticaLight13
+                      style: AppTextStyles.gothamLight13
                           .copyWith(color: AppColors.white),
                     ),
                   ],
@@ -211,19 +211,19 @@ class _LessonVariantInfoCard extends StatelessWidget {
                   children: [
                     Text(
                       "$duration - $pax",
-                      style: AppTextStyles.helveticaLight13
+                      style: AppTextStyles.gothamLight13
                           .copyWith(color: AppColors.white),
                     ),
                     SizedBox(height: 4.h),
                     Text(
                       time,
-                      style: AppTextStyles.helveticaLight13
+                      style: AppTextStyles.gothamLight13
                           .copyWith(color: AppColors.white),
                     ),
                     SizedBox(height: 4.h),
                     Text(
                       date,
-                      style: AppTextStyles.helveticaLight13
+                      style: AppTextStyles.gothamLight13
                           .copyWith(color: AppColors.white),
                     ),
                   ],
@@ -255,7 +255,7 @@ class _ConfirmationDialog extends StatelessWidget {
             _headingText(context),
             textAlign: TextAlign.center,
             style:
-                AppTextStyles.panchangBold15.copyWith(color: AppColors.white),
+                AppTextStyles.balooBold15.copyWith(color: AppColors.white),
           ),
           SizedBox(height: 20.h),
           // Text(
@@ -270,13 +270,13 @@ class _ConfirmationDialog extends StatelessWidget {
             RefundDescriptionComponent(
                 policy: policy,
                 text: policy == null ? "LEAVE_POLICY_LESSON".tr(context) : null,
-                style: AppTextStyles.panchangBold10
+                style: AppTextStyles.balooBold10
                     .copyWith(color: AppColors.white)),
           SizedBox(height: 20.h),
           MainButton(
             color: AppColors.yellow,
             labelStyle:
-                AppTextStyles.panchangMedium13.copyWith(color: AppColors.green),
+                AppTextStyles.balooMedium13.copyWith(color: AppColors.darkBlue),
             label: _buttonText(context),
             onTap: () {
               Navigator.pop(context, true);

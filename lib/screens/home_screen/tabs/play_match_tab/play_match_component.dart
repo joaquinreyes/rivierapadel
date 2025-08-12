@@ -52,7 +52,7 @@ class _ViewSelectorComponent extends StatelessWidget {
         padding: const EdgeInsets.symmetric(vertical: 10),
         decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(5),
-            color: isSelected ? AppColors.green : Colors.transparent),
+            color: isSelected ? AppColors.darkBlue : Colors.transparent),
         child: GestureDetector(
           onTap: () {
             if (!isSelected) {
@@ -62,9 +62,9 @@ class _ViewSelectorComponent extends StatelessWidget {
           child: Text(
             title,
             style: isSelected
-                ? AppTextStyles.panchangBold14
+                ? AppTextStyles.balooBold14
                     .copyWith(height: 0.95, color: AppColors.white)
-                : AppTextStyles.panchangBold13
+                : AppTextStyles.balooBold13
                     .copyWith(height: 0.95, color: AppColors.darkGreen70),
             textAlign: TextAlign.center,
           ),
@@ -247,7 +247,7 @@ class _FilterRow extends ConsumerWidget {
             Expanded(
               child: Text(
                 label,
-                style: AppTextStyles.helveticaRegular12,
+                style: AppTextStyles.gothamRegular12,
               ),
             ),
             Image.asset(
@@ -274,7 +274,7 @@ class _FilterRow extends ConsumerWidget {
             width: double.infinity,
             constraints: BoxConstraints(maxHeight: 440.h),
             decoration: const BoxDecoration(
-              color: AppColors.lightPink,
+              color: AppColors.backgroundColor,
               borderRadius: BorderRadius.only(
                 topLeft: Radius.circular(20),
                 topRight: Radius.circular(20),
@@ -322,21 +322,21 @@ class _FilterRow extends ConsumerWidget {
           SizedBox(height: 5.h),
           Text(
             'DATE'.trU(context),
-            style: AppTextStyles.panchangBold15,
+            style: AppTextStyles.balooBold15,
           ),
           SizedBox(height: 20.h),
           SfDateRangePickerTheme(
             data: const SfDateRangePickerThemeData().copyWith(
-                headerTextStyle: AppTextStyles.panchangBold16.copyWith(
+                headerTextStyle: AppTextStyles.balooBold16.copyWith(
                   color: AppColors.darkGreen,
                 ),
-                viewHeaderTextStyle: AppTextStyles.panchangBold18.copyWith(
+                viewHeaderTextStyle: AppTextStyles.balooBold18.copyWith(
                   color: AppColors.darkGreen,
                 ),
-                disabledDatesTextStyle: AppTextStyles.panchangBold14.copyWith(
+                disabledDatesTextStyle: AppTextStyles.balooBold14.copyWith(
                   color: AppColors.darkGreen,
                 ),
-                todayTextStyle: AppTextStyles.panchangBold14.copyWith(
+                todayTextStyle: AppTextStyles.balooBold14.copyWith(
                   color: AppColors.darkGreen,
                 ),
                 todayHighlightColor: AppColors.green5,
@@ -348,18 +348,18 @@ class _FilterRow extends ConsumerWidget {
               selectionShape: DateRangePickerSelectionShape.circle,
               initialSelectedRange: range,
               enablePastDates: false,
-              endRangeSelectionColor: AppColors.green,
-              startRangeSelectionColor: AppColors.green,
+              endRangeSelectionColor: AppColors.darkBlue,
+              startRangeSelectionColor: AppColors.darkBlue,
               rangeSelectionColor: AppColors.green25,
               monthCellStyle: DateRangePickerMonthCellStyle(
-                textStyle: AppTextStyles.panchangBold14.copyWith(
+                textStyle: AppTextStyles.balooBold14.copyWith(
                   color: AppColors.darkGreen,
                 ),
               ),
-              selectionTextStyle: AppTextStyles.panchangBold14.copyWith(
+              selectionTextStyle: AppTextStyles.balooBold14.copyWith(
                 color: AppColors.white,
               ),
-              rangeTextStyle: AppTextStyles.panchangBold14.copyWith(
+              rangeTextStyle: AppTextStyles.balooBold14.copyWith(
                 color: AppColors.white,
               ),
               monthViewSettings: DateRangePickerMonthViewSettings(
@@ -367,23 +367,23 @@ class _FilterRow extends ConsumerWidget {
                 viewHeaderHeight: 52.h,
                 firstDayOfWeek: 1,
                 viewHeaderStyle: DateRangePickerViewHeaderStyle(
-                  textStyle: AppTextStyles.helveticaRegular16.copyWith(
+                  textStyle: AppTextStyles.gothamRegular16.copyWith(
                     color: AppColors.darkGreen,
                   ),
                 ),
               ),
               headerHeight: 52.h,
               yearCellStyle: DateRangePickerYearCellStyle(
-                todayTextStyle: AppTextStyles.panchangBold16.copyWith(
+                todayTextStyle: AppTextStyles.balooBold16.copyWith(
                   color: AppColors.darkGreen,
                 ),
-                disabledDatesTextStyle: AppTextStyles.panchangBold16.copyWith(
+                disabledDatesTextStyle: AppTextStyles.balooBold16.copyWith(
                   color: AppColors.darkGreen,
                 ),
-                textStyle: AppTextStyles.panchangBold16.copyWith(
+                textStyle: AppTextStyles.balooBold16.copyWith(
                   color: AppColors.darkGreen,
                 ),
-                leadingDatesTextStyle: AppTextStyles.panchangBold16.copyWith(
+                leadingDatesTextStyle: AppTextStyles.balooBold16.copyWith(
                   color: AppColors.darkGreen,
                 ),
               ),
@@ -422,7 +422,7 @@ class _FilterRow extends ConsumerWidget {
           SizedBox(height: 5.h),
           Text(
             'LEVEL'.trU(context),
-            style: AppTextStyles.panchangBold15,
+            style: AppTextStyles.balooBold15,
           ),
           SizedBox(height: 20.h),
           const _LevelListForSelection()
@@ -454,7 +454,7 @@ class _FilterRow extends ConsumerWidget {
           SizedBox(height: 5.h),
           Text(
             'LOCATION'.trU(context),
-            style: AppTextStyles.panchangBold15,
+            style: AppTextStyles.balooBold15,
           ),
           SizedBox(height: 20.h),
           Flexible(
@@ -512,7 +512,7 @@ class _FilterRow extends ConsumerWidget {
           SizedBox(height: 5.h),
           Text(
             'COACHES'.trU(context),
-            style: AppTextStyles.panchangBold15,
+            style: AppTextStyles.balooBold15,
           ),
           SizedBox(height: 20.h),
           Flexible(
@@ -625,7 +625,7 @@ class OptionTile extends StatelessWidget {
         onTap: enabled ? onTap : null,
         child: Container(
           decoration: BoxDecoration(
-            color: selected ? AppColors.green : AppColors.green5,
+            color: selected ? AppColors.darkBlue : AppColors.green5,
             borderRadius: BorderRadius.circular(5.r),
           ),
           padding: EdgeInsets.all(10.h),
@@ -638,7 +638,7 @@ class OptionTile extends StatelessWidget {
               Expanded(
                 flex: 10,
                 child: Text((option),
-                    style: AppTextStyles.panchangMedium13.copyWith(
+                    style: AppTextStyles.balooMedium13.copyWith(
                         color:
                             selected ? AppColors.white : AppColors.darkGreen)),
               ),

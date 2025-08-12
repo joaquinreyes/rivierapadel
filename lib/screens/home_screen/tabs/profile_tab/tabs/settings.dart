@@ -53,7 +53,7 @@ class _UpComingBookingsState extends ConsumerState<Settings> {
           children: [
             Text(
               'PERSONAL_INFORMATION'.tr(context),
-              style: AppTextStyles.panchangBold13,
+              style: AppTextStyles.balooBold13,
             ),
             SecondaryImageButton(
               label: "EDIT".tr(context),

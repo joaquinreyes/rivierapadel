@@ -1,5 +1,8 @@
+import 'dart:developer';
+
 import 'package:acepadel/components/custom_dialog.dart';
 import 'package:acepadel/components/selected_tag.dart';
+import 'package:acepadel/globals/images.dart';
 import 'package:acepadel/routes/app_pages.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -118,7 +121,7 @@ class _BookCourtDialogState extends ConsumerState<BookCourtDialog> {
           mainAxisSize: MainAxisSize.min,
           children: [
             Text(
-              "BOOKING_INFORMATION".tr(context),
+              "BOOKING_INFORMATION".trU(context),
               style: AppTextStyles.popupHeaderTextStyle,
             ),
             SizedBox(height: 5.h),
@@ -197,12 +200,15 @@ class _BookCourtDialogState extends ConsumerState<BookCourtDialog> {
                           style: AppTextStyles.popupBodyTextStyle,
                         ),
                       ),
-                    BookCourtInfoCard(
-                      textPrice: textPrice,
-                      price: pricePaid,
-                      bookings: widget.bookings,
-                      bookingTime: widget.bookingTime,
-                      courtName: widget.court.values.first,
+                    Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 3.w),
+                      child: BookCourtInfoCard(
+                        textPrice: textPrice,
+                        price: pricePaid,
+                        bookings: widget.bookings,
+                        bookingTime: widget.bookingTime,
+                        courtName: widget.court.values.first,
+                      ),
                     ),
                   ],
                 );
@@ -221,23 +227,44 @@ class _BookCourtDialogState extends ConsumerState<BookCourtDialog> {
               SizedBox(height: 20.h),
               if (!widget.isOnlyOpenMatch)
                 Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    RichText(
-                      text: TextSpan(
-                        text: "DO_YOU_WANT_TO_OPEN_THIS_MATCH".tr(context),
-                        style: AppTextStyles.panchangMedium12.copyWith(
-                          color: AppColors.white,
-                        ),
+                    Row(
+                        crossAxisAlignment: CrossAxisAlignment.end,
                         children: [
-                          TextSpan(
-                            text: " ${"OPTIONAL".tr(context)}",
-                            style: AppTextStyles.helveticaLight13.copyWith(
-                              color: AppColors.white,
+                          Expanded(
+                            child: Text(
+                              "DO_YOU_WANT_TO_OPEN_THIS_MATCH".tr(context),
+                              style: AppTextStyles.balooMedium16.copyWith(
+                                color: AppColors.white,
+                                height: 1
+                              ),
                             ),
                           ),
-                        ],
-                      ),
+                          Text(
+                            " ${"OPTIONAL".tr(context).toLowerCase()}",
+                            style: AppTextStyles.sansRegular15.copyWith(
+                              color: AppColors.white,
+                            ),
+                          )
+                        ]
                     ),
+                    // RichText(
+                    //   text: TextSpan(
+                    //     text: "DO_YOU_WANT_TO_OPEN_THIS_MATCH".tr(context),
+                    //     style: AppTextStyles.sansRegular14.copyWith(
+                    //       color: AppColors.white,
+                    //     ),
+                    //     children: [
+                    //       TextSpan(
+                    //         text: " ${"OPTIONAL".tr(context)}",
+                    //         style: AppTextStyles.gothamLight13.copyWith(
+                    //           color: AppColors.white,
+                    //         ),
+                    //       ),
+                    //     ],
+                    //   ),
+                    // ),
                     SizedBox(height: 5.h),
                     _selectionRowContainer(
                       text: "OPEN_MATCH_TO_FIND_PLAYERS".tr(context),
@@ -255,8 +282,8 @@ class _BookCourtDialogState extends ConsumerState<BookCourtDialog> {
             Align(
               alignment: Alignment.centerLeft,
               child: Text(
-                "BOOKING_PAYMENT".trU(context),
-                style: AppTextStyles.panchangMedium15.copyWith(
+                "BOOKING_PAYMENT".tr(context),
+                style: AppTextStyles.balooMedium20.copyWith(
                   color: AppColors.white,
                 ),
               ),
@@ -265,18 +292,18 @@ class _BookCourtDialogState extends ConsumerState<BookCourtDialog> {
             MainButton(
               enabled: price > 0,
               label:
-                  isOpenMatch ? "PAY_MY_SHARE".tr(context) : "PAY".tr(context),
+                  isOpenMatch ? "PAY_MY_SHARE".trU(context) : "PAY".trU(context),
               isForPopup: true,
               onTap: () {
                 _payCourt(false, isPaid ? price : (price - refundAmount),
                     refundAmount);
               },
             ),
-            SizedBox(height: 10.h),
+            SizedBox(height: 5.h),
             if (!widget.isOnlyOpenMatch)
               MainButton(
-                color: AppColors.white,
-                label: "ADD_TO_CART".tr(context),
+                color: AppColors.white25,
+                label: "ADD_TO_CART".trU(context),
                 isForPopup: true,
                 onTap: () {
                   _payCourt(true, isPaid ? price : (price - refundAmount),
@@ -555,7 +582,7 @@ class _BookCourtDialogLessonState extends ConsumerState<BookCourtDialogLesson> {
               alignment: Alignment.centerLeft,
               child: Text(
                 "NUMBER_OF_PAX".trU(context),
-                style: AppTextStyles.panchangMedium15.copyWith(
+                style: AppTextStyles.balooMedium15.copyWith(
                   color: AppColors.white,
                 ),
               ),
@@ -581,8 +608,8 @@ class _BookCourtDialogLessonState extends ConsumerState<BookCourtDialogLesson> {
                     child: Text(
                       (e.maximumCapacity ?? 0).toString(),
                       textAlign: TextAlign.center,
-                      style: AppTextStyles.panchangMedium13.copyWith(
-                        color: AppColors.green,
+                      style: AppTextStyles.balooMedium13.copyWith(
+                        color: AppColors.darkBlue,
                       ),
                     ),
                   ),
@@ -594,7 +621,7 @@ class _BookCourtDialogLessonState extends ConsumerState<BookCourtDialogLesson> {
               alignment: Alignment.centerLeft,
               child: Text(
                 "BOOKING_PAYMENT".trU(context),
-                style: AppTextStyles.panchangMedium15.copyWith(
+                style: AppTextStyles.balooMedium15.copyWith(
                   color: AppColors.white,
                 ),
               ),

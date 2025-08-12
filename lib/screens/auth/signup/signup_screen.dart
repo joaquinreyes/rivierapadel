@@ -71,7 +71,7 @@ class _SignUpScreenState extends ConsumerState<SignUpScreen> {
           child: Scaffold(
             backgroundColor: PlatformC().isCurrentDesignPlatformDesktop
                 ? Colors.transparent
-                : AppColors.lightPink,
+                : AppColors.backgroundColor,
             body: provider.when(
               data: (data) {
                 return _SignupFlow(levelQuestions: data);
@@ -113,14 +113,14 @@ class __SignupFlowState extends ConsumerState<_SignupFlow> {
       child: Center(
         child: Container(
           height: height,
-          color: AppColors.lightPink,
+          color: AppColors.backgroundColor,
           margin: EdgeInsets.symmetric(
               vertical: PlatformC().isCurrentDesignPlatformDesktop ? 30 : 0),
           constraints: kComponentWidthConstraint,
           child: SafeArea(
             child: Column(
               children: [
-                SizedBox(height: 34.5.h),
+                SizedBox(height: 19.h),
                 Container(
                   padding: EdgeInsets.symmetric(horizontal: 32.w),
                   alignment: AlignmentDirectional.centerStart,
@@ -128,14 +128,16 @@ class __SignupFlowState extends ConsumerState<_SignupFlow> {
                     onTap: _onBack,
                     child: Image.asset(
                       AppImages.arrowBack.path,
-                      height: 24.h,
+                      height: 18.h,
                     ),
                   ),
                 ),
+                10.verticalSpace,
                 Text(
-                  'REGISTER'.tr(context),
-                  style: AppTextStyles.panchangBold26,
+                  'REGISTER'.trU(context),
+                  style: AppTextStyles.balooMedium30.copyWith(height: 1),
                 ),
+                10.verticalSpace,
                 Expanded(
                   child: PageView(
                     physics: const NeverScrollableScrollPhysics(),

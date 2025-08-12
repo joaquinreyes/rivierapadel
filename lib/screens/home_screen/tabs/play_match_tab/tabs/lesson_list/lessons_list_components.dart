@@ -31,7 +31,7 @@ class _LessonDatesVisibilityToggle extends StatelessWidget {
                 isDatesVisible
                     ? "HIDE_DATES".tr(context)
                     : "SHOW_DATES".tr(context),
-                style: AppTextStyles.helveticaLight12
+                style: AppTextStyles.gothamLight12
                     .copyWith(color: AppColors.darkGreen),
               ),
               SizedBox(width: 4.w),
@@ -162,7 +162,7 @@ class _LessonCoachesListView extends StatelessWidget {
               child: Container(
                 decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(25.r),
-                    color: isSelected ? AppColors.green : Colors.transparent),
+                    color: isSelected ? AppColors.darkBlue : Colors.transparent),
                 padding: EdgeInsets.symmetric(horizontal: 15.w),
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
@@ -173,14 +173,14 @@ class _LessonCoachesListView extends StatelessWidget {
                         path: profileUrl, width: 40.w, height: 40.h),
                     Text(
                       "COACH".tr(context),
-                      style: AppTextStyles.helveticaRegular12.copyWith(
+                      style: AppTextStyles.gothamRegular12.copyWith(
                           color: isSelected
                               ? AppColors.white
                               : AppColors.darkGreen70),
                     ),
                     Text(
                       fullName,
-                      style: AppTextStyles.panchangBold11.copyWith(
+                      style: AppTextStyles.balooBold11.copyWith(
                           color: isSelected
                               ? AppColors.white
                               : AppColors.darkGreen70,
@@ -220,7 +220,7 @@ class _LessonDateItem extends StatelessWidget {
           children: [
             Text(
               serviceBooking?.bookingDate.format("EEE dd MMM") ?? "",
-              style: AppTextStyles.helveticaRegular14
+              style: AppTextStyles.gothamRegular14
                   .copyWith(color: AppColors.darkGreen),
             ),
             SizedBox(height: 2.h),
@@ -229,7 +229,7 @@ class _LessonDateItem extends StatelessWidget {
               child: Text(
                 // "${serviceBooking?.bookingStartTime.format("hh:mm")} - ${serviceBooking?.bookingEndTime.format("hh:mm a")}",
                 serviceBooking?.formatStartEndTime ?? "",
-                style: AppTextStyles.helveticaLight13
+                style: AppTextStyles.gothamLight13
                     .copyWith(color: AppColors.darkGreen),
               ),
             ),
@@ -245,7 +245,7 @@ class _LessonDateItem extends StatelessWidget {
                 maxCapacity: maxCapacity,
                 minCapacity: minCapacity,
               ),
-              style: AppTextStyles.panchangBold9.copyWith(
+              style: AppTextStyles.balooBold9.copyWith(
                 color: AppColors.darkGreen,
               ),
             ),
@@ -258,7 +258,7 @@ class _LessonDateItem extends StatelessWidget {
               ),
               child: Text(
                 "${serviceBooking?.players?.length.toString() ?? "0"}/$maxCapacity",
-                style: AppTextStyles.helveticaRegular12
+                style: AppTextStyles.gothamRegular12
                     .copyWith(color: AppColors.darkGreen),
               ),
             ),
@@ -273,7 +273,7 @@ class _LessonDateItem extends StatelessWidget {
           height: 35.h,
           width: 90.w,
           label: "BOOK".tr(context),
-          labelStyle: AppTextStyles.panchangMedium10.copyWith(
+          labelStyle: AppTextStyles.balooMedium10.copyWith(
             color: AppColors.darkGreen,
           ),
         )
@@ -295,26 +295,26 @@ class _ConfirmationDialog extends StatelessWidget {
             "ARE_YOU_SURE_YOU_WANT_TO_JOIN".tr(context),
             textAlign: TextAlign.center,
             style:
-                AppTextStyles.panchangBold15.copyWith(color: AppColors.white),
+                AppTextStyles.balooBold15.copyWith(color: AppColors.white),
           ),
           SizedBox(height: 20.h),
           Text(
             "LESSON_CANCELLATION_POLICY".tr(context),
             textAlign: TextAlign.center,
             style:
-                AppTextStyles.panchangMedium11.copyWith(color: AppColors.white),
+                AppTextStyles.balooMedium11.copyWith(color: AppColors.white),
           ),
           Text(
             "CANCELLATION_POLICY_3".tr(context),
             textAlign: TextAlign.center,
             style:
-                AppTextStyles.panchangMedium11.copyWith(color: AppColors.white),
+                AppTextStyles.balooMedium11.copyWith(color: AppColors.white),
           ),
           SizedBox(height: 20.h),
           MainButton(
             label: "JOIN_PAY_MY_SHARE".tr(context),
             labelStyle:
-                AppTextStyles.panchangMedium13.copyWith(color: AppColors.green),
+                AppTextStyles.balooMedium13.copyWith(color: AppColors.darkBlue),
             color: AppColors.yellow,
             onTap: () {
               Navigator.pop(context, true);

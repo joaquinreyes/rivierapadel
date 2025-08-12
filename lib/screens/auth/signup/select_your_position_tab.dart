@@ -30,21 +30,21 @@ class _SelectYourPositionState extends State<_SelectYourPosition> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            SizedBox(height: 45.h),
+            SizedBox(height: 20.h),
             Align(
               alignment: Alignment.centerLeft,
               child: Text(
-                'SELECT_YOUR_POSITION'.tr(context).toUpperCase(),
+                'SELECT_YOUR_POSITION'.tr(context),
                 textAlign: TextAlign.center,
-                style: AppTextStyles.panchangMedium15,
+                style: AppTextStyles.balooMedium20.copyWith(height: 1),
               ),
             ),
-            SizedBox(height: 30.h),
+            SizedBox(height: 21.h),
             _optionTile(
                 PlayingSide.right, "RIGHT_SIDE_EXPLANATION".tr(context)),
             _optionTile(PlayingSide.left, "LEFT_SIDE_EXPLANATION".tr(context)),
             _optionTile(PlayingSide.both, "BOTH_SIDES_EXPLANATION".tr(context)),
-            SizedBox(height: 37.h),
+            SizedBox(height: 50.h),
             Align(
               alignment: Alignment.centerRight,
               child: SizedBox(
@@ -52,7 +52,7 @@ class _SelectYourPositionState extends State<_SelectYourPosition> {
                 child: MainButton(
                   enabled: canProceed,
                   showArrow: true,
-                  label: 'NEXT'.tr(context),
+                  label: 'NEXT'.trU(context),
                   onTap: () async {
                     if (canProceed) {
                       widget.registerModel.playingSide =
@@ -85,8 +85,8 @@ class _SelectYourPositionState extends State<_SelectYourPosition> {
           vertical: 10.h,
         ),
         decoration: BoxDecoration(
-          color: selected ? AppColors.green5 : AppColors.darkGreen5,
-          borderRadius: BorderRadius.circular(5.r),
+          color: selected ? AppColors.darkBlue : AppColors.optionBgColor05,
+          borderRadius: BorderRadius.circular(100.r),
         ),
         child: Row(
           children: [
@@ -99,15 +99,17 @@ class _SelectYourPositionState extends State<_SelectYourPosition> {
                 children: [
                   Text(
                     side.userFacingString,
-                    style: AppTextStyles.panchangMedium13.copyWith(
-                      color: selected ? AppColors.white : AppColors.darkGreen,
+                    style: selected ? AppTextStyles.sansMedium16.copyWith(
+                      color:  AppColors.white,
+                    ) : AppTextStyles.sansRegular16.copyWith(
+                      color:  AppColors.darkBlue,
                     ),
                   ),
                   SizedBox(height: 2.h),
                   Text(
                     explanation,
-                    style: AppTextStyles.helveticaLight14.copyWith(
-                      color: selected ? AppColors.white : AppColors.darkGreen,
+                    style: AppTextStyles.sansRegular15.copyWith(
+                      color: selected ? AppColors.white : AppColors.darkBlue,
                     ),
                   )
                 ],

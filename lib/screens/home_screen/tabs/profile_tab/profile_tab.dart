@@ -177,7 +177,7 @@ class _ProfileTabState extends ConsumerState<ProfileTab> {
           padding: EdgeInsets.symmetric(horizontal: 13.w),
           margin: EdgeInsets.symmetric(vertical: 4.h),
           decoration: BoxDecoration(
-            color: isSelected ? AppColors.green : Colors.transparent,
+            color: isSelected ? AppColors.darkBlue : Colors.transparent,
             borderRadius: BorderRadius.circular(5.r),
           ),
           child: Column(
@@ -186,9 +186,9 @@ class _ProfileTabState extends ConsumerState<ProfileTab> {
               Text(text,
                   textAlign: TextAlign.center,
                   style: isSelected
-                      ? AppTextStyles.helveticaBold13
+                      ? AppTextStyles.gothamBold13
                           .copyWith(color: Colors.white)
-                      : AppTextStyles.helveticaRegular12),
+                      : AppTextStyles.gothamRegular12),
             ],
           ),
         ),

@@ -53,8 +53,8 @@ class BookingCartState extends ConsumerState<BookingCart> {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Text("BOOKING_CART".tr(context),
-                style: AppTextStyles.panchangBold12.copyWith(
-                  color: AppColors.green,
+                style: AppTextStyles.balooBold12.copyWith(
+                  color: AppColors.darkBlue,
                 )),
             SizedBox(width: 5.w),
             Container(
@@ -62,15 +62,15 @@ class BookingCartState extends ConsumerState<BookingCart> {
               // height: 20.w,
               alignment: Alignment.center,
               decoration: const BoxDecoration(
-                  color: AppColors.green, shape: BoxShape.circle),
+                  color: AppColors.darkBlue, shape: BoxShape.circle),
               padding: EdgeInsets.all(6.w),
               child: Text(count,
-                  style: AppTextStyles.panchangBold10.copyWith(
+                  style: AppTextStyles.balooBold10.copyWith(
                     color: AppColors.yellow,
                   )),
             ),
             SizedBox(width: 10.w),
-            const Icon(Icons.keyboard_arrow_up, color: AppColors.green)
+            const Icon(Icons.keyboard_arrow_up, color: AppColors.darkBlue)
           ],
         ),
       ),

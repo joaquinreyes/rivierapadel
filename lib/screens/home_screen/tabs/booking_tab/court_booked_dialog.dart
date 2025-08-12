@@ -53,7 +53,7 @@ class _CourtBookedDialogState extends ConsumerState<CourtBookedDialog> {
         children: [
           Center(
             child: Text(
-              "BOOKING_INFORMATION".tr(context),
+              "BOOKING_INFORMATION".trU(context),
               style: AppTextStyles.popupHeaderTextStyle,
               textAlign: TextAlign.center,
             ),
@@ -70,14 +70,17 @@ class _CourtBookedDialogState extends ConsumerState<CourtBookedDialog> {
                 ? "${"PRICE".tr(context)} ${Utils.formatPrice((widget.amountPaid ?? widget.bookings.price)?.toDouble())}\n${"REFUND".tr(context)} ${Utils.formatPrice(widget.refundAmount?.toDouble())}"
                 : null,
             bookings: widget.bookings,
+            dividerColor: AppColors.white25,
+            textColor: AppColors.white,
             price: widget.amountPaid ?? widget.bookings.price,
             bookingTime: widget.bookingTime,
             courtName: widget.court.values.first,
-            color: AppColors.yellow,
+            color: AppColors.oak,
           ),
+          if (widget.isOpenMatch)
           SizedBox(height: 15.h),
           if (widget.isOpenMatch) _openMatch(),
-          SizedBox(height: 20.h),
+          SizedBox(height: 15.h),
           Row(
             children: [
               SecondaryImageButton(
@@ -125,11 +128,13 @@ class _CourtBookedDialogState extends ConsumerState<CourtBookedDialog> {
             ],
           ),
           if (widget.isOpenMatch) ...[
-            SizedBox(height: 17.h),
+            SizedBox(height: 10.h),
             SecondaryImageButton(
+              imageHeight: 14.h,
+              imageWidth: 14.h,
               isForPopup: true,
-              label: 'SHARE_MATCH'.trU(context),
-              image: AppImages.calendar.path,
+              label: 'SHARE_MATCH'.tr(context),
+              image: AppImages.whatsaapIcon.path,
               onTap: () {
                 final service = ref
                     .watch(fetchServiceDetailProvider(widget.serviceID!))
@@ -156,30 +161,30 @@ class _CourtBookedDialogState extends ConsumerState<CourtBookedDialog> {
           children: [
             if (organizerNote.isNotEmpty) ...[
               Text(
-                "NOTE_FROM_THE_ORGANIZER".tr(context),
-                style: AppTextStyles.panchangBold10
+                "NOTE_FROM_ORGANIZER".tr(context),
+                style: AppTextStyles.sansRegular16
                     .copyWith(color: AppColors.white),
               ),
               SizedBox(height: 5.h),
               Container(
-                padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 8.h),
+                padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 6.h),
                 decoration: BoxDecoration(
-                  color: AppColors.green5,
+                  color: AppColors.white25,
                   borderRadius: BorderRadius.circular(25.r),
                 ),
                 width: double.infinity,
                 child: Text(
                   data.organizerNote ?? "",
-                  style: AppTextStyles.panchangMedium10
+                  style: AppTextStyles.sansRegular13
                       .copyWith(color: AppColors.white),
                 ),
               ),
+            SizedBox(height: 15.h),
             ],
-            SizedBox(height: 20.h),
             Text(
-              "YOUR_OPEN_MATCH".trU(context),
+              "YOUR_OPEN_MATCH".tr(context),
               style:
-                  AppTextStyles.panchangBold10.copyWith(color: AppColors.white),
+                  AppTextStyles.sansRegular16.copyWith(color: AppColors.white),
             ),
             SizedBox(height: 10.h),
             OpenMatchParticipantRowWithBG(

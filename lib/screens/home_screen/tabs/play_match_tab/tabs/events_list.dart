@@ -85,7 +85,7 @@ class _EventListState extends ConsumerState<EventsList> {
           padding: EdgeInsets.only(bottom: 10.h),
           child: Text(
             Utils.formatBookingDate(date, context),
-            style: AppTextStyles.panchangBold13,
+            style: AppTextStyles.balooBold13,
           ),
         ),
       );
@@ -145,7 +145,7 @@ class _EventsCard extends ConsumerWidget {
                   children: [
                     Text(
                       (event.service?.event?.eventName ?? "").toUpperCase(),
-                      style: AppTextStyles.helveticaBold14
+                      style: AppTextStyles.gothamBold14
                           .copyWith(color: AppColors.darkGreen),
                     ),
                     SizedBox(height: 5.h),
@@ -183,7 +183,7 @@ class _EventsCard extends ConsumerWidget {
                         maxCapacity: event.getMaximumCapacity,
                         minCapacity: event.getMinimumCapacity,
                       ).toUpperCase(),
-                      style: AppTextStyles.panchangBold9
+                      style: AppTextStyles.balooBold9
                           .copyWith(color: AppColors.darkGreen),
                     ),
                     SizedBox(height: 4.h),
@@ -196,7 +196,7 @@ class _EventsCard extends ConsumerWidget {
                       ),
                       child: Text(
                         "${event.players?.length.toString() ?? "0"}/${(event.getMaximumCapacity).toString() ?? "0"}",
-                        style: AppTextStyles.helveticaRegular12.copyWith(
+                        style: AppTextStyles.gothamRegular12.copyWith(
                           color: AppColors.darkGreen,
                         ),
                       ),
@@ -226,12 +226,12 @@ class _EventsCard extends ConsumerWidget {
         SizedBox(height: 5.h),
         Text(
           text1,
-          style: AppTextStyles.helveticaLight12,
+          style: AppTextStyles.gothamLight12,
         ),
         SizedBox(height: 5.h),
         Text(
           text2,
-          style: AppTextStyles.helveticaLight12,
+          style: AppTextStyles.gothamLight12,
         ),
       ],
     );

@@ -27,7 +27,7 @@ class _HeaderInfo extends ConsumerWidget {
             },
             child: Text(
               "SIGN_OUT".tr(context),
-              style: AppTextStyles.helveticaLight12,
+              style: AppTextStyles.gothamLight12,
             ),
           ),
         ),
@@ -96,12 +96,12 @@ class _HeaderInfo extends ConsumerWidget {
                 SizedBox(height: 5.h),
                 Text(
                   user?.firstName ?? "",
-                  style: AppTextStyles.panchangBold18,
+                  style: AppTextStyles.balooBold18,
                 ),
                 SizedBox(height: 1.h),
                 Text(
                   "$level • $playingSide",
-                  style: AppTextStyles.panchangMedium11,
+                  style: AppTextStyles.balooMedium11,
                 ),
                 SizedBox(height: 12.h),
                 paymentDetails.when(
@@ -131,12 +131,12 @@ class _HeaderInfo extends ConsumerWidget {
       children: [
         Text(
           "WALLET".tr(context),
-          style: AppTextStyles.panchangBold12,
+          style: AppTextStyles.balooBold12,
         ),
         SizedBox(width: 4.w),
         Text(
           Utils.formatPrice2(walletBalance, currency),
-          style: AppTextStyles.panchangMedium12,
+          style: AppTextStyles.balooMedium12,
         )
       ],
     );
@@ -158,7 +158,7 @@ class _Membership extends ConsumerWidget {
               children: [
                 Text(
                   "${"LOYALTY_PROGRAM".tr(context)} ${memberShip.tr(context)}",
-                  style: AppTextStyles.panchangBold11,
+                  style: AppTextStyles.balooBold11,
                 ),
                 const Spacer(),
                 GestureDetector(
@@ -173,7 +173,7 @@ class _Membership extends ConsumerWidget {
                     children: [
                       Text(
                         "INFO".tr(context),
-                        style: AppTextStyles.panchangMedium11,
+                        style: AppTextStyles.balooMedium11,
                       ),
                       SizedBox(width: 5.w),
                       Image.asset(
@@ -245,7 +245,7 @@ class _PlayedHoursState extends ConsumerState<_PlayedHours> {
                   Expanded(
                     child: Text(
                       "${"THIS_MONTH".tr(context)} $hours hrs",
-                      style: AppTextStyles.helveticaLight11,
+                      style: AppTextStyles.gothamLight11,
                     ),
                   ),
                   const Spacer(),
@@ -253,7 +253,7 @@ class _PlayedHoursState extends ConsumerState<_PlayedHours> {
                     child: Center(
                       child: Text(
                         "GOLD".tr(context),
-                        style: AppTextStyles.helveticaRegular13,
+                        style: AppTextStyles.gothamRegular13,
                       ),
                     ),
                   ),
@@ -262,7 +262,7 @@ class _PlayedHoursState extends ConsumerState<_PlayedHours> {
                     child: Center(
                       child: Text(
                         "PLATINUM".tr(context),
-                        style: AppTextStyles.helveticaRegular13,
+                        style: AppTextStyles.gothamRegular13,
                       ),
                     ),
                   ),
@@ -361,7 +361,7 @@ class _LoyaltyInfoDialog extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CustomDialog(
-      color: AppColors.lightPink,
+      color: AppColors.backgroundColor,
       closeIconColor: AppColors.darkGreen,
       child: SingleChildScrollView(
         child: Column(
@@ -375,11 +375,11 @@ class _LoyaltyInfoDialog extends StatelessWidget {
             SizedBox(height: 20.h),
             Text(
               "LOYALTY_PROGRAM".tr(context),
-              style: AppTextStyles.panchangBold15,
+              style: AppTextStyles.balooBold15,
             ),
             Text(
               "GOLD".tr(context),
-              style: AppTextStyles.panchangBold15,
+              style: AppTextStyles.balooBold15,
             ),
             SizedBox(height: 15.h),
             _benefitsReqRowWidget(
@@ -390,7 +390,7 @@ class _LoyaltyInfoDialog extends StatelessWidget {
             SizedBox(height: 15.h),
             Text(
               "ONCE_YOU_ATTAIN_THIS_CARD".tr(context),
-              style: AppTextStyles.panchangMedium11,
+              style: AppTextStyles.balooMedium11,
               textAlign: TextAlign.center,
             ),
             SizedBox(height: 15.h),
@@ -401,11 +401,11 @@ class _LoyaltyInfoDialog extends StatelessWidget {
             ),
             Text(
               "LOYALTY_PROGRAM".tr(context),
-              style: AppTextStyles.panchangBold15,
+              style: AppTextStyles.balooBold15,
             ),
             Text(
               "PLATINUM".tr(context),
-              style: AppTextStyles.panchangBold15,
+              style: AppTextStyles.balooBold15,
             ),
             SizedBox(height: 15.h),
             _benefitsReqRowWidget(
@@ -416,7 +416,7 @@ class _LoyaltyInfoDialog extends StatelessWidget {
             SizedBox(height: 15.h),
             Text(
               "ONCE_YOU_ATTAIN_THIS_CARD".tr(context),
-              style: AppTextStyles.panchangMedium11,
+              style: AppTextStyles.balooMedium11,
               textAlign: TextAlign.center,
             ),
           ],
@@ -444,13 +444,13 @@ class _LoyaltyInfoDialog extends StatelessWidget {
                 children: [
                   Text(
                     "BENEFITS".tr(context),
-                    style: AppTextStyles.panchangMedium12
+                    style: AppTextStyles.balooMedium12
                         .copyWith(color: AppColors.white),
                   ),
                   const CDivider(color: AppColors.white25),
                   Text(
                     benefits,
-                    style: AppTextStyles.helveticaLight13
+                    style: AppTextStyles.gothamLight13
                         .copyWith(color: AppColors.white),
                   ),
                 ],
@@ -471,12 +471,12 @@ class _LoyaltyInfoDialog extends StatelessWidget {
                 children: [
                   Text(
                     "REQUIREMENTS".tr(context),
-                    style: AppTextStyles.panchangMedium12,
+                    style: AppTextStyles.balooMedium12,
                   ),
                   const CDivider(color: AppColors.darkGreen25),
                   Text(
                     req,
-                    style: AppTextStyles.helveticaLight13,
+                    style: AppTextStyles.gothamLight13,
                   ),
                 ],
               ),

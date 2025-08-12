@@ -37,8 +37,8 @@ class _OpenMatchWaitingForApprovalPlayersState
         Text(
           "PLAYERS_WAITING_FOR_YOUR_APPROVAL".tr(context),
           style: widget.isForPopUp
-              ? AppTextStyles.panchangMedium12.copyWith(color: AppColors.white)
-              : AppTextStyles.panchangBold14,
+              ? AppTextStyles.balooMedium12.copyWith(color: AppColors.white)
+              : AppTextStyles.balooBold14,
         ),
         SizedBox(height: 10.h),
         Container(
@@ -66,7 +66,7 @@ class _OpenMatchWaitingForApprovalPlayersState
                         children: [
                           Text(
                             player.getCustomerName,
-                            style: AppTextStyles.panchangBold9.copyWith(
+                            style: AppTextStyles.balooBold9.copyWith(
                                 color: widget.isForPopUp
                                     ? AppColors.white
                                     : AppColors.black),
@@ -74,7 +74,7 @@ class _OpenMatchWaitingForApprovalPlayersState
                           if (subTitle.trim().length > 1)
                             Text(
                               subTitle,
-                              style: AppTextStyles.helveticaLight13.copyWith(
+                              style: AppTextStyles.gothamLight13.copyWith(
                                   height: 0.9,
                                   color: widget.isForPopUp
                                       ? AppColors.white
@@ -88,7 +88,7 @@ class _OpenMatchWaitingForApprovalPlayersState
                         width: 100.w,
                         height: 32.h,
                         color: AppColors.yellow,
-                        labelStyle: AppTextStyles.panchangMedium9
+                        labelStyle: AppTextStyles.balooMedium9
                             .copyWith(color: AppColors.darkGreen),
                         applySize: false,
                         padding: EdgeInsets.symmetric(vertical: 6.h),

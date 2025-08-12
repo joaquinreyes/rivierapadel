@@ -106,7 +106,7 @@ class _AcePadelState extends ConsumerState<AcePadel> {
           )
         ],
         theme: ThemeData(
-          scaffoldBackgroundColor: AppColors.lightPink,
+          scaffoldBackgroundColor: AppColors.backgroundColor,
           colorScheme: const ColorScheme.light().copyWith(
             primary: AppColors.green5,
           ),

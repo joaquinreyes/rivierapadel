@@ -126,7 +126,7 @@ class __EnterMatchResultsState extends ConsumerState<EnterMatchResults> {
                 SizedBox(height: 5.h),
                 Text("ALSO_HELP_US_RANK".tr(context),
                     textAlign: TextAlign.center,
-                    style: AppTextStyles.panchangMedium12
+                    style: AppTextStyles.balooMedium12
                         .copyWith(color: AppColors.white)),
                 SizedBox(height: 20.h),
                 Row(
@@ -134,12 +134,12 @@ class __EnterMatchResultsState extends ConsumerState<EnterMatchResults> {
                   children: [
                     Text(
                       "YOUR_OPEN_MATCH".trU(context),
-                      style: AppTextStyles.panchangMedium12
+                      style: AppTextStyles.balooMedium12
                           .copyWith(color: AppColors.white),
                     ),
                     Text(
                       widget.service.openMatchLevelRange,
-                      style: AppTextStyles.panchangMedium12
+                      style: AppTextStyles.balooMedium12
                           .copyWith(color: AppColors.white),
                     ),
                   ],

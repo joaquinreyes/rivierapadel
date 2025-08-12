@@ -92,26 +92,29 @@ class _BookingTabState extends ConsumerState<BookingTab> {
       onRefresh: () => ref.refresh(getCourtBookingProvider.future),
       child: Column(
         children: [
-          SizedBox(height: 35.5.h),
+          SizedBox(height: 5.h),
           Row(
             children: [
-              Container(
-                alignment: AlignmentDirectional.centerStart,
-                padding: EdgeInsets.symmetric(horizontal: 20.w),
-                child: Image.asset(
-                  AppImages.logoHorizontal.path,
-                  width: 100.w,
-                  height: 50.w,
-                ),
-              ),
+              24.horizontalSpace,
+              Text("AVAILABLE_COURTS".trU(context),
+              style: AppTextStyles.balooMedium22.copyWith(height: 1),),
+              // Container(
+              //   alignment: AlignmentDirectional.centerStart,
+              //   padding: EdgeInsets.symmetric(horizontal: 20.w),
+              //   child: Image.asset(
+              //     AppImages.logoHorizontal.path,
+              //     width: 100.w,
+              //     height: 50.w,
+              //   ),
+              // ),
               const Spacer(),
               const NotificationButton(),
               SizedBox(width: 30.w),
             ],
           ),
-          SizedBox(height: 2.5.h),
-          _viewSelectRow(),
-          SizedBox(height: 10.h),
+          // SizedBox(height: 2.5.h),
+          // _viewSelectRow(),
+          // SizedBox(height: 10.h),
           Expanded(
               child: data.when(
             data: (data) {
@@ -162,7 +165,7 @@ class _BookingTabState extends ConsumerState<BookingTab> {
             ),
           ],
         ),
-        SizedBox(height: 4.h),
+        // SizedBox(height: 4.h),
         Expanded(
           child: PageView(
             controller: pageController,
@@ -247,8 +250,8 @@ class _BookingTabState extends ConsumerState<BookingTab> {
             ref.read(_selectedTimeSlotAndLocationID.notifier).state =
                 (null, null);
             ref.read(selectedSportProvider.notifier).sport = sport;
-          }),
-          SizedBox(height: 10.h),
+          }), // remove
+          SizedBox(height: 2.h),
           courtBookings.when(
             data: (data) {
               if (data == null) {
@@ -277,7 +280,7 @@ class _BookingTabState extends ConsumerState<BookingTab> {
       mainAxisSize: MainAxisSize.min,
       children: [
         _serviceRow(data),
-        SizedBox(height: 20.h),
+        SizedBox(height: 17.h),
         vouchers.when(
           data: (data) {
             if (data.isEmpty) {
@@ -291,8 +294,8 @@ class _BookingTabState extends ConsumerState<BookingTab> {
                   padding: EdgeInsets.only(left: 20.w),
                   child: Text(
                     "BUY_CREDIT_VOUCHERS".trU(context),
-                    style: AppTextStyles.helveticaRegular12
-                        .copyWith(letterSpacing: 3),
+                    style: AppTextStyles.balooMedium17
+                        .copyWith(height: 1),
                   ),
                 ),
                 SizedBox(
@@ -304,7 +307,7 @@ class _BookingTabState extends ConsumerState<BookingTab> {
                   child: Row(
                     children: data
                         .map((e) => Padding(
-                              padding: EdgeInsets.only(left: 20.w),
+                              padding: EdgeInsets.only(left: 15.w),
                               child: _VoucherCardWidget(
                                   voucher: e,
                                   onTap: () async {
@@ -435,15 +438,17 @@ class _BookingTabState extends ConsumerState<BookingTab> {
                   children: [
                     Expanded(
                       child: Text(
-                        locationName,
-                        style: AppTextStyles.panchangBold12,
+                        locationName.toUpperCase(),
+                        style: AppTextStyles.balooMedium15.copyWith(height: 1,),
                       ),
                     ),
                     // const Spacer(),
+                    8.horizontalSpace,
                     Text(
                       distance,
-                      style: AppTextStyles.helveticaLight13.copyWith(
-                        color: AppColors.darkGreen70,
+                      style: AppTextStyles.sansRegular15.copyWith(
+                        color: AppColors.clay70,
+                        height: 1,
                       ),
                     ),
                   ],
@@ -548,9 +553,9 @@ class _BookingTabState extends ConsumerState<BookingTab> {
           text,
           textAlign: TextAlign.center,
           style: isDateLessonSelected
-              ? AppTextStyles.helveticaRegular12
+              ? AppTextStyles.gothamRegular12
                   .copyWith(color: AppColors.darkGreen)
-              : AppTextStyles.helveticaLight12,
+              : AppTextStyles.gothamLight12,
         ),
       ),
     );
@@ -580,11 +585,12 @@ class _BookingTabState extends ConsumerState<BookingTab> {
   Widget _sportsAndServiceBackgroundContainer({Widget? child}) {
     return Container(
       height: 38.h,
-      margin: EdgeInsets.symmetric(horizontal: 15.w),
+      margin: EdgeInsets.symmetric(horizontal: 15.w,vertical: 10.h),
       constraints: kComponentWidthConstraint,
       decoration: inset.BoxDecoration(
         boxShadow: kInsetShadow,
-        borderRadius: BorderRadius.circular(5.r),
+        color: AppColors.clay05,
+        borderRadius: BorderRadius.circular(100.r),
       ),
       child: child,
     );
@@ -592,12 +598,12 @@ class _BookingTabState extends ConsumerState<BookingTab> {
 
   Container _serviceTimeSlotsBackgroundContainer({Widget? child}) {
     return Container(
-      padding: EdgeInsets.symmetric(horizontal: 15.h, vertical: 15.h),
+      padding: EdgeInsets.fromLTRB(10.w,10.h,10.w,15.h),
       margin: EdgeInsets.symmetric(horizontal: 15.w),
       constraints: kComponentWidthConstraint,
       decoration: BoxDecoration(
-        color: AppColors.darkGreen5,
-        borderRadius: BorderRadius.circular(5.r),
+        color: AppColors.clay05,
+        borderRadius: BorderRadius.circular(12.r),
       ),
       child: child,
     );
@@ -760,7 +766,7 @@ class _LessonState extends ConsumerState<LessonsList> {
                     selectedDate != null
                         ? DateFormat('EEE d MMM').format(selectedDate)
                         : cardData.getDateCourt(selectedDuration),
-                    style: AppTextStyles.helveticaBold14
+                    style: AppTextStyles.gothamBold14
                         .copyWith(color: AppColors.darkGreen),
                   ),
                 Row(
@@ -776,7 +782,7 @@ class _LessonState extends ConsumerState<LessonsList> {
                     ],
                     Text(
                       cardData.fullName?.capitalizeFirst ?? "",
-                      style: AppTextStyles.panchangBold9
+                      style: AppTextStyles.balooBold9
                           .copyWith(color: AppColors.darkGreen),
                     ),
                   ],
@@ -795,7 +801,7 @@ class _LessonState extends ConsumerState<LessonsList> {
                     },
                     child: Text(
                       "INFO".tr(context),
-                      style: AppTextStyles.helveticaLight13.copyWith(
+                      style: AppTextStyles.gothamLight13.copyWith(
                         color: AppColors.darkGreen70,
                       ),
                     ),

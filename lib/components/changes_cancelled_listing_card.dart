@@ -28,7 +28,7 @@ class ChangesCancelledListingCard extends StatelessWidget {
           SizedBox(width: 10.w),
           Text(
             text,
-            style: AppTextStyles.panchangBold10,
+            style: AppTextStyles.balooBold10,
           ),
         ],
       ),

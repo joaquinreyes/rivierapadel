@@ -93,13 +93,13 @@ class _UserOpenMatchCardState extends ConsumerState<UserOpenMatchCard> {
             children: [
               Text(
                 "OPEN_MATCH".tr(context),
-                style: AppTextStyles.helveticaBold13.copyWith(color: textColor),
+                style: AppTextStyles.gothamBold13.copyWith(color: textColor),
               ),
               const Spacer(),
               Text(
                 (widget.booking.service?.location?.locationName ?? "")
                     .capitalizeFirst,
-                style: AppTextStyles.helveticaBold13.copyWith(color: textColor),
+                style: AppTextStyles.gothamBold13.copyWith(color: textColor),
               ),
             ],
           ),
@@ -112,7 +112,7 @@ class _UserOpenMatchCardState extends ConsumerState<UserOpenMatchCard> {
           SizedBox(height: 15.h),
           Text(
             widget.booking.formattedDateStartEndTime,
-            style: AppTextStyles.helveticaLight13.copyWith(color: textColor),
+            style: AppTextStyles.gothamLight13.copyWith(color: textColor),
           ),
           SizedBox(height: 5.h),
           Row(
@@ -120,13 +120,13 @@ class _UserOpenMatchCardState extends ConsumerState<UserOpenMatchCard> {
               Text(
                 widget.booking.courtName.capitalizeFirst,
                 style:
-                    AppTextStyles.helveticaLight13.copyWith(color: textColor),
+                    AppTextStyles.gothamLight13.copyWith(color: textColor),
               ),
               const Spacer(),
               Text(
                 "LEVELS".capitalizeFirst,
                 style:
-                    AppTextStyles.helveticaLight13.copyWith(color: textColor),
+                    AppTextStyles.gothamLight13.copyWith(color: textColor),
               ),
             ],
           )

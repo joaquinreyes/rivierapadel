@@ -28,47 +28,60 @@ class __LevelScoreTab extends ConsumerState<_LevelScoreTab> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                SizedBox(height: 45.h),
+                SizedBox(height: 20.h),
                 Align(
                   alignment: Alignment.centerLeft,
                   child: Text(
-                    'LEVEL_ASSESSMENT'.trU(context),
+                    'LEVEL_ASSESSMENT'.tr(context),
                     textAlign: TextAlign.center,
-                    style: AppTextStyles.panchangMedium15,
+                    style: AppTextStyles.balooMedium20.copyWith(height: 1),
                   ),
                 ),
-                SizedBox(height: 25.h),
+                SizedBox(height: 8.h),
+                Align(
+                  alignment: Alignment.centerLeft,
+                  child: Text(
+                    "LEVEL_DESCRIPTION".tr(context),
+                    style: AppTextStyles.sansRegular14.copyWith(height: 1),
+                  ),
+                ),
+                SizedBox(height: 15.h),
+                Image.asset(
+                  AppImages.levelInfo.path,
+                  width: double.infinity,
+                ),
+                SizedBox(height: 38.h),
                 Align(
                   alignment: Alignment.centerLeft,
                   child: Text(
                     "GREAT_YOUR_STARTING_LEVEL_IS".tr(context),
-                    style: AppTextStyles.panchangMedium14,
+                    style: AppTextStyles.balooMedium19.copyWith(height: 1),
                   ),
                 ),
-                SizedBox(height: 25.h),
+                7.verticalSpace,
                 Container(
                   width: double.infinity,
-                  padding: EdgeInsets.symmetric(vertical: 10.h),
+                  padding: EdgeInsets.symmetric(vertical: 6.5.h),
                   decoration: BoxDecoration(
-                    color: AppColors.yellow50,
-                    borderRadius: BorderRadius.circular(5.r),
+                    color: AppColors.oak,
+                    borderRadius: BorderRadius.circular(100.r),
                   ),
                   child: Center(
                     child: Text(
                       data.level?.formatString() ?? "",
-                      style: AppTextStyles.panchangMedium29
-                          .copyWith(color: AppColors.green5),
+                      style: AppTextStyles.balooMedium22
+                          .copyWith(color: AppColors.white),
                     ),
                   ),
                 ),
-                SizedBox(height: 37.h),
+                SizedBox(height: 75.h),
                 Align(
                   alignment: Alignment.centerRight,
                   child: SizedBox(
-                    width: 180.w,
+                    width: 160.w,
                     child: MainButton(
                       enabled: _canProceed,
-                      label: 'CONTINUE'.tr(context),
+                      label: 'CONTINUE'.trU(context),
                       showArrow: true,
                       onTap: () async {
                         if (_canProceed) {

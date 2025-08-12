@@ -73,7 +73,7 @@ class CustomDropDownState<T> extends State<CustomDropDown<T>> {
                 Expanded(
                   child: Text(
                     widget.label,
-                    style: AppTextStyles.helveticaLight12.copyWith(
+                    style: AppTextStyles.gothamLight12.copyWith(
                       color: AppColors.white,
                     ),
                   ),

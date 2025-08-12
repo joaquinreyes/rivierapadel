@@ -48,7 +48,7 @@ class _ApplicantDialogState extends ConsumerState<OpenMatchApplicantDialog> {
           Text(
             "PLAYERS_WAITING_FOR_YOUR_APPROVAL".trU(context),
             textAlign: TextAlign.center,
-            style: AppTextStyles.panchangBold9,
+            style: AppTextStyles.balooBold9,
           ),
           SizedBox(height: 20.h),
           ApplicantOpenMatchInfoCard(
@@ -56,7 +56,7 @@ class _ApplicantDialogState extends ConsumerState<OpenMatchApplicantDialog> {
           ),
           SizedBox(height: 20.h),
           Text("CURRENT_PLAYERS".tr(context),
-              style: AppTextStyles.panchangBold10),
+              style: AppTextStyles.balooBold10),
           SizedBox(height: 5.h),
           OpenMatchParticipantRowWithBG(
             textForAvailableSlot: "AVAILABLE".tr(context),

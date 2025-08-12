@@ -134,7 +134,7 @@ class _RankingProfileState extends ConsumerState<RankingProfile> {
                 SizedBox(height: 5.h),
                 Text(
                   (userFromAssessment.firstName ?? "").toLowerCase(),
-                  style: AppTextStyles.helveticaRegular16,
+                  style: AppTextStyles.gothamRegular16,
                 ),
               ],
             ),

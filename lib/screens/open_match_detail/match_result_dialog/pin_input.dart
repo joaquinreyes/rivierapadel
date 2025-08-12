@@ -70,7 +70,7 @@ class _CustomNumberInputState extends ConsumerState<CustomNumberInput> {
                 textAlign: TextAlign.center,
                 cursorColor: widget.color,
                 maxLength: 1,
-                style: AppTextStyles.panchangMedium21.copyWith(
+                style: AppTextStyles.balooMedium21.copyWith(
                   color: widget.color,
                 ),
                 decoration: InputDecoration(

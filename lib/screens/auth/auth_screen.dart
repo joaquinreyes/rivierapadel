@@ -69,7 +69,12 @@ class _Body extends ConsumerWidget {
           margin: EdgeInsets.symmetric(
             vertical: PlatformC().isCurrentDesignPlatformDesktop ? 30 : 0,
           ),
-          color: AppColors.lightPink,
+          // color: AppColors.lightPink,
+          decoration: BoxDecoration(
+              image: DecorationImage(
+                fit: BoxFit.cover,
+                image: AssetImage(AppImages.splashLogoBg.path),
+              )),
           child: ConstrainedBox(
             constraints: kComponentWidthConstraint,
             child: Column(
@@ -80,26 +85,25 @@ class _Body extends ConsumerWidget {
                 Image.asset(
                   AppImages.splashLogo.path,
                   width: double.infinity,
-                  height: 250.h,
-                  fit: BoxFit.fill,
+                  height: 390.h,
                 ),
                 const Spacer(),
                 MainButton(
-                  label: FlutterI18n.translate(context, "SIGN_IN"),
+                  label: FlutterI18n.translate(context, "SIGN_IN").toUpperCase(),
                   showArrow: true,
-                  height: 50.h,
+                  // height: 40.h,
                   onTap: () {
                     ref.read(goRouterProvider).push(RouteNames.signIn);
                   },
                 ),
                 SizedBox(height: 22.h),
                 MainButton(
-                  color: AppColors.white,
+                  color: AppColors.darkBlue50,
                   label: FlutterI18n.translate(context, "REGISTER"),
-                  labelStyle: AppTextStyles.panchangMedium13
-                      .copyWith(color: AppColors.green),
+                  labelStyle: AppTextStyles.sansRegular18
+                      .copyWith(color: AppColors.white,height: 0.9),
                   showArrow: true,
-                  height: 50.h,
+                  // height: 40.h,
                   onTap: () {
                     ref.read(goRouterProvider).push(RouteNames.signUp);
                   },

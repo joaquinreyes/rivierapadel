@@ -37,13 +37,13 @@ class _MatchResultFormsState extends ConsumerState<_MatchResultForms> {
             children: [
               Text(
                 widget.service.formattedDateStartTime.toUpperCase(),
-                style: AppTextStyles.helveticaBold13
+                style: AppTextStyles.gothamBold13
                     .copyWith(color: AppColors.white),
               ),
               Text(
                 widget.service.service?.location?.locationName.toUpperCase() ??
                     '',
-                style: AppTextStyles.helveticaBold13
+                style: AppTextStyles.gothamBold13
                     .copyWith(color: AppColors.white),
               ),
             ],
@@ -85,7 +85,7 @@ class _MatchResultFormsState extends ConsumerState<_MatchResultForms> {
         },
         child: Text(
           "DRAW".tr(context),
-          style: AppTextStyles.helveticaRegular14.copyWith(
+          style: AppTextStyles.gothamRegular14.copyWith(
             color: AppColors.darkGreen,
           ),
         ),
@@ -164,7 +164,7 @@ class _SingleResultForm extends ConsumerWidget {
     return Center(
       child: Text(
         "DRAW".trU(context),
-        style: AppTextStyles.panchangMedium21.copyWith(color: AppColors.white),
+        style: AppTextStyles.balooMedium21.copyWith(color: AppColors.white),
       ),
     );
   }
@@ -186,7 +186,7 @@ class _RankOtherPlayers extends ConsumerWidget {
         SizedBox(height: 20.h),
         Text(
           "RANK_THE_OTHER_PLAYERS".trU(context),
-          style: AppTextStyles.panchangBold12.copyWith(color: AppColors.white),
+          style: AppTextStyles.balooBold12.copyWith(color: AppColors.white),
         ),
         SizedBox(height: 10.h),
         for (var i = 0; i < players.length; i++) ...[
@@ -255,7 +255,7 @@ class _RankingLevelSelectorState extends State<_RankingLevelSelector> {
         Text(
           "SELECT_PLAYER_LEVEL".tr(context),
           style:
-              AppTextStyles.panchangMedium10.copyWith(color: AppColors.white),
+              AppTextStyles.balooMedium10.copyWith(color: AppColors.white),
         ),
         SizedBox(height: 5.h),
         Container(
@@ -300,7 +300,7 @@ class _RankingLevelSelectorState extends State<_RankingLevelSelector> {
                     child: Center(
                       child: Text(
                         e.toStringAsFixed(2),
-                        style: AppTextStyles.helveticaRegular14.copyWith(
+                        style: AppTextStyles.gothamRegular14.copyWith(
                             color: isSelected
                                 ? AppColors.darkGreen
                                 : AppColors.white),
@@ -342,13 +342,13 @@ class _ScoreInput extends StatelessWidget {
           if (isWinner)
             Text(
               "WINNERS".tr(context),
-              style: AppTextStyles.panchangMedium21.copyWith(
-                color: AppColors.green,
+              style: AppTextStyles.balooMedium21.copyWith(
+                color: AppColors.darkBlue,
               ),
             ),
           CustomNumberInput(
             onChanged: onChanged,
-            color: isWinner ? AppColors.green : AppColors.white,
+            color: isWinner ? AppColors.darkBlue : AppColors.white,
             index: index,
             initialScore: scores,
           ),
@@ -391,7 +391,7 @@ class _SwapRow extends StatelessWidget {
         const Spacer(flex: 5),
         Text(
           "V/S",
-          style: AppTextStyles.panchangBold12.copyWith(color: AppColors.white),
+          style: AppTextStyles.balooBold12.copyWith(color: AppColors.white),
         ),
         const Spacer(flex: 3),
       ],

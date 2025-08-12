@@ -25,7 +25,7 @@ class _DeletePasswordBtns extends ConsumerWidget {
           },
           child: Text(
             "DELETE_ACCOUNT".tr(context),
-            style: AppTextStyles.helveticaLight12,
+            style: AppTextStyles.gothamLight12,
           ),
         ),
         const Spacer(),
@@ -39,7 +39,7 @@ class _DeletePasswordBtns extends ConsumerWidget {
           },
           child: Text(
             "CHANGE_PASSWORD".tr(context),
-            style: AppTextStyles.helveticaLight12,
+            style: AppTextStyles.gothamLight12,
           ),
         )
       ],
@@ -116,11 +116,11 @@ Row _buildInfoField(String heading, String value) {
     children: [
       Text(
         heading,
-        style: AppTextStyles.helveticaRegular13,
+        style: AppTextStyles.gothamRegular13,
       ),
       Text(
         value,
-        style: AppTextStyles.helveticaLight13,
+        style: AppTextStyles.gothamLight13,
       ),
     ],
   );
@@ -160,14 +160,14 @@ class __ChangePasswordDialogState extends ConsumerState<_ChangePasswordDialog> {
                 children: [
                   Text(
                     "CURRENT_PASSWORD".tr(context),
-                    style: AppTextStyles.panchangMedium12.copyWith(
+                    style: AppTextStyles.balooMedium12.copyWith(
                       color: AppColors.white,
                     ),
                   ),
                   const Spacer(),
                   Text(
                     "RECOVER".tr(context),
-                    style: AppTextStyles.helveticaLight13.copyWith(
+                    style: AppTextStyles.gothamLight13.copyWith(
                       color: AppColors.white,
                     ),
                   ),
@@ -187,7 +187,7 @@ class __ChangePasswordDialogState extends ConsumerState<_ChangePasswordDialog> {
                 alignment: AlignmentDirectional.centerStart,
                 child: Text(
                   "NEW_PASSWORD".tr(context),
-                  style: AppTextStyles.panchangMedium12.copyWith(
+                  style: AppTextStyles.balooMedium12.copyWith(
                     color: AppColors.white,
                   ),
                 ),
@@ -269,7 +269,7 @@ class __DeleteAccountConfirmationState
               alignment: AlignmentDirectional.centerStart,
               child: Text(
                 "PASSWORD".tr(context),
-                style: AppTextStyles.panchangMedium12.copyWith(
+                style: AppTextStyles.balooMedium12.copyWith(
                   color: AppColors.white,
                 ),
               ),
@@ -322,7 +322,7 @@ class TransactionList extends ConsumerWidget {
             children: [
               Text(
                 "TRANSACTION_HISTORY".tr(context),
-                style: AppTextStyles.panchangBold13,
+                style: AppTextStyles.balooBold13,
               ),
               SizedBox(width: 5.w),
               if (showShareButton)
@@ -338,7 +338,7 @@ class TransactionList extends ConsumerWidget {
                               padding: EdgeInsets.symmetric(vertical: 10.h),
                               child: Text(
                                 "TRANSACTION_HISTORY".tr(context),
-                                style: AppTextStyles.panchangBold13
+                                style: AppTextStyles.balooBold13
                                     .copyWith(color: AppColors.white),
                               ),
                             ),
@@ -354,7 +354,7 @@ class TransactionList extends ConsumerWidget {
               SizedBox(width: 10.w),
               Text(
                 "(${"LATEST".tr(context)})",
-                style: AppTextStyles.helveticaLight13
+                style: AppTextStyles.gothamLight13
                     .copyWith(color: AppColors.darkGreen),
               ),
             ],
@@ -393,7 +393,7 @@ class TransactionList extends ConsumerWidget {
                           Expanded(
                               child: Text(
                             showDate,
-                            style: AppTextStyles.helveticaLight13.copyWith(
+                            style: AppTextStyles.gothamLight13.copyWith(
                                 color: isForPopUp
                                     ? AppColors.white
                                     : AppColors.darkGreen),
@@ -401,7 +401,7 @@ class TransactionList extends ConsumerWidget {
                           Expanded(
                               child: Text(
                             status,
-                            style: AppTextStyles.helveticaLight13.copyWith(
+                            style: AppTextStyles.gothamLight13.copyWith(
                                 color: isForPopUp
                                     ? AppColors.white
                                     : AppColors.darkGreen),
@@ -411,7 +411,7 @@ class TransactionList extends ConsumerWidget {
                               flex: 1,
                               child: Text(
                                 paymentMethod.capitalizeFirst,
-                                style: AppTextStyles.helveticaRegular14
+                                style: AppTextStyles.gothamRegular14
                                     .copyWith(
                                         color: isForPopUp
                                             ? AppColors.white
@@ -421,7 +421,7 @@ class TransactionList extends ConsumerWidget {
                           Expanded(
                               child: Text(
                             amount,
-                            style: AppTextStyles.helveticaLight13.copyWith(
+                            style: AppTextStyles.gothamLight13.copyWith(
                                 color: isForPopUp
                                     ? AppColors.white
                                     : AppColors.darkGreen),

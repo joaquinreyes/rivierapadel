@@ -24,7 +24,7 @@ class LevelRestrictionContainer extends StatelessWidget {
           const BoxDecoration(color: AppColors.white, boxShadow: [kBoxShadow]),
       child: Text(
         "${"LEVEL".tr(context)} $levelRestriction",
-        style: AppTextStyles.helveticaRegular12,
+        style: AppTextStyles.gothamRegular12,
       ),
     );
   }

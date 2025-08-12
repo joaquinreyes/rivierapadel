@@ -27,7 +27,7 @@ class AsyncDialog<T> extends ConsumerWidget {
       }
     });
     return CustomDialog(
-        color: async.hasError ? AppColors.green : AppColors.lightPink,
+        color: async.hasError ? AppColors.darkBlue : AppColors.backgroundColor,
         showCloseIcon: false,
         // showCloseIcon: async.hasError,
         contentPadding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 10.h),
@@ -55,7 +55,7 @@ class AsyncDialog<T> extends ConsumerWidget {
                 MainButton(
                   label: 'CONTINUE'.tr(context),
                   color: AppColors.yellow,
-                  labelStyle: AppTextStyles.panchangMedium13,
+                  labelStyle: AppTextStyles.balooMedium13,
                   onTap: () {
                     Navigator.pop(context, error.toString());
                   },
@@ -77,7 +77,7 @@ class AsyncDialog<T> extends ConsumerWidget {
         const SizedBox(width: 10),
         Text(
           "${"loading".tr(context).capitalizeFirst}...",
-          style: AppTextStyles.panchangBold15.copyWith(color: AppColors.green),
+          style: AppTextStyles.balooBold15.copyWith(color: AppColors.darkBlue),
         ),
       ],
     );

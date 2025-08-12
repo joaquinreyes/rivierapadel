@@ -2,6 +2,7 @@ const kAssets = 'assets/images';
 
 enum AppImages {
   splashLogo("$kAssets/splash_logo.png"),
+  splashLogoBg("$kAssets/splash_logo_background.png"),
   // logo_horizontal.png
   logoHorizontal("$kAssets/logo_horizontal.png"),
   webStaticPage("$kAssets/web_static_page.png"),
@@ -11,6 +12,8 @@ enum AppImages {
   loadingGif("$kAssets/loading.gif"),
   dialogBg("$kAssets/dialog_bg.png"),
   selectedTag("$kAssets/selected_tag.png"),
+  popupSelectCircle("$kAssets/popupSelectCircle.png"),
+  unSelectedPopTag("$kAssets/unSelectedPopTag.png"),
   unselectedTag("$kAssets/un_selected_tag.png"),
   noNotificationBell("$kAssets/no_notification_bell.png"),
   notificationBell("$kAssets/notification_bell.png"),
@@ -35,6 +38,7 @@ enum AppImages {
   warning2("$kAssets/warning_2.png"),
   goldCard("$kAssets/gold_card.png"),
   platinumCard("$kAssets/platinum_card.png"),
+  levelInfo("$kAssets/level_info.png"),
   refresh("$kAssets/refresh.png");
 
   final String path;

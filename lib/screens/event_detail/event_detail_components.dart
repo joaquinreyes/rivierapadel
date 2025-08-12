@@ -14,7 +14,7 @@ class _InfoCard extends StatelessWidget {
         vertical: 15.h,
       ),
       decoration: BoxDecoration(
-        color: AppColors.green,
+        color: AppColors.darkBlue,
         borderRadius: BorderRadius.circular(5),
       ),
       child: Column(
@@ -26,7 +26,7 @@ class _InfoCard extends StatelessWidget {
                 flex: 10,
                 child: Text(
                   (event.service?.event?.eventName ?? "").capitalizeFirst,
-                  style: AppTextStyles.helveticaBold14
+                  style: AppTextStyles.gothamBold14
                       .copyWith(color: AppColors.white),
                 ),
               ),
@@ -35,7 +35,7 @@ class _InfoCard extends StatelessWidget {
                 child: Text(
                   (event.service?.location?.locationName ?? "").capitalizeFirst,
                   textAlign: TextAlign.end,
-                  style: AppTextStyles.helveticaBold12
+                  style: AppTextStyles.gothamBold12
                       .copyWith(color: AppColors.white),
                 ),
               ),
@@ -58,18 +58,18 @@ class _InfoCard extends StatelessWidget {
                   children: [
                     Text(
                       'SLOTS'.trU(context),
-                      style: AppTextStyles.panchangBold9
+                      style: AppTextStyles.balooBold9
                           .copyWith(color: AppColors.white),
                     ),
                     // SizedBox(height: 4.h),
                     Text(
                       "${'MAX'.tr(context)} ${event.getMaximumCapacity.toString() ?? ""} ${'PLAYERS'.tr(context)}",
-                      style: AppTextStyles.helveticaLight11
+                      style: AppTextStyles.gothamLight11
                           .copyWith(color: AppColors.white),
                     ),
                     Text(
                       "${'MIN'.tr(context)} ${event.getMinimumCapacity.toString() ?? ""} ${'PLAYERS'.tr(context)}",
-                      style: AppTextStyles.helveticaLight11
+                      style: AppTextStyles.gothamLight11
                           .copyWith(color: AppColors.white),
                     ),
                   ],
@@ -104,13 +104,13 @@ class _InfoCard extends StatelessWidget {
         Text(
           text1,
           style:
-              AppTextStyles.helveticaLight13.copyWith(color: AppColors.white),
+              AppTextStyles.gothamLight13.copyWith(color: AppColors.white),
         ),
         SizedBox(height: 2.h),
         Text(
           text2,
           style:
-              AppTextStyles.helveticaLight13.copyWith(color: AppColors.white),
+              AppTextStyles.gothamLight13.copyWith(color: AppColors.white),
         ),
       ],
     );
@@ -144,14 +144,14 @@ class _ConfirmationDialog extends StatelessWidget {
             _headingText(context),
             textAlign: TextAlign.center,
             style:
-                AppTextStyles.panchangBold15.copyWith(color: AppColors.white),
+                AppTextStyles.balooBold15.copyWith(color: AppColors.white),
           ),
           if (type != _ConfirmationDialogType.withdraw) ...[
             SizedBox(height: 5.h),
             Text(
               _descText(context),
               textAlign: TextAlign.center,
-              style: AppTextStyles.panchangMedium11
+              style: AppTextStyles.balooMedium11
                   .copyWith(color: AppColors.white),
             ),
           ],
@@ -159,7 +159,7 @@ class _ConfirmationDialog extends StatelessWidget {
             RefundDescriptionComponent(
                 policy: policy,
                 text: policy == null ? "LEAVE_POLICY_EVENT".tr(context) : null,
-                style: AppTextStyles.panchangBold10
+                style: AppTextStyles.balooBold10
                     .copyWith(color: AppColors.white)),
           // if (type == _ConfirmationDialogType.leave)
           //   Text(
@@ -172,7 +172,7 @@ class _ConfirmationDialog extends StatelessWidget {
           MainButton(
             color: AppColors.yellow,
             labelStyle:
-                AppTextStyles.panchangMedium13.copyWith(color: AppColors.green),
+                AppTextStyles.balooMedium13.copyWith(color: AppColors.darkBlue),
             label: _buttonText(context),
             onTap: () {
               Navigator.pop(context, true);
@@ -511,7 +511,7 @@ class __DoubleEventsState extends ConsumerState<_DoubleEventsPlayers> {
       width: 25.h,
       height: 25.h,
       child: Center(
-        child: Text("${i + 1}", style: AppTextStyles.panchangMedium10),
+        child: Text("${i + 1}", style: AppTextStyles.balooMedium10),
       ),
     );
   }
@@ -692,7 +692,7 @@ class ApplicantSlotWidget extends StatelessWidget {
                   onTap: seeApplicants,
                   child: Text(
                       "${applicantsCount > 1 ? "SEE_APPLICANTS".tr(context) : "SEE_APPLICANT".tr(context)} ($applicantsCount)",
-                      style: AppTextStyles.helveticaLight12
+                      style: AppTextStyles.gothamLight12
                           .copyWith(color: AppColors.darkGreen)),
                 ),
               ] else ...[
@@ -702,7 +702,7 @@ class ApplicantSlotWidget extends StatelessWidget {
                   borderRadius: 0,
                   child: Text(
                     "YOU_APPLIED".tr(context),
-                    style: AppTextStyles.helveticaLight12,
+                    style: AppTextStyles.gothamLight12,
                   ),
                 ),
               ]
@@ -721,7 +721,7 @@ class ApplicantSlotWidget extends StatelessWidget {
       minFontSize: 8.sp,
       maxLines: 1,
       stepGranularity: 1.sp,
-      style: AppTextStyles.helveticaBold12,
+      style: AppTextStyles.gothamBold12,
     );
   }
 
@@ -762,8 +762,8 @@ class _ApplicantSlotWidget extends StatelessWidget {
     this.textColor,
     required this.applicantsCount,
     required this.currentInWaitingList,
-    this.backGroundColor = AppColors.green,
-    this.iconColor = AppColors.green,
+    this.backGroundColor = AppColors.darkBlue,
+    this.iconColor = AppColors.darkBlue,
   });
 
   final String text;
@@ -800,7 +800,7 @@ class _ApplicantSlotWidget extends StatelessWidget {
                   onTap: seeApplicants,
                   child: Text(
                       "${applicantsCount > 1 ? "SEE_APPLICANTS".tr(context) : "SEE_APPLICANT".tr(context)} ($applicantsCount)",
-                      style: AppTextStyles.helveticaLight12
+                      style: AppTextStyles.gothamLight12
                           .copyWith(color: AppColors.darkGreen)),
                 ),
               ] else ...[
@@ -810,7 +810,7 @@ class _ApplicantSlotWidget extends StatelessWidget {
                   borderRadius: 0,
                   child: Text(
                     "YOU_APPLIED".tr(context),
-                    style: AppTextStyles.helveticaLight12,
+                    style: AppTextStyles.gothamLight12,
                   ),
                 ),
               ]
@@ -829,7 +829,7 @@ class _ApplicantSlotWidget extends StatelessWidget {
       minFontSize: 8.sp,
       maxLines: 1,
       stepGranularity: 1.sp,
-      style: AppTextStyles.helveticaBold12,
+      style: AppTextStyles.gothamBold12,
     );
   }
 
@@ -904,7 +904,7 @@ class _WaitingPlayersSlotsState extends ConsumerState<_WaitingPlayersSlots> {
             const Icon(Icons.info_outline, color: AppColors.black, size: 16),
             SizedBox(width: 5.w),
             Text("WAITING_LIST".tr(context),
-                style: AppTextStyles.panchangBold13.copyWith(
+                style: AppTextStyles.balooBold13.copyWith(
                   color: AppColors.darkGreen,
                 ))
           ],
@@ -939,7 +939,7 @@ class _WaitingPlayersSlotsState extends ConsumerState<_WaitingPlayersSlots> {
                       ),
               )
             : Text("THERE_IS_NO_WAITING_LIST".trU(context),
-                style: AppTextStyles.helveticaLight12.copyWith(
+                style: AppTextStyles.gothamLight12.copyWith(
                   color: AppColors.darkGreen,
                 )),
         SizedBox(height: 15.h),
@@ -958,7 +958,7 @@ class _WaitingPlayersSlotsState extends ConsumerState<_WaitingPlayersSlots> {
                 SizedBox(width: 5.w),
                 Text(
                   "LEAVE_WAITING_LIST".tr(context),
-                  style: AppTextStyles.helveticaLight12
+                  style: AppTextStyles.gothamLight12
                       .copyWith(color: AppColors.darkGreen),
                 ),
               ],

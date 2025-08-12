@@ -15,22 +15,34 @@ class ImageSourceSheet extends StatelessWidget {
     return Container(
       padding: EdgeInsets.all(20.w),
       decoration: BoxDecoration(
-        color: AppColors.lightPink,
+        color: AppColors.backgroundColor,
         borderRadius: BorderRadius.only(
             topLeft: Radius.circular(12.r), topRight: Radius.circular(12.r)),
       ),
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
+          Align(
+            alignment: AlignmentDirectional.centerEnd,
+            child: InkWell(
+              onTap: () => Navigator.pop(context),
+              child: Icon(
+                Icons.close,
+                color: AppColors.darkBlue,
+                size: 15.sp,
+              ),
+            ),
+          ),
           Text(
-            'CHANGE_PROFILE_PICTURE'.tr(context),
-            style: AppTextStyles.panchangBold15,
+            'CHANGE_PROFILE_PICTURE'.trU(context),
+            style: AppTextStyles.balooMedium19,
           ),
           SizedBox(height: 20.h),
           MainButton(
             label: 'CAMERA'.tr(context),
             enabled: true,
-            showArrow: false,
+            showArrow: true,
+            labelStyle: AppTextStyles.sansMedium18.copyWith(color: AppColors.white,height: 1),
             onTap: () {
               Navigator.pop(context, ImageSource.camera);
             },
@@ -39,7 +51,8 @@ class ImageSourceSheet extends StatelessWidget {
           MainButton(
             label: 'GALLERY'.tr(context),
             enabled: true,
-            showArrow: false,
+            showArrow: true,
+            labelStyle: AppTextStyles.sansMedium18.copyWith(color: AppColors.white,height: 1),
             onTap: () {
               Navigator.pop(context, ImageSource.gallery);
             },

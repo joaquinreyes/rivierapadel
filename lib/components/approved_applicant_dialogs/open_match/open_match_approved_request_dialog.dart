@@ -51,7 +51,7 @@ class _ApprovedRequestDialogState
             "YOU_HAVE_BEEN_ACCEPTED_INTO_THE_MATCH".trU(context),
             textAlign: TextAlign.center,
             style:
-                AppTextStyles.panchangBold15.copyWith(color: AppColors.white),
+                AppTextStyles.balooBold15.copyWith(color: AppColors.white),
           ),
           SizedBox(height: 20.h),
           ApplicantOpenMatchInfoCard(
@@ -61,7 +61,7 @@ class _ApprovedRequestDialogState
           Align(
             alignment: AlignmentDirectional.centerStart,
             child: Text("CURRENT_PLAYERS".tr(context),
-                style: AppTextStyles.panchangMedium12
+                style: AppTextStyles.balooMedium12
                     .copyWith(color: AppColors.white)),
           ),
           SizedBox(height: 5.h),

@@ -19,7 +19,7 @@ class ServiceCoaches extends StatelessWidget {
       children: [
         SizedBox(height: 20.h),
         Text("${"COACHES".tr(context)} ${coaches.length}",
-            style: AppTextStyles.panchangBold13),
+            style: AppTextStyles.balooBold13),
         SizedBox(height: 10.h),
         ListView.separated(
           shrinkWrap: true,
@@ -47,7 +47,7 @@ class ServiceCoaches extends StatelessWidget {
                   path: coach.profileUrl, width: 40.w, height: 40.w),
               Text(
                 "${coach.fullName}",
-                style: AppTextStyles.panchangBold9
+                style: AppTextStyles.balooBold9
                     .copyWith(color: AppColors.darkGreen),
               )
             ],
@@ -56,7 +56,7 @@ class ServiceCoaches extends StatelessWidget {
           Expanded(
             child: Text(
               coach.description ?? "",
-              style: AppTextStyles.helveticaLight12
+              style: AppTextStyles.gothamLight12
                   .copyWith(color: AppColors.darkGreen),
             ),
           ),

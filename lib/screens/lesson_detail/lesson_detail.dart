@@ -114,7 +114,7 @@ class _DataBodyState extends ConsumerState<_DataBody> {
     final bool isLessonVariant = maxPaxValue != null;
     return Container(
       constraints: kComponentWidthConstraint,
-      color: AppColors.lightPink,
+      color: AppColors.backgroundColor,
       padding: EdgeInsets.symmetric(horizontal: 15.w),
       child: NotificationListener<OverscrollIndicatorNotification>(
         onNotification: (notification) {
@@ -139,7 +139,7 @@ class _DataBodyState extends ConsumerState<_DataBody> {
               ),
               Text(
                 "${"LESSON".trU(context)}\n ${"INFORMATION".trU(context)}",
-                style: AppTextStyles.panchangBold18.copyWith(height: 0.9),
+                style: AppTextStyles.balooBold18.copyWith(height: 0.9),
                 textAlign: TextAlign.center,
               ),
               SizedBox(height: 50.h),
@@ -154,7 +154,7 @@ class _DataBodyState extends ConsumerState<_DataBody> {
                   children: [
                     Text(
                       "${"PLAYERS".tr(context)} ${service.players?.length ?? 0} / ${service.getMaximumCapacity}",
-                      style: AppTextStyles.panchangBold13,
+                      style: AppTextStyles.balooBold13,
                     ),
                     Text(
                       "${"STATUS".tr(context).capitalizeFirst}: ${Utils.eventLessonStatusText(
@@ -163,7 +163,7 @@ class _DataBodyState extends ConsumerState<_DataBody> {
                         maxCapacity: service.getMaximumCapacity,
                         minCapacity: service.getMinimumCapacity,
                       )}",
-                      style: AppTextStyles.panchangBold13,
+                      style: AppTextStyles.balooBold13,
                     ),
                   ],
                 ),

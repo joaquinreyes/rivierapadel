@@ -105,7 +105,7 @@ class SecondaryTextField extends StatelessWidget {
         minLines: minLines ?? 1,
         cursorColor: errorText == null ? AppColors.white : AppColors.errorColor,
         style: style ??
-            AppTextStyles.helveticaLight12.copyWith(
+            AppTextStyles.gothamLight12.copyWith(
               height: 1,
               color: (readOnly ?? false) ? AppColors.white25 : AppColors.white,
               ////fontFamily: kPirulen,
@@ -121,11 +121,11 @@ class SecondaryTextField extends StatelessWidget {
               ),
           alignLabelWithHint: true,
           labelText: labelText,
-          labelStyle: AppTextStyles.panchangBold18,
+          labelStyle: AppTextStyles.balooBold18,
           helperText: helperText,
           hintText: hintText,
           hintStyle: hintTextStyle ??
-              AppTextStyles.helveticaLight12.copyWith(color: AppColors.white55),
+              AppTextStyles.sansRegular13.copyWith(color: AppColors.white55),
           prefixIcon: prefixIcon,
           prefixIconConstraints:
               BoxConstraints.tightFor(width: 50.h, height: 45.h),
@@ -137,15 +137,15 @@ class SecondaryTextField extends StatelessWidget {
           prefix: prefix,
           isDense: true,
           border: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(5.r),
+            borderRadius: BorderRadius.circular(100.r),
             borderSide: BorderSide.none,
           ),
           enabledBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(5.r),
+            borderRadius: BorderRadius.circular(100.r),
             borderSide: BorderSide.none,
           ),
           focusedBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(5.r),
+            borderRadius: BorderRadius.circular(100.r),
             borderSide: BorderSide.none,
           ),
         ),

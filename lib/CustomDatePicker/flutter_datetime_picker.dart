@@ -340,7 +340,7 @@ class _DatePickerState extends State<_DatePickerComponent> {
       child: Container(
         padding: const EdgeInsets.all(8.0),
         height: theme.containerHeight,
-        decoration: const BoxDecoration(color: AppColors.lightPink),
+        decoration: const BoxDecoration(color: AppColors.backgroundColor),
         child: NotificationListener(
           onNotification: (ScrollNotification notification) {
             if (notification.depth == 0 &&
@@ -357,7 +357,7 @@ class _DatePickerState extends State<_DatePickerComponent> {
             data: const CupertinoThemeData(brightness: Brightness.dark),
             child: CupertinoPicker.builder(
               key: key,
-              backgroundColor: AppColors.lightPink,
+              backgroundColor: AppColors.backgroundColor,
               scrollController: scrollController as FixedExtentScrollController,
               itemExtent: theme.itemHeight,
               onSelectedItemChanged: (int index) {
@@ -392,7 +392,7 @@ class _DatePickerState extends State<_DatePickerComponent> {
     return Container(
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(5.r),
-        color: AppColors.lightPink,
+        color: AppColors.backgroundColor,
       ),
       width: 350.w,
       child: Column(
@@ -485,8 +485,8 @@ class _DatePickerState extends State<_DatePickerComponent> {
               },
               child: Text(
                 'Confirm',
-                style: AppTextStyles.panchangBold18
-                    .copyWith(height: 1.2, color: AppColors.lightPink),
+                style: AppTextStyles.balooBold18
+                    .copyWith(height: 1.2, color: AppColors.backgroundColor),
               ),
             ),
           ),
@@ -507,7 +507,7 @@ class _DatePickerState extends State<_DatePickerComponent> {
           topLeft: Radius.circular(5),
           topRight: Radius.circular(5),
         ),
-        color: AppColors.lightPink,
+        color: AppColors.backgroundColor,
         // color: theme.headerColor ?? theme.backgroundColor,
       ),
       child: Row(

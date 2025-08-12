@@ -146,7 +146,7 @@ class ParticipantSlot extends ConsumerWidget {
             minFontSize: 8.sp,
             maxLines: 1,
             stepGranularity: 1.sp,
-            style: AppTextStyles.helveticaLight11
+            style: AppTextStyles.gothamLight11
                 .copyWith(height: 0.99, color: textColor),
           ),
         if (side != "SIDE" && side.trim().isNotEmpty)
@@ -157,7 +157,7 @@ class ParticipantSlot extends ConsumerWidget {
             minFontSize: 8.sp,
             maxLines: 1,
             stepGranularity: 1.sp,
-            style: AppTextStyles.helveticaLight11
+            style: AppTextStyles.gothamLight11
                 .copyWith(height: 0.99, color: textColor),
           ),
       ],
@@ -174,7 +174,7 @@ class ParticipantSlot extends ConsumerWidget {
       minFontSize: 2.sp,
       maxLines: 1,
       stepGranularity: 1.sp,
-      style: AppTextStyles.panchangBold9.copyWith(color: textColor),
+      style: AppTextStyles.balooBold9.copyWith(color: textColor),
     );
   }
 

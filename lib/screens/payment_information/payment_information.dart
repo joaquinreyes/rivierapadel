@@ -113,7 +113,7 @@ class _PaymentInformationState extends ConsumerState<PaymentInformation> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Text(
-              "PAYMENT_INFORMATION".tr(context),
+              "PAYMENT_INFORMATION".trU(context),
               style: AppTextStyles.popupHeaderTextStyle,
               textAlign: TextAlign.center,
             ),
@@ -148,25 +148,44 @@ class _PaymentInformationState extends ConsumerState<PaymentInformation> {
       children: [
         if (!widget.isMultiBooking && widget.allowCoupon)
           Column(children: [
-            Align(
-              alignment: AlignmentDirectional.centerStart,
-              child: RichText(
-                text: TextSpan(
-                  text: "COUPON".tr(context),
-                  style: AppTextStyles.panchangMedium12.copyWith(
-                    color: AppColors.white,
-                  ),
-                  children: [
-                    TextSpan(
-                      text: " ${"OPTIONAL".tr(context)}",
-                      style: AppTextStyles.helveticaLight13.copyWith(
+            Row(
+                crossAxisAlignment: CrossAxisAlignment.end,
+                children: [
+                  Expanded(
+                    child: Text(
+                      "DO_YOU_HAVE_A_DISCOUNT_COUPON".tr(context),
+                      style: AppTextStyles.sansRegular15.copyWith(
                         color: AppColors.white,
                       ),
                     ),
-                  ],
-                ),
-              ),
+                  ),
+                  Text(
+                    " ${"OPTIONAL".tr(context).toLowerCase()}",
+                    style: AppTextStyles.sansRegular14.copyWith(
+                      color: AppColors.white,
+                    ),
+                  )
+                ]
             ),
+            // Align(
+            //   alignment: AlignmentDirectional.centerStart,
+            //   child: RichText(
+            //     text: TextSpan(
+            //       text: "COUPON".tr(context),
+            //       style: AppTextStyles.balooMedium12.copyWith(
+            //         color: AppColors.white,
+            //       ),
+            //       children: [
+            //         TextSpan(
+            //           text: " ${"OPTIONAL".tr(context)}",
+            //           style: AppTextStyles.gothamLight13.copyWith(
+            //             color: AppColors.white,
+            //           ),
+            //         ),
+            //       ],
+            //     ),
+            //   ),
+            // ),
             SizedBox(height: 5.h),
             SecondaryTextField(
               hintText: "ENTER_COUPON_HERE".tr(context),
@@ -210,16 +229,16 @@ class _PaymentInformationState extends ConsumerState<PaymentInformation> {
           alignment: Alignment.centerLeft,
           child: Text(
             "PAYMENT_METHOD".tr(context),
-            style: AppTextStyles.panchangMedium12.copyWith(
+            style: AppTextStyles.sansRegular16.copyWith(
               color: AppColors.white,
             ),
           ),
         ),
-        SizedBox(height: 20.h),
+        SizedBox(height: 15.h),
         Flexible(
           child: _buildPaymentMethodCard(data),
         ),
-        SizedBox(height: 5.h),
+        SizedBox(height: 10.h),
         Flexible(
           child: _PaymentButton(
             transactionRequestType: widget.transactionRequestType,
@@ -418,16 +437,16 @@ class _PaymentInformationState extends ConsumerState<PaymentInformation> {
       color: isSelected ? AppColors.darkGreen : Colors.white,
     );
     return InkWell(
-      borderRadius: BorderRadius.circular(5.r),
+      borderRadius: BorderRadius.circular(100.r),
       onTap: onTap,
       child: Container(
         decoration: BoxDecoration(
-          color: isSelected ? AppColors.yellow50Popup : AppColors.white25,
-          borderRadius: BorderRadius.circular(5.r),
+          color: isSelected ? AppColors.oak50 : AppColors.white25,
+          borderRadius: BorderRadius.circular(100.r),
         ),
         margin: EdgeInsets.only(bottom: 10.h),
         padding: EdgeInsets.symmetric(
-          vertical: 6.h,
+          vertical: 10.h,
           horizontal: 10.w,
         ),
         child: Row(
@@ -435,8 +454,8 @@ class _PaymentInformationState extends ConsumerState<PaymentInformation> {
             if (imagePath != null) ...[
               Image.network(
                 imagePath,
-                width: 34.w,
-                height: 34.w,
+                width: 26.w,
+                height: 26.w,
                 fit: BoxFit.fitWidth,
               ),
             ] else ...[
@@ -449,8 +468,8 @@ class _PaymentInformationState extends ConsumerState<PaymentInformation> {
               children: [
                 Text(
                   title,
-                  style: AppTextStyles.helveticaRegular14.copyWith(
-                    color: isSelected ? AppColors.darkGreen : AppColors.white,
+                  style: isSelected ? AppTextStyles.gothamRegular16 : AppTextStyles.sansRegular16.copyWith(
+                    color:  AppColors.white,
                   ),
                 ),
               ],
@@ -459,7 +478,7 @@ class _PaymentInformationState extends ConsumerState<PaymentInformation> {
             if (payableAmount != null) ...[
               Text(
                 Utils.formatPrice(payableAmount),
-                style: AppTextStyles.helveticaLight12.copyWith(
+                style: AppTextStyles.gothamLight12.copyWith(
                   color: isSelected ? AppColors.darkGreen : AppColors.white,
                 ),
               ),
@@ -467,12 +486,15 @@ class _PaymentInformationState extends ConsumerState<PaymentInformation> {
             if (showSwitch)
               SizedBox(
                 height: 22.h,
-                child: CupertinoSwitch(
-                  value: isSelected,
-                  thumbColor: AppColors.white,
-                  activeColor: AppColors.yellow,
-                  trackColor: AppColors.white25,
-                  onChanged: (_) => onTap(),
+                child: Transform.scale(
+                  scale: 0.85,
+                  child: CupertinoSwitch(
+                    value: isSelected,
+                    thumbColor: AppColors.white,
+                    activeColor: AppColors.oak,
+                    trackColor: AppColors.white25,
+                    onChanged: (_) => onTap(),
+                  ),
                 ),
               ),
           ],

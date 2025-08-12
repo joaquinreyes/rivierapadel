@@ -55,15 +55,13 @@ class _SignUpFormTabState extends ConsumerState<_SignUpFormTab> {
             child: RichText(
               text: TextSpan(
                 text: '${'ALREADY_HAVE_AN_ACCOUNT'.tr(context)} ',
-                style: AppTextStyles.panchangMedium13.copyWith(
-                  color: AppColors.darkGreen,
+                style: AppTextStyles.sansRegular18.copyWith(
+                  height: 1
                 ),
                 children: [
                   TextSpan(
                     text: 'SIGN_IN'.tr(context),
-                    style: AppTextStyles.panchangBold12.copyWith(
-                      color: AppColors.darkGreen,
-                    ),
+                    style: AppTextStyles.sansMedium18,
                   ),
                 ],
               ),
@@ -83,7 +81,7 @@ class _SignUpFormTabState extends ConsumerState<_SignUpFormTab> {
                   children: [
                     Text(
                       'FIRST_NAME'.tr(context),
-                      style: AppTextStyles.panchangMedium14,
+                      style: AppTextStyles.balooMedium19,
                     ),
                     CustomTextField(
                       controller: _firstNameController,
@@ -94,7 +92,7 @@ class _SignUpFormTabState extends ConsumerState<_SignUpFormTab> {
                     SizedBox(height: 50.h),
                     Text(
                       'LAST_NAME'.tr(context),
-                      style: AppTextStyles.panchangMedium14,
+                      style: AppTextStyles.balooMedium19,
                     ),
                     CustomTextField(
                       controller: _lastNameController,
@@ -105,7 +103,7 @@ class _SignUpFormTabState extends ConsumerState<_SignUpFormTab> {
                     SizedBox(height: 50.h),
                     Text(
                       'EMAIL'.tr(context),
-                      style: AppTextStyles.panchangMedium14,
+                      style: AppTextStyles.balooMedium19,
                     ),
                     CustomTextField(
                       controller: _emailController,
@@ -125,7 +123,7 @@ class _SignUpFormTabState extends ConsumerState<_SignUpFormTab> {
                     SizedBox(height: 50.h),
                     Text(
                       'PHONE_NUMBER'.tr(context),
-                      style: AppTextStyles.panchangMedium14,
+                      style: AppTextStyles.balooMedium19,
                     ),
                     Row(
                       crossAxisAlignment: CrossAxisAlignment.center,
@@ -138,14 +136,14 @@ class _SignUpFormTabState extends ConsumerState<_SignUpFormTab> {
                           },
                           initialSelection: dialCode,
                           padding: EdgeInsets.zero,
-                          textStyle: AppTextStyles.panchangMedium14
+                          textStyle: AppTextStyles.balooMedium14
                               .copyWith(color: AppColors.darkGreen),
-                          searchStyle: AppTextStyles.panchangMedium14
+                          searchStyle: AppTextStyles.balooMedium14
                               .copyWith(color: AppColors.darkGreen),
-                          dialogTextStyle: AppTextStyles.panchangMedium14
+                          dialogTextStyle: AppTextStyles.balooMedium14
                               .copyWith(color: AppColors.darkGreen),
                           flagWidth: 25.w,
-                          backgroundColor: AppColors.lightPink,
+                          backgroundColor: AppColors.backgroundColor,
                         ),
                         Expanded(
                           child: CustomTextField(
@@ -166,7 +164,7 @@ class _SignUpFormTabState extends ConsumerState<_SignUpFormTab> {
                     SizedBox(height: 50.h),
                     Text(
                       'PASSWORD'.tr(context),
-                      style: AppTextStyles.panchangMedium14,
+                      style: AppTextStyles.balooMedium19,
                     ),
                     CustomTextField(
                       controller: _passwordController,
@@ -187,33 +185,54 @@ class _SignUpFormTabState extends ConsumerState<_SignUpFormTab> {
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: [
-                          Container(
-                            height: 15.h,
-                            width: 15.h,
-                            margin: EdgeInsets.only(left: 10.w),
-                            child: Checkbox(
-                              activeColor: AppColors.green5,
-                              value: isTermsChecked,
-                              onChanged: (v) {
-                                setState(() {
-                                  isTermsChecked = v ?? false;
-                                });
-                              },
-                            ),
+                          GestureDetector(
+                            onTap: () {
+                              setState(() {
+                                isTermsChecked = !isTermsChecked;
+                              });
+                            },
+                            child: Container(
+                                height: 15.h,
+                                width: 15.h,
+                                decoration: BoxDecoration(border: Border.all(color: AppColors.darkBlue,width: 1.w)),
+                                margin: EdgeInsets.only(left: 10.w),
+                                child: isTermsChecked
+                                    ? Center(
+                                  child: Icon(
+                                    Icons.check,
+                                    size: 12.sp,
+                                    color: AppColors.black,
+                                  ),
+                                )
+                                    : null),
                           ),
+                          // Container(
+                          //   height: 15.h,
+                          //   width: 15.h,
+                          //   margin: EdgeInsets.only(left: 10.w),
+                          //   child: Checkbox(
+                          //     // activeColor: AppColors.white,
+                          //     value: isTermsChecked,
+                          //     onChanged: (v) {
+                          //       setState(() {
+                          //         isTermsChecked = v ?? false;
+                          //       });
+                          //     },
+                          //   ),
+                          // ),
                           SizedBox(width: 15.w),
                           RichText(
                             text: TextSpan(
                               text: 'I_ACCEPT_THE'.tr(context),
-                              style: AppTextStyles.helveticaLight14
-                                  .copyWith(color: AppColors.darkGreen),
+                              style: AppTextStyles.sansRegular15,
                               children: [
                                 TextSpan(
                                   text:
                                       '${'TERMS_AND_CONDITIONS'.tr(context)}.',
-                                  style: AppTextStyles.helveticaLight14
+                                  style: AppTextStyles.gothamLight16
                                       .copyWith(
                                           color: AppColors.darkGreen,
+                                          fontStyle: FontStyle.italic,
                                           decoration: TextDecoration.underline),
                                   recognizer: TapGestureRecognizer()
                                     ..onTap = () =>
@@ -233,7 +252,7 @@ class _SignUpFormTabState extends ConsumerState<_SignUpFormTab> {
           const Spacer(),
           MainButton(
             enabled: _canProceed,
-            label: 'REGISTER'.tr(context),
+            label: 'REGISTER'.tr(context).capitalEnabled(context, canProceed: _canProceed),
             showArrow: true,
             onTap: () {
               if (!(formKey.currentState?.validate() ?? false)) return;
@@ -260,23 +279,24 @@ class _SignUpFormTabState extends ConsumerState<_SignUpFormTab> {
       context: context,
       builder: (context) {
         return CustomDialog(
-          color: AppColors.lightPink,
+          color: AppColors.backgroundColor,
+          closeIconColor: AppColors.darkBlue,
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
               Text(
                 isTerms
-                    ? "TERMS_AND_CONDITIONS".tr(context).capitalizeFirst
-                    : "COMMUNICATIONS".tr(context).capitalizeFirst,
-                style: AppTextStyles.popupHeaderTextStyle,
+                    ? "TERMS_AND_CONDITIONS".trU(context)
+                    : "COMMUNICATIONS".trU(context),
+                style: AppTextStyles.popupHeaderTextStyle.copyWith(color: AppColors.darkBlue),
               ),
-              SizedBox(height: 30.h),
+              SizedBox(height: 20.h),
               Text(
                 isTerms
                     ? 'TERMS_AND_CONDITIONS_TEXT'.tr(context)
                     : "OPT_IN_FOR_COMMUNICATIONS_TEXT".tr(context),
                 textAlign: TextAlign.center,
-                style: AppTextStyles.helveticaLight14,
+                style: AppTextStyles.sansRegular15,
               ),
               SizedBox(height: 40.h),
             ],

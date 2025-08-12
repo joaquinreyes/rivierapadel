@@ -13,7 +13,7 @@ class _ChooseSpotDialog extends StatelessWidget {
       children: [
         Text(
           "CHOOSE_YOUR_SPOT".trU(context),
-          style: AppTextStyles.panchangBold13.copyWith(color: AppColors.white),
+          style: AppTextStyles.balooBold13.copyWith(color: AppColors.white),
         ),
         SizedBox(height: 20.h),
         OpenMatchParticipantRowWithBG(
@@ -58,7 +58,7 @@ class _WaitingForApprovalDialogState
             "YOU_ARE_NOW_WAITING_FOR_APPROVAL".trU(context),
             textAlign: TextAlign.center,
             style:
-                AppTextStyles.panchangBold14.copyWith(color: AppColors.white),
+                AppTextStyles.balooBold14.copyWith(color: AppColors.white),
           ),
           provider.when(
             data: (data) {
@@ -74,7 +74,7 @@ class _WaitingForApprovalDialogState
                   Text(
                     "HERE_ARE_OTHER_PLAYERS_WAITING_FOR_APPROVAL".tr(context),
                     textAlign: TextAlign.center,
-                    style: AppTextStyles.panchangBold10,
+                    style: AppTextStyles.balooBold10,
                   ),
                   Row(
                     children: [
@@ -87,11 +87,11 @@ class _WaitingForApprovalDialogState
                                 height: 40.w),
                             Text(
                               data[i].getCustomerName,
-                              style: AppTextStyles.panchangBold26.copyWith(),
+                              style: AppTextStyles.balooBold26.copyWith(),
                             ),
                             Text(
                               "6.5 •  Right",
-                              style: AppTextStyles.panchangBold26.copyWith(
+                              style: AppTextStyles.balooBold26.copyWith(
                                 height: 0.9,
                               ),
                             ),
@@ -140,7 +140,7 @@ class ConfirmationDialog extends StatelessWidget {
             _headingText(context),
             textAlign: TextAlign.center,
             style:
-                AppTextStyles.panchangBold15.copyWith(color: AppColors.white),
+                AppTextStyles.balooBold15.copyWith(color: AppColors.white),
           ),
           if (type != ConfirmationDialogType.withdraw) ...[
             SizedBox(height: 20.h),
@@ -148,7 +148,7 @@ class ConfirmationDialog extends StatelessWidget {
               _descText(context),
               textAlign: TextAlign.center,
               style:
-                  AppTextStyles.panchangBold11.copyWith(color: AppColors.white),
+                  AppTextStyles.balooBold11.copyWith(color: AppColors.white),
             ),
           ],
           if (type == ConfirmationDialogType.join ||
@@ -159,14 +159,14 @@ class ConfirmationDialog extends StatelessWidget {
                 text: type == ConfirmationDialogType.join
                     ? "CANCELLATION_POLICY".tr(context)
                     : null,
-                style: AppTextStyles.panchangBold11
+                style: AppTextStyles.balooBold11
                     .copyWith(color: AppColors.white))
           ],
           SizedBox(height: 20.h),
           MainButton(
             color: AppColors.yellow,
             labelStyle:
-                AppTextStyles.panchangMedium13.copyWith(color: AppColors.green),
+                AppTextStyles.balooMedium13.copyWith(color: AppColors.darkBlue),
             label: _buttonText(context),
             onTap: () {
               Navigator.pop(context, true);

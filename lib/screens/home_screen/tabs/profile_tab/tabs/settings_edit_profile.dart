@@ -238,7 +238,7 @@ class __EDITProfileState extends ConsumerState<_EditProfile> {
                     selectedDate != null
                         ? selectedDate.format("MMMM yyyy")
                         : "mm/yyyy",
-                    style: AppTextStyles.helveticaRegular12.copyWith(
+                    style: AppTextStyles.gothamRegular12.copyWith(
                       color: AppColors.white,
                     ),
                   ),
@@ -322,8 +322,8 @@ class __EDITProfileState extends ConsumerState<_EditProfile> {
                     child: Text(
                       str,
                       style: isSelected
-                          ? AppTextStyles.helveticaRegular12
-                          : AppTextStyles.helveticaLight12
+                          ? AppTextStyles.gothamRegular12
+                          : AppTextStyles.gothamLight12
                               .copyWith(color: AppColors.white),
                     ),
                   ),
@@ -390,8 +390,8 @@ class __EDITProfileState extends ConsumerState<_EditProfile> {
                     child: Text(
                       str,
                       style: isSelected
-                          ? AppTextStyles.helveticaRegular12
-                          : AppTextStyles.helveticaLight12
+                          ? AppTextStyles.gothamRegular12
+                          : AppTextStyles.gothamLight12
                               .copyWith(color: AppColors.white),
                     ),
                   ),
@@ -436,7 +436,7 @@ class __EDITProfileState extends ConsumerState<_EditProfile> {
           flex: 2,
           child: Text(
             header,
-            style: AppTextStyles.panchangMedium12.copyWith(
+            style: AppTextStyles.balooMedium12.copyWith(
               color: AppColors.white,
             ),
           ),

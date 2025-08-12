@@ -29,7 +29,7 @@ class ServiceInformationText extends StatelessWidget {
             SizedBox(width: 10.w),
             Text(
               "INFORMATION".tr(context),
-              style: AppTextStyles.panchangBold13
+              style: AppTextStyles.balooBold13
                   .copyWith(color: AppColors.darkGreen),
             ),
           ],
@@ -37,7 +37,7 @@ class ServiceInformationText extends StatelessWidget {
         SizedBox(height: 6.h),
         Text(
           service.service?.additionalService ?? "",
-          style: AppTextStyles.helveticaLight12,
+          style: AppTextStyles.gothamLight12,
         ),
       ],
     );

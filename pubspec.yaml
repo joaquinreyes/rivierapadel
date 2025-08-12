@@ -89,36 +89,41 @@ flutter:
     - assets/images/.
     - assets/locales/.
   fonts:
-    - family: Helvetica
+    - family: Gotham
       fonts:
-        - asset: assets/fonts/helvetica/helvetica-light-reg.ttf
+        - asset: assets/fonts/gotham/GothamNarrow-Light.otf
           weight: 300
-        - asset: assets/fonts/helvetica/Helvetica.ttf
+        - asset: assets/fonts/gotham/GothamNarrow-Book.otf
           weight: 400
-        - asset: assets/fonts/helvetica/Helvetica-Bold.ttf
+        - asset: assets/fonts/gotham/GothamNarrow-Bold.otf
           weight: 700
-        - asset: assets/fonts/helvetica/Helvetica-BoldOblique.ttf
+        - asset: assets/fonts/gotham/GothamNarrow-BoldItalic.otf
           weight: 700
           style: italic
-        - asset: assets/fonts/helvetica/Helvetica-Oblique.ttf
+        - asset: assets/fonts/gotham/GothamNarrow-BookItalic.otf
           style: italic
           weight: 400
-    - family: Panchang
+    - family: Baloo
       fonts:
-        - asset: assets/fonts/penchang/Panchang-Extralight.otf
-          weight: 200
-        - asset: assets/fonts/penchang/Panchang-Light.otf
-          weight: 300
-        - asset: assets/fonts/penchang/Panchang-Regular.otf
+        - asset: assets/fonts/baloo/Baloo2-Regular.ttf
           weight: 400
-        - asset: assets/fonts/penchang/Panchang-Medium.otf
+        - asset: assets/fonts/baloo/Baloo2-Medium.ttf
           weight: 500
-        - asset: assets/fonts/penchang/Panchang-Semibold.otf
+        - asset: assets/fonts/baloo/Baloo2-SemiBold.ttf
           weight: 600
-        - asset: assets/fonts/penchang/Panchang-Bold.otf
+        - asset: assets/fonts/baloo/Baloo2-Bold.ttf
           weight: 700
-        - asset: assets/fonts/penchang/Panchang-Extrabold.otf
+        - asset: assets/fonts/baloo/Baloo2-ExtraBold.ttf
           weight: 800
+
+    - family: DM Sans
+      fonts:
+        - asset: assets/fonts/sans/DMSans-Bold.ttf
+          weight: 700
+        - asset: assets/fonts/sans/DMSans-Regular.ttf
+          weight: 400
+        - asset: assets/fonts/sans/DMSans-Medium.ttf
+          weight: 500
         # - asset: assets/fonts/Panchang-Variable.ttf
   #   - family: Trajan Pro
   #     fonts:

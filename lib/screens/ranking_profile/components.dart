@@ -14,7 +14,7 @@ class _PlayerRanking extends StatelessWidget {
       width: double.maxFinite,
       padding: const EdgeInsets.all(12),
       decoration: BoxDecoration(
-        color: AppColors.green,
+        color: AppColors.darkBlue,
         borderRadius: BorderRadius.circular(7),
       ),
       child: Column(
@@ -25,7 +25,7 @@ class _PlayerRanking extends StatelessWidget {
             children: [
               Text(
                 'PLAYER_RANKING'.trU(context),
-                style: AppTextStyles.panchangBold11.copyWith(
+                style: AppTextStyles.balooBold11.copyWith(
                   color: AppColors.white,
                   fontWeight: FontWeight.w500,
                 ),
@@ -66,7 +66,7 @@ class _PlayerRanking extends StatelessWidget {
                         const SizedBox(height: 8),
                         Text(
                           '${rounded - 1}.5',
-                          style: AppTextStyles.helveticaLight12.copyWith(
+                          style: AppTextStyles.gothamLight12.copyWith(
                             color: AppColors.white,
                           ),
                         ),
@@ -92,7 +92,7 @@ class _PlayerRanking extends StatelessWidget {
                           child: Center(
                             child: Text(
                               level.toStringAsFixed(2),
-                              style: AppTextStyles.panchangBold13,
+                              style: AppTextStyles.balooBold13,
                             ),
                           ),
                         ),
@@ -105,7 +105,7 @@ class _PlayerRanking extends StatelessWidget {
                         const SizedBox(height: 8),
                         Text(
                           '${rounded + 1}.5',
-                          style: AppTextStyles.helveticaLight12.copyWith(
+                          style: AppTextStyles.gothamLight12.copyWith(
                             color: AppColors.white,
                           ),
                         ),
@@ -145,14 +145,14 @@ class _PlayerRanking extends StatelessWidget {
                   Container(
                     width: 2,
                     height: 10,
-                    color: AppColors.green,
+                    color: AppColors.darkBlue,
                     margin: const EdgeInsets.only(top: 34),
                   ),
                   const Expanded(child: SizedBox()),
                   Container(
                     width: 2,
                     height: 10,
-                    color: AppColors.green,
+                    color: AppColors.darkBlue,
                     margin: const EdgeInsets.only(top: 34),
                   ),
                   const Expanded(child: SizedBox())
@@ -200,7 +200,7 @@ class _PlayerStats extends ConsumerWidget {
         // player stats
         Text(
           'PLAYER_STATS'.trU(context),
-          style: AppTextStyles.panchangBold13,
+          style: AppTextStyles.balooBold13,
         ),
         SizedBox(height: 15.h),
         _row("AVG_LAST_21_EVALUATIONS".tr(context), lastEvaluations),
@@ -223,11 +223,11 @@ class _PlayerStats extends ConsumerWidget {
       children: [
         Text(
           txt1,
-          style: AppTextStyles.helveticaRegular14,
+          style: AppTextStyles.gothamRegular14,
         ),
         Text(
           txt2,
-          style: AppTextStyles.helveticaLight13,
+          style: AppTextStyles.gothamLight13,
         ),
       ],
     );
@@ -256,11 +256,11 @@ class _PastMatches extends ConsumerWidget {
           children: [
             Text(
               'PAST_MATCHES'.trU(context),
-              style: AppTextStyles.panchangBold13,
+              style: AppTextStyles.balooBold13,
             ),
             Text(
               "${'WINNING_STRIKE'.trU(context)}$winningRate",
-              style: AppTextStyles.helveticaBold13,
+              style: AppTextStyles.gothamBold13,
             ),
           ],
         ),
@@ -326,11 +326,11 @@ class _PastMatchCard extends StatelessWidget {
               children: [
                 Text(
                   date.toUpperCase(),
-                  style: AppTextStyles.helveticaBold14,
+                  style: AppTextStyles.gothamBold14,
                 ),
                 Text(
                   "LEVEL",
-                  style: AppTextStyles.helveticaLight13,
+                  style: AppTextStyles.gothamLight13,
                 )
               ],
             ),
@@ -412,7 +412,7 @@ class _TeamScores extends StatelessWidget {
     bool isReserved = player.reserved ?? false;
     return Text(
       isReserved ? "RESERVED".tr(context) : (player.getCustomerName),
-      style: AppTextStyles.helveticaLight13,
+      style: AppTextStyles.gothamLight13,
     );
   }
 
@@ -421,11 +421,11 @@ class _TeamScores extends StatelessWidget {
     if (score != null) {
       return Text(
         score.toString(),
-        style: AppTextStyles.panchangMedium11.copyWith(
+        style: AppTextStyles.balooMedium11.copyWith(
           fontWeight: isWinner ? FontWeight.w700 : FontWeight.w400,
           height: 0.6,
           fontSize: isWinner ? 13 : 11,
-          color: AppColors.green.withOpacity(
+          color: AppColors.darkBlue.withOpacity(
             isWinner ? 1 : 0.5,
           ),
         ),
@@ -433,7 +433,7 @@ class _TeamScores extends StatelessWidget {
     }
     return Container(
       height: 1,
-      color: AppColors.green.withOpacity(0.5),
+      color: AppColors.darkBlue.withOpacity(0.5),
     );
   }
 
@@ -448,7 +448,7 @@ class _TeamScores extends StatelessWidget {
       child: Center(
         child: Text(
           'WINNERS',
-          style: AppTextStyles.helveticaRegular14.copyWith(
+          style: AppTextStyles.gothamRegular14.copyWith(
             height: 0.6,
             color: AppColors.darkGreen,
           ),
@@ -468,7 +468,7 @@ class _TeamScores extends StatelessWidget {
       child: Center(
         child: Text(
           'DRAW',
-          style: AppTextStyles.panchangBold11.copyWith(
+          style: AppTextStyles.balooBold11.copyWith(
             height: 0.6,
           ),
         ),
@@ -487,13 +487,13 @@ class _RankingLogicDialog extends StatelessWidget {
         children: [
           Text(
             "RANKING_LOGIC".trU(context),
-            style: AppTextStyles.panchangBold16.copyWith(color: Colors.white),
+            style: AppTextStyles.balooBold16.copyWith(color: Colors.white),
           ),
           SizedBox(height: 10.h),
           Text(
             "RANKING_LOGIC_DESC".tr(context),
             style:
-                AppTextStyles.helveticaRegular14.copyWith(color: Colors.white),
+                AppTextStyles.gothamRegular14.copyWith(color: Colors.white),
             textAlign: TextAlign.center,
           ),
         ],

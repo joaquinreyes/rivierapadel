@@ -25,7 +25,7 @@ class SideNavBar extends ConsumerWidget {
       height: MediaQuery.of(context).size.height,
       padding: EdgeInsets.symmetric(horizontal: 25.w, vertical: 25.h),
       decoration: const BoxDecoration(
-        color: AppColors.green,
+        color: AppColors.darkBlue,
         boxShadow: [
           BoxShadow(
             color: Color(0x0C000000),
@@ -145,10 +145,10 @@ class SideNavBar extends ConsumerWidget {
                   Text(
                     text,
                     style: isSelected
-                        ? AppTextStyles.panchangBold12.copyWith(
-                            color: AppColors.green,
+                        ? AppTextStyles.balooBold12.copyWith(
+                            color: AppColors.darkBlue,
                           )
-                        : AppTextStyles.panchangMedium10.copyWith(
+                        : AppTextStyles.balooMedium10.copyWith(
                             color: AppColors.gallery,
                           ),
                   ),

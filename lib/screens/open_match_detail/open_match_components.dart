@@ -33,8 +33,8 @@ class _RankedOrFriendly extends StatelessWidget {
       padding: EdgeInsets.symmetric(vertical: 5.h, horizontal: 10.w),
       child: Text(
         text,
-        style: AppTextStyles.panchangMedium10.copyWith(
-            color: isSelected ? AppColors.green : AppColors.green70,
+        style: AppTextStyles.balooMedium10.copyWith(
+            color: isSelected ? AppColors.darkBlue : AppColors.green70,
             fontWeight: isSelected ? FontWeight.w400 : FontWeight.w300),
       ),
     );
@@ -58,7 +58,7 @@ class _OrganizerNote extends StatelessWidget {
           alignment: Alignment.centerLeft,
           child: Text(
             "NOTE_FROM_ORGANIZER".tr(context),
-            style: AppTextStyles.panchangBold13,
+            style: AppTextStyles.balooBold13,
           ),
         ),
         SizedBox(height: 5.h),
@@ -72,7 +72,7 @@ class _OrganizerNote extends StatelessWidget {
             horizontal: 12.w,
             vertical: 6.h,
           ),
-          child: Text(note, style: AppTextStyles.helveticaLight12),
+          child: Text(note, style: AppTextStyles.gothamLight12),
         ),
       ],
     );
@@ -90,7 +90,7 @@ class _InfoCard extends ConsumerWidget {
         vertical: 15.h,
       ),
       decoration: BoxDecoration(
-        color: AppColors.green,
+        color: AppColors.darkBlue,
         borderRadius: BorderRadius.circular(10),
       ),
       child: Column(
@@ -102,13 +102,13 @@ class _InfoCard extends ConsumerWidget {
               children: [
                 Text(
                   'ORGANIZER'.tr(context),
-                  style: AppTextStyles.panchangMedium12
+                  style: AppTextStyles.balooMedium12
                       .copyWith(color: AppColors.white),
                 ),
                 const Spacer(),
                 Text(
                   'BOOKING'.tr(context),
-                  style: AppTextStyles.panchangMedium12
+                  style: AppTextStyles.balooMedium12
                       .copyWith(color: AppColors.white),
                 ),
               ],
@@ -130,19 +130,19 @@ class _InfoCard extends ConsumerWidget {
                   children: [
                     Text(
                       service.formattedDateStartEndTime,
-                      style: AppTextStyles.helveticaLight13
+                      style: AppTextStyles.gothamLight13
                           .copyWith(color: AppColors.white),
                     ),
                     SizedBox(height: 2.h),
                     Text(
                       "${service.courts?.first.courtName ?? ""} | ${service.service?.location?.locationName ?? ""}",
-                      style: AppTextStyles.helveticaLight13
+                      style: AppTextStyles.gothamLight13
                           .copyWith(color: AppColors.white),
                     ),
                     SizedBox(height: 2.h),
                     Text(
                       "LEVEL | ${Utils.formatPrice(service.service?.price)}",
-                      style: AppTextStyles.helveticaLight13
+                      style: AppTextStyles.gothamLight13
                           .copyWith(color: AppColors.white),
                     ),
                   ],
@@ -163,7 +163,7 @@ class _InfoCard extends ConsumerWidget {
         child: Text("NO_ORGANIZER".tr(context),
             textAlign: TextAlign.center,
             style:
-                AppTextStyles.panchangBold9.copyWith(color: AppColors.white)),
+                AppTextStyles.balooBold9.copyWith(color: AppColors.white)),
       );
     }
     String level =
@@ -192,14 +192,14 @@ class _InfoCard extends ConsumerWidget {
         Text(
           organizer.getCustomerName,
           textAlign: TextAlign.center,
-          style: AppTextStyles.panchangBold9.copyWith(color: AppColors.white),
+          style: AppTextStyles.balooBold9.copyWith(color: AppColors.white),
         ),
         Text(
           // "LEVEL • SIDE",
           level,
           textAlign: TextAlign.center,
           style:
-              AppTextStyles.helveticaLight11.copyWith(color: AppColors.white),
+              AppTextStyles.gothamLight11.copyWith(color: AppColors.white),
         ),
       ],
     );
@@ -375,7 +375,7 @@ class __ScoreComponentState extends ConsumerState<_ScoreViewComponent> {
       children: [
         Text(
           "SCORE",
-          style: AppTextStyles.panchangBold13,
+          style: AppTextStyles.balooBold13,
         ),
         SizedBox(height: 10.h),
         Container(
@@ -389,12 +389,12 @@ class __ScoreComponentState extends ConsumerState<_ScoreViewComponent> {
                 children: [
                   Text(
                     widget.service.formatBookingDate.toUpperCase(),
-                    style: AppTextStyles.helveticaBold14,
+                    style: AppTextStyles.gothamBold14,
                   ),
                   _enterButton(teamAScores, teamBScores),
                   Text(
                     widget.service.openMatchLevelRange,
-                    style: AppTextStyles.helveticaRegular12,
+                    style: AppTextStyles.gothamRegular12,
                   )
                 ],
               ),
@@ -480,7 +480,7 @@ class __ScoreComponentState extends ConsumerState<_ScoreViewComponent> {
         ),
         child: Text(
           "ENTER_MATCH_RESULTS".tr(context),
-          style: AppTextStyles.helveticaRegular14.copyWith(
+          style: AppTextStyles.gothamRegular14.copyWith(
             color: isEnabled ? AppColors.darkGreen : AppColors.green25,
           ),
         ),
@@ -549,11 +549,11 @@ class _TeamScore extends ConsumerWidget {
     if (score != null) {
       return Text(
         score.toString(),
-        style: AppTextStyles.panchangMedium11.copyWith(
+        style: AppTextStyles.balooMedium11.copyWith(
           fontWeight: isWinner ? FontWeight.w700 : FontWeight.w400,
           height: 0.6,
           fontSize: isWinner ? 13 : 11,
-          color: AppColors.green.withOpacity(
+          color: AppColors.darkBlue.withOpacity(
             isWinner ? 1 : 0.5,
           ),
         ),
@@ -576,7 +576,7 @@ class _TeamScore extends ConsumerWidget {
       child: Center(
         child: Text(
           'WINNERS'.tr(context),
-          style: AppTextStyles.helveticaLight12.copyWith(
+          style: AppTextStyles.gothamLight12.copyWith(
             height: 0.6,
             color: AppColors.darkGreen,
           ),
@@ -596,7 +596,7 @@ class _TeamScore extends ConsumerWidget {
       child: Center(
         child: Text(
           'DRAW'.tr(context),
-          style: AppTextStyles.helveticaLight12
+          style: AppTextStyles.gothamLight12
               .copyWith(height: 0.6, color: AppColors.darkGreen),
         ),
       ),
@@ -607,7 +607,7 @@ class _TeamScore extends ConsumerWidget {
     if (player == null) {
       return Text(
         "-",
-        style: AppTextStyles.helveticaLight13,
+        style: AppTextStyles.gothamLight13,
       );
     }
     bool isReserved = player.reserved ?? false;
@@ -623,7 +623,7 @@ class _TeamScore extends ConsumerWidget {
               ? customerName
               : "-",
       style:
-          AppTextStyles.helveticaLight13.copyWith(color: AppColors.darkGreen),
+          AppTextStyles.gothamLight13.copyWith(color: AppColors.darkGreen),
     );
   }
 }

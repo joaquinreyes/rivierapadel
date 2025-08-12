@@ -20,20 +20,20 @@ class _AmountPayable extends ConsumerWidget {
     return Container(
       decoration: BoxDecoration(
         color: AppColors.white,
-        borderRadius: BorderRadius.circular(5.r),
+        borderRadius: BorderRadius.circular(100.r),
       ),
       padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 8.h),
       child: Row(
         children: [
           Text(
             "AMOUNT_PAYABLE".tr(context),
-            style: AppTextStyles.helveticaRegular12,
+            style: AppTextStyles.gothamRegular14,
           ),
           const Spacer(),
           if (originalAmount > payableAmount) ...[
             Text(
               Utils.formatPrice(originalAmount),
-              style: AppTextStyles.helveticaRegular12.copyWith(
+              style: AppTextStyles.gothamRegular12.copyWith(
                 decoration: TextDecoration.lineThrough,
               ),
             ),
@@ -41,7 +41,7 @@ class _AmountPayable extends ConsumerWidget {
           ],
           Text(
             Utils.formatPrice(payableAmount),
-            style: AppTextStyles.helveticaRegular12,
+            style: AppTextStyles.gothamRegular14,
           ),
         ],
       ),
@@ -97,7 +97,7 @@ class __PaymentButtonState extends ConsumerState<_PaymentButton> {
   Widget build(BuildContext context) {
     return MainButton(
       enabled: isButtonEnabled,
-      label: "PROCEED_WITH_PAYMENT".tr(context),
+      label: "PROCEED_WITH_PAYMENT".tr(context).capitalEnabled(context, canProceed: isButtonEnabled),
       isForPopup: true,
       onTap: () {
         if (widget.isMultiBooking) {

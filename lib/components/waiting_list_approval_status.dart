@@ -51,7 +51,7 @@ class _WaitingListApprovalStatusState
           player.isApproved
               ? acceptedHeader
               : "YOU_ARE_WAITING_FOR_APPROVAL".tr(context),
-          style: AppTextStyles.panchangBold13,
+          style: AppTextStyles.balooBold13,
         ),
         SizedBox(height: 5.h),
         Container(
@@ -69,12 +69,12 @@ class _WaitingListApprovalStatusState
                 children: [
                   Text(
                     player.getCustomerName,
-                    style: AppTextStyles.panchangBold9.copyWith(),
+                    style: AppTextStyles.balooBold9.copyWith(),
                   ),
                   if (subTitle.trim().length > 1)
                     Text(
                       subTitle,
-                      style: AppTextStyles.helveticaLight13.copyWith(
+                      style: AppTextStyles.gothamLight13.copyWith(
                         height: 0.9,
                       ),
                     ),
@@ -86,7 +86,7 @@ class _WaitingListApprovalStatusState
                 label: player.isApproved
                     ? "PAY_MY_SHARE".tr(context)
                     : "WITHDRAW".tr(context),
-                labelStyle: AppTextStyles.panchangMedium9
+                labelStyle: AppTextStyles.balooMedium9
                     .copyWith(color: AppColors.darkGreen),
                 applySize: false,
                 padding: EdgeInsets.symmetric(vertical: 6.h),

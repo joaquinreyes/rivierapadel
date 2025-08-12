@@ -24,7 +24,7 @@ _forgotPasswordDialog(BuildContext context, WidgetRef ref) {
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   Text(
-                    'RECOVER_PASSWORD'.tr(context),
+                    'RECOVER_PASSWORD'.trU(context),
                     style: AppTextStyles.popupHeaderTextStyle,
                     textAlign: TextAlign.center,
                   ),
@@ -33,7 +33,7 @@ _forgotPasswordDialog(BuildContext context, WidgetRef ref) {
                     alignment: AlignmentDirectional.centerStart,
                     child: Text(
                       'ENTER_EMAIL_ADDRESS'.tr(context),
-                      style: AppTextStyles.panchangMedium12.copyWith(
+                      style: AppTextStyles.sansRegular16.copyWith(
                         color: AppColors.white,
                       ),
                     ),
@@ -57,11 +57,12 @@ _forgotPasswordDialog(BuildContext context, WidgetRef ref) {
                         }
                         return null;
                       },
-                      style: AppTextStyles.helveticaLight12
+                      style: AppTextStyles.sansRegular13
                           .copyWith(color: AppColors.white),
                       fillColor: AppColors.white,
                       keyboardType: TextInputType.emailAddress,
                       isForPopup: true,
+                        hintText: 'TYPE_HERE'.tr(context),
                       onChanged: (_) {
                         setState(() {});
                       },
@@ -71,7 +72,7 @@ _forgotPasswordDialog(BuildContext context, WidgetRef ref) {
                   MainButton(
                     enabled: canProceed,
                     isForPopup: true,
-                    label: 'SEND_RECOVER_EMAIL'.tr(context),
+                    label: 'SEND_RECOVER_EMAIL'.tr(context).capitalizeFirst.capitalEnabled(context, canProceed: canProceed),
                     showArrow: false,
                     onTap: () async {
                       if (!(formKey.currentState?.validate() ?? true)) {
@@ -148,13 +149,13 @@ class _RecoverPassword2State extends ConsumerState<_RecoverPassword2> {
               SizedBox(height: 20.h),
               // IF_YOU_HAVE_AN_ACCOUNT_YOU_WILL_RECEIVE_AN_EMAIL
               Text(
-                'IF_YOU_HAVE_AN_ACCOUNT_YOU_WILL_RECEIVE_AN_EMAIL'.trU(context),
+                'IF_YOU_HAVE_AN_ACCOUNT_YOU_WILL_RECEIVE_AN_EMAIL'.tr(context),
                 style: AppTextStyles.popupBodyTextStyle,
                 textAlign: TextAlign.center,
               ),
               SizedBox(height: 10.h),
               Text(
-                'EMAIL_MAY_IN_JUNK'.trU(context),
+                'EMAIL_MAY_IN_JUNK'.tr(context),
                 style: AppTextStyles.popupBodyTextStyle,
                 textAlign: TextAlign.center,
               ),
@@ -163,8 +164,8 @@ class _RecoverPassword2State extends ConsumerState<_RecoverPassword2> {
               Align(
                 alignment: AlignmentDirectional.centerStart,
                 child: Text(
-                  'ENTER_TOKEN'.trU(context),
-                  style: AppTextStyles.popupBodyTextStyle,
+                  'ENTER_TOKEN'.tr(context),
+                  style: AppTextStyles.sansRegular16.copyWith(color: AppColors.white),
                 ),
               ),
               SizedBox(height: 5.h),
@@ -180,8 +181,8 @@ class _RecoverPassword2State extends ConsumerState<_RecoverPassword2> {
                   return null;
                 },
                 keyboardType: TextInputType.number,
-                style: AppTextStyles.helveticaLight12
-                    .copyWith(color: AppColors.white),
+                // style: AppTextStyles.gothamLight12
+                //     .copyWith(color: AppColors.white),
                 textInputAction: TextInputAction.next,
                 isForPopup: true,
                 onChanged: (_) {
@@ -192,8 +193,8 @@ class _RecoverPassword2State extends ConsumerState<_RecoverPassword2> {
               Align(
                 alignment: AlignmentDirectional.centerStart,
                 child: Text(
-                  'ENTER_NEW_PASSWORD'.trU(context),
-                  style: AppTextStyles.popupBodyTextStyle,
+                  'ENTER_NEW_PASSWORD'.tr(context),
+                  style: AppTextStyles.sansRegular16.copyWith(color: AppColors.white),
                 ),
               ),
               SizedBox(height: 5.h),
@@ -208,8 +209,8 @@ class _RecoverPassword2State extends ConsumerState<_RecoverPassword2> {
                   return null;
                 },
                 keyboardType: TextInputType.text,
-                style: AppTextStyles.helveticaLight12
-                    .copyWith(color: AppColors.white),
+                // style: AppTextStyles.gothamLight12
+                //     .copyWith(color: AppColors.white),
                 isForPopup: true,
                 onChanged: (_) {
                   setState(() {});
@@ -218,10 +219,11 @@ class _RecoverPassword2State extends ConsumerState<_RecoverPassword2> {
               SizedBox(height: 25.h),
               MainButton(
                 enabled: canProceed,
-                label: 'UPDATE_PASSWORD'.tr(context),
+                label: 'UPDATE_PASSWORD'.tr(context).capitalEnabled(context, canProceed: canProceed),
                 showArrow: false,
                 isForPopup: true,
                 applyShadow: true,
+                // padding: EdgeInsets.symmetric(vertical: 12.h),
                 onTap: () async {
                   if (!(formKey.currentState?.validate() ?? true)) {
                     return;

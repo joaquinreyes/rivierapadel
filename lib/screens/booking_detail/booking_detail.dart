@@ -64,7 +64,7 @@ class _BookingDetailState extends ConsumerState<BookingDetail> {
             ),
             Text(
               "${"BOOKING".trU(context)}\n ${"INFORMATION".trU(context)}",
-              style: AppTextStyles.panchangBold18.copyWith(height: 0.9),
+              style: AppTextStyles.balooBold18.copyWith(height: 0.9),
               textAlign: TextAlign.center,
             ),
             _body(),
@@ -230,7 +230,7 @@ class _DataBody extends ConsumerWidget {
     return Container(
       padding: EdgeInsets.all(15.w),
       decoration: BoxDecoration(
-        color: AppColors.green,
+        color: AppColors.darkBlue,
         borderRadius: BorderRadius.circular(5.r),
       ),
       child: Column(
@@ -239,14 +239,14 @@ class _DataBody extends ConsumerWidget {
             children: [
               Text(
                 "ORGANIZER".tr(context),
-                style: AppTextStyles.panchangMedium13.copyWith(
+                style: AppTextStyles.balooMedium13.copyWith(
                   color: AppColors.white,
                 ),
               ),
               const Spacer(),
               Text(
                 "BOOKING".tr(context),
-                style: AppTextStyles.panchangMedium13.copyWith(
+                style: AppTextStyles.balooMedium13.copyWith(
                   color: AppColors.white,
                 ),
               ),
@@ -272,14 +272,14 @@ class _DataBody extends ConsumerWidget {
                       ),
                       Text(
                         firstName,
-                        style: AppTextStyles.panchangBold9.copyWith(
+                        style: AppTextStyles.balooBold9.copyWith(
                           color: AppColors.white,
                           height: 1.7,
                         ),
                       ),
                       Text(
                         level, //•  Right",
-                        style: AppTextStyles.helveticaLight11.copyWith(
+                        style: AppTextStyles.gothamLight11.copyWith(
                           color: AppColors.white,
                           height: 1.4,
                         ),
@@ -294,21 +294,21 @@ class _DataBody extends ConsumerWidget {
                   children: [
                     Text(
                         "${userBooking.bookingDate.format("EEE dd MMM")} • ${userBooking.bookingStartTime.format("HH:mm")} - ${userBooking.bookingEndTime.format("HH:mm")}",
-                        style: AppTextStyles.helveticaLight13.copyWith(
+                        style: AppTextStyles.gothamLight13.copyWith(
                           color: AppColors.white,
                         ),
                         textAlign: TextAlign.center),
                     SizedBox(height: 2.h),
                     Text(
                         "${userBooking.courtName} | ${userBooking.service?.location?.locationName}",
-                        style: AppTextStyles.helveticaLight13.copyWith(
+                        style: AppTextStyles.gothamLight13.copyWith(
                           color: AppColors.white,
                         ),
                         textAlign: TextAlign.center),
                     SizedBox(height: 2.h),
                     Text(
                         "${"PRICE".tr(context)} ${Utils.formatPrice(userBooking.service?.price?.toDouble())} ",
-                        style: AppTextStyles.helveticaLight13.copyWith(
+                        style: AppTextStyles.gothamLight13.copyWith(
                           color: AppColors.white,
                         ),
                         textAlign: TextAlign.center),

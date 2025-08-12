@@ -19,14 +19,14 @@ class ApplicantEventInfoCard extends StatelessWidget {
             children: [
               Text(
                 service.service?.event?.eventName ?? "",
-                style: AppTextStyles.panchangMedium12
-                    .copyWith(color: AppColors.green),
+                style: AppTextStyles.balooMedium12
+                    .copyWith(color: AppColors.darkBlue),
               ),
               const Spacer(),
               Text(
                 "DATE_AND_TIME".tr(context),
-                style: AppTextStyles.panchangMedium12
-                    .copyWith(color: AppColors.green),
+                style: AppTextStyles.balooMedium12
+                    .copyWith(color: AppColors.darkBlue),
               )
             ],
           ),
@@ -41,14 +41,14 @@ class ApplicantEventInfoCard extends StatelessWidget {
                   Text(
                     (service.service?.location?.locationName ?? "")
                         .capitalizeFirst,
-                    style: AppTextStyles.helveticaLight13
-                        .copyWith(color: AppColors.green),
+                    style: AppTextStyles.gothamLight13
+                        .copyWith(color: AppColors.darkBlue),
                   ),
                   SizedBox(height: 2.h),
                   Text(
                     "${"PRICE".tr(context)} ${Utils.formatPrice(service.service?.price?.toDouble())}",
-                    style: AppTextStyles.helveticaLight13
-                        .copyWith(color: AppColors.green),
+                    style: AppTextStyles.gothamLight13
+                        .copyWith(color: AppColors.darkBlue),
                   ),
                 ],
               ),
@@ -58,14 +58,14 @@ class ApplicantEventInfoCard extends StatelessWidget {
                 children: [
                   Text(
                     service.formatBookingDate,
-                    style: AppTextStyles.helveticaLight13
-                        .copyWith(color: AppColors.green),
+                    style: AppTextStyles.gothamLight13
+                        .copyWith(color: AppColors.darkBlue),
                   ),
                   SizedBox(height: 2.h),
                   Text(
                     service.formatStartEndTime,
-                    style: AppTextStyles.helveticaLight13
-                        .copyWith(color: AppColors.green),
+                    style: AppTextStyles.gothamLight13
+                        .copyWith(color: AppColors.darkBlue),
                   ),
                 ],
               ),

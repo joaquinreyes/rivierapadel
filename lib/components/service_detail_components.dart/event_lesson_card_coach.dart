@@ -39,7 +39,7 @@ class EventLessonCardCoach extends StatelessWidget {
           Flexible(
             child: Text(
               coachName,
-              style: AppTextStyles.panchangBold9,
+              style: AppTextStyles.balooBold9,
             ),
           ),
         ],
@@ -66,7 +66,7 @@ class EventLessonCardCoach extends StatelessWidget {
                 Flexible(
                   child: Text(
                     coachName,
-                    style: AppTextStyles.panchangBold9,
+                    style: AppTextStyles.balooBold9,
                   ),
                 ),
               ],

@@ -89,7 +89,7 @@ class _MultiBookingCourtInfoCardState
                   child: Text(
                     "${'BOOKING'.tr(context).toUpperCase()} $formattedDate",
                     textAlign: TextAlign.start,
-                    style: AppTextStyles.panchangMedium10.copyWith(
+                    style: AppTextStyles.balooMedium10.copyWith(
                         color: AppColors.white,
                         decoration: TextDecoration.underline),
                   ),
@@ -137,7 +137,7 @@ class _MultiBookingCourtInfoCardState
                         SizedBox(width: 5.w),
                         Text(
                           "DELETE_BOOKING".tr(context),
-                          style: AppTextStyles.helveticaLight12
+                          style: AppTextStyles.gothamLight12
                               .copyWith(color: AppColors.white),
                         ),
                       ],

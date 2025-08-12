@@ -10,7 +10,7 @@ class MainButton extends StatelessWidget {
     this.label,
     this.onTap,
     this.child,
-    this.padding = EdgeInsets.zero,
+    this.padding,
     this.color,
     this.labelStyle,
     this.labelColor,
@@ -40,19 +40,19 @@ class MainButton extends StatelessWidget {
   final double? height;
   final double? width;
   final BoxConstraints? constraints;
-  final EdgeInsets padding;
+  final EdgeInsets? padding;
   final Widget? child;
   final bool showArrow;
   final bool isForPopup;
 
   Color get _defaultBackgroundColor =>
-      isForPopup ? AppColors.yellow : AppColors.green;
+      isForPopup ? AppColors.oak : AppColors.darkBlue;
 
   Color get _backgroundColor => color ?? _defaultBackgroundColor;
 
-  Color get _defaultDisabledColor => AppColors.darkGreen25;
+  Color get _defaultDisabledColor => isForPopup ? AppColors.white.withOpacity(0.1) : AppColors.darkBlue.withOpacity(0.25);
 
-  double get effectiveBorderRadius => borderRadius ?? 5.r;
+  double get effectiveBorderRadius => borderRadius ?? 100.r;
 
   BoxDecoration get buttonDecoration => BoxDecoration(
         borderRadius: BorderRadius.circular(effectiveBorderRadius),
@@ -103,7 +103,7 @@ class MainButton extends StatelessWidget {
 
   Widget _buildLabel() {
     return Padding(
-      padding: EdgeInsets.symmetric(horizontal: 15.w),
+      padding: padding ?? EdgeInsets.symmetric(horizontal: 20.w,vertical: 12.h),
       child: Row(
         mainAxisAlignment: (showArrow && !isForPopup)
             ? MainAxisAlignment.spaceBetween
@@ -124,14 +124,14 @@ class MainButton extends StatelessWidget {
   TextStyle get _labelTextStyle {
     if (enabled) {
       return labelStyle ??
-          AppTextStyles.panchangBold16.copyWith(
-            height: 1.2,
+          AppTextStyles.balooMedium20.copyWith(
+            height: 1,
             color: AppColors.white,
           );
     } else {
       return labelStyle ??
-          AppTextStyles.panchangMedium13.copyWith(
-            height: 1.2,
+          AppTextStyles.balooMedium18.copyWith(
+            height: 1,
             color: AppColors.white,
           );
     }
@@ -140,13 +140,13 @@ class MainButton extends StatelessWidget {
   TextStyle get _labelTextStyleForPopup {
     if (enabled) {
       return labelStyle ??
-          AppTextStyles.panchangMedium13.copyWith(
+          AppTextStyles.balooMedium18.copyWith(
             height: 1.2,
-            color: AppColors.green,
+            color: AppColors.white,
           );
     } else {
       return labelStyle ??
-          AppTextStyles.panchangMedium13.copyWith(
+          AppTextStyles.balooMedium18.copyWith(
             height: 1.2,
             color: AppColors.white,
           );
@@ -156,8 +156,8 @@ class MainButton extends StatelessWidget {
   Widget _buildArrowIcon() {
     return Image.asset(
       AppImages.rightArrow.path,
-      height: 18.h,
-      width: 18.h,
+      height: 16.h,
+      width: 16.h,
       color: labelStyle?.color ??
           labelColor ??
           (enabled ? AppColors.white : AppColors.white),

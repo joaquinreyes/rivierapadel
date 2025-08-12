@@ -60,7 +60,7 @@ class NotificationTile extends StatelessWidget {
                 // if (notification.createdAt != null)
                 Text(
                   "28 Oct. 19:31 hrs",
-                  style: AppTextStyles.helveticaLight12,
+                  style: AppTextStyles.gothamLight12,
                 ),
                 // if (notification.createdAt == null) const Spacer(),
                 InkWell(
@@ -79,12 +79,12 @@ class NotificationTile extends StatelessWidget {
             SizedBox(height: 5.h),
             Text(
               "A new player has joined the open match",
-              style: AppTextStyles.panchangBold10,
+              style: AppTextStyles.balooBold10,
             ),
             SizedBox(height: 5.h),
             Text(
               "John has joined the match to be held at 8:00 in Padel 1",
-              style: AppTextStyles.helveticaRegular13,
+              style: AppTextStyles.gothamRegular13,
             ),
           ],
         ),

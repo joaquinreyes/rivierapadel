@@ -60,7 +60,7 @@ class SecondaryImageButton extends StatelessWidget {
           SizedBox(width: spacing),
           Text(
             label,
-            style: AppTextStyles.helveticaLight12.copyWith(
+            style: isForPopup ? AppTextStyles.sansRegular13.copyWith(color: AppColors.white) : AppTextStyles.gothamLight12.copyWith(
                 fontSize: fontSize,
                 color: isForPopup
                     ? AppColors.white
@@ -80,7 +80,7 @@ class SecondaryButton extends StatelessWidget {
       this.enabled = true,
       this.color,
       this.padding,
-      this.borderRadius = 5,
+      this.borderRadius = 100,
       this.applyShadow = true});
   final VoidCallback? onTap;
   final Widget child;

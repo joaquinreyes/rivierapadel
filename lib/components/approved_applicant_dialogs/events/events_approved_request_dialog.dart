@@ -49,7 +49,7 @@ class _ApprovedRequestDialogState
           Text(
             "YOU_HAVE_BEEN_ACCEPTED_INTO_THE_TEAM".trU(context),
             textAlign: TextAlign.center,
-            style: AppTextStyles.panchangBold9,
+            style: AppTextStyles.balooBold9,
           ),
           SizedBox(height: 20.h),
           ApplicantOpenMatchInfoCard(
@@ -59,7 +59,7 @@ class _ApprovedRequestDialogState
           Align(
             alignment: AlignmentDirectional.centerStart,
             child: Text("CURRENT_TEAM".tr(context),
-                style: AppTextStyles.panchangBold10),
+                style: AppTextStyles.balooBold10),
           ),
           SizedBox(height: 5.h),
           OpenMatchParticipantRowWithBG(

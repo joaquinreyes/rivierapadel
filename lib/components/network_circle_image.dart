@@ -10,7 +10,7 @@ class NetworkCircleImage extends StatelessWidget {
       required this.width,
       required this.height,
       this.isYellowBg = false,
-      this.showBG = true});
+      this.showBG = false});
 
   final String? path;
   final double width;
@@ -28,7 +28,7 @@ class NetworkCircleImage extends StatelessWidget {
         color: (showBG && (path?.isEmpty ?? true))
             ? (isYellowBg ? AppColors.green5 : AppColors.darkGreen90)
             : Colors.transparent,
-        shape: BoxShape.circle,
+        // shape: BoxShape.circle,
         boxShadow: showBG
             ? [
                 BoxShadow(

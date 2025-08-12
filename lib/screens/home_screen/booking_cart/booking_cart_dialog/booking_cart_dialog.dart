@@ -89,7 +89,7 @@ class _BookCourtDialogState extends ConsumerState<BookingCartDialog> {
                       alignment: Alignment.centerLeft,
                       child: Text(
                         "BOOKING_PAYMENT".trU(context),
-                        style: AppTextStyles.panchangMedium15.copyWith(
+                        style: AppTextStyles.balooMedium15.copyWith(
                           color: AppColors.white,
                         ),
                       ),

@@ -51,18 +51,17 @@ class __AddProfilePictureState extends ConsumerState<_AddProfilePicture> {
         children: [
           if (widget.selectImage) ...[
             Text(
-              "ADD_A_PROFILE_PICTURE".tr(context),
+              "ADD_A_PROFILE_PICTURE".trU(context),
               style: AppTextStyles.popupHeaderTextStyle,
               textAlign: TextAlign.center,
             ),
             SizedBox(height: 20.h),
             Text(
               "ADD_A_PROFILE_PICTURE_EXPLANATION".tr(context),
-              style: AppTextStyles.panchangMedium13
-                  .copyWith(color: AppColors.white),
+              style: AppTextStyles.popupBodyTextStyle,
               textAlign: TextAlign.center,
             ),
-            SizedBox(height: 10.h),
+            SizedBox(height: 5.h),
             InkWell(
               onTap: () async {
                 ImageSource? src = await showModalBottomSheet(
@@ -96,32 +95,32 @@ class __AddProfilePictureState extends ConsumerState<_AddProfilePicture> {
                   _image(),
                   if (_img == null)
                     Positioned(
-                      right: 28,
-                      bottom: 8,
+                      right: 15.w,
+                      bottom: 15.h,
                       child: Image.asset(
                         AppImages.iconCamera.path,
-                        width: 13.w,
-                        height: 13.w,
+                        width: 12.h,
+                        height: 12.h,
                       ),
                     )
                 ],
               ),
             ),
-            SizedBox(height: 30.h),
+            SizedBox(height: 15.h),
           ],
           if (widget.selectDate) ...[
             Text(
               "WHEN_DID_YOU_START_PLAYING".tr(context),
-              style: AppTextStyles.panchangMedium12
+              style: AppTextStyles.sansMedium16
                   .copyWith(color: AppColors.white),
               textAlign: TextAlign.center,
             ),
             SizedBox(height: 2.h),
             Text(
               "WHEN_DID_YOU_START_PLAYING_EXPLANATION".tr(context),
-              style: AppTextStyles.helveticaLight13
+              style: AppTextStyles.sansRegular15
                   .copyWith(color: AppColors.white),
-              textAlign: TextAlign.center,
+              textAlign: TextAlign.start,
             ),
             SizedBox(height: 5.h),
             InkWell(
@@ -143,8 +142,9 @@ class __AddProfilePictureState extends ConsumerState<_AddProfilePicture> {
                 setState(() {});
               },
               child: Container(
-                decoration: const BoxDecoration(
+                decoration: BoxDecoration(
                   color: AppColors.white25,
+                  borderRadius: BorderRadius.circular(100.r)
                 ),
                 padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 5.h),
                 child: Row(
@@ -154,8 +154,8 @@ class __AddProfilePictureState extends ConsumerState<_AddProfilePicture> {
                       selectedDate == null
                           ? "mm/yyyy"
                           : selectedDate!.format("MMMM/yyyy"),
-                      style: AppTextStyles.helveticaLight12
-                          .copyWith(color: AppColors.white),
+                      style: AppTextStyles.sansRegular13
+                          .copyWith(color: AppColors.white95),
                     ),
                     const Icon(
                       Icons.keyboard_arrow_down,
@@ -199,10 +199,11 @@ class __AddProfilePictureState extends ConsumerState<_AddProfilePicture> {
   Widget _image() {
     if (_img != null) {
       return Container(
-        width: 90.w,
-        height: 90.w,
+        width: 90.h,
+        height: 90.h,
         decoration: BoxDecoration(
-          shape: BoxShape.circle,
+          // shape: BoxShape.circle,
+          borderRadius: BorderRadius.circular(17.r),
           image: DecorationImage(
             image: PlatformC().isCurrentOSMobile
                 ? FileImage(_img!)
@@ -213,8 +214,8 @@ class __AddProfilePictureState extends ConsumerState<_AddProfilePicture> {
     }
     return NetworkCircleImage(
       path: ref.read(userManagerProvider).user?.user?.profileUrl,
-      width: 90.w,
-      height: 90.w,
+      width: 90.h,
+      height: 90.h,
       isYellowBg: true,
     );
   }

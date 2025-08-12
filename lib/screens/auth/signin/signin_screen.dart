@@ -68,12 +68,12 @@ class _SigninScreenState extends ConsumerState<SigninScreen> {
           child: Scaffold(
             backgroundColor: PlatformC().isCurrentDesignPlatformDesktop
                 ? Colors.transparent
-                : AppColors.lightPink,
+                : AppColors.backgroundColor,
             body: SingleChildScrollView(
               child: Center(
                 child: Container(
                   height: height,
-                  color: AppColors.lightPink,
+                  color: AppColors.backgroundColor,
                   margin: EdgeInsets.symmetric(
                       vertical:
                           PlatformC().isCurrentDesignPlatformDesktop ? 30 : 0),
@@ -84,24 +84,26 @@ class _SigninScreenState extends ConsumerState<SigninScreen> {
                     child: SafeArea(
                       child: Column(
                         children: [
-                          SizedBox(height: 34.5.h),
+                          SizedBox(height: 19.h),
                           Align(
                             alignment: AlignmentDirectional.centerStart,
                             child: InkWell(
                               onTap: () => Navigator.pop(context),
                               child: Image.asset(
                                 AppImages.arrowBack.path,
-                                height: 24.h,
+                                height: 18.h,
                               ),
                             ),
                           ),
+                          10.verticalSpace,
                           Text(
-                            "SIGN_IN".tr(context),
-                            style: AppTextStyles.panchangBold26,
+                            "SIGN_IN".trU(context),
+                            style: AppTextStyles.balooMedium30.copyWith(height: 1),
                           ),
+                          5.verticalSpace,
                           Text(
-                            '${"WELCOME_BACK".tr(context)}!',
-                            style: AppTextStyles.panchangMedium13,
+                            '${"WELCOME_BACK".tr(context)}',
+                            style: AppTextStyles.sansRegular18.copyWith(height: 1),
                           ),
                           SizedBox(height: 45.h),
                           Align(
@@ -113,7 +115,7 @@ class _SigninScreenState extends ConsumerState<SigninScreen> {
                                 children: [
                                   Text(
                                     "EMAIL".tr(context),
-                                    style: AppTextStyles.panchangMedium14,
+                                    style: AppTextStyles.balooMedium19,
                                   ),
                                   CustomTextField(
                                     controller: _emailController,
@@ -132,10 +134,10 @@ class _SigninScreenState extends ConsumerState<SigninScreen> {
                                       setState(() {});
                                     },
                                   ),
-                                  SizedBox(height: 54.h),
+                                  SizedBox(height: 50.h),
                                   Text(
                                     "PASSWORD".tr(context),
-                                    style: AppTextStyles.panchangMedium14,
+                                    style: AppTextStyles.balooMedium19,
                                   ),
                                   CustomTextField(
                                     controller: _passwordController,
@@ -157,9 +159,9 @@ class _SigninScreenState extends ConsumerState<SigninScreen> {
                                       },
                                       child: Text(
                                         "FORGOT_MY_PASSWORD".tr(context),
-                                        style: AppTextStyles.helveticaLight13
-                                            .copyWith(
-                                          color: AppColors.darkGreen70,
+                                        style: AppTextStyles.sansRegular14.copyWith(
+                                          height: 1,
+                                          color: AppColors.clay70,
                                         ),
                                       ),
                                     ),

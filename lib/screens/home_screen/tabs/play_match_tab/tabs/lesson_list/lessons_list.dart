@@ -130,7 +130,7 @@ class _LessonsState extends ConsumerState<_Lessons> {
         children: [
           Text(
             (widget.lesson.lessonName ?? "").capitalizeFirst,
-            style: AppTextStyles.helveticaBold14,
+            style: AppTextStyles.gothamBold14,
           ),
           SizedBox(height: 2.h),
           LevelRestrictionContainer(
@@ -143,7 +143,7 @@ class _LessonsState extends ConsumerState<_Lessons> {
                 flex: 10,
                 child: Text(
                   (widget.lesson.eventInfo ?? ""),
-                  style: AppTextStyles.helveticaLight13,
+                  style: AppTextStyles.gothamLight13,
                 ),
               ),
               const Spacer(),
@@ -153,11 +153,11 @@ class _LessonsState extends ConsumerState<_Lessons> {
                   Text(
                     (widget.lesson.location?.locationName ?? "")
                         .capitalizeFirst,
-                    style: AppTextStyles.helveticaLight13,
+                    style: AppTextStyles.gothamLight13,
                   ),
                   Text(
                     Utils.formatPrice(price),
-                    style: AppTextStyles.helveticaLight13,
+                    style: AppTextStyles.gothamLight13,
                   )
                 ],
               )

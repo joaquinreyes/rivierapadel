@@ -35,14 +35,14 @@ class UserBookingCard extends StatelessWidget {
             children: [
               Text(
                 "BOOKING".tr(context),
-                style: AppTextStyles.helveticaBold13.copyWith(
+                style: AppTextStyles.gothamBold13.copyWith(
                   color: textColor,
                 ),
               ),
               const Spacer(),
               Text(
                 (booking.service?.location?.locationName ?? "").capitalizeFirst,
-                style: AppTextStyles.helveticaBold13.copyWith(
+                style: AppTextStyles.gothamBold13.copyWith(
                   color: textColor,
                 ),
               ),
@@ -58,14 +58,14 @@ class UserBookingCard extends StatelessWidget {
                 children: [
                   Text(
                     booking.courtName.capitalizeFirst,
-                    style: AppTextStyles.helveticaLight13.copyWith(
+                    style: AppTextStyles.gothamLight13.copyWith(
                       color: textColor,
                     ),
                   ),
                   SizedBox(height: 2.h),
                   Text(
                     "${"PRICE".tr(context)} ${Utils.formatPrice(booking.service?.price?.toDouble())}",
-                    style: AppTextStyles.helveticaLight13.copyWith(
+                    style: AppTextStyles.gothamLight13.copyWith(
                       color: textColor,
                     ),
                   ),
@@ -77,14 +77,14 @@ class UserBookingCard extends StatelessWidget {
                 children: [
                   Text(
                     booking.formatBookingDate,
-                    style: AppTextStyles.helveticaLight13.copyWith(
+                    style: AppTextStyles.gothamLight13.copyWith(
                       color: textColor,
                     ),
                   ),
                   SizedBox(height: 2.h),
                   Text(
                     booking.formatStartEndTime,
-                    style: AppTextStyles.helveticaLight13.copyWith(
+                    style: AppTextStyles.gothamLight13.copyWith(
                       color: textColor,
                     ),
                   ),

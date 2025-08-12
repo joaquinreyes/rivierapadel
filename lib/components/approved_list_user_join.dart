@@ -48,7 +48,7 @@ class _ApprovedListUserJoinState extends ConsumerState<ApprovedListUserJoin> {
               SizedBox(width: 5.h),
               Text(
                 "APPROVED_PLAYERS".trU(context),
-                style: AppTextStyles.panchangBold13,
+                style: AppTextStyles.balooBold13,
               ),
             ],
           ),
@@ -91,7 +91,7 @@ class _ApprovedListUserJoinState extends ConsumerState<ApprovedListUserJoin> {
                               SizedBox(height: 5.h),
                               Text(
                                 player.getCustomerName,
-                                style: AppTextStyles.panchangBold9.copyWith(),
+                                style: AppTextStyles.balooBold9.copyWith(),
                               ),
                             ],
                           ),
@@ -103,14 +103,14 @@ class _ApprovedListUserJoinState extends ConsumerState<ApprovedListUserJoin> {
                             SizedBox(height: 15.h),
                             Text(
                               "${"LEVEL".tr(context)} ${player.customer?.level(getSportsName(ref))} ", //•  Right",
-                              style: AppTextStyles.helveticaLight11.copyWith(
+                              style: AppTextStyles.gothamLight11.copyWith(
                                 height: 0.9,
                               ),
                             ),
                             SizedBox(height: 5.h),
                             Text(
                               player.customer?.playingSide ?? "",
-                              style: AppTextStyles.helveticaLight11.copyWith(
+                              style: AppTextStyles.gothamLight11.copyWith(
                                 height: 0.9,
                               ),
                             ),
@@ -122,13 +122,13 @@ class _ApprovedListUserJoinState extends ConsumerState<ApprovedListUserJoin> {
                           children: [
                             Text(
                               "STATUS".trU(context),
-                              style: AppTextStyles.helveticaRegular12,
+                              style: AppTextStyles.gothamRegular12,
                             ),
                             SizedBox(height: 3.h),
                             Text(
                               "WAITING_FOR_PLAYER_TO_JOIN".trU(context),
                               textAlign: TextAlign.center,
-                              style: AppTextStyles.helveticaBold12
+                              style: AppTextStyles.gothamBold12
                                   .copyWith(height: 1.3),
                             )
                           ],

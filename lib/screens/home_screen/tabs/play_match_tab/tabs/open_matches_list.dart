@@ -85,7 +85,7 @@ class _OpenMatchesState extends ConsumerState<OpenMatchesList> {
           padding: EdgeInsets.only(bottom: 10.h),
           child: Text(
             Utils.formatBookingDate(date, context),
-            style: AppTextStyles.panchangBold13,
+            style: AppTextStyles.balooBold13,
           ),
         ),
       );
@@ -143,7 +143,7 @@ class _OpenMatchCard extends ConsumerWidget {
                 flex: 10,
                 child: Text(
                   match.formattedDateStartEndTime,
-                  style: AppTextStyles.helveticaBold14
+                  style: AppTextStyles.gothamBold14
                       .copyWith(color: AppColors.darkGreen),
                 ),
               ),
@@ -152,7 +152,7 @@ class _OpenMatchCard extends ConsumerWidget {
                 child: Text(
                   (match.service?.location?.locationName ?? "").capitalizeFirst,
                   textAlign: TextAlign.end,
-                  style: AppTextStyles.helveticaBold12
+                  style: AppTextStyles.gothamBold12
                       .copyWith(color: AppColors.darkGreen),
                 ),
               ),
@@ -171,13 +171,13 @@ class _OpenMatchCard extends ConsumerWidget {
             children: [
               Text(
                 match.court,
-                style: AppTextStyles.helveticaLight13.copyWith(
+                style: AppTextStyles.gothamLight13.copyWith(
                   color: AppColors.darkGreen,
                 ),
               ),
               Text(
                 "${"LEVEL".tr(context)} ${match.openMatchLevelRange}",
-                style: AppTextStyles.helveticaLight13.copyWith(
+                style: AppTextStyles.gothamLight13.copyWith(
                   color: AppColors.darkGreen,
                 ),
               )

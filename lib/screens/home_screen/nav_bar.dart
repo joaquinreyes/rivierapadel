@@ -34,7 +34,7 @@ class NavBarState extends ConsumerState<NavBar> {
       alignment: Alignment.topCenter,
       padding: EdgeInsets.only(top: 11.h),
       decoration: BoxDecoration(
-        color: AppColors.lightPink,
+        color: AppColors.backgroundColor,
         boxShadow: [
           BoxShadow(
             color: AppColors.green5.withOpacity(0.25),
@@ -134,7 +134,7 @@ class NavBarState extends ConsumerState<NavBar> {
         width: 115.w,
         alignment: Alignment.center,
         decoration: BoxDecoration(
-          color: isSelected ? AppColors.green : Colors.transparent,
+          color: isSelected ? AppColors.darkBlue : Colors.transparent,
           borderRadius: BorderRadius.circular(5.r),
         ),
         child: Column(
@@ -147,11 +147,11 @@ class NavBarState extends ConsumerState<NavBar> {
             Text(
               text,
               style: isSelected
-                  ? AppTextStyles.panchangBold12.copyWith(
+                  ? AppTextStyles.balooBold12.copyWith(
                       color: AppColors.white,
                       height: textHeight,
                     )
-                  : AppTextStyles.panchangMedium9.copyWith(
+                  : AppTextStyles.balooMedium9.copyWith(
                       color: AppColors.darkGreen70,
                       height: textHeight,
                     ),

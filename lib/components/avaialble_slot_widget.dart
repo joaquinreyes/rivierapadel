@@ -10,12 +10,12 @@ class AvailableSlotWidget extends StatelessWidget {
     super.key,
     required this.text,
     required this.index,
-    this.backgroundColor = AppColors.green,
+    this.backgroundColor = AppColors.darkBlue,
     this.onTap,
     this.isHorizontal = false,
     this.otherTeamMemberID,
-    this.iconColor = AppColors.green,
-    this.textColor = AppColors.green,
+    this.iconColor = AppColors.darkBlue,
+    this.textColor = AppColors.darkBlue,
   });
 
   final String text;
@@ -74,7 +74,7 @@ class AvailableSlotWidget extends StatelessWidget {
       minFontSize: 8,
       maxLines: 1,
       stepGranularity: 1,
-      style: AppTextStyles.helveticaBold12.copyWith(
+      style: AppTextStyles.gothamBold12.copyWith(
         color: textColor,
       ),
     );

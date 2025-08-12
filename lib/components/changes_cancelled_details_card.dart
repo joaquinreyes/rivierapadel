@@ -42,14 +42,14 @@ class ChangesCancelledDetailsCard extends StatelessWidget {
               SizedBox(width: 10.w),
               Text(
                 heading,
-                style: AppTextStyles.panchangBold12,
+                style: AppTextStyles.balooBold12,
               ),
             ],
           ),
           SizedBox(height: 5.h),
           Text(
             description,
-            style: AppTextStyles.helveticaLight13,
+            style: AppTextStyles.gothamLight13,
           ),
           SizedBox(height: 5.h),
           Align(

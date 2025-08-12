@@ -46,7 +46,7 @@ class _ApplicantDialogState extends ConsumerState<EventApplicantDialog> {
         children: [
           Text("PLAYERS_WAITING_TO_ENTER_YOUR_MATCH".tr(context),
               textAlign: TextAlign.center,
-              style: AppTextStyles.panchangBold15
+              style: AppTextStyles.balooBold15
                   .copyWith(color: AppColors.white)),
           SizedBox(height: 20.h),
           ApplicantEventInfoCard(service: widget.data.serviceBooking!),
@@ -55,7 +55,7 @@ class _ApplicantDialogState extends ConsumerState<EventApplicantDialog> {
             alignment: AlignmentDirectional.centerStart,
             child: Text(
               "CURRENT_TEAM".tr(context),
-              style: AppTextStyles.panchangMedium12
+              style: AppTextStyles.balooMedium12
                   .copyWith(color: AppColors.white),
             ),
           ),
