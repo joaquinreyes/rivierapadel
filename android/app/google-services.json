@@ -1,0 +1,118 @@
+{
+  "project_info": {
+    "project_number": "1017484623328",
+    "project_id": "jungle-padel-327a6",
+    "storage_bucket": "jungle-padel-327a6.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1017484623328:android:bb3ad286d92a6098dbff85",
+        "android_client_info": {
+          "package_name": "com.bookandgo.acepadel"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1017484623328-oeefj49lo3gb0g730na7u420pfl3ssft.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCGUWuizraybNoEicPlUCdwVYZ68FQqz4A"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1017484623328-oeefj49lo3gb0g730na7u420pfl3ssft.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "1017484623328-4clfhv4pt75vm2ueqck8tsmg0fq69g52.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.ios.jungle.padel"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1017484623328:android:fbfaecdd77d90a75dbff85",
+        "android_client_info": {
+          "package_name": "com.bookandgo.padelarena"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1017484623328-oeefj49lo3gb0g730na7u420pfl3ssft.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCGUWuizraybNoEicPlUCdwVYZ68FQqz4A"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1017484623328-oeefj49lo3gb0g730na7u420pfl3ssft.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "1017484623328-4clfhv4pt75vm2ueqck8tsmg0fq69g52.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.ios.jungle.padel"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1017484623328:android:fa8df06a7848f7fbdbff85",
+        "android_client_info": {
+          "package_name": "com.jungle.padel"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1017484623328-oeefj49lo3gb0g730na7u420pfl3ssft.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCGUWuizraybNoEicPlUCdwVYZ68FQqz4A"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1017484623328-oeefj49lo3gb0g730na7u420pfl3ssft.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "1017484623328-4clfhv4pt75vm2ueqck8tsmg0fq69g52.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.ios.jungle.padel"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

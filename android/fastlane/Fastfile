@@ -1,0 +1,75 @@
+
+default_platform(:android)
+
+default_platform(:android)
+
+platform :android do
+  desc "Runs all the tests"
+  lane :test do
+    gradle(task: "test")
+  end
+
+  desc "Submit a new Beta Build to Crashlytics Beta"
+  lane :beta do
+    gradle(task: "clean assembleRelease")
+    crashlytics
+  end
+
+  desc "Deploy a new version to the Google Play"
+  lane :deploy do
+    gradle(task: "clean assembleRelease")
+    upload_to_play_store
+  end
+
+  desc "Generate a release APK only"
+  lane :release_apk do
+    gradle(task: "clean assembleRelease") # This will build the release APK
+  end
+  
+  desc "Build Flutter Web and Deploy to Firebase Hosting"
+  lane :build_and_deploy_web do
+    sh "flutter build web --web-renderer html"
+    sh "firebase deploy --only hosting"
+  end
+
+  desc "Build and Deploy iOS to testflight"
+  lane :build_and_deploy_ios do
+    Dir.chdir("../../ios") do
+      sh "fastlane beta"
+    end
+  end
+  lane :build_and_deploy_ios_release do |options|
+    Dir.chdir("../../ios") do
+      bump_type = options[:bump_type]
+      sh "fastlane release bump_type:#{bump_type}"
+    end
+  end
+
+  
+  desc "Build Android App Bundle"
+  lane :build_appbundle do
+    gradle(
+      task: "bundle",
+      build_type: "release"
+    )
+  end
+  
+  desc "Build all the things"
+  lane :build_all_beta do
+    release_apk
+    build_and_deploy_web
+    build_and_deploy_ios
+  end
+
+  desc "Build all Release"
+  lane :build_all_release do
+    bump_type = prompt(
+      text: "Choose the ios bump type (patch, minor, major):",
+      ci_input: "patch" # Default value for CI environments
+    )
+    release_apk
+    build_appbundle
+    build_and_deploy_web
+    build_and_deploy_ios_release(bump_type: bump_type)
+  end
+end

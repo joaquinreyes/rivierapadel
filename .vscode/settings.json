@@ -1,0 +1,7 @@
+{
+  "window.zoomLevel": -0.96,
+  "i18n-ally.localesPaths": [
+    "assets/locales"
+  ],
+  "dart.flutterSdkPath": ".fvm/versions/3.22.1"
+}
