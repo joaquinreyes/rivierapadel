@@ -1,4 +1,5 @@
 import 'package:acepadel/components/custom_dialog.dart';
+import 'package:acepadel/components/service_detail_components.dart/event_lesson_card_coach.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -121,20 +122,40 @@ class _LessonsState extends ConsumerState<_Lessons> {
     return Container(
       padding: EdgeInsets.symmetric(horizontal: 15.w, vertical: 15.h),
       decoration: BoxDecoration(
-        color: AppColors.darkGreen5,
-        borderRadius: BorderRadius.circular(5.r),
+        color: AppColors.clay05,
+        borderRadius: BorderRadius.circular(12.r),
       ),
-      margin: EdgeInsets.only(bottom: 10.h),
+      margin: EdgeInsets.only(bottom: 15.h),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(
-            (widget.lesson.lessonName ?? "").capitalizeFirst,
-            style: AppTextStyles.gothamBold14,
-          ),
-          SizedBox(height: 2.h),
-          LevelRestrictionContainer(
-            levelRestriction: widget.lesson.levelRestriction,
+          Row(
+            children: [
+              Expanded(
+                flex: 10,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+
+                  children: [
+                    Text(
+                      (widget.lesson.lessonName ?? "").capitalizeFirst,
+                      style: AppTextStyles.gothamRegular16,
+                    ),
+                    SizedBox(height: 2.h),
+                    LevelRestrictionContainer(
+                      levelRestriction: widget.lesson.levelRestriction,
+                    ),
+                  ],
+                ),
+              ),
+              Expanded(
+                flex: 8,
+                child: EventLessonCardCoach(
+                  coaches: widget.lesson.coaches,
+                  showAllCouches: false,
+                ),
+              ),
+            ],
           ),
           const CDivider(),
           Row(
@@ -143,7 +164,7 @@ class _LessonsState extends ConsumerState<_Lessons> {
                 flex: 10,
                 child: Text(
                   (widget.lesson.eventInfo ?? ""),
-                  style: AppTextStyles.gothamLight13,
+                  style: AppTextStyles.sansRegular13,
                 ),
               ),
               const Spacer(),
@@ -153,11 +174,11 @@ class _LessonsState extends ConsumerState<_Lessons> {
                   Text(
                     (widget.lesson.location?.locationName ?? "")
                         .capitalizeFirst,
-                    style: AppTextStyles.gothamLight13,
+                    style: AppTextStyles.sansRegular13,
                   ),
                   Text(
                     Utils.formatPrice(price),
-                    style: AppTextStyles.gothamLight13,
+                    style: AppTextStyles.sansRegular13,
                   )
                 ],
               )
@@ -173,14 +194,14 @@ class _LessonsState extends ConsumerState<_Lessons> {
             },
           ),
           if (isDatesVisible) ...[
-            if (widget.lesson.selectedCoach != null)
-              _LessonCoachesListView(
-                lesson: widget.lesson,
-                onChangeSelectedCoach: (int? id) {
-                  widget.lesson.selectedCoach = id;
-                  setState(() {});
-                },
-              ),
+            // if (widget.lesson.selectedCoach != null)
+            //   _LessonCoachesListView(
+            //     lesson: widget.lesson,
+            //     onChangeSelectedCoach: (int? id) {
+            //       widget.lesson.selectedCoach = id;
+            //       setState(() {});
+            //     },
+            //   ),
             SizedBox(height: 10.h),
             _LessonDatesListView(
               lesson: widget.lesson,
@@ -262,7 +283,7 @@ class _LessonsState extends ConsumerState<_Lessons> {
         if (paymentDone != null && context.mounted && mounted) {
           Utils.showMessageDialog(
             context,
-            "YOU_HAVE_JOINED_SUCCESSFULLY".tr(context),
+            "YOU_HAVE_JOINED_SUCCESSFULLY".trU(context),
           );
         }
       }

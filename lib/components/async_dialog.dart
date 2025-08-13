@@ -42,8 +42,8 @@ class AsyncDialog<T> extends ConsumerWidget {
                 SizedBox(height: 10.h),
                 Image.asset(
                   AppImages.warning2.path,
-                  width: 60.w,
-                  height: 60.w,
+                  width: 90.w,
+                  height: 90.w,
                 ),
                 SizedBox(height: 15.h),
                 SelectableText(
@@ -53,9 +53,10 @@ class AsyncDialog<T> extends ConsumerWidget {
                 ),
                 SizedBox(height: 25.h),
                 MainButton(
-                  label: 'CONTINUE'.tr(context),
-                  color: AppColors.yellow,
-                  labelStyle: AppTextStyles.balooMedium13,
+                  label: 'CONTINUE'.trU(context),
+                  // color: AppColors.yellow,
+                  isForPopup: true,
+                  // labelStyle: AppTextStyles.balooMedium13,
                   onTap: () {
                     Navigator.pop(context, error.toString());
                   },

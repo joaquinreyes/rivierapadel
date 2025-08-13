@@ -12,8 +12,8 @@ class ApplicantOpenMatchInfoCard extends StatelessWidget {
     return Container(
       padding: EdgeInsets.all(15.h),
       decoration: BoxDecoration(
-        color: AppColors.yellow,
-        borderRadius: BorderRadius.all(Radius.circular(5.r)),
+        color: AppColors.oak,
+        borderRadius: BorderRadius.all(Radius.circular(12.r)),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -22,18 +22,18 @@ class ApplicantOpenMatchInfoCard extends StatelessWidget {
             children: [
               Text(
                 "LOCATION".tr(context),
-                style: AppTextStyles.balooMedium12
-                    .copyWith(color: AppColors.darkBlue),
+                style: AppTextStyles.balooMedium16
+                    .copyWith(color: AppColors.white),
               ),
               const Spacer(),
               Text("DATE_AND_TIME".tr(context),
-                  style: AppTextStyles.balooMedium12
-                      .copyWith(color: AppColors.darkBlue)),
+                  style: AppTextStyles.balooMedium16
+                      .copyWith(color: AppColors.white)),
             ],
           ),
-          SizedBox(height: 1.h),
-          const CDivider(),
-          SizedBox(height: 2.h),
+          // SizedBox(height: 1.h),
+          const CDivider(color: AppColors.white25,),
+          // SizedBox(height: 2.h),
           Row(
             children: [
               Column(
@@ -41,22 +41,22 @@ class ApplicantOpenMatchInfoCard extends StatelessWidget {
                 children: [
                   Text(
                     service.courtName,
-                    style: AppTextStyles.gothamLight13
-                        .copyWith(color: AppColors.darkBlue),
+                    style: AppTextStyles.sansRegular15
+                        .copyWith(color: AppColors.white),
                   ),
                   SizedBox(height: 2.h),
                   Text(
                     // locationName.capitalizeFirst,
                     (service.service?.location?.locationName ?? "")
                         .capitalizeFirst,
-                    style: AppTextStyles.gothamLight13
-                        .copyWith(color: AppColors.darkBlue),
+                    style: AppTextStyles.sansRegular15
+                        .copyWith(color: AppColors.white),
                   ),
                   SizedBox(height: 2.h),
                   Text(
                     "${"PRICE".tr(context)} ${Utils.formatPrice(service.service?.price?.toDouble())}",
-                    style: AppTextStyles.gothamLight13
-                        .copyWith(color: AppColors.darkBlue),
+                    style: AppTextStyles.sansRegular15
+                        .copyWith(color: AppColors.white),
                   ),
                 ],
               ),
@@ -65,21 +65,21 @@ class ApplicantOpenMatchInfoCard extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.end,
                 children: [
                   Text(
-                    service.formatStartEndTime,
-                    style: AppTextStyles.gothamLight13
-                        .copyWith(color: AppColors.darkBlue),
+                    service.formatStartEndTimeAm,
+                    style: AppTextStyles.sansRegular15
+                        .copyWith(color: AppColors.white),
                   ),
                   SizedBox(height: 2.h),
                   Text(
                     service.formatBookingDate,
-                    style: AppTextStyles.gothamLight13
-                        .copyWith(color: AppColors.darkBlue),
+                    style: AppTextStyles.sansRegular15
+                        .copyWith(color: AppColors.white),
                   ),
                   SizedBox(height: 2.h),
                   Text(
                     service.duration,
-                    style: AppTextStyles.gothamLight13
-                        .copyWith(color: AppColors.darkBlue),
+                    style: AppTextStyles.sansRegular15
+                        .copyWith(color: AppColors.white),
                   ),
                 ],
               ),

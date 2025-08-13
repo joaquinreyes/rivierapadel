@@ -62,7 +62,7 @@ class _CustomNumberInputState extends ConsumerState<CustomNumberInput> {
         (index) {
           return Expanded(
             child: Container(
-              margin: const EdgeInsets.only(left: 4, right: 4),
+              margin: const EdgeInsets.only(left: 8, right: 8,bottom: 4),
               child: TextField(
                 controller: _controllers[index],
                 focusNode: _focusNode(index),
@@ -75,7 +75,7 @@ class _CustomNumberInputState extends ConsumerState<CustomNumberInput> {
                 ),
                 decoration: InputDecoration(
                   counterText: '', // Hide the character counter
-                  contentPadding: const EdgeInsets.only(bottom: 3),
+                  contentPadding: const EdgeInsets.only(bottom: 0),
                   border: UnderlineInputBorder(
                     borderSide: BorderSide(color: widget.color, width: 1),
                   ),

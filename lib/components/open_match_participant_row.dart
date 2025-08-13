@@ -26,6 +26,7 @@ class OpenMatchParticipantRowWithBG extends StatelessWidget {
     this.availableSlotIconColor = AppColors.darkBlue,
     this.textColor = AppColors.darkBlue,
     this.onPlayerTap,
+    this.padding,
   });
   final Color availableSlotbackGroundColor;
   final bool allowBackground;
@@ -40,18 +41,19 @@ class OpenMatchParticipantRowWithBG extends StatelessWidget {
   final int maxPlayers;
   final Function(int, bool)? onPlayerTap;
   final Color? bgColor;
+  final EdgeInsetsGeometry? padding;
 
   @override
   Widget build(BuildContext context) {
     return Container(
       clipBehavior: Clip.antiAlias,
-      padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 10.h),
+      padding: padding ?? EdgeInsets.symmetric(horizontal: 10.w, vertical: 10.h),
       width: double.infinity,
       constraints: kComponentWidthConstraint,
       decoration: BoxDecoration(
         color:
             bgColor ?? (allowBackground ? AppColors.gallery : AppColors.white),
-        borderRadius: BorderRadius.circular(7.r),
+        borderRadius: BorderRadius.circular(12.r),
         boxShadow: [
           if (allowBackground)
             const BoxShadow(
@@ -92,6 +94,7 @@ class OpenMatchParticipantRow extends StatefulWidget {
     this.availableSlotIconColor = AppColors.darkBlue,
     this.textColor = AppColors.darkBlue,
     this.onPlayerTap,
+    // this.reservedImage,
   });
 
   final Color availableSlotbackGroundColor;
@@ -104,6 +107,7 @@ class OpenMatchParticipantRow extends StatefulWidget {
   final int maxPlayers;
   final Color availableSlotIconColor;
   final Color textColor;
+  // final bool? reservedImage;
   final Function(int, bool)? onPlayerTap;
   @override
   State<OpenMatchParticipantRow> createState() =>
@@ -161,12 +165,12 @@ class _OpenMatchParticipantRowState extends State<OpenMatchParticipantRow> {
           const Spacer(),
           AutoSizeText(
             'V/S',
-            maxFontSize: 12,
+            maxFontSize: 15,
             minFontSize: 8,
             maxLines: 1,
             stepGranularity: 1,
             textAlign: TextAlign.center,
-            style: AppTextStyles.gothamBold14.copyWith(
+            style: AppTextStyles.balooMedium15.copyWith(
               color: widget.textColor,
             ),
           ),
@@ -214,6 +218,7 @@ class _OpenMatchParticipantRowState extends State<OpenMatchParticipantRow> {
           onRelease: widget.onRelease,
           showReleaseReserveButton: showReleaseReserveButton,
           textColor: widget.textColor,
+          // reservedImage: widget.reservedImage,
           onPlayerTap: widget.onPlayerTap,
         );
       }

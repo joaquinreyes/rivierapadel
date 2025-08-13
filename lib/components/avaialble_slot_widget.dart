@@ -58,7 +58,7 @@ class AvailableSlotWidget extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         children: [
           _circle(),
-          SizedBox(height: 8.h),
+          // SizedBox(height: 8.h),
           _text(),
           SizedBox(height: 8.h),
         ],
@@ -74,7 +74,7 @@ class AvailableSlotWidget extends StatelessWidget {
       minFontSize: 8,
       maxLines: 1,
       stepGranularity: 1,
-      style: AppTextStyles.gothamBold12.copyWith(
+      style: AppTextStyles.balooMedium11.copyWith(
         color: textColor,
       ),
     );
@@ -82,25 +82,29 @@ class AvailableSlotWidget extends StatelessWidget {
 
   Container _circle() {
     return Container(
-      width: 35.w,
-      height: 35.w,
+      width: 35.h,
+      height: 35.h,
+      padding: EdgeInsets.all(2.h),
+      margin: EdgeInsets.only(top: 2.h),
       decoration: BoxDecoration(
         color: backgroundColor,
-        shape: BoxShape.circle,
+        borderRadius: BorderRadius.circular(6.r)
+        // shape: BoxShape.circle,
       ),
       child: DottedBorder(
-        borderType: BorderType.Circle,
-        dashPattern: const [5, 4],
+        borderType: BorderType.RRect,
+        radius: Radius.circular(6.r),
+        dashPattern: const [4, 4],
         color: iconColor,
         strokeWidth: 1.h,
         child: Container(
-          height: 35.w,
-          width: 35.w,
+          height: 35.h,
+          width: 35.h,
           alignment: Alignment.center,
           child: Icon(
             Icons.add,
             color: iconColor,
-            size: 20.h,
+            size: 18.h,
           ),
         ),
       ),

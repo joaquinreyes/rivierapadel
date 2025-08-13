@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'dart:ui';
+import 'package:acepadel/components/c_divider.dart';
 import 'package:acepadel/globals/images.dart';
 import 'package:acepadel/models/voucher_model.dart';
 import 'package:acepadel/screens/app_provider.dart';
@@ -280,7 +281,6 @@ class _BookingTabState extends ConsumerState<BookingTab> {
       mainAxisSize: MainAxisSize.min,
       children: [
         _serviceRow(data),
-        SizedBox(height: 17.h),
         vouchers.when(
           data: (data) {
             if (data.isEmpty) {
@@ -290,6 +290,7 @@ class _BookingTabState extends ConsumerState<BookingTab> {
               mainAxisSize: MainAxisSize.min,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
+                SizedBox(height: 12.h),
                 Padding(
                   padding: EdgeInsets.only(left: 20.w),
                   child: Text(
@@ -373,7 +374,7 @@ class _BookingTabState extends ConsumerState<BookingTab> {
             return const CupertinoActivityIndicator(radius: 10);
           },
         ),
-        SizedBox(height: 15.h),
+        SizedBox(height: 10.h),
         ExpandablePageView(
           physics: const NeverScrollableScrollPhysics(),
           controller: ref.watch(_pageViewController),

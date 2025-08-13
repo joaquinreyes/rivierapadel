@@ -31,7 +31,7 @@ class _CourtBookedDialogState extends ConsumerState<CartBookedDialog> {
         children: [
           Center(
             child: Text(
-              "BOOKING_CONFIRMED".tr(context),
+              "BOOKING_CONFIRMED".trU(context),
               style: AppTextStyles.popupHeaderTextStyle,
               textAlign: TextAlign.center,
             ),
@@ -42,10 +42,12 @@ class _CourtBookedDialogState extends ConsumerState<CartBookedDialog> {
             style: AppTextStyles.popupBodyTextStyle,
             textAlign: TextAlign.center,
           ),
-          SizedBox(height: 20.h),
+          SizedBox(height: 15.h),
           MultiBookingCourtInfoCard(
             bookings: widget.bookings,
-            color: AppColors.yellow,
+            color: AppColors.oak,
+            textColor: AppColors.white,
+            dividerColor: AppColors.white25,
             showDelete: false,
           ),
           SizedBox(height: 20.h),

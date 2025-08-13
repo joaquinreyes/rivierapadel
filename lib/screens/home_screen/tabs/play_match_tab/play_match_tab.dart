@@ -79,11 +79,11 @@ class _PlayMatchTabState extends ConsumerState<PlayMatchTab> {
 
     return Column(
       children: [
-        SizedBox(height: 35.5.h),
+        SizedBox(height: 31.h),
         const _ViewSelector(),
-        SizedBox(height: 15.h),
+        SizedBox(height: 12.h),
         _FilterRow(),
-        SizedBox(height: 20.h),
+        SizedBox(height: 10.h),
         Expanded(
           child: Padding(
             padding: EdgeInsets.symmetric(horizontal: 15.w),

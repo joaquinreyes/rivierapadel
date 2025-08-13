@@ -11,10 +11,10 @@ class _RankedOrFriendly extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       decoration: inset.BoxDecoration(
-        borderRadius: BorderRadius.circular(10.r),
+        borderRadius: BorderRadius.circular(100.r),
         boxShadow: kInsetShadow,
       ),
-      padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 5.h),
+      padding: EdgeInsets.symmetric(horizontal: 5.w, vertical: 4.h),
       child: Row(
         children: [
           _buildWidget("FRIENDLY".tr(context), !isRanked),
@@ -27,15 +27,14 @@ class _RankedOrFriendly extends StatelessWidget {
   _buildWidget(String text, bool isSelected) {
     return Container(
       decoration: BoxDecoration(
-        color: isSelected ? AppColors.yellow : Colors.transparent,
+        color: isSelected ? AppColors.oak : Colors.transparent,
         borderRadius: BorderRadius.circular(10.r),
       ),
-      padding: EdgeInsets.symmetric(vertical: 5.h, horizontal: 10.w),
+      padding: EdgeInsets.symmetric(vertical: 2.h, horizontal: 10.w),
       child: Text(
         text,
-        style: AppTextStyles.balooMedium10.copyWith(
-            color: isSelected ? AppColors.darkBlue : AppColors.green70,
-            fontWeight: isSelected ? FontWeight.w400 : FontWeight.w300),
+        style: isSelected ? AppTextStyles.gothamRegular14.copyWith(color: AppColors.white) : AppTextStyles.sansRegular13.copyWith(
+            color: AppColors.clay70,),
       ),
     );
   }
@@ -57,22 +56,22 @@ class _OrganizerNote extends StatelessWidget {
         Container(
           alignment: Alignment.centerLeft,
           child: Text(
-            "NOTE_FROM_ORGANIZER".tr(context),
-            style: AppTextStyles.balooBold13,
+            "NOTE_FROM_ORGANIZER".trU(context),
+            style: AppTextStyles.balooMedium17,
           ),
         ),
         SizedBox(height: 5.h),
         Container(
           alignment: Alignment.centerLeft,
           decoration: BoxDecoration(
-            color: AppColors.darkGreen5,
-            borderRadius: BorderRadius.circular(10.r),
+            color: AppColors.clay05,
+            borderRadius: BorderRadius.circular(100.r),
           ),
           padding: EdgeInsets.symmetric(
             horizontal: 12.w,
             vertical: 6.h,
           ),
-          child: Text(note, style: AppTextStyles.gothamLight12),
+          child: Text(note, style: AppTextStyles.sansRegular13),
         ),
       ],
     );
@@ -84,38 +83,39 @@ class _InfoCard extends ConsumerWidget {
   final ServiceDetail service;
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    String level = service.openMatchLevelRange;
+    if (level.isNotEmpty) {
+      level = "${"LEVEL".tr(context)} $level |";
+    }
     return Container(
       padding: EdgeInsets.symmetric(
-        horizontal: 15.h,
+        horizontal: 15.w,
         vertical: 15.h,
       ),
       decoration: BoxDecoration(
         color: AppColors.darkBlue,
-        borderRadius: BorderRadius.circular(10),
+        borderRadius: BorderRadius.circular(12.r),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Padding(
-            padding: EdgeInsets.symmetric(horizontal: 15.w),
-            child: Row(
-              children: [
-                Text(
-                  'ORGANIZER'.tr(context),
-                  style: AppTextStyles.balooMedium12
-                      .copyWith(color: AppColors.white),
-                ),
-                const Spacer(),
-                Text(
-                  'BOOKING'.tr(context),
-                  style: AppTextStyles.balooMedium12
-                      .copyWith(color: AppColors.white),
-                ),
-              ],
-            ),
+          Row(
+            children: [
+              Text(
+                'ORGANIZER'.tr(context),
+                style: AppTextStyles.balooMedium16
+                    .copyWith(color: AppColors.white),
+              ),
+              const Spacer(),
+              Text(
+                'BOOKING'.tr(context),
+                style: AppTextStyles.balooMedium16
+                    .copyWith(color: AppColors.white),
+              ),
+            ],
           ),
-          const CDivider(color: AppColors.lightGrey, thickness: 0.6),
-          SizedBox(height: 10.h),
+          const CDivider(color: AppColors.white25),
+          SizedBox(height: 4.h),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
@@ -129,20 +129,20 @@ class _InfoCard extends ConsumerWidget {
                   crossAxisAlignment: CrossAxisAlignment.end,
                   children: [
                     Text(
-                      service.formattedDateStartEndTime,
-                      style: AppTextStyles.gothamLight13
+                      service.formattedDateStartEndTimeAm,
+                      style: AppTextStyles.sansRegular15
                           .copyWith(color: AppColors.white),
                     ),
                     SizedBox(height: 2.h),
                     Text(
                       "${service.courts?.first.courtName ?? ""} | ${service.service?.location?.locationName ?? ""}",
-                      style: AppTextStyles.gothamLight13
+                      style: AppTextStyles.sansRegular15
                           .copyWith(color: AppColors.white),
                     ),
                     SizedBox(height: 2.h),
                     Text(
-                      "LEVEL | ${Utils.formatPrice(service.service?.price)}",
-                      style: AppTextStyles.gothamLight13
+                      "$level ${Utils.formatPrice(service.service?.price)}",
+                      style: AppTextStyles.sansRegular15
                           .copyWith(color: AppColors.white),
                     ),
                   ],
@@ -184,22 +184,23 @@ class _InfoCard extends ConsumerWidget {
           child: NetworkCircleImage(
             // path: participant?.imgUrl,
             path: organizer.customer?.profileUrl,
-            width: 40.h,
-            height: 40.h,
+            width: 37.h,
+            height: 37.h,
+            boxBorder: Border.all(color: AppColors.white25),
           ),
         ),
-        SizedBox(height: 5.h),
+        // SizedBox(height: 5.h),
         Text(
           organizer.getCustomerName,
           textAlign: TextAlign.center,
-          style: AppTextStyles.balooBold9.copyWith(color: AppColors.white),
+          style: AppTextStyles.balooMedium11.copyWith(color: AppColors.white),
         ),
         Text(
           // "LEVEL • SIDE",
           level,
           textAlign: TextAlign.center,
           style:
-              AppTextStyles.gothamLight11.copyWith(color: AppColors.white),
+              AppTextStyles.sansRegular12.copyWith(color: AppColors.white),
         ),
       ],
     );
@@ -375,13 +376,13 @@ class __ScoreComponentState extends ConsumerState<_ScoreViewComponent> {
       children: [
         Text(
           "SCORE",
-          style: AppTextStyles.balooBold13,
+          style: AppTextStyles.balooMedium17,
         ),
         SizedBox(height: 10.h),
         Container(
-          padding: const EdgeInsets.all(10),
+          padding: EdgeInsets.all(15.h),
           decoration: BoxDecoration(
-              color: AppColors.green5, borderRadius: BorderRadius.circular(7)),
+              color: AppColors.clay05, borderRadius: BorderRadius.circular(12.r)),
           child: Column(
             children: [
               Row(
@@ -389,16 +390,16 @@ class __ScoreComponentState extends ConsumerState<_ScoreViewComponent> {
                 children: [
                   Text(
                     widget.service.formatBookingDate.toUpperCase(),
-                    style: AppTextStyles.gothamBold14,
+                    style: AppTextStyles.sansMedium14,
                   ),
                   _enterButton(teamAScores, teamBScores),
                   Text(
                     widget.service.openMatchLevelRange,
-                    style: AppTextStyles.gothamRegular12,
+                    style: AppTextStyles.sansRegular15,
                   )
                 ],
               ),
-              SizedBox(height: 10.h),
+              // SizedBox(height: 10.h),
               const CDivider(),
               SizedBox(height: 5.h),
               _TeamScore(
@@ -417,7 +418,7 @@ class __ScoreComponentState extends ConsumerState<_ScoreViewComponent> {
                 isWinner: !isAWin && !isDraw && isMatchScoreFilled,
                 isDraw: isDraw && isMatchScoreFilled,
               ),
-              SizedBox(height: 5.h),
+              // SizedBox(height: 5.h),
             ],
           ),
         ),
@@ -464,9 +465,9 @@ class __ScoreComponentState extends ConsumerState<_ScoreViewComponent> {
             }
           : null,
       child: Container(
-        padding: const EdgeInsets.symmetric(vertical: 3, horizontal: 12),
+        padding: const EdgeInsets.symmetric(vertical: 2, horizontal: 15),
         decoration: BoxDecoration(
-          color: isEnabled ? AppColors.yellow : Colors.transparent,
+          color: isEnabled ? AppColors.oak : Colors.transparent,
           borderRadius: BorderRadius.circular(10),
           boxShadow: [
             if (isEnabled)
@@ -480,9 +481,9 @@ class __ScoreComponentState extends ConsumerState<_ScoreViewComponent> {
         ),
         child: Text(
           "ENTER_MATCH_RESULTS".tr(context),
-          style: AppTextStyles.gothamRegular14.copyWith(
-            color: isEnabled ? AppColors.darkGreen : AppColors.green25,
-          ),
+          style: isEnabled
+              ? AppTextStyles.gothamRegular14.copyWith(color: AppColors.white)
+              : AppTextStyles.sansMedium14.copyWith(color: AppColors.darkBlue.withOpacity(0.25)),
         ),
       ),
     );
@@ -549,14 +550,7 @@ class _TeamScore extends ConsumerWidget {
     if (score != null) {
       return Text(
         score.toString(),
-        style: AppTextStyles.balooMedium11.copyWith(
-          fontWeight: isWinner ? FontWeight.w700 : FontWeight.w400,
-          height: 0.6,
-          fontSize: isWinner ? 13 : 11,
-          color: AppColors.darkBlue.withOpacity(
-            isWinner ? 1 : 0.5,
-          ),
-        ),
+        style: isWinner ? AppTextStyles.balooMedium17 : AppTextStyles.sansRegular16,
       );
     }
     return Container(
@@ -568,17 +562,17 @@ class _TeamScore extends ConsumerWidget {
   _winnerContainer(BuildContext context) {
     return Container(
       margin: const EdgeInsets.only(left: 15),
-      padding: const EdgeInsets.symmetric(vertical: 10),
+      padding: const EdgeInsets.symmetric(vertical: 4),
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(7),
-        color: AppColors.yellow50,
+        borderRadius: BorderRadius.circular(100.r),
+        color: AppColors.oak,
       ),
       child: Center(
         child: Text(
-          'WINNERS'.tr(context),
-          style: AppTextStyles.gothamLight12.copyWith(
-            height: 0.6,
-            color: AppColors.darkGreen,
+          'Winners'.tr(context),
+          style: AppTextStyles.sansMedium16.copyWith(
+            // height: 0.6,
+            color: AppColors.white,
           ),
         ),
       ),
@@ -588,16 +582,15 @@ class _TeamScore extends ConsumerWidget {
   _drawContainer(BuildContext context) {
     return Container(
       margin: const EdgeInsets.only(left: 15),
-      padding: const EdgeInsets.symmetric(vertical: 10),
+      padding: const EdgeInsets.symmetric(vertical: 4),
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(7),
-        color: AppColors.yellow50,
+        borderRadius: BorderRadius.circular(100.r),
+        color: AppColors.white,
       ),
       child: Center(
         child: Text(
-          'DRAW'.tr(context),
-          style: AppTextStyles.gothamLight12
-              .copyWith(height: 0.6, color: AppColors.darkGreen),
+          'Draw',
+          style: AppTextStyles.sansMedium16,
         ),
       ),
     );
@@ -607,7 +600,7 @@ class _TeamScore extends ConsumerWidget {
     if (player == null) {
       return Text(
         "-",
-        style: AppTextStyles.gothamLight13,
+        style: AppTextStyles.sansRegular15,
       );
     }
     bool isReserved = player.reserved ?? false;
@@ -622,8 +615,7 @@ class _TeamScore extends ConsumerWidget {
           : customerName.isNotEmpty
               ? customerName
               : "-",
-      style:
-          AppTextStyles.gothamLight13.copyWith(color: AppColors.darkGreen),
+      style: isWinner ? AppTextStyles.sansMedium15 : AppTextStyles.sansRegular15,
     );
   }
 }

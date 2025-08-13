@@ -28,27 +28,27 @@ class _NotificationScreenState extends ConsumerState<NotificationScreen> {
           padding: EdgeInsets.symmetric(horizontal: 15.w),
           child: Column(
             children: [
-              SizedBox(height: 35.5.h),
+              SizedBox(height: 20.h),
               if (!PlatformC().isCurrentDesignPlatformDesktop)
                 Align(
                   alignment: Alignment.centerLeft,
                   child: Padding(
-                    padding: EdgeInsets.only(left: 17.w),
+                    padding: EdgeInsets.only(left: 3.w),
                     child: InkWell(
                       onTap: () => ref.read(goRouterProvider).pop(),
                       child: Image.asset(
                         AppImages.backArrow.path,
-                        height: 20.h,
-                        width: 20.h,
+                        height: 24.h,
+                        width: 24.h,
                       ),
                     ),
                   ),
                 ),
               Text(
                 "NOTIFICATION".trU(context),
-                style: AppTextStyles.balooBold18,
+                style: AppTextStyles.balooMedium22,
               ),
-              SizedBox(height: 40.h),
+              SizedBox(height: 30.h),
               // const _ClearAllBtn(),
               SizedBox(height: 15.h),
               Expanded(

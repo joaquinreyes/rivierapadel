@@ -18,9 +18,9 @@ class ServiceCoaches extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         SizedBox(height: 20.h),
-        Text("${"COACHES".tr(context)} ${coaches.length}",
-            style: AppTextStyles.balooBold13),
-        SizedBox(height: 10.h),
+        Text("${"COACH".trU(context)} ${coaches.length}",
+            style: AppTextStyles.balooMedium17),
+        SizedBox(height: 4.h),
         ListView.separated(
           shrinkWrap: true,
           itemCount: coaches.length,
@@ -35,8 +35,8 @@ class ServiceCoaches extends StatelessWidget {
   _coachCard(ServiceDetail_Coach coach) {
     return Container(
       decoration: BoxDecoration(
-        color: AppColors.green5,
-        borderRadius: BorderRadius.circular(5.r),
+        color: AppColors.clay05,
+        borderRadius: BorderRadius.circular(12.r),
       ),
       padding: EdgeInsets.symmetric(vertical: 15.h, horizontal: 10.w),
       child: Row(
@@ -44,11 +44,14 @@ class ServiceCoaches extends StatelessWidget {
           Column(
             children: [
               NetworkCircleImage(
-                  path: coach.profileUrl, width: 40.w, height: 40.w),
+                path: coach.profileUrl,
+                width: 37.h,
+                height: 37.h,
+                boxBorder: Border.all(color: AppColors.white25),
+              ),
               Text(
-                "${coach.fullName}",
-                style: AppTextStyles.balooBold9
-                    .copyWith(color: AppColors.darkGreen),
+                "${coach.fullName?.toUpperCase()}",
+                style: AppTextStyles.balooMedium11,
               )
             ],
           ),
@@ -56,8 +59,7 @@ class ServiceCoaches extends StatelessWidget {
           Expanded(
             child: Text(
               coach.description ?? "",
-              style: AppTextStyles.gothamLight12
-                  .copyWith(color: AppColors.darkGreen),
+              style: AppTextStyles.sansRegular13
             ),
           ),
         ],

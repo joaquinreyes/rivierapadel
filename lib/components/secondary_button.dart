@@ -40,7 +40,7 @@ class SecondaryImageButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SecondaryButton(
-      color: color ?? (isForPopup ? AppColors.white25 : AppColors.darkGreen5),
+      color: color ?? (isForPopup ? AppColors.white25 : AppColors.clay05),
       padding: padding,
       applyShadow: applyShadow,
       onTap: () {
@@ -55,16 +55,14 @@ class SecondaryImageButton extends StatelessWidget {
             width: imageWidth,
             color: isForPopup
                 ? AppColors.white
-                : (iconColor ?? AppColors.darkGreen),
+                : (iconColor ?? AppColors.darkBlue),
           ),
           SizedBox(width: spacing),
           Text(
             label,
-            style: isForPopup ? AppTextStyles.sansRegular13.copyWith(color: AppColors.white) : AppTextStyles.gothamLight12.copyWith(
+            style: isForPopup ? AppTextStyles.sansRegular13.copyWith(color: AppColors.white) : AppTextStyles.sansRegular13.copyWith(
                 fontSize: fontSize,
-                color: isForPopup
-                    ? AppColors.white
-                    : (iconColor ?? AppColors.darkGreen)),
+                color: (iconColor ?? AppColors.darkBlue)),
           ),
         ],
       ),

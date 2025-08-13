@@ -15,7 +15,7 @@ class _InfoCard extends StatelessWidget {
       ),
       decoration: BoxDecoration(
         color: AppColors.darkBlue,
-        borderRadius: BorderRadius.circular(5),
+        borderRadius: BorderRadius.circular(12.r),
       ),
       child: Column(
         mainAxisSize: MainAxisSize.min,
@@ -26,30 +26,30 @@ class _InfoCard extends StatelessWidget {
                 flex: 10,
                 child: Text(
                   (event.service?.event?.eventName ?? "").capitalizeFirst,
-                  style: AppTextStyles.gothamBold14
+                  style: AppTextStyles.sansMedium16
                       .copyWith(color: AppColors.white),
                 ),
               ),
               Expanded(
                 flex: 3,
                 child: Text(
-                  (event.service?.location?.locationName ?? "").capitalizeFirst,
+                  (event.service?.location?.locationName ?? "").toUpperCase(),
                   textAlign: TextAlign.end,
-                  style: AppTextStyles.gothamBold12
+                  style: AppTextStyles.balooMedium14
                       .copyWith(color: AppColors.white),
                 ),
               ),
             ],
           ),
           const CDivider(color: AppColors.white25),
-          SizedBox(height: 10.h),
+          // SizedBox(height: 10.h),
           Row(
             crossAxisAlignment: CrossAxisAlignment.end,
             children: [
               Expanded(
                 child: _colInfo(
                   event.bookingDate.format("EEE dd MMM"),
-                  "${event.bookingStartTime.format("HH:mm")} - ${event.bookingEndTime.format("HH:mm")}",
+                  "${event.bookingStartTime.format("h:mm")} - ${event.bookingEndTime.format("h:mm a").toLowerCase()}",
                 ),
               ),
               Expanded(
@@ -58,18 +58,18 @@ class _InfoCard extends StatelessWidget {
                   children: [
                     Text(
                       'SLOTS'.trU(context),
-                      style: AppTextStyles.balooBold9
+                      style: AppTextStyles.balooMedium12
                           .copyWith(color: AppColors.white),
                     ),
                     // SizedBox(height: 4.h),
                     Text(
                       "${'MAX'.tr(context)} ${event.getMaximumCapacity.toString() ?? ""} ${'PLAYERS'.tr(context)}",
-                      style: AppTextStyles.gothamLight11
+                      style: AppTextStyles.sansRegular12
                           .copyWith(color: AppColors.white),
                     ),
                     Text(
                       "${'MIN'.tr(context)} ${event.getMinimumCapacity.toString() ?? ""} ${'PLAYERS'.tr(context)}",
-                      style: AppTextStyles.gothamLight11
+                      style: AppTextStyles.sansRegular12
                           .copyWith(color: AppColors.white),
                     ),
                   ],
@@ -104,13 +104,13 @@ class _InfoCard extends StatelessWidget {
         Text(
           text1,
           style:
-              AppTextStyles.gothamLight13.copyWith(color: AppColors.white),
+              AppTextStyles.sansRegular13.copyWith(color: AppColors.white),
         ),
         SizedBox(height: 2.h),
         Text(
           text2,
           style:
-              AppTextStyles.gothamLight13.copyWith(color: AppColors.white),
+              AppTextStyles.sansRegular13.copyWith(color: AppColors.white),
         ),
       ],
     );
@@ -144,23 +144,21 @@ class _ConfirmationDialog extends StatelessWidget {
             _headingText(context),
             textAlign: TextAlign.center,
             style:
-                AppTextStyles.balooBold15.copyWith(color: AppColors.white),
+                AppTextStyles.popupHeaderTextStyle,
           ),
           if (type != _ConfirmationDialogType.withdraw) ...[
             SizedBox(height: 5.h),
             Text(
               _descText(context),
               textAlign: TextAlign.center,
-              style: AppTextStyles.balooMedium11
-                  .copyWith(color: AppColors.white),
+              style: AppTextStyles.popupBodyTextStyle,
             ),
           ],
           if (type == _ConfirmationDialogType.leave)
             RefundDescriptionComponent(
                 policy: policy,
                 text: policy == null ? "LEAVE_POLICY_EVENT".tr(context) : null,
-                style: AppTextStyles.balooBold10
-                    .copyWith(color: AppColors.white)),
+                style: AppTextStyles.popupBodyTextStyle),
           // if (type == _ConfirmationDialogType.leave)
           //   Text(
           //     "LEAVE_POLICY_EVENT".tr(context),
@@ -170,9 +168,10 @@ class _ConfirmationDialog extends StatelessWidget {
           //   ),
           SizedBox(height: 20.h),
           MainButton(
-            color: AppColors.yellow,
-            labelStyle:
-                AppTextStyles.balooMedium13.copyWith(color: AppColors.darkBlue),
+            // color: AppColors.yellow,
+            isForPopup: true,
+            // labelStyle:
+            //     AppTextStyles.balooMedium13.copyWith(color: AppColors.darkBlue),
             label: _buttonText(context),
             onTap: () {
               Navigator.pop(context, true);
@@ -228,22 +227,22 @@ class _ConfirmationDialog extends StatelessWidget {
   _buttonText(BuildContext context) {
     switch (type) {
       case _ConfirmationDialogType.join:
-        return "JOIN_PAY_MY_SHARE".tr(context);
+        return "JOIN_PAY_MY_SHARE".trU(context);
 
       case _ConfirmationDialogType.leave:
-        return "LEAVE".tr(context);
+        return "LEAVE".trU(context);
       case _ConfirmationDialogType.joinWaitingLit:
-        return "JOIN_WAITING_LIST".tr(context);
+        return "JOIN_WAITING_LIST".trU(context);
       case _ConfirmationDialogType.approvePlayer:
-        return "APPROVE_PLAYER".tr(context);
+        return "APPROVE_PLAYER".trU(context);
       case _ConfirmationDialogType.applyForApproval:
-        return "APPLY_TO_TEAM".tr(context);
+        return "APPLY_TO_TEAM".trU(context);
       case _ConfirmationDialogType.withdraw:
-        return "YES_WITHDRAW".tr(context);
+        return "YES_WITHDRAW".trU(context);
       case _ConfirmationDialogType.releaseReserve:
-        return "RELEASE_THIS_SPOT".tr(context);
+        return "RELEASE_THIS_SPOT".trU(context);
       case _ConfirmationDialogType.reserve:
-        return "RESERVE_PAY_SLOT".tr(context);
+        return "RESERVE_PAY_SLOT".trU(context);
     }
   }
 }
@@ -502,8 +501,8 @@ class __DoubleEventsState extends ConsumerState<_DoubleEventsPlayers> {
   Widget _count(int i) {
     return Container(
       decoration: BoxDecoration(
-        color: AppColors.white,
-        borderRadius: BorderRadius.all(Radius.circular(7.r)),
+        color: AppColors.oak50,
+        borderRadius: BorderRadius.all(Radius.circular(100.r)),
         boxShadow: const [
           kBoxShadow,
         ],
@@ -511,7 +510,7 @@ class __DoubleEventsState extends ConsumerState<_DoubleEventsPlayers> {
       width: 25.h,
       height: 25.h,
       child: Center(
-        child: Text("${i + 1}", style: AppTextStyles.balooMedium10),
+        child: Text("${i + 1}", style: AppTextStyles.sansMedium14),
       ),
     );
   }
@@ -829,7 +828,7 @@ class _ApplicantSlotWidget extends StatelessWidget {
       minFontSize: 8.sp,
       maxLines: 1,
       stepGranularity: 1.sp,
-      style: AppTextStyles.gothamBold12,
+      style: AppTextStyles.balooMedium12,
     );
   }
 
@@ -901,15 +900,14 @@ class _WaitingPlayersSlotsState extends ConsumerState<_WaitingPlayersSlots> {
       children: [
         Row(
           children: [
-            const Icon(Icons.info_outline, color: AppColors.black, size: 16),
-            SizedBox(width: 5.w),
-            Text("WAITING_LIST".tr(context),
-                style: AppTextStyles.balooBold13.copyWith(
-                  color: AppColors.darkGreen,
-                ))
+            // const Icon(Icons.info_outline, color: AppColors.black, size: 16),
+            Image.asset(AppImages.infoIcon.path, width: 12.w, height: 12.h,color: AppColors.darkBlue,),
+            SizedBox(width: 10.w),
+            Text("WAITING_LIST".trU(context),
+                style: AppTextStyles.balooMedium17)
           ],
         ),
-        SizedBox(height: 15.h),
+        SizedBox(height: 6.h),
         showWaitingList
             ? Container(
                 decoration: BoxDecoration(
@@ -938,10 +936,8 @@ class _WaitingPlayersSlotsState extends ConsumerState<_WaitingPlayersSlots> {
                         onSlotTap: widget.onSlotTap,
                       ),
               )
-            : Text("THERE_IS_NO_WAITING_LIST".trU(context),
-                style: AppTextStyles.gothamLight12.copyWith(
-                  color: AppColors.darkGreen,
-                )),
+            : Text("THERE_IS_NO_WAITING_LIST".tr(context),
+                style: AppTextStyles.sansRegular13),
         SizedBox(height: 15.h),
         if (showWaitingList && widget.isInWaitingList)
           SecondaryButton(

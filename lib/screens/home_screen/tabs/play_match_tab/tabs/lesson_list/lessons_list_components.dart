@@ -19,10 +19,10 @@ class _LessonDatesVisibilityToggle extends StatelessWidget {
         ),
         onTap: onTap,
         child: Container(
-          padding: EdgeInsets.symmetric(vertical: 8.h, horizontal: 10.w),
+          padding: EdgeInsets.symmetric(vertical: 4.h, horizontal: 12.w),
           decoration: BoxDecoration(
-            color: AppColors.yellow,
-            borderRadius: BorderRadius.circular(5.r),
+            color: AppColors.oak,
+            borderRadius: BorderRadius.circular(100.r),
           ),
           child: Row(
             mainAxisSize: MainAxisSize.min,
@@ -30,15 +30,15 @@ class _LessonDatesVisibilityToggle extends StatelessWidget {
               Text(
                 isDatesVisible
                     ? "HIDE_DATES".tr(context)
-                    : "SHOW_DATES".tr(context),
-                style: AppTextStyles.gothamLight12
-                    .copyWith(color: AppColors.darkGreen),
+                    : "SEE_DATES".tr(context),
+                style: AppTextStyles.sansRegular13
+                    .copyWith(color: AppColors.white),
               ),
               SizedBox(width: 4.w),
               Icon(
                 isDatesVisible ? Icons.arrow_upward : Icons.arrow_downward,
                 size: 16.sp,
-                color: AppColors.darkGreen,
+                color: AppColors.white,
               ),
             ],
           ),
@@ -77,7 +77,7 @@ class _LessonDatesListView extends StatelessWidget {
         }
         return check
             ? Padding(
-                padding: EdgeInsets.symmetric(vertical: 10.h),
+                padding: EdgeInsets.symmetric(vertical: 8.h),
                 child: const CDivider(),
               )
             : const SizedBox();
@@ -220,17 +220,15 @@ class _LessonDateItem extends StatelessWidget {
           children: [
             Text(
               serviceBooking?.bookingDate.format("EEE dd MMM") ?? "",
-              style: AppTextStyles.gothamRegular14
-                  .copyWith(color: AppColors.darkGreen),
+              style: AppTextStyles.sansMedium15,
             ),
             SizedBox(height: 2.h),
             Padding(
-              padding: EdgeInsets.only(left: 4.w),
+              padding: EdgeInsets.only(left: 10.w),
               child: Text(
                 // "${serviceBooking?.bookingStartTime.format("hh:mm")} - ${serviceBooking?.bookingEndTime.format("hh:mm a")}",
-                serviceBooking?.formatStartEndTime ?? "",
-                style: AppTextStyles.gothamLight13
-                    .copyWith(color: AppColors.darkGreen),
+                serviceBooking?.formatStartEndTimeAm ?? "",
+                style: AppTextStyles.sansRegular15,
               ),
             ),
           ],
@@ -244,22 +242,20 @@ class _LessonDateItem extends StatelessWidget {
                 playersCount: serviceBooking?.players?.length ?? 0,
                 maxCapacity: maxCapacity,
                 minCapacity: minCapacity,
-              ),
-              style: AppTextStyles.balooBold9.copyWith(
-                color: AppColors.darkGreen,
-              ),
+              ).toUpperCase(),
+              style: AppTextStyles.balooMedium12,
             ),
-            SizedBox(height: 4.h),
+            // SizedBox(height: 4.h),
             Container(
               padding: EdgeInsets.symmetric(vertical: 2.h, horizontal: 10.w),
               decoration: BoxDecoration(
-                color: AppColors.yellow,
+                color: AppColors.oak,
                 borderRadius: BorderRadius.all(Radius.circular(100.r)),
               ),
               child: Text(
                 "${serviceBooking?.players?.length.toString() ?? "0"}/$maxCapacity",
-                style: AppTextStyles.gothamRegular12
-                    .copyWith(color: AppColors.darkGreen),
+                style: AppTextStyles.sansMedium15
+                    .copyWith(color: AppColors.white),
               ),
             ),
           ],
@@ -270,12 +266,11 @@ class _LessonDateItem extends StatelessWidget {
           showArrow: true,
           enabled: isEnabled,
           applyShadow: isEnabled,
-          height: 35.h,
-          width: 90.w,
+          height: 30.h,
+          width: 83.w,
+          padding: EdgeInsets.only(left: 8.w,right: 4.w),
           label: "BOOK".tr(context),
-          labelStyle: AppTextStyles.balooMedium10.copyWith(
-            color: AppColors.darkGreen,
-          ),
+          labelStyle: AppTextStyles.sansMedium14,
         )
       ],
     );
@@ -292,7 +287,7 @@ class _ConfirmationDialog extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         children: [
           Text(
-            "ARE_YOU_SURE_YOU_WANT_TO_JOIN".tr(context),
+            "ARE_YOU_SURE_YOU_WANT_TO_JOIN".trU(context),
             textAlign: TextAlign.center,
             style:
                 AppTextStyles.balooBold15.copyWith(color: AppColors.white),

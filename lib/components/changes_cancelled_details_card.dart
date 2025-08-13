@@ -18,8 +18,8 @@ class ChangesCancelledDetailsCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-        color: AppColors.yellow,
-        borderRadius: BorderRadius.circular(5.r),
+        color: AppColors.oak,
+        borderRadius: BorderRadius.circular(12.r),
       ),
       padding: EdgeInsets.only(
         left: 15.w,
@@ -37,21 +37,21 @@ class ChangesCancelledDetailsCard extends StatelessWidget {
                 AppImages.warning.path,
                 width: 13.w,
                 height: 13.w,
-                color: AppColors.darkGreen,
+                color: AppColors.white,
               ),
               SizedBox(width: 10.w),
               Text(
                 heading,
-                style: AppTextStyles.balooBold12,
+                style: AppTextStyles.balooMedium13.copyWith(color: AppColors.white),
               ),
             ],
           ),
           SizedBox(height: 5.h),
           Text(
             description,
-            style: AppTextStyles.gothamLight13,
+            style: AppTextStyles.sansRegular15.copyWith(color: AppColors.white),
           ),
-          SizedBox(height: 5.h),
+          // SizedBox(height: 5.h),
           Align(
             alignment: Alignment.centerRight,
             child: SecondaryImageButton(
@@ -60,10 +60,12 @@ class ChangesCancelledDetailsCard extends StatelessWidget {
               },
               label: "SEND_US_A_MESSAGE".tr(context),
               image: AppImages.whatsaapIcon.path,
-              color: AppColors.darkGreen25,
-              textColor: AppColors.darkGreen,
-              iconColor: AppColors.darkGreen,
-              fontSize: 11.sp,
+              color: AppColors.darkBlue.withOpacity(0.25),
+              textColor: AppColors.white,
+              iconColor: AppColors.white,
+              fontSize: 13.sp,
+              imageHeight: 14.h,
+              imageWidth: 14.h,
               applyShadow: false,
             ),
           ),

@@ -18,6 +18,7 @@ enum AppImages {
   noNotificationBell("$kAssets/no_notification_bell.png"),
   notificationBell("$kAssets/notification_bell.png"),
   logo("$kAssets/logo_2.png"),
+  reservedLogo("$kAssets/reservedLogo.png"),
   calendar("$kAssets/calendar.png"),
   tennisBall("$kAssets/tennis-ball.png"),
   iconCamera("$kAssets/icon_camera.png"),

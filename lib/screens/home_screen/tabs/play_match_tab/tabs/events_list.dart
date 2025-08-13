@@ -82,10 +82,10 @@ class _EventListState extends ConsumerState<EventsList> {
     for (var date in dateList) {
       widgets.add(
         Padding(
-          padding: EdgeInsets.only(bottom: 10.h),
+          padding: EdgeInsets.only(bottom: 15.h),
           child: Text(
-            Utils.formatBookingDate(date, context),
-            style: AppTextStyles.balooBold13,
+            Utils.formatBookingDate(date, context).toUpperCase(),
+            style: AppTextStyles.balooMedium18,
           ),
         ),
       );
@@ -95,7 +95,7 @@ class _EventListState extends ConsumerState<EventsList> {
       widgets.addAll(
         dataMatches.map(
           (event) => Padding(
-            padding: EdgeInsets.only(bottom: 10.h),
+            padding: EdgeInsets.only(bottom: 15.h),
             child: InkWell(
               onTap: () async {
                 await ref
@@ -129,10 +129,10 @@ class _EventsCard extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return Container(
-      padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 10.h),
+      padding: EdgeInsets.symmetric(horizontal: 15.w, vertical: 15.h),
       decoration: BoxDecoration(
-          color: AppColors.darkGreen5,
-          borderRadius: BorderRadius.circular(7.r)),
+          color: AppColors.clay05,
+          borderRadius: BorderRadius.circular(12.r)),
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
@@ -144,11 +144,9 @@ class _EventsCard extends ConsumerWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      (event.service?.event?.eventName ?? "").toUpperCase(),
-                      style: AppTextStyles.gothamBold14
-                          .copyWith(color: AppColors.darkGreen),
+                      (event.service?.event?.eventName ?? "").capitalizeFirst,
+                      style: AppTextStyles.gothamRegular16,
                     ),
-                    SizedBox(height: 5.h),
                     LevelRestrictionContainer(
                       levelRestriction: event.service?.event?.levelRestriction,
                     ),
@@ -159,6 +157,7 @@ class _EventsCard extends ConsumerWidget {
                 flex: 8,
                 child: EventLessonCardCoach(
                   coaches: event.getCoaches,
+                  showAllCouches: false,
                 ),
               )
             ],
@@ -168,8 +167,8 @@ class _EventsCard extends ConsumerWidget {
             children: [
               Expanded(
                 child: _colInfo(
-                  (event.formatBookingDate),
-                  event.formatStartEndTime,
+                  event.service?.location?.locationName ?? "",
+                  "${"PRICE".tr(context)} ${Utils.formatPrice(event.service?.price)}",
                 ),
               ),
               Expanded(
@@ -183,21 +182,20 @@ class _EventsCard extends ConsumerWidget {
                         maxCapacity: event.getMaximumCapacity,
                         minCapacity: event.getMinimumCapacity,
                       ).toUpperCase(),
-                      style: AppTextStyles.balooBold9
-                          .copyWith(color: AppColors.darkGreen),
+                      style: AppTextStyles.balooMedium12,
                     ),
-                    SizedBox(height: 4.h),
+                    // SizedBox(height: 4.h),
                     Container(
                       padding:
                           EdgeInsets.symmetric(vertical: 2.h, horizontal: 10.w),
                       decoration: BoxDecoration(
-                        color: AppColors.yellow,
-                        borderRadius: BorderRadius.all(Radius.circular(7.r)),
+                        color: AppColors.oak,
+                        borderRadius: BorderRadius.all(Radius.circular(100.r)),
                       ),
                       child: Text(
                         "${event.players?.length.toString() ?? "0"}/${(event.getMaximumCapacity).toString() ?? "0"}",
-                        style: AppTextStyles.gothamRegular12.copyWith(
-                          color: AppColors.darkGreen,
+                        style: AppTextStyles.gothamRegular14.copyWith(
+                          color: AppColors.white,
                         ),
                       ),
                     ),
@@ -206,11 +204,11 @@ class _EventsCard extends ConsumerWidget {
               ),
               Expanded(
                 child: _colInfo(
-                  event.service?.location?.locationName ?? "",
-                  "${"PRICE".tr(context)} ${Utils.formatPrice(event.service?.price)}",
+                  (event.formatBookingDate),
+                  event.formatStartEndTimeAm,
                   isEnd: true,
                 ),
-              )
+              ),
             ],
           )
         ],
@@ -226,12 +224,12 @@ class _EventsCard extends ConsumerWidget {
         SizedBox(height: 5.h),
         Text(
           text1,
-          style: AppTextStyles.gothamLight12,
+          style: AppTextStyles.sansRegular13,
         ),
         SizedBox(height: 5.h),
         Text(
           text2,
-          style: AppTextStyles.gothamLight12,
+          style: AppTextStyles.sansRegular13,
         ),
       ],
     );

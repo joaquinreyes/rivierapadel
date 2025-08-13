@@ -76,11 +76,11 @@ class _ChatScreenState extends ConsumerState<ChatScreen> {
     final userId = ref.read(userManagerProvider).user?.user?.id;
     return Column(
       children: [
-        SizedBox(height: 35.5.h),
+        SizedBox(height: 20.h),
         Align(
           alignment: Alignment.centerLeft,
           child: Padding(
-            padding: EdgeInsets.only(left: 17.w),
+            padding: EdgeInsets.only(left: 18.5.w),
             child: InkWell(
               onTap: () => ref.read(goRouterProvider).pop(),
               child: Image.asset(
@@ -92,9 +92,8 @@ class _ChatScreenState extends ConsumerState<ChatScreen> {
           ),
         ),
         Text(
-          "CHAT".tr(context),
-          style: AppTextStyles.balooBold18
-              .copyWith(height: 0.9, color: AppColors.darkGreen),
+          "CHAT".trU(context),
+          style: AppTextStyles.balooMedium22,
           textAlign: TextAlign.center,
         ),
         SizedBox(height: 15.h),
@@ -116,7 +115,7 @@ class _ChatScreenState extends ConsumerState<ChatScreen> {
             // No data state
             if (!snapshot.hasData || snapshot.data!.chats.isEmpty) {
               return Center(
-                  child: Text('${"NO_MESSAGES_AVAILABLE".tr(context)}.'));
+                  child: Text('${"NO_MESSAGES_AVAILABLE".tr(context)}.',style: AppTextStyles.sansRegular14,));
             }
 
             // Chat data state
@@ -172,21 +171,20 @@ class _ChatScreenState extends ConsumerState<ChatScreen> {
                         DateTime.now())
                     .format("HH:mm");
                 return Padding(
-                  padding:
-                      const EdgeInsets.symmetric(vertical: 5, horizontal: 10),
+                  padding: EdgeInsets.symmetric(vertical: 5.h, horizontal: 15.w),
                   child: Align(
                     alignment:
                         isSend ? Alignment.centerRight : Alignment.centerLeft,
                     child: Container(
-                      padding: const EdgeInsets.all(10),
+                      padding: EdgeInsets.all(7.h),
                       decoration: BoxDecoration(
-                          color: isSend ? AppColors.yellow : AppColors.white,
-                          borderRadius: BorderRadius.circular(10),
+                          color: isSend ? AppColors.darkBlue : AppColors.clay05,
+                          borderRadius: BorderRadius.circular(8.r),
                           boxShadow: [
                             BoxShadow(
                               color: Colors.black.withOpacity(0.1),
-                              blurRadius: 10,
-                              offset: const Offset(-5, 5),
+                              blurRadius: 4,
+                              offset: const Offset(0, 4),
                               spreadRadius: 1,
                             )
                           ]),
@@ -209,17 +207,17 @@ class _ChatScreenState extends ConsumerState<ChatScreen> {
                                             const EdgeInsets.only(bottom: 5),
                                         child: Text(
                                           "$name (${role.trU(context)})",
-                                          style: AppTextStyles.balooBold11
+                                          style: AppTextStyles.balooMedium14
                                               .copyWith(
                                                   color: isPlayer
                                                       ? AppColors.darkBlue
-                                                      : AppColors.blue35),
+                                                      : AppColors.greenNew),
                                           textAlign: TextAlign.start,
                                         )),
                                   Text(
                                     value,
-                                    style: AppTextStyles.gothamLight14
-                                        .copyWith(color: AppColors.darkGreen),
+                                    style: AppTextStyles.sansRegular16
+                                        .copyWith(color: isSend ? AppColors.white :AppColors.darkBlue),
                                     textAlign: TextAlign.start,
                                   )
                                 ],
@@ -227,8 +225,8 @@ class _ChatScreenState extends ConsumerState<ChatScreen> {
                           SizedBox(width: 5.w),
                           Text(
                             time,
-                            style: AppTextStyles.gothamLight12
-                                .copyWith(color: AppColors.darkGreen70),
+                            style: AppTextStyles.sansRegular13
+                                .copyWith(color: isSend ? AppColors.white95 :AppColors.clay70),
                             textAlign: TextAlign.center,
                           ),
                         ],
@@ -242,11 +240,11 @@ class _ChatScreenState extends ConsumerState<ChatScreen> {
         )),
         Container(
             height: 85.h,
-            padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 18),
+            padding: EdgeInsets.symmetric(horizontal: 39.w, vertical: 19.h),
             decoration: BoxDecoration(
               color: Colors.white,
-              borderRadius: const BorderRadius.only(
-                  topRight: Radius.circular(15), topLeft: Radius.circular(15)),
+              borderRadius: BorderRadius.only(
+                  topRight: Radius.circular(5.r), topLeft: Radius.circular(5.r)),
               boxShadow: [
                 BoxShadow(
                   color: AppColors.black.withOpacity(0.25),
@@ -260,15 +258,16 @@ class _ChatScreenState extends ConsumerState<ChatScreen> {
               node: node,
               hintText: "TYPE_HERE".tr(context),
               controller: _controller,
+              hintTextStyle: AppTextStyles.sansRegular13.copyWith(color: AppColors.darkBlue.withOpacity(0.25)),
               contentPadding: EdgeInsets.only(
-                  left: 15.w, top: 15.h, bottom: 15.h, right: 15.w),
+                  left: 10.w, top: 10.h, bottom: 10.h, right: 10.w),
               border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular((10).r),
                   borderSide: const BorderSide(color: AppColors.darkGreen90)),
               fillColor: Colors.transparent,
               keyboardType: TextInputType.text,
               suffixIcon: Padding(
-                  padding: EdgeInsets.only(right: 15.w),
+                  padding: EdgeInsets.only(right: 10.w),
                   child: InkWell(
                     onTap: _sendMessage,
                     child: const Icon(Icons.send, color: AppColors.darkGreen90),

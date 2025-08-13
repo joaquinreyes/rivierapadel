@@ -35,9 +35,9 @@ class BookingCartState extends ConsumerState<BookingCart> {
       child: Container(
         padding: EdgeInsets.symmetric(vertical: 5.h),
         decoration: BoxDecoration(
-          borderRadius: const BorderRadius.only(
-              topLeft: Radius.circular(20), topRight: Radius.circular(20)),
-          color: AppColors.yellow,
+          borderRadius: BorderRadius.only(
+              topLeft: Radius.circular(15.r), topRight: Radius.circular(15.r)),
+          color: AppColors.oak,
           boxShadow: [
             BoxShadow(
               color: AppColors.green25.withOpacity(0.25),
@@ -52,9 +52,9 @@ class BookingCartState extends ConsumerState<BookingCart> {
           mainAxisSize: MainAxisSize.max,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Text("BOOKING_CART".tr(context),
-                style: AppTextStyles.balooBold12.copyWith(
-                  color: AppColors.darkBlue,
+            Text("BOOKING_CART".trU(context),
+                style: AppTextStyles.balooMedium15.copyWith(
+                  color: AppColors.white,
                 )),
             SizedBox(width: 5.w),
             Container(
@@ -62,15 +62,15 @@ class BookingCartState extends ConsumerState<BookingCart> {
               // height: 20.w,
               alignment: Alignment.center,
               decoration: const BoxDecoration(
-                  color: AppColors.darkBlue, shape: BoxShape.circle),
+                  color: AppColors.white, shape: BoxShape.circle),
               padding: EdgeInsets.all(6.w),
               child: Text(count,
                   style: AppTextStyles.balooBold10.copyWith(
-                    color: AppColors.yellow,
+                    color: AppColors.oak,
                   )),
             ),
-            SizedBox(width: 10.w),
-            const Icon(Icons.keyboard_arrow_up, color: AppColors.darkBlue)
+            SizedBox(width: 35.w),
+            const Icon(Icons.keyboard_arrow_up, color: AppColors.white)
           ],
         ),
       ),

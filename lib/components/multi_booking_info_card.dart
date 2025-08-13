@@ -17,11 +17,16 @@ class MultiBookingCourtInfoCard extends ConsumerStatefulWidget {
       required this.bookings,
       this.color = AppColors.white,
       this.showDelete = true,
-      this.onTapDeleteBooking});
+      this.onTapDeleteBooking,
+      this.dividerColor,
+      this.textColor = AppColors.darkBlue,
+      });
 
   final List<MultipleBookings> bookings;
   final bool showDelete;
   final Color color;
+  final Color textColor;
+  final Color? dividerColor;
   final Function(MultipleBookings)? onTapDeleteBooking;
 
   @override
@@ -56,8 +61,8 @@ class _MultiBookingCourtInfoCardState
 
     // Format the date and time
     String dayAndDate = DateFormat('EEE d MMM').format(bookingTime);
-    String startTimeFormatted = DateFormat('HH:mm').format(bookingTime);
-    String endTimeFormatted = DateFormat('HH:mm').format(endDateTime);
+    String startTimeFormatted = DateFormat('h:mm').format(bookingTime);
+    String endTimeFormatted = DateFormat('h:mm a').format(endDateTime).toLowerCase();
 
     // Combine into the desired format
     String formattedDate =
@@ -87,9 +92,9 @@ class _MultiBookingCourtInfoCardState
               children: [
                 Expanded(
                   child: Text(
-                    "${'BOOKING'.tr(context).toUpperCase()} $formattedDate",
+                    "${'BOOKING'.tr(context)} $formattedDate",
                     textAlign: TextAlign.start,
-                    style: AppTextStyles.balooMedium10.copyWith(
+                    style: AppTextStyles.balooMedium16.copyWith(
                         color: AppColors.white,
                         decoration: TextDecoration.underline),
                   ),
@@ -112,6 +117,8 @@ class _MultiBookingCourtInfoCardState
                 SizedBox(height: 5.h),
                 BookCourtInfoCard(
                   color: widget.color,
+                  textColor: widget.textColor,
+                  dividerColor: widget.dividerColor,
                   bookings: Bookings(
                       duration: duration < 0 ? 0 : duration,
                       location: Location(locationName: data.locationName)),
@@ -119,7 +126,7 @@ class _MultiBookingCourtInfoCardState
                   courtName: data.courtName ?? "",
                   price: data.totalPrice,
                 ),
-                if (widget.showDelete) SizedBox(height: 7.h),
+                if (widget.showDelete) SizedBox(height: 10.h),
                 if (widget.showDelete)
                   SecondaryButton(
                     onTap: () {
@@ -132,12 +139,12 @@ class _MultiBookingCourtInfoCardState
                     child: Row(
                       mainAxisSize: MainAxisSize.min,
                       children: [
-                        const Icon(Icons.close,
-                            color: AppColors.white, size: 18),
-                        SizedBox(width: 5.w),
+                        Icon(Icons.close,
+                            color: AppColors.white, size: 13.h),
+                        SizedBox(width: 7.w),
                         Text(
                           "DELETE_BOOKING".tr(context),
-                          style: AppTextStyles.gothamLight12
+                          style: AppTextStyles.sansRegular13
                               .copyWith(color: AppColors.white),
                         ),
                       ],

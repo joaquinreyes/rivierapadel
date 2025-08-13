@@ -47,11 +47,11 @@ class _BookingDetailState extends ConsumerState<BookingDetail> {
         padding: EdgeInsets.symmetric(horizontal: 15.w),
         child: Column(
           children: [
-            SizedBox(height: 35.5.h),
+            SizedBox(height: 20.h),
             Align(
               alignment: Alignment.centerLeft,
               child: Padding(
-                padding: EdgeInsets.only(left: 17.w),
+                padding: EdgeInsets.only(left: 3.w),
                 child: InkWell(
                   onTap: () => ref.read(goRouterProvider).pop(),
                   child: Image.asset(
@@ -64,7 +64,7 @@ class _BookingDetailState extends ConsumerState<BookingDetail> {
             ),
             Text(
               "${"BOOKING".trU(context)}\n ${"INFORMATION".trU(context)}",
-              style: AppTextStyles.balooBold18.copyWith(height: 0.9),
+              style: AppTextStyles.balooMedium22.copyWith(height: 1.2),
               textAlign: TextAlign.center,
             ),
             _body(),
@@ -141,79 +141,76 @@ class _DataBody extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    return Padding(
-      padding: EdgeInsets.symmetric(horizontal: 15.w),
-      child: Column(
-        children: [
-          if (userBooking.isCancelled ?? false) ...[
-            SizedBox(height: 15.h),
-            ChangesCancelledDetailsCard(
-              heading: "BOOKING_CANCELLED".tr(context),
-              description: "CANCEL_DESC".tr(context),
-            )
-          ],
-          SizedBox(height: 15.h),
-          _buildCard(context, ref),
-          SizedBox(height: 20.h),
-          if (!userBooking.isPast) ...[
-            Row(
-              children: [
-                SecondaryImageButton(
-                  label: "CANCEL_MATCH".tr(context),
-                  image: AppImages.crossIcon.path,
-                  imageHeight: 13.w,
-                  imageWidth: 13.w,
-                  onTap: () {
-                    _cancel(context, ref);
-                  },
-                ),
-                const Spacer(),
-                SecondaryImageButton(
-                  label: "OPEN_MATCH_TO_FIND_PLAYERS".tr(context),
-                  image: AppImages.tennisBall.path,
-                  imageHeight: 11.w,
-                  imageWidth: 11.w,
-                  fontSize: 9.5.sp,
-                  onTap: () {
-                    _changeToOpen(context, ref);
-                  },
-                ),
-              ],
-            ),
-            SizedBox(height: 10.h),
-          ],
+    return Column(
+      children: [
+          SizedBox(height: 40.h),
+        if (userBooking.isCancelled ?? false) ...[
+          ChangesCancelledDetailsCard(
+            heading: "BOOKING_CANCELLED".tr(context),
+            description: "CANCEL_DESC".tr(context),
+          ),
+        SizedBox(height: 15.h),
+        ],
+        _buildCard(context, ref),
+        SizedBox(height: 20.h),
+        if (!userBooking.isPast) ...[
           Row(
             children: [
-              if (!userBooking.isPast)
-                SecondaryImageButton(
-                  label: "ADD_TO_CALENDAR".tr(context),
-                  image: AppImages.calendar.path,
-                  imageHeight: 15.w,
-                  imageWidth: 15.w,
-                  onTap: () {
-                    String title =
-                        "Booking @ ${userBooking.courtName} - ${userBooking.service?.location?.locationName.capitalizeFirst}";
-                    ref.watch(addToCalendarProvider(
-                      title: title,
-                      startDate: userBooking.bookingStartTime,
-                      endDate: userBooking.bookingEndTime,
-                    ));
-                  },
-                ),
-              const Spacer(),
               SecondaryImageButton(
-                label: "SHARE_MATCH".tr(context),
-                image: AppImages.whatsaapIcon.path,
+                label: "CANCEL_MATCH".tr(context),
+                image: AppImages.crossIcon.path,
                 imageHeight: 13.w,
                 imageWidth: 13.w,
                 onTap: () {
-                  _shareWhatsAap(context, ref);
+                  _cancel(context, ref);
+                },
+              ),
+              const Spacer(),
+              SecondaryImageButton(
+                label: "OPEN_MATCH_TO_FIND_PLAYERS".tr(context),
+                image: AppImages.tennisBall.path,
+                imageHeight: 11.w,
+                imageWidth: 11.w,
+                fontSize: 9.5.sp,
+                onTap: () {
+                  _changeToOpen(context, ref);
                 },
               ),
             ],
           ),
+          SizedBox(height: 10.h),
         ],
-      ),
+        Row(
+          children: [
+            if (!userBooking.isPast)
+              SecondaryImageButton(
+                label: "ADD_TO_CALENDAR".tr(context),
+                image: AppImages.calendar.path,
+                imageHeight: 15.w,
+                imageWidth: 15.w,
+                onTap: () {
+                  String title =
+                      "Booking @ ${userBooking.courtName} - ${userBooking.service?.location?.locationName.capitalizeFirst}";
+                  ref.watch(addToCalendarProvider(
+                    title: title,
+                    startDate: userBooking.bookingStartTime,
+                    endDate: userBooking.bookingEndTime,
+                  ));
+                },
+              ),
+            const Spacer(),
+            SecondaryImageButton(
+              label: "SHARE_MATCH".tr(context),
+              image: AppImages.whatsaapIcon.path,
+              imageHeight: 13.w,
+              imageWidth: 13.w,
+              onTap: () {
+                _shareWhatsAap(context, ref);
+              },
+            ),
+          ],
+        ),
+      ],
     );
   }
 
@@ -228,10 +225,10 @@ class _DataBody extends ConsumerWidget {
       firstName = userBooking.players?.first.getCustomerName ?? "";
     }
     return Container(
-      padding: EdgeInsets.all(15.w),
+      padding: EdgeInsets.only(left: 15.w,bottom: 10.h,top: 15.h,right: 15.w),
       decoration: BoxDecoration(
         color: AppColors.darkBlue,
-        borderRadius: BorderRadius.circular(5.r),
+        borderRadius: BorderRadius.circular(12.r),
       ),
       child: Column(
         children: [
@@ -257,7 +254,7 @@ class _DataBody extends ConsumerWidget {
           ),
           SizedBox(height: 5.h),
           Row(
-            crossAxisAlignment: CrossAxisAlignment.end,
+            crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
               if ((userBooking.players ?? []).isNotEmpty)
@@ -266,22 +263,21 @@ class _DataBody extends ConsumerWidget {
                     children: [
                       NetworkCircleImage(
                         path: profileUrl,
-                        width: 40.w,
-                        height: 40.w,
+                        width: 37.w,
+                        height: 37.w,
                         showBG: true,
                       ),
                       Text(
                         firstName,
-                        style: AppTextStyles.balooBold9.copyWith(
+                        style: AppTextStyles.balooMedium11.copyWith(
                           color: AppColors.white,
-                          height: 1.7,
+                          // height: 1.7,
                         ),
                       ),
                       Text(
                         level, //•  Right",
-                        style: AppTextStyles.gothamLight11.copyWith(
+                        style: AppTextStyles.sansRegular12.copyWith(
                           color: AppColors.white,
-                          height: 1.4,
                         ),
                       ),
                     ],
@@ -293,25 +289,25 @@ class _DataBody extends ConsumerWidget {
                   crossAxisAlignment: CrossAxisAlignment.end,
                   children: [
                     Text(
-                        "${userBooking.bookingDate.format("EEE dd MMM")} • ${userBooking.bookingStartTime.format("HH:mm")} - ${userBooking.bookingEndTime.format("HH:mm")}",
-                        style: AppTextStyles.gothamLight13.copyWith(
+                        "${userBooking.bookingDate.format("EEE dd MMM")} | ${userBooking.bookingStartTime.format("h:mm")} - ${userBooking.bookingEndTime.format("h:mm a").toLowerCase()}",
+                        style: AppTextStyles.sansRegular15.copyWith(
                           color: AppColors.white,
                         ),
                         textAlign: TextAlign.center),
                     SizedBox(height: 2.h),
                     Text(
                         "${userBooking.courtName} | ${userBooking.service?.location?.locationName}",
-                        style: AppTextStyles.gothamLight13.copyWith(
+                        style: AppTextStyles.sansRegular15.copyWith(
                           color: AppColors.white,
                         ),
                         textAlign: TextAlign.center),
-                    SizedBox(height: 2.h),
-                    Text(
-                        "${"PRICE".tr(context)} ${Utils.formatPrice(userBooking.service?.price?.toDouble())} ",
-                        style: AppTextStyles.gothamLight13.copyWith(
-                          color: AppColors.white,
-                        ),
-                        textAlign: TextAlign.center),
+                    // SizedBox(height: 2.h),
+                    // Text(
+                    //     "${"PRICE".tr(context)} ${Utils.formatPrice(userBooking.service?.price?.toDouble())} ",
+                    //     style: AppTextStyles.gothamLight13.copyWith(
+                    //       color: AppColors.white,
+                    //     ),
+                    //     textAlign: TextAlign.center),
                   ],
                 ),
               ),

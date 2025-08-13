@@ -44,11 +44,12 @@ class _ApplicantDialogState extends ConsumerState<OpenMatchApplicantDialog> {
     return CustomDialog(
       child: Column(
         mainAxisSize: MainAxisSize.min,
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
             "PLAYERS_WAITING_FOR_YOUR_APPROVAL".trU(context),
             textAlign: TextAlign.center,
-            style: AppTextStyles.balooBold9,
+            style: AppTextStyles.popupHeaderTextStyle,
           ),
           SizedBox(height: 20.h),
           ApplicantOpenMatchInfoCard(
@@ -56,14 +57,15 @@ class _ApplicantDialogState extends ConsumerState<OpenMatchApplicantDialog> {
           ),
           SizedBox(height: 20.h),
           Text("CURRENT_PLAYERS".tr(context),
-              style: AppTextStyles.balooBold10),
+              style: AppTextStyles.balooMedium15.copyWith(color: AppColors.white)),
           SizedBox(height: 5.h),
           OpenMatchParticipantRowWithBG(
-            textForAvailableSlot: "AVAILABLE".tr(context),
+            padding: EdgeInsets.only(top: 15.h,right: 12.w,left: 12.w),
+            textForAvailableSlot: "AVAILABLE".trU(context),
             players: widget.data.serviceBooking?.players ?? [],
             showReserveReleaseButton: false,
-            bgColor: AppColors.yellow,
-            availableSlotbackGroundColor: AppColors.blue35,
+            bgColor: AppColors.white25,
+            availableSlotbackGroundColor: AppColors.darkBlue,
             availableSlotIconColor: AppColors.white,
             textColor: AppColors.white,
           ),

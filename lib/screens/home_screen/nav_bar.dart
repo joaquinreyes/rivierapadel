@@ -37,7 +37,7 @@ class NavBarState extends ConsumerState<NavBar> {
         color: AppColors.backgroundColor,
         boxShadow: [
           BoxShadow(
-            color: AppColors.green5.withOpacity(0.25),
+            color: AppColors.black.withOpacity(0.25),
             blurRadius: 24,
             offset: const Offset(0, 4),
             spreadRadius: 0,
@@ -52,9 +52,9 @@ class NavBarState extends ConsumerState<NavBar> {
             Stack(
               children: [
                 _item(
-                  text: '${'PLAY'.trU(context)} &\n${'MATCH'.trU(context)}',
+                  text: '${'PLAY'.trU(context)}\n& ${'MATCH'.trU(context)}',
                   index: 0,
-                  textHeight: 0.99,
+                  // textHeight: 0.99,
                   isSelected: pageIndex == 0,
                   onTap: () async {
                     if (pageIndex != 0) {
@@ -94,7 +94,7 @@ class NavBarState extends ConsumerState<NavBar> {
             _item(
               text: "RESERVE".trU(context),
               index: 1,
-              textHeight: 0.90,
+              // textHeight: 0.90,
               isSelected: pageIndex == 1,
               onTap: () async {
                 if (pageIndex != 1) {
@@ -105,7 +105,7 @@ class NavBarState extends ConsumerState<NavBar> {
             _item(
               text: 'PROFILE'.trU(context),
               index: 2,
-              textHeight: 0.90,
+              // textHeight: 0.90,
               isSelected: pageIndex == 2,
               onTap: () async {
                 if (pageIndex != 2) {
@@ -130,30 +130,30 @@ class NavBarState extends ConsumerState<NavBar> {
         onTap();
       },
       child: Container(
-        height: 45.h,
+        height: 39.h,
         width: 115.w,
         alignment: Alignment.center,
         decoration: BoxDecoration(
           color: isSelected ? AppColors.darkBlue : Colors.transparent,
-          borderRadius: BorderRadius.circular(5.r),
+          borderRadius: BorderRadius.circular(15.r),
         ),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            if (index == 2) ...[
-              const _Profile(),
-              SizedBox(height: 4.h),
-            ],
+            // if (index == 2) ...[
+            //   const _Profile(),
+            //   SizedBox(height: 4.h),
+            // ],
             Text(
               text,
               style: isSelected
-                  ? AppTextStyles.balooBold12.copyWith(
+                  ? AppTextStyles.balooMedium15.copyWith(
                       color: AppColors.white,
-                      height: textHeight,
+                      height: index == 0 ? textHeight : null,
                     )
-                  : AppTextStyles.balooMedium9.copyWith(
-                      color: AppColors.darkGreen70,
-                      height: textHeight,
+                  : AppTextStyles.balooMedium13.copyWith(
+                      color: AppColors.clay70,
+                      height: index == 0 ? textHeight : null,
                     ),
               textAlign: TextAlign.center,
             ),
@@ -187,7 +187,7 @@ Widget _insetContainer({required Widget child}) {
     constraints: kComponentWidthConstraint,
     width: 361.w,
     decoration: inset.BoxDecoration(
-      color: AppColors.darkGreen5,
+      color: AppColors.clay05,
       borderRadius: BorderRadius.circular(5.r),
       boxShadow: kInsetShadow,
     ),

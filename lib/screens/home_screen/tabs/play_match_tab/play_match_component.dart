@@ -7,21 +7,24 @@ class _ViewSelector extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final selectedIndex = ref.watch(_selectedTabIndex);
     return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+      height: 50.h,
+      padding: EdgeInsets.symmetric(horizontal: 15.w, vertical: 5.h),
       decoration: inset.BoxDecoration(
-          boxShadow: kInsetShadow, color: AppColors.darkGreen5),
+          boxShadow: kInsetShadow, color: AppColors.clay05),
       child: Row(
         children: [
           _ViewSelectorComponent(
               isSelected: selectedIndex == 0,
-              title: '${'OPEN'.trU(context)} ${'MATCHES'.trU(context)}',
+              title: '${'OPEN'.trU(context)}\n ${'MATCHES'.trU(context)}',
               ref: ref,
               value: 0),
+          10.horizontalSpace,
           _ViewSelectorComponent(
               isSelected: selectedIndex == 1,
               title: "EVENTS".trU(context),
               ref: ref,
               value: 1),
+          10.horizontalSpace,
           _ViewSelectorComponent(
               isSelected: selectedIndex == 2,
               title: "LESSONS".trU(context),
@@ -49,9 +52,9 @@ class _ViewSelectorComponent extends StatelessWidget {
   Widget build(BuildContext context) {
     return Expanded(
       child: Container(
-        padding: const EdgeInsets.symmetric(vertical: 10),
+        padding: EdgeInsets.symmetric(vertical: 4.h),
         decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(5),
+            borderRadius: BorderRadius.circular(15.r),
             color: isSelected ? AppColors.darkBlue : Colors.transparent),
         child: GestureDetector(
           onTap: () {
@@ -62,10 +65,10 @@ class _ViewSelectorComponent extends StatelessWidget {
           child: Text(
             title,
             style: isSelected
-                ? AppTextStyles.balooBold14
-                    .copyWith(height: 0.95, color: AppColors.white)
-                : AppTextStyles.balooBold13
-                    .copyWith(height: 0.95, color: AppColors.darkGreen70),
+                ? AppTextStyles.balooMedium17
+                    .copyWith(height: value==0 ? 0.95 : null, color: AppColors.white)
+                : AppTextStyles.balooMedium15
+                    .copyWith(height: value==0 ? 0.95 : null, color: AppColors.clay70),
             textAlign: TextAlign.center,
           ),
         ),
@@ -160,7 +163,7 @@ class _FilterRow extends ConsumerWidget {
           // const Spacer(),
           SizedBox(width: 4.w),
           Expanded(
-            flex: selectedIndex == 2 ? 4 : 2,
+            flex: 2,
             child: allLocations.when(
               data: (data) {
                 if (data == null) {
@@ -171,9 +174,9 @@ class _FilterRow extends ConsumerWidget {
                   list.insert(0, kAllLocation);
                 }
                 final coachesList = Utils.fetchLocationCoaches(data);
-                if (coachesList.first.id != kAllCoaches.id) {
-                  coachesList.insert(0, kAllCoaches);
-                }
+                // if (coachesList.first.id != kAllCoaches.id) {
+                //   coachesList.insert(0, kAllCoaches);
+                // }
                 return Row(
                   children: [
                     Expanded(
@@ -194,26 +197,26 @@ class _FilterRow extends ConsumerWidget {
                             builder: (context) => widget);
                       },
                     )),
-                    if (selectedIndex == 2) SizedBox(width: 5.w),
-                    if (selectedIndex == 2)
-                      Expanded(
-                          child: _buildFilterItem(
-                        label: (selectedCoach.fullName ?? 'All Coaches')
-                            .capitalizeFirst,
-                        onTap: () {
-                          final Widget widget =
-                              _buildCoachSelector(ref, context, coachesList);
-                          if (PlatformC().isCurrentDesignPlatformDesktop) {
-                            showDialog(
-                                context: context, builder: (context) => widget);
-                            return;
-                          }
-                          showModalBottomSheet(
-                              context: context,
-                              backgroundColor: Colors.transparent,
-                              builder: (context) => widget);
-                        },
-                      )),
+                    // if (selectedIndex == 2) SizedBox(width: 5.w),
+                    // if (selectedIndex == 2)
+                    //   Expanded(
+                    //       child: _buildFilterItem(
+                    //     label: (selectedCoach.fullName ?? 'All Coaches')
+                    //         .capitalizeFirst,
+                    //     onTap: () {
+                    //       final Widget widget =
+                    //           _buildCoachSelector(ref, context, coachesList);
+                    //       if (PlatformC().isCurrentDesignPlatformDesktop) {
+                    //         showDialog(
+                    //             context: context, builder: (context) => widget);
+                    //         return;
+                    //       }
+                    //       showModalBottomSheet(
+                    //           context: context,
+                    //           backgroundColor: Colors.transparent,
+                    //           builder: (context) => widget);
+                    //     },
+                    //   )),
                   ],
                 );
               },
@@ -233,14 +236,14 @@ class _FilterRow extends ConsumerWidget {
   }) {
     return InkWell(
       onTap: onTap,
-      borderRadius: BorderRadius.circular(25.r),
+      borderRadius: BorderRadius.circular(100.r),
       child: Container(
         decoration: inset.BoxDecoration(
           boxShadow: kInsetShadow,
-          color: AppColors.darkGreen5,
-          borderRadius: BorderRadius.circular(10.r),
+          color: AppColors.clay05,
+          borderRadius: BorderRadius.circular(100.r),
         ),
-        padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 10.h),
+        padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 8.h),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
@@ -307,7 +310,7 @@ class _FilterRow extends ConsumerWidget {
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-          SizedBox(height: 22.h),
+          SizedBox(height: 5.h),
           Align(
             alignment: AlignmentDirectional.centerEnd,
             child: InkWell(
@@ -322,27 +325,27 @@ class _FilterRow extends ConsumerWidget {
           SizedBox(height: 5.h),
           Text(
             'DATE'.trU(context),
-            style: AppTextStyles.balooBold15,
+            style: AppTextStyles.balooMedium19,
           ),
-          SizedBox(height: 20.h),
+          SizedBox(height: 10.h),
           SfDateRangePickerTheme(
             data: const SfDateRangePickerThemeData().copyWith(
-                headerTextStyle: AppTextStyles.balooBold16.copyWith(
-                  color: AppColors.darkGreen,
+                headerTextStyle: AppTextStyles.balooMedium18.copyWith(
+                  color: AppColors.darkBlue,
                 ),
-                viewHeaderTextStyle: AppTextStyles.balooBold18.copyWith(
-                  color: AppColors.darkGreen,
+                viewHeaderTextStyle: AppTextStyles.balooMedium20.copyWith(
+                  color: AppColors.darkBlue,
                 ),
-                disabledDatesTextStyle: AppTextStyles.balooBold14.copyWith(
-                  color: AppColors.darkGreen,
+                disabledDatesTextStyle: AppTextStyles.balooMedium20.copyWith(
+                  color: AppColors.darkBlue,
                 ),
-                todayTextStyle: AppTextStyles.balooBold14.copyWith(
-                  color: AppColors.darkGreen,
+                todayTextStyle: AppTextStyles.balooMedium20.copyWith(
+                  color: AppColors.darkBlue,
                 ),
-                todayHighlightColor: AppColors.green5,
+                todayHighlightColor: AppColors.darkBlue,
                 headerBackgroundColor: Colors.transparent),
             child: SfDateRangePicker(
-              todayHighlightColor: AppColors.green25,
+              todayHighlightColor: AppColors.clay70,
               controller: dateController,
               selectionMode: DateRangePickerSelectionMode.range,
               selectionShape: DateRangePickerSelectionShape.circle,
@@ -350,16 +353,16 @@ class _FilterRow extends ConsumerWidget {
               enablePastDates: false,
               endRangeSelectionColor: AppColors.darkBlue,
               startRangeSelectionColor: AppColors.darkBlue,
-              rangeSelectionColor: AppColors.green25,
+              rangeSelectionColor: AppColors.darkBlue.withOpacity(0.25),
               monthCellStyle: DateRangePickerMonthCellStyle(
-                textStyle: AppTextStyles.balooBold14.copyWith(
-                  color: AppColors.darkGreen,
+                textStyle: AppTextStyles.balooMedium20.copyWith(
+                  color: AppColors.darkBlue,
                 ),
               ),
-              selectionTextStyle: AppTextStyles.balooBold14.copyWith(
+              selectionTextStyle: AppTextStyles.balooMedium20.copyWith(
                 color: AppColors.white,
               ),
-              rangeTextStyle: AppTextStyles.balooBold14.copyWith(
+              rangeTextStyle: AppTextStyles.balooMedium20.copyWith(
                 color: AppColors.white,
               ),
               monthViewSettings: DateRangePickerMonthViewSettings(
@@ -367,24 +370,24 @@ class _FilterRow extends ConsumerWidget {
                 viewHeaderHeight: 52.h,
                 firstDayOfWeek: 1,
                 viewHeaderStyle: DateRangePickerViewHeaderStyle(
-                  textStyle: AppTextStyles.gothamRegular16.copyWith(
-                    color: AppColors.darkGreen,
+                  textStyle: AppTextStyles.gothamRegular14.copyWith(
+                    color: AppColors.clay70,
                   ),
                 ),
               ),
               headerHeight: 52.h,
               yearCellStyle: DateRangePickerYearCellStyle(
-                todayTextStyle: AppTextStyles.balooBold16.copyWith(
-                  color: AppColors.darkGreen,
+                todayTextStyle: AppTextStyles.balooMedium20.copyWith(
+                  color: AppColors.darkBlue,
                 ),
-                disabledDatesTextStyle: AppTextStyles.balooBold16.copyWith(
-                  color: AppColors.darkGreen,
+                disabledDatesTextStyle: AppTextStyles.balooMedium20.copyWith(
+                  color: AppColors.darkBlue,
                 ),
-                textStyle: AppTextStyles.balooBold16.copyWith(
-                  color: AppColors.darkGreen,
+                textStyle: AppTextStyles.balooMedium20.copyWith(
+                  color: AppColors.darkBlue,
                 ),
-                leadingDatesTextStyle: AppTextStyles.balooBold16.copyWith(
-                  color: AppColors.darkGreen,
+                leadingDatesTextStyle: AppTextStyles.balooMedium20.copyWith(
+                  color: AppColors.darkBlue,
                 ),
               ),
               onSelectionChanged: (DateRangePickerSelectionChangedArgs args) {
@@ -407,7 +410,7 @@ class _FilterRow extends ConsumerWidget {
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-          SizedBox(height: 22.h),
+          SizedBox(height: 5.h),
           Align(
             alignment: AlignmentDirectional.centerEnd,
             child: InkWell(
@@ -415,16 +418,16 @@ class _FilterRow extends ConsumerWidget {
               child: Icon(
                 Icons.close,
                 color: AppColors.white,
-                size: 20.sp,
+                size: 20.h,
               ),
             ),
           ),
           SizedBox(height: 5.h),
           Text(
             'LEVEL'.trU(context),
-            style: AppTextStyles.balooBold15,
+            style: AppTextStyles.balooMedium19,
           ),
-          SizedBox(height: 20.h),
+          // SizedBox(height: 20.h),
           const _LevelListForSelection()
         ],
       ),
@@ -439,7 +442,7 @@ class _FilterRow extends ConsumerWidget {
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-          SizedBox(height: 22.h),
+          SizedBox(height: 5.h),
           Align(
             alignment: AlignmentDirectional.centerEnd,
             child: InkWell(
@@ -454,9 +457,9 @@ class _FilterRow extends ConsumerWidget {
           SizedBox(height: 5.h),
           Text(
             'LOCATION'.trU(context),
-            style: AppTextStyles.balooBold15,
+            style: AppTextStyles.balooMedium19,
           ),
-          SizedBox(height: 20.h),
+          SizedBox(height: 15.h),
           Flexible(
             child: Scrollbar(
               thumbVisibility: isDesktop,
@@ -464,6 +467,7 @@ class _FilterRow extends ConsumerWidget {
                 physics: const BouncingScrollPhysics(),
                 itemCount: locations.length,
                 shrinkWrap: true,
+                padding: EdgeInsets.only(bottom: 10.h),
                 itemBuilder: (context, index) {
                   final location = locations[index];
                   return Padding(
@@ -619,14 +623,14 @@ class OptionTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.symmetric(horizontal: 25.w),
+      padding: EdgeInsets.symmetric(horizontal: 20.w),
       child: InkWell(
         borderRadius: BorderRadius.circular(15.r),
         onTap: enabled ? onTap : null,
         child: Container(
           decoration: BoxDecoration(
             color: selected ? AppColors.darkBlue : AppColors.green5,
-            borderRadius: BorderRadius.circular(5.r),
+            borderRadius: BorderRadius.circular(100.r),
           ),
           padding: EdgeInsets.all(10.h),
           child: Row(
@@ -638,9 +642,7 @@ class OptionTile extends StatelessWidget {
               Expanded(
                 flex: 10,
                 child: Text((option),
-                    style: AppTextStyles.balooMedium13.copyWith(
-                        color:
-                            selected ? AppColors.white : AppColors.darkGreen)),
+                    style: selected ?AppTextStyles.sansMedium16.copyWith(color: AppColors.white)  : AppTextStyles.sansRegular14),
               ),
             ],
           ),

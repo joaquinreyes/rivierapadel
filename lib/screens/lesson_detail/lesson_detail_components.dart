@@ -9,6 +9,7 @@ class _InfoCard extends StatelessWidget {
   Widget build(BuildContext context) {
     final maxPaxValue = lesson.maxPaxValue;
     final bool isLessonVariant = maxPaxValue != null;
+    String? levelRestriction = lesson.service?.event?.levelRestriction;
 
     if (isLessonVariant) {
       return _LessonVariantInfoCard(lesson: lesson);
@@ -21,7 +22,7 @@ class _InfoCard extends StatelessWidget {
       ),
       decoration: BoxDecoration(
         color: AppColors.darkBlue,
-        borderRadius: BorderRadius.circular(5),
+        borderRadius: BorderRadius.circular(12.r),
       ),
       child: Column(
         mainAxisSize: MainAxisSize.min,
@@ -32,7 +33,7 @@ class _InfoCard extends StatelessWidget {
                 flex: 10,
                 child: Text(
                   (lesson.service?.lesson?.lessonName ?? "").capitalizeFirst,
-                  style: AppTextStyles.gothamBold14
+                  style: AppTextStyles.sansMedium16
                       .copyWith(color: AppColors.white),
                 ),
               ),
@@ -40,22 +41,22 @@ class _InfoCard extends StatelessWidget {
                 flex: 3,
                 child: Text(
                     (lesson.service?.location?.locationName ?? "")
-                        .capitalizeFirst,
+                        .toUpperCase(),
                     textAlign: TextAlign.end,
-                    style: AppTextStyles.gothamBold12
+                    style: AppTextStyles.balooMedium14
                         .copyWith(color: AppColors.white)),
               ),
             ],
           ),
           const CDivider(color: AppColors.white25),
-          SizedBox(height: 10.h),
+          // SizedBox(height: 10.h),
           Row(
             crossAxisAlignment: CrossAxisAlignment.end,
             children: [
               Expanded(
                 child: _colInfo(
                   lesson.bookingDate.format("EEE dd MMM"),
-                  "${lesson.bookingStartTime.format("HH:mm")} - ${lesson.bookingEndTime.format("HH:mm")}",
+                  "${lesson.bookingStartTime.format("h:mm")} - ${lesson.bookingEndTime.format("h:mm a").toLowerCase()}",
                 ),
               ),
               Expanded(
@@ -64,18 +65,18 @@ class _InfoCard extends StatelessWidget {
                   children: [
                     Text(
                       'SLOTS'.trU(context),
-                      style: AppTextStyles.balooBold9
+                      style: AppTextStyles.balooMedium12
                           .copyWith(color: AppColors.white),
                     ),
                     // SizedBox(height: 4.h),
                     Text(
                       "${'MAX'.tr(context)} ${lesson.getMaximumCapacity.toString() ?? ""} ${'PLAYERS'.tr(context)}",
-                      style: AppTextStyles.gothamLight11
+                      style: AppTextStyles.sansRegular12
                           .copyWith(color: AppColors.white),
                     ),
                     Text(
                       "${'MIN'.tr(context)} ${lesson.getMinimumCapacity.toString() ?? ""} ${'PLAYERS'.tr(context)}",
-                      style: AppTextStyles.gothamLight11
+                      style: AppTextStyles.sansRegular12
                           .copyWith(color: AppColors.white),
                     ),
                   ],
@@ -83,7 +84,7 @@ class _InfoCard extends StatelessWidget {
               ),
               Expanded(
                 child: _colInfo(
-                  "",
+                  levelRestriction != null ? "${"LEVEL".tr(context)} $levelRestriction" : "",
                   "${"PRICE".tr(context)} ${Utils.formatPrice(lesson.service?.price)}",
                   isEnd: true,
                 ),
@@ -108,13 +109,13 @@ class _InfoCard extends StatelessWidget {
         Text(
           text1,
           style:
-              AppTextStyles.gothamLight12.copyWith(color: AppColors.white),
+              AppTextStyles.sansRegular13.copyWith(color: AppColors.white),
         ),
         SizedBox(height: 2.h),
         Text(
           text2,
           style:
-              AppTextStyles.gothamLight12.copyWith(color: AppColors.white),
+              AppTextStyles.sansRegular13.copyWith(color: AppColors.white),
         ),
       ],
     );
@@ -255,28 +256,27 @@ class _ConfirmationDialog extends StatelessWidget {
             _headingText(context),
             textAlign: TextAlign.center,
             style:
-                AppTextStyles.balooBold15.copyWith(color: AppColors.white),
+                AppTextStyles.popupHeaderTextStyle,
           ),
           SizedBox(height: 20.h),
-          // Text(
-          //   type == _ConfirmationDialogType.join
-          //       ? "LESSON_CANCELLATION_POLICY".tr(context)
-          //       : "IF_YOU_LEAVE_DESC_EVENT".tr(context),
-          //   textAlign: TextAlign.center,
-          //   style:
-          //       AppTextStyles.panchangBold10.copyWith(color: AppColors.white),
-          // ),
+          Text(
+            type == _ConfirmationDialogType.join
+                ? "LESSON_CANCELLATION_POLICY".tr(context)
+                : "IF_YOU_LEAVE_DESC_EVENT".tr(context),
+            textAlign: TextAlign.center,
+            style:
+                AppTextStyles.popupBodyTextStyle,
+          ),
           if (type == _ConfirmationDialogType.leave)
             RefundDescriptionComponent(
                 policy: policy,
                 text: policy == null ? "LEAVE_POLICY_LESSON".tr(context) : null,
-                style: AppTextStyles.balooBold10
-                    .copyWith(color: AppColors.white)),
+                style: AppTextStyles.popupBodyTextStyle),
           SizedBox(height: 20.h),
           MainButton(
-            color: AppColors.yellow,
-            labelStyle:
-                AppTextStyles.balooMedium13.copyWith(color: AppColors.darkBlue),
+            isForPopup: true,
+            // labelStyle:
+            //     AppTextStyles.balooMedium13.copyWith(color: AppColors.darkBlue),
             label: _buttonText(context),
             onTap: () {
               Navigator.pop(context, true);
@@ -290,19 +290,19 @@ class _ConfirmationDialog extends StatelessWidget {
   _headingText(BuildContext context) {
     switch (type) {
       case _ConfirmationDialogType.join:
-        return "ARE_YOU_SURE_YOU_WANT_TO_JOIN".tr(context);
+        return "ARE_YOU_SURE_YOU_WANT_TO_JOIN".trU(context);
       case _ConfirmationDialogType.leave:
-        return "ARE_YOU_SURE_YOU_WANT_TO_LEAVE".tr(context);
+        return "ARE_YOU_SURE_YOU_WANT_TO_LEAVE".trU(context);
     }
   }
 
   _buttonText(BuildContext context) {
     switch (type) {
       case _ConfirmationDialogType.join:
-        return "JOIN_PAY_MY_SHARE".tr(context);
+        return "JOIN_PAY_MY_SHARE".trU(context);
 
       case _ConfirmationDialogType.leave:
-        return "LEAVE".tr(context);
+        return "LEAVE".trU(context);
     }
   }
 }
@@ -336,7 +336,7 @@ class _LessonPlayersSlots extends StatelessWidget {
               : AvailableSlotWidget(
                   backgroundColor: Colors.transparent,
                   iconColor: AppColors.darkGreen,
-                  text: "AVAILABLE".tr(context),
+                  text: "AVAILABLE".trU(context),
                   index: colIndex,
                   onTap: (index, __) => onSlotTap(index, null),
                 );
@@ -351,7 +351,7 @@ class _LessonPlayersSlots extends StatelessWidget {
             child: AvailableSlotWidget(
               backgroundColor: Colors.transparent,
               iconColor: AppColors.darkGreen,
-              text: "AVAILABLE".tr(context),
+              text: "AVAILABLE".trU(context),
               index: -1,
             ),
           ),

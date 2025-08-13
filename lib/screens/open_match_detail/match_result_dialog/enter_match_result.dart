@@ -126,28 +126,27 @@ class __EnterMatchResultsState extends ConsumerState<EnterMatchResults> {
                 SizedBox(height: 5.h),
                 Text("ALSO_HELP_US_RANK".tr(context),
                     textAlign: TextAlign.center,
-                    style: AppTextStyles.balooMedium12
-                        .copyWith(color: AppColors.white)),
+                    style: AppTextStyles.popupBodyTextStyle),
                 SizedBox(height: 20.h),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
-                      "YOUR_OPEN_MATCH".trU(context),
-                      style: AppTextStyles.balooMedium12
+                      "YOUR_OPEN_MATCH".tr(context).capitalizeFirst,
+                      style: AppTextStyles.sansRegular16
                           .copyWith(color: AppColors.white),
                     ),
-                    Text(
-                      widget.service.openMatchLevelRange,
-                      style: AppTextStyles.balooMedium12
-                          .copyWith(color: AppColors.white),
-                    ),
+                    // Text(
+                    //   widget.service.openMatchLevelRange,
+                    //   style: AppTextStyles.balooMedium12
+                    //       .copyWith(color: AppColors.white),
+                    // ),
                   ],
                 ),
-                SizedBox(height: 10.h),
+                SizedBox(height: 5.h),
                 _MatchResultForms(service: widget.service),
                 const _RankOtherPlayers(),
-                SizedBox(height: 20.h),
+                SizedBox(height: 10.h),
                 MainButton(
                   enabled: ref.watch(canProceed),
                   label: "ENTER_RESULTS".tr(context),

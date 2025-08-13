@@ -27,6 +27,7 @@ class ParticipantSlot extends ConsumerWidget {
     this.imageIconColor = AppColors.white,
     this.showLevel = true,
     this.onPlayerTap,
+    // this.reservedImage,
   });
 
   final BookingPlayerBase player;
@@ -38,6 +39,7 @@ class ParticipantSlot extends ConsumerWidget {
   final Color imageIconColor;
   final Function(int, bool)? onPlayerTap;
   final bool showLevel;
+  // final bool? reservedImage;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -111,7 +113,7 @@ class ParticipantSlot extends ConsumerWidget {
         mainAxisSize: MainAxisSize.min,
         children: [
           _image(),
-          SizedBox(height: 5.h),
+          // SizedBox(height: 5.h),
           _text(context),
           if ((!(player.reserved ?? true))) ...[
             _levelSideText(level, side),
@@ -123,6 +125,7 @@ class ParticipantSlot extends ConsumerWidget {
               imageHeight: 10.w,
               imageWidth: 10.w,
               spacing: 3.w,
+              textColor: AppColors.darkBlue,
               label: "RELEASE".tr(context),
               onTap: () {
                 onRelease?.call(player.id ?? -1);
@@ -142,22 +145,22 @@ class ParticipantSlot extends ConsumerWidget {
           AutoSizeText(
             level,
             textAlign: TextAlign.center,
-            maxFontSize: 11.sp,
+            maxFontSize: 12.sp,
             minFontSize: 8.sp,
             maxLines: 1,
             stepGranularity: 1.sp,
-            style: AppTextStyles.gothamLight11
+            style: AppTextStyles.sansRegular12
                 .copyWith(height: 0.99, color: textColor),
           ),
         if (side != "SIDE" && side.trim().isNotEmpty)
           AutoSizeText(
             side,
             textAlign: TextAlign.center,
-            maxFontSize: 11.sp,
+            maxFontSize: 12.sp,
             minFontSize: 8.sp,
             maxLines: 1,
             stepGranularity: 1.sp,
-            style: AppTextStyles.gothamLight11
+            style: AppTextStyles.sansRegular12
                 .copyWith(height: 0.99, color: textColor),
           ),
       ],
@@ -174,15 +177,18 @@ class ParticipantSlot extends ConsumerWidget {
       minFontSize: 2.sp,
       maxLines: 1,
       stepGranularity: 1.sp,
-      style: AppTextStyles.balooBold9.copyWith(color: textColor),
+      style: AppTextStyles.balooMedium11.copyWith(color: textColor),
     );
   }
 
   Widget _image() {
     return NetworkCircleImage(
       path: (player.reserved == false) ? player.customer?.profileUrl : null,
-      width: isHorizontal ? 40.w : 45.w,
-      height: isHorizontal ? 40.w : 45.w,
+      width: isHorizontal ? 37.h : 37.h,
+      height: isHorizontal ? 37.h : 37.h,
+      scale: 1,
+      reservedLogo: player.reserved,
+      boxBorder: Border.all(color: ((player.customer?.profileUrl?.isNotEmpty ?? false) && (player.reserved == false)) ? AppColors.white25 : AppColors.darkBlue),
     );
   }
 }

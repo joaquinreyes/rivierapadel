@@ -35,16 +35,16 @@ class _OpenMatchWaitingForApprovalPlayersState
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          "PLAYERS_WAITING_FOR_YOUR_APPROVAL".tr(context),
+          "PLAYERS_WAITING_FOR_YOUR_APPROVAL".tr(context).capitalEnabled(context, canProceed: !widget.isForPopUp),
           style: widget.isForPopUp
-              ? AppTextStyles.balooMedium12.copyWith(color: AppColors.white)
-              : AppTextStyles.balooBold14,
+              ? AppTextStyles.balooMedium16.copyWith(color: AppColors.white)
+              : AppTextStyles.balooMedium17,
         ),
         SizedBox(height: 10.h),
         Container(
           decoration: BoxDecoration(
-            color: widget.isForPopUp ? AppColors.white25 : AppColors.green5,
-            borderRadius: BorderRadius.circular((widget.isForPopUp ? 5 : 15).r),
+            color: widget.isForPopUp ? AppColors.white25 : AppColors.clay05,
+            borderRadius: BorderRadius.circular(12.r),
           ),
           padding: EdgeInsets.symmetric(horizontal: 25.w, vertical: 15.h),
           child: Column(
@@ -59,17 +59,15 @@ class _OpenMatchWaitingForApprovalPlayersState
                     children: [
                       NetworkCircleImage(
                           path: player.customer?.profileUrl,
-                          width: 40.w,
-                          height: 40.h),
+                          scale: 1,
+                          width: 37.h,
+                          height: 37.h),
                       SizedBox(width: 15.w),
                       Column(
                         children: [
                           Text(
-                            player.getCustomerName,
-                            style: AppTextStyles.balooBold9.copyWith(
-                                color: widget.isForPopUp
-                                    ? AppColors.white
-                                    : AppColors.black),
+                            player.getCustomerName.toUpperCase(),
+                            style: widget.isForPopUp ? AppTextStyles.balooMedium12.copyWith(color: AppColors.white) : AppTextStyles.balooMedium12,
                           ),
                           if (subTitle.trim().length > 1)
                             Text(
@@ -86,12 +84,13 @@ class _OpenMatchWaitingForApprovalPlayersState
                       MainButton(
                         label: "APPROVE".tr(context),
                         width: 100.w,
-                        height: 32.h,
-                        color: AppColors.yellow,
-                        labelStyle: AppTextStyles.balooMedium9
-                            .copyWith(color: AppColors.darkGreen),
+                        // height: 32.h,
+                        borderRadius: 8.r,
+                        color: AppColors.oak,
+                        labelStyle: AppTextStyles.balooMedium13
+                            .copyWith(color: AppColors.white,height: 1.2),
                         applySize: false,
-                        padding: EdgeInsets.symmetric(vertical: 6.h),
+                        // padding: EdgeInsets.symmetric(vertical: 6.h),
                         onTap: () {
                           widget.onApprove(player.id!);
                         },

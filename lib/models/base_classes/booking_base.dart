@@ -113,6 +113,13 @@ class BookingBase {
     return "${bookingDate.format("EEE dd MMM")} | ${bookingStartTime.format("HH:mm")} - ${bookingEndTime.format("HH:mm")}";
   }
 
+  String get formattedDateStartEndTimeAm {
+    if (startTime == null) {
+      return '';
+    }
+    return "${bookingDate.format("EEE dd MMM")} | ${bookingStartTime.format("h:mm")} - ${bookingEndTime.format("h:mm a").toLowerCase()}";
+  }
+
   String get formattedDateStartEndTimeForShare {
     if (startTime == null) {
       return '';
@@ -136,6 +143,12 @@ class BookingBase {
       return '';
     }
     return "${bookingStartTime.format("HH:mm")} - ${bookingEndTime.format("HH:mm")}";
+  }
+  String get formatStartEndTimeAm {
+    if (startTime == null) {
+      return '';
+    }
+    return "${bookingStartTime.format("h:mm")} - ${bookingEndTime.format("h:mm a").toLowerCase()}";
   }
 
   String get formatStartTime {

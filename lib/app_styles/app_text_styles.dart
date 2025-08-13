@@ -454,6 +454,17 @@ class AppTextStyles {
       );
 
 
+  static TextStyle get sansRegular12 => _dMSansRegular12;
+  static TextStyle get _dMSansRegular12 => TextStyle(
+        fontSize: 12.sp,
+        decoration: TextDecoration.none,
+        fontFamily: 'DM Sans',
+        color: AppColors.darkBlue,
+        fontStyle: FontStyle.normal,
+        fontWeight: FontWeight.w400,
+      );
+
+
   static TextStyle get sansMedium18 => _dMSansMedium18;
   static TextStyle get _dMSansMedium18 => TextStyle(
     fontSize: 18.sp,

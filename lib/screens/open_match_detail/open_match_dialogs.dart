@@ -13,15 +13,16 @@ class _ChooseSpotDialog extends StatelessWidget {
       children: [
         Text(
           "CHOOSE_YOUR_SPOT".trU(context),
-          style: AppTextStyles.balooBold13.copyWith(color: AppColors.white),
+          style: AppTextStyles.popupHeaderTextStyle,
         ),
         SizedBox(height: 20.h),
         OpenMatchParticipantRowWithBG(
-          availableSlotbackGroundColor: AppColors.blue35,
+          availableSlotbackGroundColor: AppColors.darkBlue,
           availableSlotIconColor: AppColors.white,
           bgColor: AppColors.white25,
           textColor: AppColors.white,
-          textForAvailableSlot: "JOIN".tr(context),
+          padding: EdgeInsets.only(top: 15.h,left: 10.w,right: 10.w),
+          textForAvailableSlot: "RESERVE".trU(context),
           players: players,
           onTap: (index, playerID) {
             Navigator.pop(context, (index, playerID));
@@ -140,7 +141,7 @@ class ConfirmationDialog extends StatelessWidget {
             _headingText(context),
             textAlign: TextAlign.center,
             style:
-                AppTextStyles.balooBold15.copyWith(color: AppColors.white),
+                AppTextStyles.popupHeaderTextStyle,
           ),
           if (type != ConfirmationDialogType.withdraw) ...[
             SizedBox(height: 20.h),
@@ -148,7 +149,7 @@ class ConfirmationDialog extends StatelessWidget {
               _descText(context),
               textAlign: TextAlign.center,
               style:
-                  AppTextStyles.balooBold11.copyWith(color: AppColors.white),
+                  AppTextStyles.popupBodyTextStyle,
             ),
           ],
           if (type == ConfirmationDialogType.join ||
@@ -159,14 +160,14 @@ class ConfirmationDialog extends StatelessWidget {
                 text: type == ConfirmationDialogType.join
                     ? "CANCELLATION_POLICY".tr(context)
                     : null,
-                style: AppTextStyles.balooBold11
-                    .copyWith(color: AppColors.white))
+                style: AppTextStyles.popupBodyTextStyle)
           ],
           SizedBox(height: 20.h),
           MainButton(
-            color: AppColors.yellow,
-            labelStyle:
-                AppTextStyles.balooMedium13.copyWith(color: AppColors.darkBlue),
+            // color: AppColors.yellow,
+            isForPopup: true,
+            // labelStyle:
+            //     AppTextStyles.balooMedium13.copyWith(color: AppColors.darkBlue),
             label: _buttonText(context),
             onTap: () {
               Navigator.pop(context, true);
@@ -202,21 +203,21 @@ class ConfirmationDialog extends StatelessWidget {
   _buttonText(BuildContext context) {
     switch (type) {
       case ConfirmationDialogType.cancel:
-        return "CANCEL_MATCH".tr(context);
+        return "CANCEL_MATCH".trU(context);
       case ConfirmationDialogType.join:
-        return "JOIN_PAY_MY_SHARE".tr(context);
+        return "JOIN_PAY_MY_SHARE".trU(context);
       case ConfirmationDialogType.reserve:
-        return "RESERVE_PAY_SLOT".tr(context);
+        return "RESERVE_PAY_SLOT".trU(context);
       case ConfirmationDialogType.leave:
-        return "LEAVE_OPEN_MATCH".tr(context);
+        return "LEAVE_OPEN_MATCH".trU(context);
       case ConfirmationDialogType.approvalNeeded:
-        return "APPLY_TO_OPEN_MATCH".tr(context);
+        return "APPLY_TO_OPEN_MATCH".trU(context);
       case ConfirmationDialogType.approveConfirm:
-        return "APPROVE_PLAYER".tr(context);
+        return "APPROVE_PLAYER".trU(context);
       case ConfirmationDialogType.releaseReserve:
-        return "RELEASE_THIS_SPOT".tr(context);
+        return "RELEASE_THIS_SPOT".trU(context);
       case ConfirmationDialogType.withdraw:
-        return "YES_WITHDRAW".tr(context);
+        return "YES_WITHDRAW".trU(context);
     }
   }
 

@@ -16,10 +16,10 @@ class _MatchResultFormsState extends ConsumerState<_MatchResultForms> {
       return const SizedBox();
     }
     return Container(
-      padding: const EdgeInsets.all(10),
+      padding: const EdgeInsets.all(12),
       decoration: BoxDecoration(
         color: AppColors.white25,
-        borderRadius: BorderRadius.circular(7),
+        borderRadius: BorderRadius.circular(12.r),
         boxShadow: const [
           BoxShadow(
             color: Color(0x11000000),
@@ -36,23 +36,23 @@ class _MatchResultFormsState extends ConsumerState<_MatchResultForms> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
-                widget.service.formattedDateStartTime.toUpperCase(),
-                style: AppTextStyles.gothamBold13
+                widget.service.formatBookingDate,
+                style: AppTextStyles.sansMedium16
                     .copyWith(color: AppColors.white),
               ),
               Text(
-                widget.service.service?.location?.locationName.toUpperCase() ??
+                widget.service.openMatchLevelRange.toUpperCase() ??
                     '',
-                style: AppTextStyles.gothamBold13
+                style: AppTextStyles.sansRegular15
                     .copyWith(color: AppColors.white),
               ),
             ],
           ),
-          SizedBox(height: 10.h),
-          const CDivider(color: AppColors.white25),
+          // SizedBox(height: 10.h),
+          CDivider(color: AppColors.white.withOpacity(0.10)),
           SizedBox(height: 5.h),
           _drawButton(),
-          SizedBox(height: 10.h),
+          // SizedBox(height: 10.h),
           if (players.length > 1)
             _SingleResultForm(
               players: [players.first, players[1]],
@@ -85,7 +85,7 @@ class _MatchResultFormsState extends ConsumerState<_MatchResultForms> {
         },
         child: Text(
           "DRAW".tr(context),
-          style: AppTextStyles.gothamRegular14.copyWith(
+          style: AppTextStyles.sansRegular13.copyWith(
             color: AppColors.darkGreen,
           ),
         ),
@@ -185,8 +185,8 @@ class _RankOtherPlayers extends ConsumerWidget {
       children: [
         SizedBox(height: 20.h),
         Text(
-          "RANK_THE_OTHER_PLAYERS".trU(context),
-          style: AppTextStyles.balooBold12.copyWith(color: AppColors.white),
+          "RANK_THE_OTHER_PLAYERS".tr(context),
+          style: AppTextStyles.sansRegular16.copyWith(color: AppColors.white),
         ),
         SizedBox(height: 10.h),
         for (var i = 0; i < players.length; i++) ...[
@@ -255,13 +255,13 @@ class _RankingLevelSelectorState extends State<_RankingLevelSelector> {
         Text(
           "SELECT_PLAYER_LEVEL".tr(context),
           style:
-              AppTextStyles.balooMedium10.copyWith(color: AppColors.white),
+              AppTextStyles.sansRegular15.copyWith(color: AppColors.white),
         ),
         SizedBox(height: 5.h),
         Container(
           decoration: BoxDecoration(
             color: AppColors.white25,
-            borderRadius: BorderRadius.circular(7),
+            borderRadius: BorderRadius.circular(100.r),
             boxShadow: const [
               BoxShadow(
                 color: Color(0x11000000),
@@ -284,8 +284,8 @@ class _RankingLevelSelectorState extends State<_RankingLevelSelector> {
                         const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
                     decoration: BoxDecoration(
                       color:
-                          isSelected ? AppColors.yellow50 : Colors.transparent,
-                      borderRadius: BorderRadius.circular(7),
+                          isSelected ? AppColors.oak50 : Colors.transparent,
+                      borderRadius: BorderRadius.circular(100.r),
                       boxShadow: isSelected
                           ? const [
                               BoxShadow(
@@ -300,10 +300,8 @@ class _RankingLevelSelectorState extends State<_RankingLevelSelector> {
                     child: Center(
                       child: Text(
                         e.toStringAsFixed(2),
-                        style: AppTextStyles.gothamRegular14.copyWith(
-                            color: isSelected
-                                ? AppColors.darkGreen
-                                : AppColors.white),
+                        style: isSelected ? AppTextStyles.sansMedium14 : AppTextStyles.sansRegular13.copyWith(
+                            color: AppColors.white),
                       ),
                     ),
                   ),
@@ -331,11 +329,11 @@ class _ScoreInput extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.symmetric(vertical: 10),
-      margin: const EdgeInsets.only(bottom: 10),
+      padding: const EdgeInsets.symmetric(vertical: 2),
+      margin: EdgeInsets.only(bottom: 10.h,top: 10.h),
       decoration: BoxDecoration(
-        color: isWinner ? AppColors.yellow : Colors.transparent,
-        borderRadius: BorderRadius.circular(7),
+        color: isWinner ? AppColors.oak : Colors.transparent,
+        borderRadius: BorderRadius.circular(12.r),
       ),
       child: Column(
         children: [
@@ -343,12 +341,12 @@ class _ScoreInput extends StatelessWidget {
             Text(
               "WINNERS".tr(context),
               style: AppTextStyles.balooMedium21.copyWith(
-                color: AppColors.darkBlue,
+                color: AppColors.white,
               ),
             ),
           CustomNumberInput(
             onChanged: onChanged,
-            color: isWinner ? AppColors.darkBlue : AppColors.white,
+            color: AppColors.white,
             index: index,
             initialScore: scores,
           ),
@@ -374,7 +372,7 @@ class _SwapRow extends StatelessWidget {
             );
           },
           child: Container(
-            padding: const EdgeInsets.all(5),
+            padding: EdgeInsets.all(4.5.h),
             decoration: BoxDecoration(
               color: AppColors.white,
               borderRadius: BorderRadius.circular(7),
@@ -391,7 +389,7 @@ class _SwapRow extends StatelessWidget {
         const Spacer(flex: 5),
         Text(
           "V/S",
-          style: AppTextStyles.balooBold12.copyWith(color: AppColors.white),
+          style: AppTextStyles.balooMedium12.copyWith(color: AppColors.white),
         ),
         const Spacer(flex: 3),
       ],
@@ -419,7 +417,7 @@ class __SwapDialogState extends ConsumerState<_SwapDialog> {
         ),
         SizedBox(height: 20.h),
         Text(
-          "CLICK_ON_THE_PLAYER_THAT_WAS_ON_YOUR_TEAM".trU(context),
+          "CLICK_ON_THE_PLAYER_THAT_WAS_ON_YOUR_TEAM".tr(context),
           style: AppTextStyles.popupBodyTextStyle,
         ),
         SizedBox(height: 15.h),

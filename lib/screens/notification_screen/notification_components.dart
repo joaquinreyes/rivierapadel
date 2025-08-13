@@ -12,8 +12,8 @@ class _ClearAllBtn extends StatelessWidget {
       child: SecondaryImageButton(
         label: "CLEAR_ALL".tr(context),
         image: AppImages.crossIcon.path,
-        imageHeight: 10.h,
-        imageWidth: 10.w,
+        imageHeight: 13.h,
+        imageWidth: 13.h,
         onTap: () {},
       ),
     );
@@ -45,10 +45,10 @@ class NotificationTile extends StatelessWidget {
       },
       child: Container(
         padding:
-            EdgeInsets.only(left: 15.w, right: 15.w, top: 10.h, bottom: 10.h),
+            EdgeInsets.only(left: 15.w, right: 10.w, top: 10.h, bottom: 15.h),
         decoration: BoxDecoration(
-          color: AppColors.white,
-          borderRadius: BorderRadius.circular(5.r),
+          color: AppColors.clay05,
+          borderRadius: BorderRadius.circular(12.r),
         ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -60,7 +60,7 @@ class NotificationTile extends StatelessWidget {
                 // if (notification.createdAt != null)
                 Text(
                   "28 Oct. 19:31 hrs",
-                  style: AppTextStyles.gothamLight12,
+                  style: AppTextStyles.sansRegular13.copyWith(color: AppColors.clay70,),
                 ),
                 // if (notification.createdAt == null) const Spacer(),
                 InkWell(
@@ -79,12 +79,12 @@ class NotificationTile extends StatelessWidget {
             SizedBox(height: 5.h),
             Text(
               "A new player has joined the open match",
-              style: AppTextStyles.balooBold10,
+              style: AppTextStyles.balooMedium13,
             ),
             SizedBox(height: 5.h),
             Text(
               "John has joined the match to be held at 8:00 in Padel 1",
-              style: AppTextStyles.gothamRegular13,
+              style: AppTextStyles.sansRegular15.copyWith(height: 1),
             ),
           ],
         ),

@@ -48,7 +48,7 @@ class _BookCourtDialogState extends ConsumerState<BookingCartDialog> {
           mainAxisSize: MainAxisSize.min,
           children: [
             Text(
-              "BOOKING_INFORMATION".tr(context),
+              "BOOKING_INFORMATION".trU(context),
               style: AppTextStyles.popupHeaderTextStyle,
             ),
             SizedBox(height: 5.h),
@@ -62,7 +62,7 @@ class _BookCourtDialogState extends ConsumerState<BookingCartDialog> {
               alignment: Alignment.centerLeft,
               child: Text(
                 "${"YOUR_BOOKING_CART_DETAILS".tr(context)}:",
-                style: AppTextStyles.popupHeaderTextStyle,
+                style: AppTextStyles.balooMedium16.copyWith(color: AppColors.white),
                 textAlign: TextAlign.start,
               ),
             ),
@@ -88,15 +88,15 @@ class _BookCourtDialogState extends ConsumerState<BookingCartDialog> {
                     Align(
                       alignment: Alignment.centerLeft,
                       child: Text(
-                        "BOOKING_PAYMENT".trU(context),
-                        style: AppTextStyles.balooMedium15.copyWith(
+                        "BOOKING_PAYMENT".tr(context),
+                        style: AppTextStyles.balooMedium20.copyWith(
                           color: AppColors.white,
                         ),
                       ),
                     ),
                     SizedBox(height: 10.h),
                     MainButton(
-                      label: "PAY_ALL_BOOKINGS".tr(context),
+                      label: "PAY_ALL_BOOKINGS".trU(context),
                       isForPopup: true,
                       onTap: () {
                         _payCourt(data);

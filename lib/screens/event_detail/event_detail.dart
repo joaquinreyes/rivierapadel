@@ -121,45 +121,44 @@ class _DataBodyState extends ConsumerState<_DataBody> {
           padding: EdgeInsets.zero,
           child: Column(
             children: [
-              SizedBox(height: 35.5.h),
+              SizedBox(height: 20.h),
               Align(
                 alignment: Alignment.centerLeft,
                 child: Padding(
-                  padding: EdgeInsets.only(left: 17.w),
+                  padding: EdgeInsets.only(left: 3.w),
                   child: GestureDetector(
                     onTap: () => ref.read(goRouterProvider).pop(),
                     child: Image.asset(AppImages.backArrow.path,
-                        height: 20.h, width: 20.h),
+                        height: 24.h, width: 24.h),
                   ),
                 ),
               ),
               Text(
                 "${"EVENT".trU(context)}\n ${"INFORMATION".trU(context)}",
-                style: AppTextStyles.balooBold13.copyWith(height: 0.9),
+                style: AppTextStyles.balooMedium22.copyWith(height: 1.2),
                 textAlign: TextAlign.center,
               ),
-              SizedBox(height: 50.h),
+              SizedBox(height: 40.h),
               _InfoCard(event: service),
-              SizedBox(height: 10.h),
               ServiceInformationText(service: service),
               ServiceCoaches(coaches: service.getCoaches),
               SizedBox(height: 20.h),
               Align(
                 alignment: Alignment.centerLeft,
                 child: Text(
-                    "${"PLAYERS".tr(context)} ${service.players?.length ?? 0} / ${service.getMaximumCapacity}",
-                    style: AppTextStyles.balooBold13
-                        .copyWith(color: AppColors.darkGreen)),
+                    // "${"PLAYERS".trU(context)} ${service.players?.length ?? 0} / ${service.getMaximumCapacity}",
+                    "${service.service?.isDoubleEvent ?? false ? "TEAMS".tr(context) : "PLAYERS".tr(context)} ${service.players?.length ?? 0} / ${service.getMaximumCapacity}",
+                    style: AppTextStyles.balooMedium17.copyWith(color: AppColors.darkGreen)),
               ),
               SizedBox(height: 10.h),
               Container(
                 clipBehavior: Clip.antiAlias,
-                padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 10.h),
+                padding: EdgeInsets.only(left: 20.w, right: 20.w,top: 15.h,bottom: service.service?.isDoubleEvent ?? false ? 15.h : 8.h),
                 width: double.infinity,
                 constraints: kComponentWidthConstraint,
                 decoration: BoxDecoration(
-                  color: AppColors.green5,
-                  borderRadius: BorderRadius.circular(5.r),
+                  color: AppColors.clay05,
+                  borderRadius: BorderRadius.circular(12.r),
                 ),
                 child: _EventPlayersSlots(
                   onRelease: _onRelease,
@@ -272,8 +271,8 @@ class _DataBodyState extends ConsumerState<_DataBody> {
     return SecondaryImageButton(
       label: "SHARE_MATCH".tr(context),
       image: AppImages.whatsaapIcon.path,
-      imageHeight: 13.w,
-      imageWidth: 13.w,
+      imageHeight: 14.w,
+      imageWidth: 14.w,
       onTap: _shareWhatsAap,
     );
   }
@@ -389,7 +388,7 @@ class _DataBodyState extends ConsumerState<_DataBody> {
       if (paymentDone != null && mounted) {
         Utils.showMessageDialog(
           context,
-          "YOU_HAVE_JOINED_SUCCESSFULLY".tr(context),
+          "YOU_HAVE_JOINED_SUCCESSFULLY".trU(context),
         );
       }
     }
@@ -481,7 +480,7 @@ class _DataBodyState extends ConsumerState<_DataBody> {
         ref.invalidate(fetchServiceDetailProvider(service.id!));
         Utils.showMessageDialog(
           context,
-          "YOU_HAVE_LEFT_THE_MATCH".tr(context),
+          "YOU_HAVE_LEFT_THE_MATCH".trU(context),
         );
       }
     }

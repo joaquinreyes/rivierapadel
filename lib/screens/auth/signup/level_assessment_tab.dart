@@ -106,7 +106,7 @@ class __LevelAssessmentTab extends ConsumerState<_LevelAssessmentTab> {
         ),
         child: Row(
           children: [
-            SelectedTag(isSelected: selected),
+            SelectedTag(isSelected: selected,),
             SizedBox(width: 20.w),
             Expanded(
               child: Text(

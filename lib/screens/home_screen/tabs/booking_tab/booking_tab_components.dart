@@ -1054,7 +1054,7 @@ class _VoucherConfirmDialog extends StatelessWidget {
                 Text(
                     "${"GET".tr(context)} ${voucher.value} ${"CREDITS".tr(context).toLowerCase()}",
                     style: AppTextStyles.balooMedium16),
-                const SizedBox(height: 4),
+                CDivider(color: AppColors.clay05,),
                 Text(
                     "${"PRICE".tr(context)} ${Utils.formatPrice(voucher.price ?? 0)}",
                     style: AppTextStyles.sansRegular15),
@@ -1118,7 +1118,7 @@ class _FilterRow extends ConsumerWidget {
         Image.asset(
           AppImages.filterIcon.path,
           height: 15.h,
-          width: 15.w,
+          width: 15.h,
         ),
 
         SizedBox(width: 8.w),

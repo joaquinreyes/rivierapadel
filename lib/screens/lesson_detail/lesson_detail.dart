@@ -125,26 +125,26 @@ class _DataBodyState extends ConsumerState<_DataBody> {
           padding: EdgeInsets.zero,
           child: Column(
             children: [
-              SizedBox(height: 35.5.h),
+              SizedBox(height: 20.h),
               Align(
                 alignment: Alignment.centerLeft,
                 child: Padding(
-                  padding: EdgeInsets.only(left: 17.w),
+                  padding: EdgeInsets.only(left: 3.w),
                   child: GestureDetector(
                     onTap: () => ref.read(goRouterProvider).pop(),
                     child: Image.asset(AppImages.backArrow.path,
-                        height: 20.h, width: 20.h),
+                        height: 24.h, width: 24.h),
                   ),
                 ),
               ),
               Text(
                 "${"LESSON".trU(context)}\n ${"INFORMATION".trU(context)}",
-                style: AppTextStyles.balooBold18.copyWith(height: 0.9),
+                style: AppTextStyles.balooMedium22.copyWith(height: 1.2),
                 textAlign: TextAlign.center,
               ),
-              SizedBox(height: 50.h),
+              SizedBox(height: 40.h),
               _InfoCard(lesson: service),
-              SizedBox(height: 10.h),
+              // SizedBox(height: 10.h),
               if (!isLessonVariant) ...[
                 ServiceInformationText(service: service),
                 ServiceCoaches(coaches: service.getCoaches),
@@ -153,17 +153,17 @@ class _DataBodyState extends ConsumerState<_DataBody> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
-                      "${"PLAYERS".tr(context)} ${service.players?.length ?? 0} / ${service.getMaximumCapacity}",
-                      style: AppTextStyles.balooBold13,
+                      "${"PLAYERS".trU(context)} ${service.players?.length ?? 0} / ${service.getMaximumCapacity}",
+                      style: AppTextStyles.balooMedium17,
                     ),
                     Text(
-                      "${"STATUS".tr(context).capitalizeFirst}: ${Utils.eventLessonStatusText(
+                      "${"STATUS".trU(context).capitalizeFirst}: ${Utils.eventLessonStatusText(
                         context: context,
                         playersCount: service.players?.length ?? 0,
                         maxCapacity: service.getMaximumCapacity,
                         minCapacity: service.getMinimumCapacity,
-                      )}",
-                      style: AppTextStyles.balooBold13,
+                      ).toUpperCase()}",
+                      style: AppTextStyles.balooMedium15,
                     ),
                   ],
                 ),
@@ -171,12 +171,12 @@ class _DataBodyState extends ConsumerState<_DataBody> {
                 Container(
                   clipBehavior: Clip.antiAlias,
                   padding:
-                      EdgeInsets.symmetric(horizontal: 12.w, vertical: 10.h),
+                      EdgeInsets.only(right: 20.w,left: 20.w, top: 15.h,bottom: 5.h),
                   width: double.infinity,
                   constraints: kComponentWidthConstraint,
                   decoration: BoxDecoration(
-                    color: AppColors.green5,
-                    borderRadius: BorderRadius.circular(5.r),
+                    color: AppColors.clay05,
+                    borderRadius: BorderRadius.circular(12.r),
                   ),
                   child: _LessonPlayersSlots(
                     players: service.players ?? [],
@@ -217,8 +217,8 @@ class _DataBodyState extends ConsumerState<_DataBody> {
     return SecondaryImageButton(
       label: "SHARE_MATCH".tr(context),
       image: AppImages.whatsaapIcon.path,
-      imageHeight: 13.w,
-      imageWidth: 13.w,
+      imageHeight: 14.w,
+      imageWidth: 14.w,
       onTap: _shareWhatsAap,
     );
   }
@@ -314,7 +314,7 @@ class _DataBodyState extends ConsumerState<_DataBody> {
       if (paymentDone != null && mounted) {
         Utils.showMessageDialog(
           context,
-          "YOU_HAVE_JOINED_SUCCESSFULLY".tr(context),
+          "YOU_HAVE_JOINED_SUCCESSFULLY".trU(context),
         );
       }
     }
@@ -345,7 +345,7 @@ class _DataBodyState extends ConsumerState<_DataBody> {
 
       Utils.showMessageDialog(
         context,
-        "YOU_HAVE_CANCELLED_THE_LESSON".tr(context),
+        "YOU_HAVE_CANCELLED_THE_LESSON".trU(context),
       );
     }
   }

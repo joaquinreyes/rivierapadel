@@ -25,19 +25,21 @@ class ServiceInformationText extends StatelessWidget {
         SizedBox(height: 20.h),
         Row(
           children: [
-            Image.asset(AppImages.infoIcon.path, width: 12.w, height: 12.h),
+            Image.asset(AppImages.infoIcon.path, width: 12.w, height: 12.h,color: AppColors.darkBlue,),
             SizedBox(width: 10.w),
             Text(
-              "INFORMATION".tr(context),
-              style: AppTextStyles.balooBold13
-                  .copyWith(color: AppColors.darkGreen),
+              "INFORMATION".trU(context),
+              style: AppTextStyles.balooMedium17,
             ),
           ],
         ),
-        SizedBox(height: 6.h),
-        Text(
-          service.service?.additionalService ?? "",
-          style: AppTextStyles.gothamLight12,
+        // SizedBox(height: 6.h),
+        Padding(
+          padding: EdgeInsets.symmetric(horizontal: 12.w),
+          child: Text(
+            service.service?.additionalService ?? "The Americana is a mini tournament style were you get to play against everybody in mini games of 12 points.",
+            style: AppTextStyles.sansRegular13,
+          ),
         ),
       ],
     );

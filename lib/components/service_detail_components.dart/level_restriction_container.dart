@@ -20,11 +20,14 @@ class LevelRestrictionContainer extends StatelessWidget {
     }
     return Container(
       padding: EdgeInsets.symmetric(vertical: 2.h, horizontal: 6.w),
-      decoration:
-          const BoxDecoration(color: AppColors.white, boxShadow: [kBoxShadow]),
+      decoration: BoxDecoration(
+        color: AppColors.white,
+        boxShadow: [kBoxShadow],
+        borderRadius: BorderRadius.circular(100.r),
+      ),
       child: Text(
         "${"LEVEL".tr(context)} $levelRestriction",
-        style: AppTextStyles.gothamRegular12,
+        style: AppTextStyles.sansMedium14,
       ),
     );
   }

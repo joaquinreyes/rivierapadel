@@ -84,8 +84,8 @@ class _OpenMatchesState extends ConsumerState<OpenMatchesList> {
         Padding(
           padding: EdgeInsets.only(bottom: 10.h),
           child: Text(
-            Utils.formatBookingDate(date, context),
-            style: AppTextStyles.balooBold13,
+            Utils.formatBookingDate(date, context).toUpperCase(),
+            style: AppTextStyles.balooMedium17,
           ),
         ),
       );
@@ -95,7 +95,7 @@ class _OpenMatchesState extends ConsumerState<OpenMatchesList> {
       widgets.addAll(
         dataMatches.map(
           (match) => Padding(
-            padding: EdgeInsets.only(bottom: 10.h),
+            padding: EdgeInsets.only(bottom: 15.h),
             child: InkWell(
               borderRadius: BorderRadius.circular(25.r),
               onTap: () async {
@@ -129,10 +129,10 @@ class _OpenMatchCard extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return Container(
-      padding: EdgeInsets.symmetric(horizontal: 15.h, vertical: 15.h),
+      padding: EdgeInsets.symmetric(horizontal: 15.w, vertical: 15.h),
       decoration: BoxDecoration(
-        color: AppColors.green5,
-        borderRadius: BorderRadius.circular(5.r),
+        color: AppColors.clay05,
+        borderRadius: BorderRadius.circular(12.r),
       ),
       child: Column(
         mainAxisSize: MainAxisSize.min,
@@ -142,27 +142,26 @@ class _OpenMatchCard extends ConsumerWidget {
               Expanded(
                 flex: 10,
                 child: Text(
-                  match.formattedDateStartEndTime,
-                  style: AppTextStyles.gothamBold14
-                      .copyWith(color: AppColors.darkGreen),
+                  match.formattedDateStartEndTimeAm,
+                  style: AppTextStyles.sansMedium14,
                 ),
               ),
               Expanded(
                 flex: 3,
                 child: Text(
-                  (match.service?.location?.locationName ?? "").capitalizeFirst,
+                  (match.service?.location?.locationName ?? "").toUpperCase(),
                   textAlign: TextAlign.end,
-                  style: AppTextStyles.gothamBold12
+                  style: AppTextStyles.balooMedium14
                       .copyWith(color: AppColors.darkGreen),
                 ),
               ),
             ],
           ),
-          SizedBox(height: 2.h),
+          // SizedBox(height: 2.h),
           const CDivider(),
           OpenMatchParticipantRow(
-            textForAvailableSlot: "AVAILABLE".tr(context),
-            availableSlotIconColor: AppColors.darkGreen,
+            textForAvailableSlot: "AVAILABLE".trU(context),
+            availableSlotIconColor: AppColors.darkBlue,
             availableSlotbackGroundColor: Colors.transparent,
             players: match.players ?? [],
           ),
@@ -171,15 +170,11 @@ class _OpenMatchCard extends ConsumerWidget {
             children: [
               Text(
                 match.court,
-                style: AppTextStyles.gothamLight13.copyWith(
-                  color: AppColors.darkGreen,
-                ),
+                style: AppTextStyles.sansRegular13,
               ),
               Text(
                 "${"LEVEL".tr(context)} ${match.openMatchLevelRange}",
-                style: AppTextStyles.gothamLight13.copyWith(
-                  color: AppColors.darkGreen,
-                ),
+                style: AppTextStyles.sansRegular13,
               )
             ],
           )

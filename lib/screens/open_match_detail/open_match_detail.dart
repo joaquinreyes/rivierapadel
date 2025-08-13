@@ -164,41 +164,41 @@ class _DataBodyState extends ConsumerState<_DataBody> {
           padding: EdgeInsets.zero,
           child: Column(
             children: [
-              SizedBox(height: 35.5.h),
+              SizedBox(height: 20.h),
               Align(
                 alignment: Alignment.centerLeft,
                 child: Padding(
-                  padding: EdgeInsets.only(left: 17.w),
+                  padding: EdgeInsets.only(left: 3.w),
                   child: GestureDetector(
                     onTap: () => ref.read(goRouterProvider).pop(),
                     child: Image.asset(AppImages.backArrow.path,
-                        height: 25.h, width: 25.h),
+                        height: 24.h, width: 24.h),
                   ),
                 ),
               ),
               Text(
                 "${"MATCH".trU(context)}\n ${"INFORMATION".trU(context)}",
-                style: AppTextStyles.balooBold18.copyWith(height: 0.9),
+                style: AppTextStyles.balooMedium22.copyWith(height: 1.2),
                 textAlign: TextAlign.center,
               ),
               SizedBox(height: 40.h),
               if (isCancelled) ...[
-                SizedBox(height: 15.h),
+                // SizedBox(height: 15.h),
                 ChangesCancelledDetailsCard(
-                  heading: "OPEN_MATCH_CANCELLED".tr(context),
+                  heading: "OPEN_MATCH_CANCELLED".trU(context),
                   description: "CANCEL_DESC".tr(context),
-                )
+                ),
+              SizedBox(height: 15.h),
               ],
-              SizedBox(height: 15.h),
               _InfoCard(service: service),
-              SizedBox(height: 15.h),
+              SizedBox(height: 20.h),
               _OrganizerNote(note: service.organizerNote ?? ""),
               SizedBox(height: 20.h),
               Row(
                 children: [
                   Text(
-                    "PLAYERS".tr(context),
-                    style: AppTextStyles.balooBold13,
+                    "PLAYERS".trU(context),
+                    style: AppTextStyles.balooMedium17,
                   ),
                   const Spacer(),
                   _RankedOrFriendly(isRanked: isRankedMatch)
@@ -206,10 +206,11 @@ class _DataBodyState extends ConsumerState<_DataBody> {
               ),
               SizedBox(height: 10.h),
               OpenMatchParticipantRowWithBG(
-                bgColor: AppColors.green5,
-                textForAvailableSlot: "AVAILABLE".trU(context),
+                bgColor: AppColors.clay05,
+                textForAvailableSlot: "RESERVE".trU(context),
                 players: service.players ?? [],
                 allowBackground: false,
+                padding: EdgeInsets.only(right: 10.w,left: 10.w,top: 15.h),
                 onTap: (_, __) async {
                   final provider = fetchServiceWaitingPlayersProvider(
                       service.id!, RequestServiceType.booking);
@@ -227,13 +228,15 @@ class _DataBodyState extends ConsumerState<_DataBody> {
                   }
                 },
                 showReserveReleaseButton: true,
+                availableSlotbackGroundColor: AppColors.darkBlue,
+                availableSlotIconColor: AppColors.white,
                 currentPlayerID: ref.read(userProvider)?.user?.id ?? -1,
                 onRelease: _onRelease,
               ),
               SizedBox(height: 20.h),
               _secondaryButtons(isJoined, context, service),
               if (isJoined) ...[
-                SizedBox(height: 20.h),
+                // SizedBox(height: 20.h),
                 _ApprovedList(
                     id: service.id!,
                     isCurrentOrganizer: isCurrentUserOrganizer),
@@ -303,8 +306,8 @@ class _DataBodyState extends ConsumerState<_DataBody> {
     return SecondaryImageButton(
       label: "SHARE_MATCH".tr(context),
       image: AppImages.whatsaapIcon.path,
-      imageHeight: 13.w,
-      imageWidth: 13.w,
+      imageHeight: 14.h,
+      imageWidth: 14.h,
       onTap: () {
         Utils.shareOpenMatch(context, widget.service);
       },
@@ -336,8 +339,8 @@ class _DataBodyState extends ConsumerState<_DataBody> {
           ? "CANCEL_MATCH".tr(context)
           : "LEAVE_OPEN_MATCH".tr(context),
       image: AppImages.crossIcon.path,
-      imageHeight: 15.w,
-      imageWidth: 15.w,
+      imageHeight: 13.h,
+      imageWidth: 13.h,
       onTap: () {
         _onLeave();
       },
@@ -397,8 +400,8 @@ class _DataBodyState extends ConsumerState<_DataBody> {
       Utils.showMessageDialog(
         context,
         !isLeave
-            ? "YOU_HAVE_CANCELED_THE_MATCH".tr(context)
-            : "YOU_HAVE_LEFT_THE_MATCH".tr(context),
+            ? "YOU_HAVE_CANCELED_THE_MATCH".trU(context)
+            : "YOU_HAVE_LEFT_THE_MATCH".trU(context),
       );
     }
   }
@@ -517,8 +520,8 @@ class _DataBodyState extends ConsumerState<_DataBody> {
       Utils.showMessageDialog(
         context,
         isReserve
-            ? "YOU_HAVE_RESERVED_A_SPOT_SUCCESSFULLY".tr(context)
-            : "YOU_HAVE_JOINED_THE_MATCH".tr(context),
+            ? "YOU_HAVE_RESERVED_A_SPOT_SUCCESSFULLY".trU(context)
+            : "YOU_HAVE_JOINED_THE_MATCH".trU(context),
       );
     }
   }

@@ -10,12 +10,12 @@ class _PlayerRanking extends StatelessWidget {
     int rounded = level.floor();
     double decimal = level - rounded.toDouble();
     return Container(
-      height: 110,
+      height: 90.h,
       width: double.maxFinite,
-      padding: const EdgeInsets.all(12),
+      padding:  EdgeInsets.symmetric(vertical: 10.h,horizontal: 15.w),
       decoration: BoxDecoration(
         color: AppColors.darkBlue,
-        borderRadius: BorderRadius.circular(7),
+        borderRadius: BorderRadius.circular(12.r),
       ),
       child: Column(
         mainAxisSize: MainAxisSize.min,
@@ -25,36 +25,34 @@ class _PlayerRanking extends StatelessWidget {
             children: [
               Text(
                 'PLAYER_RANKING'.trU(context),
-                style: AppTextStyles.balooBold11.copyWith(
+                style: AppTextStyles.balooMedium14.copyWith(
                   color: AppColors.white,
-                  fontWeight: FontWeight.w500,
                 ),
               ),
-              // InkWell(
-              //   onTap: () {
-              //     showDialogForRankingInfo(context);
-              //   },
-              //   borderRadius: BorderRadius.circular(7),
-              //   child: Padding(
-              //     padding:
-              //         const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
-              //     child: Row(
-              //       children: [
-              //         const Icon(Icons.info_outline_rounded,color: AppColors.white,size: 15),
-              //         SizedBox(width: 2.w),
-              //         Text(
-              //           'INFO'.tr(context),
-              //           style: AppTextStyles.helveticaLight12.copyWith(
-              //             color: AppColors.white,
-              //           ),
-              //         ),
-              //       ],
-              //     ),
-              //   ),
-              // )
+              InkWell(
+                onTap: () {
+                  showDialogForRankingInfo(context);
+                },
+                borderRadius: BorderRadius.circular(7),
+                child: Row(
+                  children: [
+                    // const Icon(Icons.info_outline_rounded,color: AppColors.white,size: 15),
+                    // SizedBox(width: 2.w),
+                    Text(
+                      'INFO'.tr(context),
+                      style: AppTextStyles.sansRegular13.copyWith(
+                        color: AppColors.white,
+                      ),
+                    ),
+                    5.horizontalSpace,
+                    Image.asset(AppImages.infoIcon.path, width: 12.w, height: 12.h,color: AppColors.white,),
+
+                  ],
+                ),
+              )
             ],
           ),
-          SizedBox(height: 15.h),
+          SizedBox(height: 5.h),
           Stack(
             children: [
               Row(
@@ -63,10 +61,10 @@ class _PlayerRanking extends StatelessWidget {
                   Expanded(
                     child: Column(
                       children: [
-                        const SizedBox(height: 8),
+                        SizedBox(height: 4.h),
                         Text(
                           '${rounded - 1}.5',
-                          style: AppTextStyles.gothamLight12.copyWith(
+                          style: AppTextStyles.sansMedium15.copyWith(
                             color: AppColors.white,
                           ),
                         ),
@@ -83,16 +81,16 @@ class _PlayerRanking extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Container(
-                          padding: const EdgeInsets.symmetric(
-                              horizontal: 12, vertical: 2),
+                          padding: EdgeInsets.symmetric(
+                              horizontal: 12.w, vertical: 2.h),
                           decoration: BoxDecoration(
-                            color: AppColors.white,
-                            borderRadius: BorderRadius.circular(7),
+                            color: AppColors.oak,
+                            borderRadius: BorderRadius.circular(100.r),
                           ),
                           child: Center(
                             child: Text(
                               level.toStringAsFixed(2),
-                              style: AppTextStyles.balooBold13,
+                              style: AppTextStyles.sansMedium16.copyWith(color: AppColors.white),
                             ),
                           ),
                         ),
@@ -102,10 +100,10 @@ class _PlayerRanking extends StatelessWidget {
                   Expanded(
                     child: Column(
                       children: [
-                        const SizedBox(height: 8),
+                        SizedBox(height: 4.h),
                         Text(
                           '${rounded + 1}.5',
-                          style: AppTextStyles.gothamLight12.copyWith(
+                          style: AppTextStyles.sansMedium15.copyWith(
                             color: AppColors.white,
                           ),
                         ),
@@ -120,9 +118,9 @@ class _PlayerRanking extends StatelessWidget {
                 ],
               ),
               Padding(
-                padding: const EdgeInsets.only(top: 34),
+                padding: EdgeInsets.only(top: 34),
                 child: ClipRRect(
-                  borderRadius: BorderRadius.circular(10),
+                  borderRadius: BorderRadius.circular(10.r),
                   child: TweenAnimationBuilder<double>(
                     duration: const Duration(milliseconds: 500),
                     curve: Curves.easeInOut,
@@ -133,8 +131,9 @@ class _PlayerRanking extends StatelessWidget {
                     builder: (context, value, _) => LinearProgressIndicator(
                       minHeight: 10,
                       value: value,
-                      color: AppColors.white,
-                      backgroundColor: Colors.white.withOpacity(0.4),
+                      color: AppColors.oak,
+                      borderRadius: BorderRadius.circular(10.r),
+                      backgroundColor: Colors.white,
                     ),
                   ),
                 ),
@@ -200,14 +199,14 @@ class _PlayerStats extends ConsumerWidget {
         // player stats
         Text(
           'PLAYER_STATS'.trU(context),
-          style: AppTextStyles.balooBold13,
+          style: AppTextStyles.balooMedium17,
         ),
-        SizedBox(height: 15.h),
+        SizedBox(height: 10.h),
         _row("AVG_LAST_21_EVALUATIONS".tr(context), lastEvaluations),
         const SizedBox(height: 8),
         _row("POSITION".tr(context), position),
         const SizedBox(height: 8),
-        _row("STARTED_PLAYING".tr(context), startedPlaying),
+        _row("STARTED_PLAYING".tr(context).capitalizeFirst, startedPlaying),
 
         // const SizedBox(height: 8),
         // _row("BEST_QUALITY".tr(context), "-"),
@@ -223,11 +222,11 @@ class _PlayerStats extends ConsumerWidget {
       children: [
         Text(
           txt1,
-          style: AppTextStyles.gothamRegular14,
+          style: AppTextStyles.sansMedium16,
         ),
         Text(
           txt2,
-          style: AppTextStyles.gothamLight13,
+          style: AppTextStyles.sansRegular15,
         ),
       ],
     );
@@ -256,11 +255,11 @@ class _PastMatches extends ConsumerWidget {
           children: [
             Text(
               'PAST_MATCHES'.trU(context),
-              style: AppTextStyles.balooBold13,
+              style: AppTextStyles.balooMedium17,
             ),
             Text(
-              "${'WINNING_STRIKE'.trU(context)}$winningRate",
-              style: AppTextStyles.gothamBold13,
+              "${'WINNING_STRIKE'.tr(context)}$winningRate",
+              style: AppTextStyles.balooMedium15,
             ),
           ],
         ),
@@ -316,9 +315,9 @@ class _PastMatchCard extends StatelessWidget {
       },
       child: Container(
         decoration: BoxDecoration(
-            color: AppColors.darkGreen5,
-            borderRadius: BorderRadius.circular(7)),
-        padding: const EdgeInsets.all(10),
+            color: AppColors.clay05,
+            borderRadius: BorderRadius.circular(12.r)),
+        padding: EdgeInsets.all(15.h),
         child: Column(
           children: [
             Row(
@@ -326,17 +325,17 @@ class _PastMatchCard extends StatelessWidget {
               children: [
                 Text(
                   date.toUpperCase(),
-                  style: AppTextStyles.gothamBold14,
+                  style: AppTextStyles.sansMedium16,
                 ),
                 Text(
                   "LEVEL",
-                  style: AppTextStyles.gothamLight13,
+                  style: AppTextStyles.sansRegular15,
                 )
               ],
             ),
-            const SizedBox(height: 10),
+            // const SizedBox(height: 10),
             const CDivider(),
-            const SizedBox(height: 5),
+            // const SizedBox(height: 5),
             _TeamScores(
               players: teamAPlayers,
               scores: teamAScore,
@@ -412,7 +411,7 @@ class _TeamScores extends StatelessWidget {
     bool isReserved = player.reserved ?? false;
     return Text(
       isReserved ? "RESERVED".tr(context) : (player.getCustomerName),
-      style: AppTextStyles.gothamLight13,
+      style: isWinner ? AppTextStyles.sansMedium15 : AppTextStyles.sansRegular15,
     );
   }
 
@@ -421,14 +420,7 @@ class _TeamScores extends StatelessWidget {
     if (score != null) {
       return Text(
         score.toString(),
-        style: AppTextStyles.balooMedium11.copyWith(
-          fontWeight: isWinner ? FontWeight.w700 : FontWeight.w400,
-          height: 0.6,
-          fontSize: isWinner ? 13 : 11,
-          color: AppColors.darkBlue.withOpacity(
-            isWinner ? 1 : 0.5,
-          ),
-        ),
+        style: isWinner ? AppTextStyles.balooMedium17 : AppTextStyles.sansRegular16,
       );
     }
     return Container(
@@ -440,17 +432,17 @@ class _TeamScores extends StatelessWidget {
   _winnerContainer() {
     return Container(
       margin: const EdgeInsets.only(left: 12),
-      padding: const EdgeInsets.symmetric(vertical: 5),
+      padding: const EdgeInsets.symmetric(vertical: 4),
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(5),
-        color: AppColors.yellow,
+        borderRadius: BorderRadius.circular(100.r),
+        color: AppColors.oak,
       ),
       child: Center(
         child: Text(
-          'WINNERS',
-          style: AppTextStyles.gothamRegular14.copyWith(
-            height: 0.6,
-            color: AppColors.darkGreen,
+          'Winners',
+          style: AppTextStyles.sansMedium16.copyWith(
+            // height: 0.6,
+            color: AppColors.white,
           ),
         ),
       ),
@@ -460,17 +452,15 @@ class _TeamScores extends StatelessWidget {
   _drawContainer() {
     return Container(
       margin: const EdgeInsets.only(left: 12),
-      padding: const EdgeInsets.symmetric(vertical: 5),
+      padding: const EdgeInsets.symmetric(vertical: 4),
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(7),
+        borderRadius: BorderRadius.circular(100.r),
         color: AppColors.white,
       ),
       child: Center(
         child: Text(
-          'DRAW',
-          style: AppTextStyles.balooBold11.copyWith(
-            height: 0.6,
-          ),
+          'Draw',
+          style: AppTextStyles.sansMedium16,
         ),
       ),
     );
@@ -483,17 +473,19 @@ class _RankingLogicDialog extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CustomDialog(
+      color: AppColors.white,
+      closeIconColor: AppColors.darkBlue,
       child: Column(
         children: [
           Text(
             "RANKING_LOGIC".trU(context),
-            style: AppTextStyles.balooBold16.copyWith(color: Colors.white),
+            style: AppTextStyles.popupHeaderTextStyle.copyWith(color: AppColors.darkBlue),
           ),
           SizedBox(height: 10.h),
           Text(
             "RANKING_LOGIC_DESC".tr(context),
             style:
-                AppTextStyles.gothamRegular14.copyWith(color: Colors.white),
+                AppTextStyles.popupBodyTextStyle.copyWith(color: AppColors.darkBlue),
             textAlign: TextAlign.center,
           ),
         ],

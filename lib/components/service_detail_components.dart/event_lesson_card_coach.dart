@@ -34,12 +34,14 @@ class EventLessonCardCoach extends StatelessWidget {
             path: coachProfile,
             width: 28.w,
             height: 28.w,
+            reservedLogo: true,
+            scale: 1,
           ),
           SizedBox(width: 5.w),
           Flexible(
             child: Text(
-              coachName,
-              style: AppTextStyles.balooBold9,
+              coachName.toUpperCase(),
+              style: AppTextStyles.balooMedium12,
             ),
           ),
         ],
@@ -61,12 +63,14 @@ class EventLessonCardCoach extends StatelessWidget {
                   path: coachProfile,
                   width: 28.w,
                   height: 28.w,
+                  reservedLogo: true,
+                  scale: 1,
                 ),
                 SizedBox(width: 5.w),
                 Flexible(
                   child: Text(
-                    coachName,
-                    style: AppTextStyles.balooBold9,
+                    coachName.toUpperCase(),
+                    style: AppTextStyles.balooMedium12,
                   ),
                 ),
               ],

@@ -33,6 +33,7 @@ class AppColors {
   static const oak50 = Color(0xFFBBD2D8);
   static Color optionBgColor05 = Color(0xFF051A0E).withOpacity(0.05);
   static Color clay05 = Color(0xFFF4F5F6);
+  static Color greenNew = Color(0xFF595E49);
 
   static Color get yellow50Popup => Utils.calculateColorOverBackground(
       AppColors.yellow, "7F", AppColors.white);
