@@ -1,6 +1,7 @@
 import 'package:acepadel/components/custom_dialog.dart';
 import 'package:acepadel/models/lesson_model_new.dart';
 import 'package:acepadel/repository/booking_repo.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -192,6 +193,7 @@ class _CourtBookedDialogState extends ConsumerState<CourtBookedDialog> {
               availableSlotIconColor: AppColors.white,
               bgColor: AppColors.white25,
               textColor: AppColors.white,
+              reservedImage: false,
               textForAvailableSlot: "RESERVE".trU(context),
               players: data.players ?? [],
               padding: EdgeInsets.only(top: 10.h,right: 8.w,left: 8.w),
@@ -202,7 +204,10 @@ class _CourtBookedDialogState extends ConsumerState<CourtBookedDialog> {
       },
       error: (err, __) => SecondaryText(text: err.toString()),
       loading: () => const Center(
-        child: CircularProgressIndicator(),
+        child: CupertinoActivityIndicator(
+          radius: 10,
+          color: AppColors.white25,
+        ),
       ),
     );
   }

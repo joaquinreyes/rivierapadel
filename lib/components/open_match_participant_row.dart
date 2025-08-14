@@ -27,6 +27,7 @@ class OpenMatchParticipantRowWithBG extends StatelessWidget {
     this.textColor = AppColors.darkBlue,
     this.onPlayerTap,
     this.padding,
+    this.reservedImage,
   });
   final Color availableSlotbackGroundColor;
   final bool allowBackground;
@@ -42,6 +43,7 @@ class OpenMatchParticipantRowWithBG extends StatelessWidget {
   final Function(int, bool)? onPlayerTap;
   final Color? bgColor;
   final EdgeInsetsGeometry? padding;
+  final bool? reservedImage;
 
   @override
   Widget build(BuildContext context) {
@@ -74,6 +76,7 @@ class OpenMatchParticipantRowWithBG extends StatelessWidget {
         currentCustomerID: currentPlayerID,
         onRelease: onRelease,
         maxPlayers: maxPlayers,
+        reservedImage: reservedImage,
         availableSlotIconColor: availableSlotIconColor,
       ),
     );
@@ -94,7 +97,7 @@ class OpenMatchParticipantRow extends StatefulWidget {
     this.availableSlotIconColor = AppColors.darkBlue,
     this.textColor = AppColors.darkBlue,
     this.onPlayerTap,
-    // this.reservedImage,
+    this.reservedImage,
   });
 
   final Color availableSlotbackGroundColor;
@@ -107,7 +110,7 @@ class OpenMatchParticipantRow extends StatefulWidget {
   final int maxPlayers;
   final Color availableSlotIconColor;
   final Color textColor;
-  // final bool? reservedImage;
+  final bool? reservedImage;
   final Function(int, bool)? onPlayerTap;
   @override
   State<OpenMatchParticipantRow> createState() =>
@@ -246,6 +249,7 @@ class _OpenMatchParticipantRowState extends State<OpenMatchParticipantRow> {
             player: player,
             onRelease: widget.onRelease,
             showReleaseReserveButton: showReleaseReserveButton,
+            reservedImage: widget.reservedImage,
             textColor: widget.textColor,
             onPlayerTap: widget.onPlayerTap,
           );

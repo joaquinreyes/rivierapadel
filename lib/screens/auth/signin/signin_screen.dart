@@ -175,6 +175,7 @@ class _SigninScreenState extends ConsumerState<SigninScreen> {
                             enabled: canProceed,
                             label: FlutterI18n.translate(context, "SIGN_IN").capitalEnabled(context, canProceed: canProceed),
                             showArrow: true,
+                            padding: EdgeInsets.symmetric(horizontal: 10.w),
                             onTap: () async {
                               if (!(_formKey.currentState?.validate() ??
                                   true)) {

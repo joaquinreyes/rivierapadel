@@ -86,6 +86,7 @@ class _AcePadelState extends ConsumerState<AcePadel> {
       data: MediaQuery.of(context)
           .copyWith(textScaler: const TextScaler.linear(1)),
       child: MaterialApp.router(
+        title: 'Rivera Padel',
         routerConfig: router,
         debugShowCheckedModeBanner: false,
         locale: const Locale('en'),

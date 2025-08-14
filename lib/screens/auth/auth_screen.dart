@@ -100,8 +100,9 @@ class _Body extends ConsumerWidget {
                 MainButton(
                   color: AppColors.darkBlue50,
                   label: FlutterI18n.translate(context, "REGISTER"),
+                  padding: EdgeInsets.symmetric(horizontal: 10.w),
                   labelStyle: AppTextStyles.sansRegular18
-                      .copyWith(color: AppColors.white,height: 0.9),
+                      .copyWith(color: AppColors.white,),
                   showArrow: true,
                   // height: 40.h,
                   onTap: () {

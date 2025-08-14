@@ -27,7 +27,7 @@ class ParticipantSlot extends ConsumerWidget {
     this.imageIconColor = AppColors.white,
     this.showLevel = true,
     this.onPlayerTap,
-    // this.reservedImage,
+    this.reservedImage,
   });
 
   final BookingPlayerBase player;
@@ -39,7 +39,7 @@ class ParticipantSlot extends ConsumerWidget {
   final Color imageIconColor;
   final Function(int, bool)? onPlayerTap;
   final bool showLevel;
-  // final bool? reservedImage;
+  final bool? reservedImage;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -187,7 +187,7 @@ class ParticipantSlot extends ConsumerWidget {
       width: isHorizontal ? 37.h : 37.h,
       height: isHorizontal ? 37.h : 37.h,
       scale: 1,
-      reservedLogo: player.reserved,
+      reservedLogo: reservedImage ?? player.reserved ?? false,
       boxBorder: Border.all(color: ((player.customer?.profileUrl?.isNotEmpty ?? false) && (player.reserved == false)) ? AppColors.white25 : AppColors.darkBlue),
     );
   }
