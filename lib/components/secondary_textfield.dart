@@ -106,7 +106,7 @@ class SecondaryTextField extends StatelessWidget {
         cursorColor: errorText == null ? AppColors.white : AppColors.errorColor,
         style: style ??
             AppTextStyles.gothamLight12.copyWith(
-              height: 1,
+              // height: 1,
               color: (readOnly ?? false) ? AppColors.white25 : AppColors.white,
               ////fontFamily: kPirulen,
               fontSize: 12.sp,

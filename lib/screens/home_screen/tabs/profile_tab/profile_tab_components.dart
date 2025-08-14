@@ -16,6 +16,8 @@ class _HeaderInfo extends ConsumerWidget {
           alignment: Alignment.centerRight,
           margin: EdgeInsets.only(right: 18.w),
           child: SecondaryButton(
+            applyShadow: false,
+            color: AppColors.clay05,
             onTap: () async {
               bool? logout = await showDialog(
                   context: context,
@@ -31,6 +33,7 @@ class _HeaderInfo extends ConsumerWidget {
             ),
           ),
         ),
+        10.verticalSpace,
         Row(
           crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisAlignment: MainAxisAlignment.center,
@@ -70,25 +73,28 @@ class _HeaderInfo extends ConsumerWidget {
                 children: [
                   NetworkCircleImage(
                     path: user?.profileUrl,
-                    width: 100.w,
-                    height: 100.h,
-                    showBG: true,
-                    isYellowBg: true,
+                    width: 90.w,
+                    height: 90.h,
+                    borderRadius: BorderRadius.circular(18.r),
+                    showBG: false,
+                    scale: 1,
+                    reservedLogo: true,
+                    isYellowBg: false,
                   ),
                   Positioned(
-                    right: 28,
-                    bottom: 8,
+                    right: 12.w,
+                    bottom: 10.h,
                     child: Image.asset(
                       AppImages.iconCamera.path,
-                      width: 18.w,
-                      height: 18.w,
+                      width: 13.w,
+                      height: 13.w,
                       color: AppColors.white,
                     ),
                   )
                 ],
               ),
             ),
-            SizedBox(width: 10.w),
+            SizedBox(width: 20.w),
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisAlignment: MainAxisAlignment.start,
@@ -96,18 +102,18 @@ class _HeaderInfo extends ConsumerWidget {
                 SizedBox(height: 5.h),
                 Text(
                   user?.firstName ?? "",
-                  style: AppTextStyles.balooBold18,
+                  style: AppTextStyles.balooMedium22,
                 ),
                 SizedBox(height: 1.h),
                 Text(
                   "$level • $playingSide",
-                  style: AppTextStyles.balooMedium11,
+                  style: AppTextStyles.sansRegular15.copyWith(height: 1),
                 ),
-                SizedBox(height: 12.h),
+                SizedBox(height: 4.h),
                 paymentDetails.when(
                     data: (data) {
                       double walletBalance = 0;
-                      String currency = "IDR";
+                      String currency = "Rp";
                       if (data.isNotEmpty) {
                         walletBalance = data.first.balance;
                         currency = data.first.currency;
@@ -116,7 +122,7 @@ class _HeaderInfo extends ConsumerWidget {
                     },
                     loading: () =>
                         const Center(child: CupertinoActivityIndicator()),
-                    error: (e, _) => walletView(context, 0, "IDR"))
+                    error: (e, _) => walletView(context, 0, "Rp"))
               ],
             )
           ],
@@ -131,12 +137,12 @@ class _HeaderInfo extends ConsumerWidget {
       children: [
         Text(
           "WALLET".tr(context),
-          style: AppTextStyles.balooBold12,
+          style: AppTextStyles.sansMedium15,
         ),
-        SizedBox(width: 4.w),
+        SizedBox(width: 5.w),
         Text(
           Utils.formatPrice2(walletBalance, currency),
-          style: AppTextStyles.balooMedium12,
+          style: AppTextStyles.sansRegular15,
         )
       ],
     );
@@ -157,8 +163,8 @@ class _Membership extends ConsumerWidget {
             return Row(
               children: [
                 Text(
-                  "${"LOYALTY_PROGRAM".tr(context)} ${memberShip.tr(context)}",
-                  style: AppTextStyles.balooBold11,
+                  "${"LOYALTY_PROGRAM".trU(context)} ${memberShip.trU(context)}",
+                  style: AppTextStyles.balooMedium14,
                 ),
                 const Spacer(),
                 GestureDetector(
@@ -173,14 +179,14 @@ class _Membership extends ConsumerWidget {
                     children: [
                       Text(
                         "INFO".tr(context),
-                        style: AppTextStyles.balooMedium11,
+                        style: AppTextStyles.sansRegular13,
                       ),
                       SizedBox(width: 5.w),
                       Image.asset(
                         AppImages.infoIcon.path,
-                        width: 14.w,
-                        height: 14.h,
-                        color: AppColors.darkGreen,
+                        width: 12.h,
+                        height: 11.h,
+                        color: AppColors.darkBlue,
                       ),
                     ],
                   ),
@@ -242,18 +248,18 @@ class _PlayedHoursState extends ConsumerState<_PlayedHours> {
             children: [
               Row(
                 children: [
-                  Expanded(
+                  Expanded(flex: 2,
                     child: Text(
                       "${"THIS_MONTH".tr(context)} $hours hrs",
-                      style: AppTextStyles.gothamLight11,
+                      style: AppTextStyles.sansRegular12,
                     ),
                   ),
-                  const Spacer(),
+                  // const Spacer(),
                   Expanded(
                     child: Center(
                       child: Text(
                         "GOLD".tr(context),
-                        style: AppTextStyles.gothamRegular13,
+                        style: AppTextStyles.sansMedium14,
                       ),
                     ),
                   ),
@@ -262,7 +268,7 @@ class _PlayedHoursState extends ConsumerState<_PlayedHours> {
                     child: Center(
                       child: Text(
                         "PLATINUM".tr(context),
-                        style: AppTextStyles.gothamRegular13,
+                        style: AppTextStyles.sansMedium14,
                       ),
                     ),
                   ),
@@ -273,7 +279,7 @@ class _PlayedHoursState extends ConsumerState<_PlayedHours> {
                 alignment: Alignment.bottomCenter,
                 children: [
                   ClipRRect(
-                    borderRadius: BorderRadius.circular(20),
+                    borderRadius: BorderRadius.circular(10.r),
                     child: TweenAnimationBuilder<double>(
                       duration: const Duration(milliseconds: 500),
                       curve: Curves.easeInOut,
@@ -284,9 +290,9 @@ class _PlayedHoursState extends ConsumerState<_PlayedHours> {
                       builder: (context, value, _) => LinearProgressIndicator(
                         minHeight: 10,
                         value: normalize(hours.abs(), 0, 35),
-                        color: AppColors.yellow,
+                        color: AppColors.oak,
                         borderRadius: BorderRadius.circular(20),
-                        backgroundColor: AppColors.green5,
+                        backgroundColor: AppColors.darkBlue,
                       ),
                     ),
                   ),
@@ -305,6 +311,25 @@ class _PlayedHoursState extends ConsumerState<_PlayedHours> {
                         width: 2.w,
                         height: 10.h,
                         color: Colors.white,
+                      ),
+                      const Expanded(child: SizedBox())
+                    ],
+                  ),
+                ],
+              ),
+              const SizedBox(height: 2),
+              Stack(
+                alignment: Alignment.bottomCenter,
+                children: [
+                  Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      const Expanded(child: SizedBox()),
+                      Text("15HRS".tr(context),style: AppTextStyles.sansRegular12,
+                      ),
+                      const Expanded(child: SizedBox()),
+                      Text("26HRS".tr(context),style: AppTextStyles.sansRegular12,
                       ),
                       const Expanded(child: SizedBox())
                     ],
@@ -336,13 +361,13 @@ class _SignOutConfirmation extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         children: [
           Text(
-            "SIGN_OUT_CONFIRMATION".tr(context),
+            "SIGN_OUT_CONFIRMATION".trU(context),
             style: AppTextStyles.popupHeaderTextStyle,
             textAlign: TextAlign.center,
           ),
           SizedBox(height: 20.h),
           MainButton(
-            label: "SIGN_OUT".tr(context),
+            label: "SIGN_OUT".trU(context),
             isForPopup: true,
             enabled: true,
             onTap: () {
@@ -374,12 +399,12 @@ class _LoyaltyInfoDialog extends StatelessWidget {
             ),
             SizedBox(height: 20.h),
             Text(
-              "LOYALTY_PROGRAM".tr(context),
-              style: AppTextStyles.balooBold15,
+              "LOYALTY_PROGRAM".trU(context),
+              style: AppTextStyles.popupHeaderTextStyle.copyWith(color: AppColors.darkBlue),
             ),
             Text(
-              "GOLD".tr(context),
-              style: AppTextStyles.balooBold15,
+              "GOLD".trU(context),
+              style: AppTextStyles.popupHeaderTextStyle.copyWith(color: AppColors.darkBlue,height: 1.2),
             ),
             SizedBox(height: 15.h),
             _benefitsReqRowWidget(
@@ -390,22 +415,22 @@ class _LoyaltyInfoDialog extends StatelessWidget {
             SizedBox(height: 15.h),
             Text(
               "ONCE_YOU_ATTAIN_THIS_CARD".tr(context),
-              style: AppTextStyles.balooMedium11,
+              style: AppTextStyles.sansRegular15,
               textAlign: TextAlign.center,
             ),
-            SizedBox(height: 15.h),
+            SizedBox(height: 20.h),
             Image.asset(
               AppImages.platinumCard.path,
               width: 100.w,
               height: 100.w,
             ),
             Text(
-              "LOYALTY_PROGRAM".tr(context),
-              style: AppTextStyles.balooBold15,
+              "LOYALTY_PROGRAM".trU(context),
+              style: AppTextStyles.popupHeaderTextStyle.copyWith(color: AppColors.darkBlue),
             ),
             Text(
-              "PLATINUM".tr(context),
-              style: AppTextStyles.balooBold15,
+              "PLATINUM".trU(context),
+              style: AppTextStyles.popupHeaderTextStyle.copyWith(color: AppColors.darkBlue,height: 1.2),
             ),
             SizedBox(height: 15.h),
             _benefitsReqRowWidget(
@@ -416,7 +441,7 @@ class _LoyaltyInfoDialog extends StatelessWidget {
             SizedBox(height: 15.h),
             Text(
               "ONCE_YOU_ATTAIN_THIS_CARD".tr(context),
-              style: AppTextStyles.balooMedium11,
+              style: AppTextStyles.sansRegular15,
               textAlign: TextAlign.center,
             ),
           ],
@@ -428,29 +453,29 @@ class _LoyaltyInfoDialog extends StatelessWidget {
   SizedBox _benefitsReqRowWidget(
       BuildContext context, String benefits, String req) {
     return SizedBox(
-      height: 121.h,
+      height: 143.h,
       child: Row(
         children: [
           Expanded(
-            flex: 3,
             child: Container(
               padding: EdgeInsets.symmetric(vertical: 15.h, horizontal: 10.w),
               decoration: BoxDecoration(
-                color: AppColors.green5,
-                borderRadius: BorderRadius.all(Radius.circular(5.r)),
+                color: AppColors.darkBlue,
+                borderRadius: BorderRadius.all(Radius.circular(12.r)),
               ),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
                     "BENEFITS".tr(context),
-                    style: AppTextStyles.balooMedium12
-                        .copyWith(color: AppColors.white),
+                    style: AppTextStyles.balooMedium16
+                        .copyWith(color: AppColors.white,height: 1),
                   ),
                   const CDivider(color: AppColors.white25),
+                  5.verticalSpace,
                   Text(
                     benefits,
-                    style: AppTextStyles.gothamLight13
+                    style: AppTextStyles.sansRegular13
                         .copyWith(color: AppColors.white),
                   ),
                 ],
@@ -459,24 +484,25 @@ class _LoyaltyInfoDialog extends StatelessWidget {
           ),
           SizedBox(width: 5.w),
           Expanded(
-            flex: 4,
             child: Container(
               padding: EdgeInsets.symmetric(vertical: 15.h, horizontal: 10.w),
               decoration: BoxDecoration(
-                color: AppColors.green25,
-                borderRadius: BorderRadius.all(Radius.circular(5.r)),
+                color: AppColors.darkBlue.withOpacity(0.25),
+                borderRadius: BorderRadius.all(Radius.circular(12.r)),
               ),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
                     "REQUIREMENTS".tr(context),
-                    style: AppTextStyles.balooMedium12,
+                    style: AppTextStyles.balooMedium16.copyWith(height: 1),
                   ),
-                  const CDivider(color: AppColors.darkGreen25),
+                  CDivider(color: AppColors.darkBlue.withOpacity(0.25)),
+                  5.verticalSpace,
+
                   Text(
                     req,
-                    style: AppTextStyles.gothamLight13,
+                    style: AppTextStyles.sansRegular13,
                   ),
                 ],
               ),

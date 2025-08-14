@@ -11,8 +11,8 @@ class SecondaryText extends StatelessWidget {
     return Center(
       child: Text(
         text,
-        style: AppTextStyles.gothamRegular14
-            .copyWith(color: textColor ?? AppColors.black),
+        style: AppTextStyles.sansRegular13
+            .copyWith(color: textColor ?? AppColors.darkBlue),
       ),
     );
   }

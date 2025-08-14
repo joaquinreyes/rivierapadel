@@ -8,7 +8,7 @@
 PRODUCT_NAME = acepadel
 
 // The application's bundle identifier
-PRODUCT_BUNDLE_IDENTIFIER = com.bookandgo.acepadel
+PRODUCT_BUNDLE_IDENTIFIER = com.rivierapadel.bookandgo
 
 // The copyright displayed in application information
 PRODUCT_COPYRIGHT = Copyright © 2024 com.bookandgo. All rights reserved.

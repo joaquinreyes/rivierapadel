@@ -47,19 +47,20 @@ class _UpComingBookingsState extends ConsumerState<Settings> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        SizedBox(height: 20.h),
+        // SizedBox(height: 20.h),
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Text(
-              'PERSONAL_INFORMATION'.tr(context),
-              style: AppTextStyles.balooBold13,
+              'PERSONAL_INFORMATION'.trU(context),
+              style: AppTextStyles.balooMedium17,
             ),
             SecondaryImageButton(
               label: "EDIT".tr(context),
               image: AppImages.editIcon.path,
-              imageHeight: 15.h,
-              imageWidth: 13.w,
+              imageHeight: 13.h,
+              imageWidth: 13.h,
+              fontSize: 13.sp,
               onTap: () {
                 showDialog(
                   context: context,
@@ -71,24 +72,24 @@ class _UpComingBookingsState extends ConsumerState<Settings> {
             )
           ],
         ),
-        SizedBox(height: 20.h),
+        SizedBox(height: 10.h),
         _buildInfoField("FIRST_NAME".tr(context), user?.firstName ?? ""),
-        SizedBox(height: 10.h),
-        _buildInfoField("LAST_NAME".tr(context), user?.lastName ?? ""),
-        SizedBox(height: 10.h),
+        SizedBox(height: 8.h),
+        _buildInfoField("SURNAME".tr(context), user?.lastName ?? ""),
+        SizedBox(height: 8.h),
         _buildInfoField("EMAIL".tr(context), user?.email ?? ""),
-        SizedBox(height: 10.h),
+        SizedBox(height: 8.h),
         _buildInfoField("PHONE_NUMBER".tr(context), user?.phoneNumber ?? ""),
-        SizedBox(height: 10.h),
+        SizedBox(height: 8.h),
         _buildInfoField("LEVEL".tr(context), (userLevel ?? 0).formatString()),
         if (user != null)
           _CustomFields(
             user: user,
           ),
         // const _PaymentInfo(),
-        SizedBox(height: 20.h),
+        SizedBox(height: 40.h),
         const TransactionList(),
-        SizedBox(height: 20.h),
+        SizedBox(height: 40.h),
         const _DeletePasswordBtns(),
         SizedBox(height: 20.h),
       ],
@@ -120,10 +121,10 @@ class _UpComingBookingsState extends ConsumerState<Settings> {
 //     return Column(
 //       crossAxisAlignment: CrossAxisAlignment.start,
 //       children: [
-//         SizedBox(height: 40.h),
+//         SizedBox(height: 42.h),
 //         Text(
-//           'PAYMENT_INFORMATION'.tr(context),
-//           style: AppTextStyles.panchangBold13,
+//           'PAYMENT_SETTINGS'.trU(context),
+//           style: AppTextStyles.balooMedium17,
 //         ),
 //         SizedBox(height: 12.h),
 //         _buildInfoField(

@@ -410,8 +410,8 @@ class _TeamScores extends StatelessWidget {
   _userName(ServiceDetail_Players player, BuildContext context) {
     bool isReserved = player.reserved ?? false;
     return Text(
-      isReserved ? "RESERVED".tr(context) : (player.getCustomerName),
-      style: isWinner ? AppTextStyles.sansMedium15 : AppTextStyles.sansRegular15,
+      isReserved ? "RESERVED".tr(context) : (player.getCustomerName.capitalizeFirst),
+      style: isWinner ? AppTextStyles.gothamMedium15 : AppTextStyles.sansRegular15,
     );
   }
 
@@ -420,7 +420,7 @@ class _TeamScores extends StatelessWidget {
     if (score != null) {
       return Text(
         score.toString(),
-        style: isWinner ? AppTextStyles.balooMedium17 : AppTextStyles.sansRegular16,
+        style: isWinner ? AppTextStyles.gothamMedium17 : AppTextStyles.sansRegular16,
       );
     }
     return Container(

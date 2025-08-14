@@ -95,6 +95,8 @@ flutter:
           weight: 300
         - asset: assets/fonts/gotham/GothamNarrow-Book.otf
           weight: 400
+        - asset: assets/fonts/gotham/GothamNarrow-Medium.otf
+          weight: 500
         - asset: assets/fonts/gotham/GothamNarrow-Bold.otf
           weight: 700
         - asset: assets/fonts/gotham/GothamNarrow-BoldItalic.otf

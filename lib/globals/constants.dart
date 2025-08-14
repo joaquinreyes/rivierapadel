@@ -7,8 +7,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_inset_box_shadow/flutter_inset_box_shadow.dart'
     as inset;
 
-const currency = "IDR";
-const kAppName = 'Ace Padel';
+const currency = "Rp";
+const kAppName = 'Rivera Padel';
 const kWhatsAppContact = "+6281110508077";
 const kWhatsAppLink = "https://api.whatsapp.com/send";
 

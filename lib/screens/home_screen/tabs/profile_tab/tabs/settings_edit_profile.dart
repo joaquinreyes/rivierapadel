@@ -40,43 +40,43 @@ class __EDITProfileState extends ConsumerState<_EditProfile> {
             mainAxisSize: MainAxisSize.min,
             children: [
               Text(
-                "EDIT_YOUR_INFORMATION".tr(context),
+                "EDIT_YOUR_INFORMATION".trU(context),
                 style: AppTextStyles.popupHeaderTextStyle,
               ),
-              SizedBox(height: 10.h),
+              SizedBox(height: 20.h),
               _buildTextField(
                 "FIRST_NAME".tr(context),
                 _firstNameController,
               ),
-              SizedBox(height: 10.h),
+              SizedBox(height: 5.h),
               _buildTextField(
-                "LAST_NAME".tr(context),
+                "SURNAME".tr(context),
                 _lastNameController,
               ),
-              SizedBox(height: 10.h),
+              SizedBox(height: 5.h),
               _buildTextField(
                 "EMAIL".tr(context),
                 _emailController,
                 enabled: false,
               ),
-              SizedBox(height: 10.h),
+              SizedBox(height: 5.h),
               _buildTextField(
                 "PHONE_NUMBER".tr(context),
                 _phoneController,
                 isNumber: true,
               ),
-              SizedBox(height: 10.h),
+              SizedBox(height: 5.h),
               _buildTextField(
                 "LEVEL".tr(context),
                 _levelController,
                 enabled: false,
                 isNumber: true,
               ),
-              SizedBox(height: 10.h),
+              SizedBox(height: 5.h),
               _editCustomFields(),
               SizedBox(height: 20.h),
               MainButton(
-                label: "SAVE".tr(context),
+                label: "SAVE".trU(context),
                 enabled: true,
                 isForPopup: true,
                 onTap: () async {
@@ -128,7 +128,7 @@ class __EDITProfileState extends ConsumerState<_EditProfile> {
                 (customField.sId?.isEmpty ?? true)) {
               return Container();
             }
-            return SizedBox(height: 10.h);
+            return SizedBox(height: 5.h);
           },
           physics: const NeverScrollableScrollPhysics(),
           itemBuilder: (context, index) {
@@ -229,7 +229,7 @@ class __EDITProfileState extends ConsumerState<_EditProfile> {
             ),
             decoration: BoxDecoration(
               color: AppColors.white25,
-              borderRadius: BorderRadius.circular(5.r),
+              borderRadius: BorderRadius.circular(100.r),
             ),
             child: Row(
               children: [
@@ -238,14 +238,14 @@ class __EDITProfileState extends ConsumerState<_EditProfile> {
                     selectedDate != null
                         ? selectedDate.format("MMMM yyyy")
                         : "mm/yyyy",
-                    style: AppTextStyles.gothamRegular12.copyWith(
+                    style: AppTextStyles.sansRegular13.copyWith(
                       color: AppColors.white,
                     ),
                   ),
                 ),
                 Image.asset(
                   AppImages.dropdownIcon.path,
-                  width: 10.w,
+                  width: 16.w,
                   color: AppColors.white,
                 ),
               ],
@@ -316,14 +316,14 @@ class __EDITProfileState extends ConsumerState<_EditProfile> {
                     decoration: BoxDecoration(
                       color: !isSelected
                           ? AppColors.white25
-                          : AppColors.yellow50Popup,
-                      borderRadius: BorderRadius.circular(5.r),
+                          : AppColors.oak50,
+                      borderRadius: BorderRadius.circular(100.r),
                     ),
                     child: Text(
                       str,
                       style: isSelected
-                          ? AppTextStyles.gothamRegular12
-                          : AppTextStyles.gothamLight12
+                          ? AppTextStyles.sansRegular13
+                          : AppTextStyles.sansRegular13
                               .copyWith(color: AppColors.white),
                     ),
                   ),
@@ -385,13 +385,13 @@ class __EDITProfileState extends ConsumerState<_EditProfile> {
                       color: !isSelected
                           ? AppColors.white25
                           : AppColors.yellow50Popup,
-                      borderRadius: BorderRadius.circular(5.r),
+                      borderRadius: BorderRadius.circular(100.r),
                     ),
                     child: Text(
                       str,
                       style: isSelected
-                          ? AppTextStyles.gothamRegular12
-                          : AppTextStyles.gothamLight12
+                          ? AppTextStyles.sansRegular13
+                          : AppTextStyles.sansRegular13
                               .copyWith(color: AppColors.white),
                     ),
                   ),
@@ -412,6 +412,8 @@ class __EDITProfileState extends ConsumerState<_EditProfile> {
         controller: controller,
         isEnabled: enabled,
         keyboardType: isNumber ? TextInputType.number : TextInputType.text,
+        style: AppTextStyles.sansRegular13.copyWith(color: AppColors.white),
+        hintTextStyle: AppTextStyles.sansRegular13.copyWith(color: AppColors.white),
         onChanged: (_) {
           if (id != null) {
             if (isNumber) {
@@ -436,7 +438,7 @@ class __EDITProfileState extends ConsumerState<_EditProfile> {
           flex: 2,
           child: Text(
             header,
-            style: AppTextStyles.balooMedium12.copyWith(
+            style: AppTextStyles.sansRegular16.copyWith(
               color: AppColors.white,
             ),
           ),

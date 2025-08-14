@@ -12,8 +12,8 @@ import '../routes/app_routes.dart';
 
 part 'api_manager.g.dart';
 
-const kClubID = 72;
 // const kClubID = 2;
+const kClubID = kDebugMode ? 2 : 72;
 const kBaseURL = 'https://api.bookandgo.app/api/v1/apps';
 const kChatBaseURL = 'https://chat.bookandgo.app/websocket/club';
 

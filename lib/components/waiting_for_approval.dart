@@ -14,7 +14,7 @@ class WaitingForApproval extends StatelessWidget {
     return Center(
       child: Container(
         decoration: BoxDecoration(
-          color: AppColors.yellow,
+          color: AppColors.oak,
           borderRadius: BorderRadius.all(Radius.circular(100.r)),
         ),
         padding: EdgeInsets.symmetric(
@@ -23,7 +23,7 @@ class WaitingForApproval extends StatelessWidget {
         ),
         child: Text(
           "WAITING_FOR_APPROVAL".tr(context),
-          style: AppTextStyles.balooBold10,
+          style: AppTextStyles.balooMedium13.copyWith(color: AppColors.white),
         ),
       ),
     );

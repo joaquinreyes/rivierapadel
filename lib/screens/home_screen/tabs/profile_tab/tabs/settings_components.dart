@@ -8,6 +8,7 @@ class _DeletePasswordBtns extends ConsumerWidget {
     return Row(
       children: [
         SecondaryButton(
+          padding: EdgeInsets.symmetric(horizontal: 30.w,vertical: 4.h),
           applyShadow: false,
           onTap: () async {
             final done = await showDialog(
@@ -17,7 +18,7 @@ class _DeletePasswordBtns extends ConsumerWidget {
             if (done == true && context.mounted) {
               Utils.showMessageDialog(
                 context,
-                "ACCOUNT_DELETED".tr(context),
+                "ACCOUNT_DELETED".trU(context),
               );
               ref.read(userManagerProvider).signout(ref);
               ref.read(goRouterProvider).pushReplacement(RouteNames.auth);
@@ -25,11 +26,12 @@ class _DeletePasswordBtns extends ConsumerWidget {
           },
           child: Text(
             "DELETE_ACCOUNT".tr(context),
-            style: AppTextStyles.gothamLight12,
+            style: AppTextStyles.sansRegular13,
           ),
         ),
         const Spacer(),
         SecondaryButton(
+          padding: EdgeInsets.symmetric(horizontal: 23.w,vertical: 4.h),
           applyShadow: false,
           onTap: () {
             showDialog(
@@ -39,7 +41,7 @@ class _DeletePasswordBtns extends ConsumerWidget {
           },
           child: Text(
             "CHANGE_PASSWORD".tr(context),
-            style: AppTextStyles.gothamLight12,
+            style: AppTextStyles.sansRegular13,
           ),
         )
       ],
@@ -116,11 +118,11 @@ Row _buildInfoField(String heading, String value) {
     children: [
       Text(
         heading,
-        style: AppTextStyles.gothamRegular13,
+        style: AppTextStyles.gothamMedium15,
       ),
       Text(
         value,
-        style: AppTextStyles.gothamLight13,
+        style: AppTextStyles.sansRegular15,
       ),
     ],
   );
@@ -152,22 +154,22 @@ class __ChangePasswordDialogState extends ConsumerState<_ChangePasswordDialog> {
             mainAxisSize: MainAxisSize.min,
             children: [
               Text(
-                "CHANGE_PASSWORD".tr(context),
+                "CHANGE_PASSWORD".trU(context),
                 style: AppTextStyles.popupHeaderTextStyle,
               ),
-              SizedBox(height: 25.h),
+              SizedBox(height: 20.h),
               Row(
                 children: [
                   Text(
                     "CURRENT_PASSWORD".tr(context),
-                    style: AppTextStyles.balooMedium12.copyWith(
+                    style: AppTextStyles.sansRegular16.copyWith(
                       color: AppColors.white,
                     ),
                   ),
                   const Spacer(),
                   Text(
                     "RECOVER".tr(context),
-                    style: AppTextStyles.gothamLight13.copyWith(
+                    style: AppTextStyles.sansRegular15.copyWith(
                       color: AppColors.white,
                     ),
                   ),
@@ -181,13 +183,17 @@ class __ChangePasswordDialogState extends ConsumerState<_ChangePasswordDialog> {
                 onChanged: (p0) {
                   setState(() {});
                 },
+                contentPadding: EdgeInsets.symmetric(
+                  vertical: 6.h,
+                  horizontal: 12.w,
+                ),
               ),
               SizedBox(height: 15.h),
               Align(
                 alignment: AlignmentDirectional.centerStart,
                 child: Text(
                   "NEW_PASSWORD".tr(context),
-                  style: AppTextStyles.balooMedium12.copyWith(
+                  style: AppTextStyles.sansRegular16.copyWith(
                     color: AppColors.white,
                   ),
                 ),
@@ -200,10 +206,14 @@ class __ChangePasswordDialogState extends ConsumerState<_ChangePasswordDialog> {
                 onChanged: (p0) {
                   setState(() {});
                 },
+                contentPadding: EdgeInsets.symmetric(
+                  vertical: 6.h,
+                  horizontal: 12.w,
+                ),
               ),
               SizedBox(height: 25.h),
               MainButton(
-                label: "CHANGE_PASSWORD".tr(context),
+                label: "SAVE".tr(context).capitalEnabled(context, canProceed: enabled),
                 isForPopup: true,
                 enabled: enabled,
                 onTap: () async {
@@ -218,7 +228,7 @@ class __ChangePasswordDialogState extends ConsumerState<_ChangePasswordDialog> {
                     Navigator.pop(context);
                     Utils.showMessageDialog(
                       context,
-                      "PASSWORD_SUCCESSFULLY_CHANGED".tr(context),
+                      "PASSWORD_SUCCESSFULLY_CHANGED".trU(context),
                     );
                   }
                 },
@@ -254,7 +264,7 @@ class __DeleteAccountConfirmationState
           mainAxisSize: MainAxisSize.min,
           children: [
             Text(
-              "DELETE_CONFIRMATION".tr(context),
+              "DELETE_CONFIRMATION".trU(context),
               style: AppTextStyles.popupHeaderTextStyle,
               textAlign: TextAlign.center,
             ),
@@ -269,7 +279,7 @@ class __DeleteAccountConfirmationState
               alignment: AlignmentDirectional.centerStart,
               child: Text(
                 "PASSWORD".tr(context),
-                style: AppTextStyles.balooMedium12.copyWith(
+                style: AppTextStyles.sansRegular16.copyWith(
                   color: AppColors.white,
                 ),
               ),
@@ -282,10 +292,14 @@ class __DeleteAccountConfirmationState
               onChanged: (p0) {
                 setState(() {});
               },
+              contentPadding: EdgeInsets.symmetric(
+                vertical: 6.h,
+                horizontal: 12.w,
+              ),
             ),
             SizedBox(height: 20.h),
             MainButton(
-              label: "DELETE_ACCOUNT".tr(context),
+              label: "DELETE_ACCOUNT".tr(context).capitalEnabled(context, canProceed: enabled),
               enabled: enabled,
               isForPopup: true,
               onTap: () async {
@@ -321,8 +335,8 @@ class TransactionList extends ConsumerWidget {
           Row(
             children: [
               Text(
-                "TRANSACTION_HISTORY".tr(context),
-                style: AppTextStyles.balooBold13,
+                "TRANSACTION_HISTORY".trU(context),
+                style: AppTextStyles.balooMedium17,
               ),
               SizedBox(width: 5.w),
               if (showShareButton)
@@ -332,14 +346,15 @@ class TransactionList extends ConsumerWidget {
                       context: context,
                       builder: (context) {
                         return CustomDialog(
+                          color: AppColors.white,
+                            closeIconColor: AppColors.darkBlue,
                             child: Column(
                           children: [
                             Padding(
                               padding: EdgeInsets.symmetric(vertical: 10.h),
                               child: Text(
-                                "TRANSACTION_HISTORY".tr(context),
-                                style: AppTextStyles.balooBold13
-                                    .copyWith(color: AppColors.white),
+                                "TRANSACTION_HISTORY".trU(context),
+                                style: AppTextStyles.popupHeaderTextStyle.copyWith(color: AppColors.darkBlue),
                               ),
                             ),
                             const TransactionList(isForPopUp: true)
@@ -354,7 +369,7 @@ class TransactionList extends ConsumerWidget {
               SizedBox(width: 10.w),
               Text(
                 "(${"LATEST".tr(context)})",
-                style: AppTextStyles.gothamLight13
+                style: AppTextStyles.sansRegular15
                     .copyWith(color: AppColors.darkGreen),
               ),
             ],
@@ -393,38 +408,25 @@ class TransactionList extends ConsumerWidget {
                           Expanded(
                               child: Text(
                             showDate,
-                            style: AppTextStyles.gothamLight13.copyWith(
-                                color: isForPopUp
-                                    ? AppColors.white
-                                    : AppColors.darkGreen),
+                            style: AppTextStyles.sansRegular14,
                           )),
                           Expanded(
                               child: Text(
                             status,
-                            style: AppTextStyles.gothamLight13.copyWith(
-                                color: isForPopUp
-                                    ? AppColors.white
-                                    : AppColors.darkGreen),
+                            style: AppTextStyles.sansRegular14,
                             textAlign: TextAlign.center,
                           )),
                           Expanded(
                               flex: 1,
                               child: Text(
                                 paymentMethod.capitalizeFirst,
-                                style: AppTextStyles.gothamRegular14
-                                    .copyWith(
-                                        color: isForPopUp
-                                            ? AppColors.white
-                                            : AppColors.darkGreen),
+                                style: AppTextStyles.gothamMedium16,
                                 textAlign: TextAlign.center,
                               )),
                           Expanded(
                               child: Text(
                             amount,
-                            style: AppTextStyles.gothamLight13.copyWith(
-                                color: isForPopUp
-                                    ? AppColors.white
-                                    : AppColors.darkGreen),
+                            style: AppTextStyles.sansRegular15,
                             textAlign: TextAlign.center,
                           )),
                         ],

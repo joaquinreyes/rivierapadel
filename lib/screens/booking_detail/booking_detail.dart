@@ -108,7 +108,7 @@ class _CancelConfirmDialog extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         children: [
           Text(
-            "ARE_YOU_SURE_YOU_WANT_TO_CANCEL_THE_BOOKING".tr(context),
+            "ARE_YOU_SURE_YOU_WANT_TO_CANCEL_THE_BOOKING".trU(context),
             textAlign: TextAlign.center,
             style: AppTextStyles.popupHeaderTextStyle,
           ),
@@ -122,7 +122,7 @@ class _CancelConfirmDialog extends StatelessWidget {
           ),
           SizedBox(height: 20.h),
           MainButton(
-            label: "CANCEL_BOOKING".tr(context),
+            label: "CANCEL_BOOKING".trU(context),
             isForPopup: true,
             onTap: () {
               Navigator.pop(context, true);
@@ -171,7 +171,7 @@ class _DataBody extends ConsumerWidget {
                 image: AppImages.tennisBall.path,
                 imageHeight: 11.w,
                 imageWidth: 11.w,
-                fontSize: 9.5.sp,
+                // fontSize: 9.5.sp,
                 onTap: () {
                   _changeToOpen(context, ref);
                 },
@@ -336,7 +336,7 @@ class _DataBody extends ConsumerWidget {
           if (left == true && context.mounted) {
             Utils.showMessageDialog(
               context,
-              "YOU_HAVE_CANCELED_THE_BOOKING".tr(context),
+              "YOU_HAVE_CANCELED_THE_BOOKING".trU(context),
             ).then((value) {
               ref.read(goRouterProvider).pop();
             });

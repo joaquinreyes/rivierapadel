@@ -50,31 +50,31 @@ class _WaitingListApprovalStatusState
         Text(
           player.isApproved
               ? acceptedHeader
-              : "YOU_ARE_WAITING_FOR_APPROVAL".tr(context),
-          style: AppTextStyles.balooBold13,
+              : "YOU_ARE_WAITING_FOR_APPROVAL".trU(context),
+          style: AppTextStyles.balooMedium17,
         ),
         SizedBox(height: 5.h),
         Container(
           decoration: BoxDecoration(
-            color: AppColors.green5,
+            color: AppColors.clay05,
             borderRadius: BorderRadius.circular(15.r),
           ),
           padding: EdgeInsets.symmetric(horizontal: 25.w, vertical: 15.h),
           child: Row(
             children: [
               NetworkCircleImage(
-                  path: player.customer?.profileUrl, width: 40.w, height: 40.h),
+                  path: player.customer?.profileUrl, width: 37.w, height: 37.h,scale: 1,reservedLogo: true,),
               SizedBox(width: 10.w),
               Column(
                 children: [
                   Text(
-                    player.getCustomerName,
-                    style: AppTextStyles.balooBold9.copyWith(),
+                    player.getCustomerName.toUpperCase(),
+                    style: AppTextStyles.balooMedium12.copyWith(),
                   ),
                   if (subTitle.trim().length > 1)
                     Text(
                       subTitle,
-                      style: AppTextStyles.gothamLight13.copyWith(
+                      style: AppTextStyles.sansRegular12.copyWith(
                         height: 0.9,
                       ),
                     ),
@@ -82,14 +82,14 @@ class _WaitingListApprovalStatusState
               ),
               const Spacer(),
               MainButton(
-                color: AppColors.yellow,
+                color: AppColors.oak,
                 label: player.isApproved
                     ? "PAY_MY_SHARE".tr(context)
                     : "WITHDRAW".tr(context),
-                labelStyle: AppTextStyles.balooMedium9
-                    .copyWith(color: AppColors.darkGreen),
+                labelStyle: AppTextStyles.balooMedium13
+                    .copyWith(color: AppColors.white),
                 applySize: false,
-                padding: EdgeInsets.symmetric(vertical: 6.h),
+                padding: EdgeInsets.symmetric(vertical: 4.h,horizontal: 10.w),
                 onTap: () {
                   if (player.isApproved) {
                     widget.onJoin(player.customer!.id!);

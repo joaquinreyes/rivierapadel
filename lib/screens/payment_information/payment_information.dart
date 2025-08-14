@@ -345,6 +345,11 @@ class _PaymentInformationState extends ConsumerState<PaymentInformation> {
       isSelected: isSelected,
       imagePath: AppImages.walletIcon.path,
       onTap: () => _selectPaymentMethod(paymentMethod, mdr: mdr),
+      showDelete: isSelected,
+      onDelete: isSelected
+          ? () {
+        _deletePaymentMethod(paymentMethod);
+      } : null,
       mdr: mdr,
     );
   }
@@ -382,12 +387,17 @@ class _PaymentInformationState extends ConsumerState<PaymentInformation> {
     ref.read(_selectedPaymentMethod.notifier).state = paymentMethod;
     ref.read(_selectedMDR.notifier).state = mdr;
   }
+  Future<void> _deletePaymentMethod(AppPaymentMethods paymentMethod) async {
+    ref.read(_selectedPaymentMethod.notifier).state = null;
+  }
 
   Widget _buildPaymentMethodOption({
     required String title,
     required bool isSelected,
     required String imagePath,
     required VoidCallback onTap,
+    required VoidCallback? onDelete,
+    required bool showDelete,
     MDRRates? mdr,
   }) {
     return _buildOptionContainer(
@@ -395,6 +405,8 @@ class _PaymentInformationState extends ConsumerState<PaymentInformation> {
       isSelected: isSelected,
       imagePath: imagePath,
       onTap: onTap,
+      showDelete: showDelete,
+      onDelete: onDelete,
       mdr: mdr,
     );
   }
@@ -420,6 +432,8 @@ class _PaymentInformationState extends ConsumerState<PaymentInformation> {
     required String imagePath,
     required VoidCallback onTap,
     bool showSwitch = false,
+    bool showDelete = false,
+    VoidCallback? onDelete,
     MDRRates? mdr,
   }) {
     double? payableAmount = calculateAmountPayable(ref, widget.price);
@@ -494,6 +508,21 @@ class _PaymentInformationState extends ConsumerState<PaymentInformation> {
                     activeColor: AppColors.oak,
                     trackColor: AppColors.white25,
                     onChanged: (_) => onTap(),
+                  ),
+                ),
+              ),
+            if (showDelete && !showSwitch)
+              InkWell(
+                onTap: () {
+                  onDelete?.call();
+                },
+                child: Padding(
+                  padding: EdgeInsets.all(10.w),
+                  child: Image.asset(
+                    AppImages.closeIcon.path,
+                    width: 10.w,
+                    height: 10.w,
+                    color: AppColors.darkBlue,
                   ),
                 ),
               ),

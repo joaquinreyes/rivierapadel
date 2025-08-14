@@ -60,6 +60,7 @@ class _OpenMatchWaitingForApprovalPlayersState
                       NetworkCircleImage(
                           path: player.customer?.profileUrl,
                           scale: 1,
+                          reservedLogo: !widget.isForPopUp,
                           width: 37.h,
                           height: 37.h),
                       SizedBox(width: 15.w),
@@ -83,10 +84,11 @@ class _OpenMatchWaitingForApprovalPlayersState
                       const Spacer(),
                       MainButton(
                         label: "APPROVE".tr(context),
-                        width: 100.w,
+                        // width: 100.w,
                         // height: 32.h,
-                        borderRadius: 8.r,
+                        borderRadius: 100.r,
                         color: AppColors.oak,
+                        padding: EdgeInsets.symmetric(vertical: 4.h,horizontal: 12.w),
                         labelStyle: AppTextStyles.balooMedium13
                             .copyWith(color: AppColors.white,height: 1.2),
                         applySize: false,

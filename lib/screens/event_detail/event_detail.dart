@@ -448,7 +448,7 @@ class _DataBodyState extends ConsumerState<_DataBody> {
                     widget.service.id!, RequestServiceType.event),
               );
               Utils.showMessageDialog(
-                  context, "YOU_HAVE_WITHDRAWN_FROM_THE_MATCH".tr(context));
+                  context, "YOU_HAVE_WITHDRAWN_FROM_THE_MATCH".trU(context));
             }
           });
         }

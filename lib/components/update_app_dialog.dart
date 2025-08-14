@@ -13,27 +13,31 @@ class AppUpdateDialog extends StatelessWidget {
   Widget build(BuildContext context) {
     return CustomDialog(
       showCloseIcon: false,
-      contentPadding: EdgeInsets.fromLTRB(20.w, 15.h, 20.w, 45.h),
+      contentPadding: EdgeInsets.fromLTRB(20.w, 15.h, 20.w, 30.h),
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
           Text(
-            "PLEASE_UPDATE_THE_APP".tr(context),
+            "PLEASE_UPDATE_THE_APP".trU(context),
             style: AppTextStyles.popupHeaderTextStyle,
             textAlign: TextAlign.center,
           ),
-          SizedBox(height: 15.h),
+          SizedBox(height: 10.h),
           Text(
             "UPDATE_DESC".tr(context),
             style: AppTextStyles.popupBodyTextStyle,
+            textAlign: TextAlign.center,
           ),
           SizedBox(height: 20.h),
-          MainButton(
-            label: "UPDATE_NOW".tr(context),
-            isForPopup: true,
-            onTap: () {
-              launchUrl(Uri.parse(url));
-            },
+          Padding(
+            padding: EdgeInsets.symmetric(horizontal: 8.h),
+            child: MainButton(
+              label: "UPDATE_NOW".trU(context),
+              isForPopup: true,
+              onTap: () {
+                launchUrl(Uri.parse(url));
+              },
+            ),
           )
         ],
       ),

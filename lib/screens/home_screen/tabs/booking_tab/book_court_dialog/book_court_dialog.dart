@@ -603,7 +603,7 @@ class _BookCourtDialogLessonState extends ConsumerState<BookCourtDialogLesson> {
                     alignment: Alignment.center,
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(5.r),
-                      color: isSelected ? AppColors.yellow : AppColors.yellow50,
+                      color: isSelected ? AppColors.oak : AppColors.yellow50,
                     ),
                     child: Text(
                       (e.maximumCapacity ?? 0).toString(),

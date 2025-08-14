@@ -41,7 +41,7 @@ class ChangesCancelledDetailsCard extends StatelessWidget {
               ),
               SizedBox(width: 10.w),
               Text(
-                heading,
+                heading.toUpperCase(),
                 style: AppTextStyles.balooMedium13.copyWith(color: AppColors.white),
               ),
             ],

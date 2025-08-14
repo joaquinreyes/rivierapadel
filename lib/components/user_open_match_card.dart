@@ -1,3 +1,4 @@
+import 'package:acepadel/globals/utils.dart';
 import 'package:acepadel/utils/custom_extensions.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -47,17 +48,20 @@ class _UserOpenMatchCardState extends ConsumerState<UserOpenMatchCard> {
       }
     }
     bool isCancelled = widget.booking.isCancelled ?? false;
-    final color =
-        isCancelled || leftMatch ? AppColors.darkGreen5 : AppColors.darkGreen5;
-    const textColor = AppColors.black;
-
+    final color = isCancelled ? AppColors.darkBlue : AppColors.clay05;
+    final textColor = isCancelled ? AppColors.white : AppColors.darkBlue;
+    final dividerColor = isCancelled ? AppColors.white25 : AppColors.darkBlue.withOpacity(0.05);
     bool isWaiting = widget.booking.requestWaitingList?.isNotEmpty ?? false;
     String typeLevel = (widget.booking.isFriendlyMatch ?? true)
         ? "FRIENDLY".tr(context)
         : "RANKED".tr(context);
+    final price = widget.booking.service?.price != null
+        ? Utils.formatPrice(widget.booking.service?.price?.toDouble())
+        : "-";
     final levelRange = widget.booking.openMatchLevelRange;
     if (levelRange.isNotEmpty) {
-      typeLevel = "$typeLevel | ${"LEVEL".tr(context)} $levelRange";
+      // typeLevel = "$typeLevel | ${"LEVEL".tr(context)} $levelRange";
+      typeLevel = "${"LEVEL".tr(context)} $levelRange";
     }
 
     return Container(
@@ -65,7 +69,7 @@ class _UserOpenMatchCardState extends ConsumerState<UserOpenMatchCard> {
       constraints: kComponentWidthConstraint,
       decoration: BoxDecoration(
         color: color,
-        borderRadius: BorderRadius.all(Radius.circular(5.r)),
+        borderRadius: BorderRadius.all(Radius.circular(12.r)),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -93,40 +97,54 @@ class _UserOpenMatchCardState extends ConsumerState<UserOpenMatchCard> {
             children: [
               Text(
                 "OPEN_MATCH".tr(context),
-                style: AppTextStyles.gothamBold13.copyWith(color: textColor),
+                style: AppTextStyles.sansMedium16.copyWith(color: textColor),
               ),
               const Spacer(),
               Text(
                 (widget.booking.service?.location?.locationName ?? "")
                     .capitalizeFirst,
-                style: AppTextStyles.gothamBold13.copyWith(color: textColor),
+                style: AppTextStyles.sansMedium16.copyWith(color: textColor),
               ),
             ],
           ),
-          SizedBox(height: 1.h),
-          const CDivider(),
+          // SizedBox(height: 1.h),
+          CDivider(color: dividerColor,),
+          10.verticalSpace,
           OpenMatchParticipantRow(
-            textForAvailableSlot: "AVAILABLE".tr(context),
+            textForAvailableSlot: "RESERVE".trU(context),
             players: widget.booking.players ?? [],
+            availableSlotbackGroundColor: AppColors.darkBlue,
+            availableSlotIconColor: AppColors.white,
+            textColor: textColor,
           ),
-          SizedBox(height: 15.h),
-          Text(
-            widget.booking.formattedDateStartEndTime,
-            style: AppTextStyles.gothamLight13.copyWith(color: textColor),
-          ),
-          SizedBox(height: 5.h),
+          // SizedBox(height: 5.h),
           Row(
             children: [
               Text(
                 widget.booking.courtName.capitalizeFirst,
                 style:
-                    AppTextStyles.gothamLight13.copyWith(color: textColor),
+                AppTextStyles.sansRegular13.copyWith(color: textColor),
               ),
               const Spacer(),
               Text(
-                "LEVELS".capitalizeFirst,
+                widget.booking.formattedDateStartEndTimeAm,
+                style: AppTextStyles.sansRegular13.copyWith(color: textColor),
+              ),
+            ],
+          ),
+          SizedBox(height: 5.h),
+          Row(
+            children: [
+              Text(
+                "${"PRICE".tr(context)} $price",
                 style:
-                    AppTextStyles.gothamLight13.copyWith(color: textColor),
+                    AppTextStyles.sansRegular13.copyWith(color: textColor),
+              ),
+              const Spacer(),
+              Text(
+                typeLevel,
+                style:
+                    AppTextStyles.sansRegular13.copyWith(color: textColor),
               ),
             ],
           )

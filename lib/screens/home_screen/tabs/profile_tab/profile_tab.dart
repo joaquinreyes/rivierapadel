@@ -112,20 +112,21 @@ class _ProfileTabState extends ConsumerState<ProfileTab> {
       },
       child: Column(
         children: [
-          SizedBox(height: 35.5.h),
+          SizedBox(height: 20.h),
           const _HeaderInfo(),
-          SizedBox(height: 15.h),
+          SizedBox(height: 25.h),
           // const _Membership(),
           // SizedBox(height: 15.h),
           // const _PlayedHours(),
-          // SizedBox(height: 25.h),
+          // SizedBox(height: 15.h),
           Container(
             width: double.infinity,
-            margin: EdgeInsets.symmetric(horizontal: 15.w, vertical: 15.h),
+            margin: EdgeInsets.symmetric(vertical: 15.h),
+            padding: EdgeInsets.symmetric(horizontal: 20.w,vertical: 4.h),
             decoration: inset.BoxDecoration(
-              color: AppColors.darkGreen5,
+              color: AppColors.clay05,
               borderRadius: BorderRadius.all(
-                Radius.circular(5.r),
+                Radius.circular(15.r),
               ),
               boxShadow: kInsetShadow,
             ),
@@ -174,11 +175,11 @@ class _ProfileTabState extends ConsumerState<ProfileTab> {
         child: Container(
           height: 40.h,
           constraints: kComponentWidthConstraint,
-          padding: EdgeInsets.symmetric(horizontal: 13.w),
-          margin: EdgeInsets.symmetric(vertical: 4.h),
+          padding: EdgeInsets.symmetric(horizontal: 10.w),
+          margin: EdgeInsets.symmetric(horizontal: 2.w),
           decoration: BoxDecoration(
             color: isSelected ? AppColors.darkBlue : Colors.transparent,
-            borderRadius: BorderRadius.circular(5.r),
+            borderRadius: BorderRadius.circular(15.r),
           ),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -186,9 +187,9 @@ class _ProfileTabState extends ConsumerState<ProfileTab> {
               Text(text,
                   textAlign: TextAlign.center,
                   style: isSelected
-                      ? AppTextStyles.gothamBold13
+                      ? AppTextStyles.sansMedium12
                           .copyWith(color: Colors.white)
-                      : AppTextStyles.gothamRegular12),
+                      : AppTextStyles.sansRegular12.copyWith(color: AppColors.clay70)),
             ],
           ),
         ),

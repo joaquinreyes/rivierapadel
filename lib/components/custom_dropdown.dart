@@ -66,14 +66,14 @@ class CustomDropDownState<T> extends State<CustomDropDown<T>> {
             ),
             decoration: BoxDecoration(
               color: AppColors.white25,
-              borderRadius: BorderRadius.circular(5.r),
+              borderRadius: BorderRadius.circular(100.r),
             ),
             child: Row(
               children: [
                 Expanded(
                   child: Text(
                     widget.label,
-                    style: AppTextStyles.gothamLight12.copyWith(
+                    style: AppTextStyles.sansRegular13.copyWith(
                       color: AppColors.white,
                     ),
                   ),

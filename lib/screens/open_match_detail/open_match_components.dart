@@ -550,7 +550,7 @@ class _TeamScore extends ConsumerWidget {
     if (score != null) {
       return Text(
         score.toString(),
-        style: isWinner ? AppTextStyles.balooMedium17 : AppTextStyles.sansRegular16,
+        style: isWinner ? AppTextStyles.gothamMedium17 : AppTextStyles.sansRegular16,
       );
     }
     return Container(
@@ -615,7 +615,7 @@ class _TeamScore extends ConsumerWidget {
           : customerName.isNotEmpty
               ? customerName
               : "-",
-      style: isWinner ? AppTextStyles.sansMedium15 : AppTextStyles.sansRegular15,
+      style: isWinner ? AppTextStyles.gothamMedium15 : AppTextStyles.sansRegular15,
     );
   }
 }

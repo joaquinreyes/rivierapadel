@@ -59,7 +59,7 @@ class _WaitingForApprovalDialogState
             "YOU_ARE_NOW_WAITING_FOR_APPROVAL".trU(context),
             textAlign: TextAlign.center,
             style:
-                AppTextStyles.balooBold14.copyWith(color: AppColors.white),
+                AppTextStyles.popupHeaderTextStyle,
           ),
           provider.when(
             data: (data) {

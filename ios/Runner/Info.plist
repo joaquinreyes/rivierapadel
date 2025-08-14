@@ -7,7 +7,7 @@
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
 	<key>CFBundleDisplayName</key>
-	<string>Ace Padel</string>
+	<string>Rivera Padel</string>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleGetInfoString</key>
@@ -34,7 +34,7 @@
 			<key>CFBundleURLHost</key>
 			<string>app.acepadel.bookandgo.app</string>
 			<key>CFBundleURLName</key>
-			<string>com.bookandgo.acepadel</string>
+			<string>com.rivierapadel.bookandgo</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
 				<string>https</string>

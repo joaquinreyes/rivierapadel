@@ -9,8 +9,8 @@ class ApplicantEventInfoCard extends StatelessWidget {
       padding: EdgeInsets.all(15.h),
       constraints: kComponentWidthConstraint,
       decoration: BoxDecoration(
-        color: AppColors.yellow,
-        borderRadius: BorderRadius.all(Radius.circular(5.r)),
+        color: AppColors.oak,
+        borderRadius: BorderRadius.all(Radius.circular(12.r)),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -19,20 +19,20 @@ class ApplicantEventInfoCard extends StatelessWidget {
             children: [
               Text(
                 service.service?.event?.eventName ?? "",
-                style: AppTextStyles.balooMedium12
-                    .copyWith(color: AppColors.darkBlue),
+                style: AppTextStyles.balooMedium16
+                    .copyWith(color: AppColors.white),
               ),
               const Spacer(),
               Text(
                 "DATE_AND_TIME".tr(context),
-                style: AppTextStyles.balooMedium12
-                    .copyWith(color: AppColors.darkBlue),
+                style: AppTextStyles.balooMedium16
+                    .copyWith(color: AppColors.white),
               )
             ],
           ),
-          SizedBox(height: 1.h),
-          CDivider(),
-          SizedBox(height: 2.h),
+          // SizedBox(height: 1.h),
+          const CDivider(color: AppColors.white25,),
+          // SizedBox(height: 2.h),
           Row(
             children: [
               Column(
@@ -41,14 +41,14 @@ class ApplicantEventInfoCard extends StatelessWidget {
                   Text(
                     (service.service?.location?.locationName ?? "")
                         .capitalizeFirst,
-                    style: AppTextStyles.gothamLight13
-                        .copyWith(color: AppColors.darkBlue),
+                    style: AppTextStyles.sansRegular15
+                        .copyWith(color: AppColors.white),
                   ),
                   SizedBox(height: 2.h),
                   Text(
                     "${"PRICE".tr(context)} ${Utils.formatPrice(service.service?.price?.toDouble())}",
-                    style: AppTextStyles.gothamLight13
-                        .copyWith(color: AppColors.darkBlue),
+                    style: AppTextStyles.sansRegular15
+                        .copyWith(color: AppColors.white),
                   ),
                 ],
               ),
@@ -58,14 +58,14 @@ class ApplicantEventInfoCard extends StatelessWidget {
                 children: [
                   Text(
                     service.formatBookingDate,
-                    style: AppTextStyles.gothamLight13
-                        .copyWith(color: AppColors.darkBlue),
+                    style: AppTextStyles.sansRegular15
+                        .copyWith(color: AppColors.white),
                   ),
                   SizedBox(height: 2.h),
                   Text(
-                    service.formatStartEndTime,
-                    style: AppTextStyles.gothamLight13
-                        .copyWith(color: AppColors.darkBlue),
+                    service.formatStartEndTimeAm,
+                    style: AppTextStyles.sansRegular15
+                        .copyWith(color: AppColors.white),
                   ),
                 ],
               ),

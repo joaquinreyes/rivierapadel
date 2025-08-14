@@ -52,7 +52,7 @@ class NetworkCircleImage extends StatelessWidget {
           ? Transform.scale(
               scale: scale ?? 0.78,
               child: ClipRRect(
-                borderRadius: BorderRadius.circular(6.r),
+                borderRadius: borderRadius ?? BorderRadius.circular(6.r),
                 child: Image.asset(
                   (reservedLogo ?? false) ? AppImages.reservedLogo.path : AppImages.logo.path,
                   fit: BoxFit.contain,

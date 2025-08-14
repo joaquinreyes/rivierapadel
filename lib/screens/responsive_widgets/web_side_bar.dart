@@ -127,7 +127,7 @@ class SideNavBar extends ConsumerWidget {
       },
       child: Container(
         decoration: BoxDecoration(
-          color: isSelected ? AppColors.yellow : Colors.transparent,
+          color: isSelected ? AppColors.oak : Colors.transparent,
           borderRadius: BorderRadius.circular(5.r),
         ),
         width: double.infinity,

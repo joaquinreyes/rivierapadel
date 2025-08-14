@@ -103,7 +103,12 @@ class _SplashBody extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
+        decoration: BoxDecoration(
         color: AppColors.backgroundColor,
+            image: DecorationImage(
+              fit: BoxFit.cover,
+              image: AssetImage(AppImages.splashLogoBg.path),
+            )),
         child: const Center(child: _Logo()),
       ),
     );
@@ -120,7 +125,7 @@ class _Logo extends StatelessWidget {
     return Image.asset(
       AppImages.splashLogo.path,
       width: double.infinity,
-      height: 250.h,
+      height: 390.h,
     );
   }
 }

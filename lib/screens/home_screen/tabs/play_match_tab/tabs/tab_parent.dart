@@ -1,3 +1,4 @@
+import 'package:acepadel/app_styles/app_colors.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -20,6 +21,7 @@ class __TabParentState extends ConsumerState<PlayTabsParentWidget> {
     return LayoutBuilder(
       builder: (context, constraints) {
         return RefreshIndicator(
+          color: AppColors.darkBlue,
           onRefresh: widget.onRefresh,
           child: SingleChildScrollView(
             physics: const AlwaysScrollableScrollPhysics(),

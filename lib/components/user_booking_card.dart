@@ -14,13 +14,14 @@ class UserBookingCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     bool isCancelled = booking.isCancelled ?? false;
-    final color = isCancelled ? AppColors.green5 : AppColors.darkGreen5;
-    final textColor = isCancelled ? AppColors.darkGreen : AppColors.darkGreen;
+    final color = isCancelled ? AppColors.darkBlue : AppColors.clay05;
+    final textColor = isCancelled ? AppColors.white : AppColors.darkBlue;
+    final dividerColor = isCancelled ? AppColors.white25 : AppColors.darkBlue.withOpacity(0.05);
     return Container(
       padding: EdgeInsets.all(15.h),
       decoration: BoxDecoration(
         color: color,
-        borderRadius: BorderRadius.all(Radius.circular(5.r)),
+        borderRadius: BorderRadius.all(Radius.circular(12.r)),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -35,22 +36,22 @@ class UserBookingCard extends StatelessWidget {
             children: [
               Text(
                 "BOOKING".tr(context),
-                style: AppTextStyles.gothamBold13.copyWith(
+                style: AppTextStyles.sansMedium16.copyWith(
                   color: textColor,
                 ),
               ),
               const Spacer(),
               Text(
-                (booking.service?.location?.locationName ?? "").capitalizeFirst,
-                style: AppTextStyles.gothamBold13.copyWith(
+                (booking.service?.location?.locationName ?? "").toUpperCase(),
+                style: AppTextStyles.balooMedium14.copyWith(
                   color: textColor,
                 ),
               ),
             ],
           ),
-          SizedBox(height: 1.h),
-          CDivider(),
-          SizedBox(height: 2.h),
+          // SizedBox(height: 1.h),
+          CDivider(color: dividerColor,),
+          SizedBox(height: 5.h),
           Row(
             children: [
               Column(
@@ -58,14 +59,14 @@ class UserBookingCard extends StatelessWidget {
                 children: [
                   Text(
                     booking.courtName.capitalizeFirst,
-                    style: AppTextStyles.gothamLight13.copyWith(
+                    style: AppTextStyles.sansRegular13.copyWith(
                       color: textColor,
                     ),
                   ),
                   SizedBox(height: 2.h),
                   Text(
                     "${"PRICE".tr(context)} ${Utils.formatPrice(booking.service?.price?.toDouble())}",
-                    style: AppTextStyles.gothamLight13.copyWith(
+                    style: AppTextStyles.sansRegular13.copyWith(
                       color: textColor,
                     ),
                   ),
@@ -77,14 +78,14 @@ class UserBookingCard extends StatelessWidget {
                 children: [
                   Text(
                     booking.formatBookingDate,
-                    style: AppTextStyles.gothamLight13.copyWith(
+                    style: AppTextStyles.sansRegular13.copyWith(
                       color: textColor,
                     ),
                   ),
                   SizedBox(height: 2.h),
                   Text(
-                    booking.formatStartEndTime,
-                    style: AppTextStyles.gothamLight13.copyWith(
+                    booking.formatStartEndTimeAm,
+                    style: AppTextStyles.sansRegular13.copyWith(
                       color: textColor,
                     ),
                   ),

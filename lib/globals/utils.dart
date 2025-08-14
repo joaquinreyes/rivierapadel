@@ -92,24 +92,24 @@ class Utils {
 
   static String formatPrice(double? price) {
     if (price == null) {
-      return '0 $currency';
+      return '${currency}.0';
     }
 
     final formatter = NumberFormat('#,##0', 'id_ID');
 
     // Format the price with thousands separator (.)
-    return '${formatter.format(price).replaceAll(',', '.')} $currency';
+    return '$currency.${formatter.format(price).replaceAll(',', '.')}';
   }
 
   static String formatPrice2(double? price, String currency) {
     if (price == null) {
-      return '0 $currency';
+      return '${currency}.0';
     }
 
     final formatter = NumberFormat('#,##0', 'id_ID');
 
     // Format the price with thousands separator (.)
-    return '${formatter.format(price).replaceAll(',', '.')} $currency';
+    return '$currency.${formatter.format(price).replaceAll(',', '.')}';
   }
 
   static DateTime serverTimeToDateTime(String time, DateTime date) {

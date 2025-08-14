@@ -47,7 +47,7 @@ class AsyncDialog<T> extends ConsumerWidget {
                 ),
                 SizedBox(height: 15.h),
                 SelectableText(
-                  error.toString(),
+                  error.toString().toUpperCase(),
                   textAlign: TextAlign.center,
                   style: AppTextStyles.popupHeaderTextStyle,
                 ),
@@ -77,8 +77,8 @@ class AsyncDialog<T> extends ConsumerWidget {
         Image.asset(AppImages.loadingGif.path, height: 50.h),
         const SizedBox(width: 10),
         Text(
-          "${"loading".tr(context).capitalizeFirst}...",
-          style: AppTextStyles.balooBold15.copyWith(color: AppColors.darkBlue),
+          "${"loading".trU(context).capitalizeFirst}...",
+          style: AppTextStyles.balooMedium19,
         ),
       ],
     );

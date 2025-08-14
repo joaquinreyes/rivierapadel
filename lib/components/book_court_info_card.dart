@@ -131,7 +131,7 @@ class BookCourtInfoCardLesson extends ConsumerWidget {
       this.title,
       required this.bookingTime,
       this.lessonVariant,
-      this.bgColor = AppColors.yellow,
+      this.bgColor = AppColors.white,
       this.duration,
       this.courtName,
       this.coachName,

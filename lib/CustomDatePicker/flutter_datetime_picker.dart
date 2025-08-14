@@ -340,7 +340,7 @@ class _DatePickerState extends State<_DatePickerComponent> {
       child: Container(
         padding: const EdgeInsets.all(8.0),
         height: theme.containerHeight,
-        decoration: const BoxDecoration(color: AppColors.backgroundColor),
+        decoration: const BoxDecoration(color: AppColors.darkBlue),
         child: NotificationListener(
           onNotification: (ScrollNotification notification) {
             if (notification.depth == 0 &&
@@ -357,7 +357,7 @@ class _DatePickerState extends State<_DatePickerComponent> {
             data: const CupertinoThemeData(brightness: Brightness.dark),
             child: CupertinoPicker.builder(
               key: key,
-              backgroundColor: AppColors.backgroundColor,
+              backgroundColor: AppColors.darkBlue,
               scrollController: scrollController as FixedExtentScrollController,
               itemExtent: theme.itemHeight,
               onSelectedItemChanged: (int index) {
@@ -375,7 +375,7 @@ class _DatePickerState extends State<_DatePickerComponent> {
                   child: Text(
                     content,
                     style: theme.itemStyle.copyWith(
-                      color: AppColors.darkGreen,
+                      color: AppColors.white,
                     ),
                     textAlign: TextAlign.start,
                   ),
@@ -392,7 +392,7 @@ class _DatePickerState extends State<_DatePickerComponent> {
     return Container(
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(5.r),
-        color: AppColors.backgroundColor,
+        color: AppColors.darkBlue,
       ),
       width: 350.w,
       child: Column(
@@ -472,9 +472,9 @@ class _DatePickerState extends State<_DatePickerComponent> {
             child: ElevatedButton(
               style: ElevatedButton.styleFrom(
                 shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(5.r),
+                  borderRadius: BorderRadius.circular(100.r),
                 ),
-                backgroundColor: AppColors.green5,
+                backgroundColor: AppColors.oak,
                 minimumSize: const Size.fromHeight(40),
               ),
               onPressed: () async {
@@ -484,9 +484,9 @@ class _DatePickerState extends State<_DatePickerComponent> {
                 }
               },
               child: Text(
-                'Confirm',
-                style: AppTextStyles.balooBold18
-                    .copyWith(height: 1.2, color: AppColors.backgroundColor),
+                'Confirm'.toUpperCase(),
+                style: AppTextStyles.balooMedium18
+                    .copyWith(color: AppColors.backgroundColor),
               ),
             ),
           ),
@@ -507,7 +507,7 @@ class _DatePickerState extends State<_DatePickerComponent> {
           topLeft: Radius.circular(5),
           topRight: Radius.circular(5),
         ),
-        color: AppColors.backgroundColor,
+        color: AppColors.darkBlue,
         // color: theme.headerColor ?? theme.backgroundColor,
       ),
       child: Row(
@@ -523,7 +523,7 @@ class _DatePickerState extends State<_DatePickerComponent> {
                   },
                   child: Icon(
                     Icons.close,
-                    color: AppColors.darkGreen,
+                    color: AppColors.white,
                     size: 20.sp,
                   ),
                 ),

@@ -310,7 +310,7 @@ class _ConfirmationDialog extends StatelessWidget {
             label: "JOIN_PAY_MY_SHARE".tr(context),
             labelStyle:
                 AppTextStyles.balooMedium13.copyWith(color: AppColors.darkBlue),
-            color: AppColors.yellow,
+            color: AppColors.oak,
             onTap: () {
               Navigator.pop(context, true);
             },

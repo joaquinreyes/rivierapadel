@@ -362,6 +362,46 @@ class AppTextStyles {
         fontWeight: FontWeight.w300,
       );
 
+  static TextStyle get gothamMedium14 => _dMSansMediumGotham14;
+  static TextStyle get _dMSansMediumGotham14 => TextStyle(
+    fontSize: 14.sp,
+    decoration: TextDecoration.none,
+    fontFamily: 'Gotham',
+    color: AppColors.darkBlue,
+    fontStyle: FontStyle.normal,
+    fontWeight: FontWeight.w500,
+  );
+
+  static TextStyle get gothamMedium15 => _dMSansMediumGothamBold15;
+  static TextStyle get _dMSansMediumGothamBold15 => TextStyle(
+    fontSize: 15.sp,
+    decoration: TextDecoration.none,
+    fontFamily: 'Gotham',
+    color: AppColors.darkBlue,
+    fontStyle: FontStyle.normal,
+    fontWeight: FontWeight.w500,
+  );
+
+  static TextStyle get gothamMedium16 => _dMSansMediumGothamBold16;
+  static TextStyle get _dMSansMediumGothamBold16 => TextStyle(
+    fontSize: 16.sp,
+    decoration: TextDecoration.none,
+    fontFamily: 'Gotham',
+    color: AppColors.darkBlue,
+    fontStyle: FontStyle.normal,
+    fontWeight: FontWeight.w500,
+  );
+
+  static TextStyle get gothamMedium17 => _dMSansMediumGothamBold17;
+  static TextStyle get _dMSansMediumGothamBold17 => TextStyle(
+    fontSize: 17.sp,
+    decoration: TextDecoration.none,
+    fontFamily: 'Gotham',
+    color: AppColors.darkBlue,
+    fontStyle: FontStyle.normal,
+    fontWeight: FontWeight.w500,
+  );
+
 // SECONDARY TYPEFACE REGULAR 5.0
   static TextStyle get gothamBold14 => _dMSansMediumGothamBold14;
   static TextStyle get _dMSansMediumGothamBold14 => TextStyle(
@@ -495,9 +535,39 @@ class AppTextStyles {
     fontWeight: FontWeight.w500,
   );
 
+  static TextStyle get sansMedium12 => _dMSansMedium12;
+  static TextStyle get _dMSansMedium12 => TextStyle(
+    fontSize: 12.sp,
+    decoration: TextDecoration.none,
+    fontFamily: 'DM Sans',
+    color: AppColors.darkBlue,
+    fontStyle: FontStyle.normal,
+    fontWeight: FontWeight.w500,
+  );
+
+  static TextStyle get sansMedium13 => _dMSansMedium13;
+  static TextStyle get _dMSansMedium13 => TextStyle(
+    fontSize: 13.sp,
+    decoration: TextDecoration.none,
+    fontFamily: 'DM Sans',
+    color: AppColors.darkBlue,
+    fontStyle: FontStyle.normal,
+    fontWeight: FontWeight.w500,
+  );
+
   static TextStyle get sansMedium16 => _dMSansMedium16;
   static TextStyle get _dMSansMedium16 => TextStyle(
     fontSize: 16.sp,
+    decoration: TextDecoration.none,
+    fontFamily: 'DM Sans',
+    color: AppColors.darkBlue,
+    fontStyle: FontStyle.normal,
+    fontWeight: FontWeight.w500,
+  );
+
+  static TextStyle get sansMedium17 => _dMSansMedium17;
+  static TextStyle get _dMSansMedium17 => TextStyle(
+    fontSize: 17.sp,
     decoration: TextDecoration.none,
     fontFamily: 'DM Sans',
     color: AppColors.darkBlue,

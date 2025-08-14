@@ -87,8 +87,8 @@ class _UpComingBookingsState extends ConsumerState<UserBookingsList> {
         Padding(
           padding: EdgeInsets.only(bottom: 10.h),
           child: Text(
-            Utils.formatBookingDate(date, context),
-            style: AppTextStyles.balooBold13,
+            Utils.formatBookingDate(date, context).toUpperCase(),
+            style: AppTextStyles.sansMedium17,
           ),
         ),
       );

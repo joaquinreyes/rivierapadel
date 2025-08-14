@@ -173,8 +173,7 @@ class _SigninScreenState extends ConsumerState<SigninScreen> {
                           const Spacer(),
                           MainButton(
                             enabled: canProceed,
-                            label: FlutterI18n.translate(context, "SIGN_IN")
-                                .capitalizeFirst,
+                            label: FlutterI18n.translate(context, "SIGN_IN").capitalEnabled(context, canProceed: canProceed),
                             showArrow: true,
                             onTap: () async {
                               if (!(_formKey.currentState?.validate() ??

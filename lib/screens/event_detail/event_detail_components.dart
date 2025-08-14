@@ -539,7 +539,7 @@ class __DoubleEventsState extends ConsumerState<_DoubleEventsPlayers> {
         onTap: widget.onSlotTap,
         isHorizontal: true,
         otherTeamMemberID: otherTeamMemberID,
-        backgroundColor: Colors.transparent,
+        backgroundColor: widget.bgColor ?? Colors.transparent,
         iconColor: widget.imageIconColor ?? AppColors.darkGreen,
         textColor: widget.textColor ?? AppColors.darkGreen,
       ),
@@ -569,6 +569,7 @@ class _SingleEventPlayers extends StatelessWidget {
     required this.onSlotTap,
     this.textColor,
     this.imageIconColor,
+    this.bgColor,
   });
 
   final List<BookingPlayerBase> players;
@@ -576,6 +577,7 @@ class _SingleEventPlayers extends StatelessWidget {
   final int maxPlayers;
   final Color? textColor;
   final Color? imageIconColor;
+  final Color? bgColor;
 
   @override
   Widget build(BuildContext context) {
@@ -605,7 +607,7 @@ class _SingleEventPlayers extends StatelessWidget {
               text: "AVAILABLE".trU(context),
               index: colIndex,
               onTap: (index, _) => onSlotTap(index, null),
-              backgroundColor: Colors.transparent,
+              backgroundColor: bgColor ?? Colors.transparent,
               iconColor: imageIconColor ?? AppColors.darkGreen,
               textColor: textColor ?? AppColors.darkGreen,
             ),
@@ -911,17 +913,17 @@ class _WaitingPlayersSlotsState extends ConsumerState<_WaitingPlayersSlots> {
         showWaitingList
             ? Container(
                 decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(10),
-                    color: AppColors.darkGreen5),
+                    borderRadius: BorderRadius.circular(12.r),
+                    color: AppColors.clay05),
                 padding:
                     const EdgeInsets.symmetric(horizontal: 15, vertical: 15),
                 child: widget.isDoubleEvents
                     ? _DoubleEventsPlayers(
                         onRelease: widget.onRelease,
                         isWaitingList: true,
-                        textColor: AppColors.darkGreen,
-                        bgColor: Colors.transparent,
-                        imageIconColor: AppColors.darkGreen,
+                        textColor: AppColors.darkBlue,
+                        bgColor: AppColors.darkBlue,
+                        imageIconColor: AppColors.white,
                         id: widget.id,
                         service: widget.service,
                         players: widget.players,
@@ -930,14 +932,18 @@ class _WaitingPlayersSlotsState extends ConsumerState<_WaitingPlayersSlots> {
                       )
                     : _SingleEventPlayers(
                         textColor: AppColors.darkGreen,
-                        imageIconColor: AppColors.darkGreen,
+                        imageIconColor: AppColors.white,
+                        bgColor: AppColors.darkBlue,
                         maxPlayers: maxPlayers - 2,
                         players: widget.players,
                         onSlotTap: widget.onSlotTap,
                       ),
               )
-            : Text("THERE_IS_NO_WAITING_LIST".tr(context),
-                style: AppTextStyles.sansRegular13),
+            : Padding(
+              padding: EdgeInsets.symmetric(horizontal: 12.w),
+              child: Text("THERE_IS_NO_WAITING_LIST".tr(context),
+                  style: AppTextStyles.sansRegular13),
+            ),
         SizedBox(height: 15.h),
         if (showWaitingList && widget.isInWaitingList)
           SecondaryButton(
@@ -950,11 +956,11 @@ class _WaitingPlayersSlotsState extends ConsumerState<_WaitingPlayersSlots> {
             child: Row(
               mainAxisSize: MainAxisSize.min,
               children: [
-                const Icon(Icons.close, color: AppColors.darkGreen, size: 18),
+                Icon(Icons.close, color: AppColors.darkGreen, size: 18.h),
                 SizedBox(width: 5.w),
                 Text(
                   "LEAVE_WAITING_LIST".tr(context),
-                  style: AppTextStyles.gothamLight12
+                  style: AppTextStyles.sansRegular13
                       .copyWith(color: AppColors.darkGreen),
                 ),
               ],

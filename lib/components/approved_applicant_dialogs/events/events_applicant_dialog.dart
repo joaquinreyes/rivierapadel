@@ -55,7 +55,7 @@ class _ApplicantDialogState extends ConsumerState<EventApplicantDialog> {
             alignment: AlignmentDirectional.centerStart,
             child: Text(
               "CURRENT_TEAM".tr(context),
-              style: AppTextStyles.balooMedium12
+              style: AppTextStyles.balooMedium15
                   .copyWith(color: AppColors.white),
             ),
           ),

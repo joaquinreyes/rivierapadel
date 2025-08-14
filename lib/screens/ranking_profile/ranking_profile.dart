@@ -188,6 +188,7 @@ class _RankingProfileState extends ConsumerState<RankingProfile> {
                 ),
               ],
             ),
+          if (widget.isPage)
           SizedBox(height: 35.h),
           _PlayerRanking(level: userFromAssessment.levelD(getSportsName(ref))),
           SizedBox(height: 20.h),

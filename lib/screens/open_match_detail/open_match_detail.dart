@@ -102,6 +102,7 @@ class _OpenMatchDetailState extends ConsumerState<OpenMatchDetail> {
       loading: () => const Center(
         child: CupertinoActivityIndicator(
           radius: 10,
+
         ),
       ),
     );
@@ -572,7 +573,7 @@ class _DataBodyState extends ConsumerState<_DataBody> {
                       widget.service.id!, RequestServiceType.booking),
                 );
                 Utils.showMessageDialog(
-                    context, "YOU_HAVE_WITHDRAWN_FROM_THE_MATCH".tr(context));
+                    context, "YOU_HAVE_WITHDRAWN_FROM_THE_MATCH".trU(context));
               }
             });
           }

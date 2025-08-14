@@ -12,8 +12,8 @@ class ChangesCancelledListingCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-        color: AppColors.yellow,
-        borderRadius: BorderRadius.circular(5.r),
+        color: AppColors.oak,
+        borderRadius: BorderRadius.circular(100.r),
       ),
       padding: EdgeInsets.symmetric(vertical: 4.h, horizontal: 10.w),
       child: Row(
@@ -23,12 +23,12 @@ class ChangesCancelledListingCard extends StatelessWidget {
             AppImages.warning.path,
             width: 13.w,
             height: 13.w,
-            color: AppColors.darkGreen,
+            color: AppColors.white,
           ),
           SizedBox(width: 10.w),
           Text(
-            text,
-            style: AppTextStyles.balooBold10,
+            text.toUpperCase(),
+            style: AppTextStyles.balooMedium13.copyWith(color: AppColors.white,),
           ),
         ],
       ),
