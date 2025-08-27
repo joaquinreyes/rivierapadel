@@ -289,7 +289,7 @@ class _DataBody extends ConsumerWidget {
                   crossAxisAlignment: CrossAxisAlignment.end,
                   children: [
                     Text(
-                        "${userBooking.bookingDate.format("EEE dd MMM")} | ${userBooking.bookingStartTime.format("h:mm")} - ${userBooking.bookingEndTime.format("h:mm a").toLowerCase()}",
+                        "${userBooking.bookingDate.format("EEE dd MMM")} | ${userBooking.bookingStartTime.format("HH:mm")} - ${userBooking.bookingEndTime.format("HH:mm").toLowerCase()}",
                         style: AppTextStyles.sansRegular15.copyWith(
                           color: AppColors.white,
                         ),

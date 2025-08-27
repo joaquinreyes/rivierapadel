@@ -254,16 +254,16 @@ class _BookingTabState extends ConsumerState<BookingTab> {
           //       (null, null);
           //   ref.read(selectedSportProvider.notifier).sport = sport;
           // }), // remove
-          10.verticalSpace,
-          _sportsAndServiceBackgroundContainer(
-            backgroundShow: false,
-            margin: (sports.length > 4 ?? false) ? EdgeInsets.zero : EdgeInsets.symmetric(horizontal: 15.w,),
-            child: _sportsRow(sports, sport, (ClubLocationSports sport) {
-              ref.read(_selectedTimeSlotAndLocationID.notifier).state =
-              (null, null);
-              ref.read(selectedSportProvider.notifier).sport = sport;
-            }),
-          ),
+          // 10.verticalSpace,
+          // _sportsAndServiceBackgroundContainer(
+          //   backgroundShow: false,
+          //   margin: (sports.length > 4 ?? false) ? EdgeInsets.zero : EdgeInsets.symmetric(horizontal: 15.w,),
+          //   child: _sportsRow(sports, sport, (ClubLocationSports sport) {
+          //     ref.read(_selectedTimeSlotAndLocationID.notifier).state =
+          //     (null, null);
+          //     ref.read(selectedSportProvider.notifier).sport = sport;
+          //   }),
+          // ),
           10.verticalSpace,
           courtBookings.when(
             data: (data) {

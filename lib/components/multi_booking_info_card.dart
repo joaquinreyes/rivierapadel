@@ -61,8 +61,8 @@ class _MultiBookingCourtInfoCardState
 
     // Format the date and time
     String dayAndDate = DateFormat('EEE d MMM').format(bookingTime);
-    String startTimeFormatted = DateFormat('h:mm').format(bookingTime);
-    String endTimeFormatted = DateFormat('h:mm a').format(endDateTime).toLowerCase();
+    String startTimeFormatted = DateFormat('HH:mm').format(bookingTime);
+    String endTimeFormatted = DateFormat('HH:mm').format(endDateTime).toLowerCase();
 
     // Combine into the desired format
     String formattedDate =

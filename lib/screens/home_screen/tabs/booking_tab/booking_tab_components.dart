@@ -377,7 +377,7 @@ class __TimeslotsState extends ConsumerState<_Timeslots> {
             borderRadius: borderRadius,
           ),
           child: Text(
-            timeSlotChunked[rowIndex][colIndex].format("h:mm a").toLowerCase(),
+            timeSlotChunked[rowIndex][colIndex].format("HH:mm").toLowerCase(),
             style: selected ? AppTextStyles.sansMedium15.copyWith(color: AppColors.white) : AppTextStyles.sansRegular15,
           ),
         ),
@@ -439,7 +439,7 @@ class __AvailableTimeslotState extends ConsumerState<_AvailableTimeslot> {
         final startTime = timeslot;
         final endTime = startTime.add(Duration(minutes: selectedDuration));
         final String formattedTime =
-            "${startTime.format("EEE d MMM")} | ${startTime.format("h:mm")} - ${endTime.format("h:mm a").toLowerCase()}";
+            "${startTime.format("EEE d MMM")} | ${startTime.format("HH:mm")} - ${endTime.format("HH:mm").toLowerCase()}";
         return Column(
           children: [
             Padding(
@@ -854,7 +854,7 @@ class __AvailableTimeslotLessonState
           final endTime = startTime
               .add(Duration(minutes: selectedLessonType?.duration ?? 30));
           final String formattedTime =
-              "${startTime.format("EEE d MMM")} | ${startTime.format("h:mm")} - ${endTime.format("h:mm a")}";
+              "${startTime.format("EEE d MMM")} | ${startTime.format("HH:mm")} - ${endTime.format("HH:mm")}";
           return Column(
             children: [
               Padding(

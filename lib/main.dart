@@ -43,7 +43,7 @@ Future<void> main() async {
             sharedPrefManagerProvider
                 .overrideWithValue(SharedPrefManager(prefs)),
           ],
-          child: const AcePadel(),
+          child: const RivieraPadel(),
         ),
       );
     },
@@ -55,14 +55,14 @@ Future<void> main() async {
   );
 }
 
-class AcePadel extends ConsumerStatefulWidget {
-  const AcePadel({super.key});
+class RivieraPadel extends ConsumerStatefulWidget {
+  const RivieraPadel({super.key});
 
   @override
-  ConsumerState<AcePadel> createState() => _AcePadelState();
+  ConsumerState<RivieraPadel> createState() => _AcePadelState();
 }
 
-class _AcePadelState extends ConsumerState<AcePadel> {
+class _AcePadelState extends ConsumerState<RivieraPadel> {
   @override
   void initState() {
     globalRef = ref;

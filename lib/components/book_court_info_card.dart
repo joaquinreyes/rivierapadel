@@ -97,7 +97,7 @@ class BookCourtInfoCard extends ConsumerWidget {
                   crossAxisAlignment: CrossAxisAlignment.end,
                   children: [
                     Text(
-                      "${startTime.format("h:mm")} - ${endTime.format("h:mm a").toLowerCase()}",
+                      "${startTime.format("HH:mm")} - ${endTime.format("HH:mm").toLowerCase()}",
                       textAlign: TextAlign.center,
                       style: AppTextStyles.sansRegular15.copyWith(color: textColor),
                     ),

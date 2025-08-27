@@ -117,7 +117,7 @@ class BookingBase {
     if (startTime == null) {
       return '';
     }
-    return "${bookingDate.format("EEE dd MMM")} | ${bookingStartTime.format("h:mm")} - ${bookingEndTime.format("h:mm a").toLowerCase()}";
+    return "${bookingDate.format("EEE dd MMM")} | ${bookingStartTime.format("HH:mm")} - ${bookingEndTime.format("HH:mm").toLowerCase()}";
   }
 
   String get formattedDateStartEndTimeForShare {
@@ -148,7 +148,7 @@ class BookingBase {
     if (startTime == null) {
       return '';
     }
-    return "${bookingStartTime.format("h:mm")} - ${bookingEndTime.format("h:mm a").toLowerCase()}";
+    return "${bookingStartTime.format("HH:mm")} - ${bookingEndTime.format("HH:mm").toLowerCase()}";
   }
 
   String get formatStartTime {
