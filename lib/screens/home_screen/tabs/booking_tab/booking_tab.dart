@@ -447,11 +447,13 @@ class _BookingTabState extends ConsumerState<BookingTab> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
+                SizedBox(height: 5.h),
                 Row(
                   children: [
                     Expanded(
                       child: Text(
-                        locationName.toUpperCase(),
+                        "",
+                        // locationName.toUpperCase(),
                         style: AppTextStyles.balooMedium15.copyWith(height: 1,),
                       ),
                     ),

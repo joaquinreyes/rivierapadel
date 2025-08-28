@@ -77,11 +77,11 @@ class BookCourtInfoCard extends ConsumerWidget {
                       textAlign: TextAlign.center,
                       style: AppTextStyles.sansRegular15.copyWith(color: textColor),
                     ),
-                    SizedBox(height: 2.h),
-                    Text(
-                      bookings.location?.locationName?.capitalizeFirst ?? '',
-                      style: AppTextStyles.sansRegular15.copyWith(color: textColor),
-                    ),
+                    // SizedBox(height: 2.h),
+                    // Text(
+                    //   bookings.location?.locationName?.capitalizeFirst ?? '',
+                    //   style: AppTextStyles.sansRegular15.copyWith(color: textColor),
+                    // ),
                     SizedBox(height: 2.h),
                     Text(
                       textPrice ??

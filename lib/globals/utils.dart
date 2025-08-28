@@ -92,13 +92,13 @@ class Utils {
 
   static String formatPrice(double? price) {
     if (price == null) {
-      return '${currency}.0';
+      return '${currency} 0';
     }
 
     final formatter = NumberFormat('#,##0', 'id_ID');
 
     // Format the price with thousands separator (.)
-    return '$currency.${formatter.format(price).replaceAll(',', '.')}';
+    return '$currency ${formatter.format(price).replaceAll(',', '.')}';
   }
 
   static String formatPrice2(double? price, String currency) {
