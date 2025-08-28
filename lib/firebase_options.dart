@@ -52,22 +52,20 @@ class DefaultFirebaseOptions {
   }
 
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyCGUWuizraybNoEicPlUCdwVYZ68FQqz4A',
-    appId: '1:1017484623328:android:fa8df06a7848f7fbdbff85',
-    messagingSenderId: '1017484623328',
-    projectId: 'jungle-padel-327a6',
-    storageBucket: 'jungle-padel-327a6.appspot.com',
+    apiKey: 'AIzaSyDZSHzjzdh1A8J_Ini5CEA0GIwJh0MOmjQ',
+    appId: '1:808637490319:android:71a7daa29516439b7cbcfa',
+    messagingSenderId: '808637490319',
+    projectId: 'frontendbooakdngo3',
+    storageBucket: 'frontendbooakdngo3.firebasestorage.app',
   );
 
   static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyDOVbbDo1RlkDtHLOdfMeZ9WPHNPwP56zg',
-    appId: '1:1017484623328:ios:6db63327b9208c03dbff85',
-    messagingSenderId: '1017484623328',
-    projectId: 'jungle-padel-327a6',
-    storageBucket: 'jungle-padel-327a6.appspot.com',
-    iosClientId:
-        '1017484623328-matd0q6vsog06hhf5q5smjk6uam059ue.apps.googleusercontent.com',
-    iosBundleId: 'jungle.padel',
+    apiKey: 'AIzaSyBCJDvBaX9K0LOMpcHri0miwk5Q5rZ4tCY',
+    appId: '1:808637490319:ios:a856dad0685886bf7cbcfa',
+    messagingSenderId: '808637490319',
+    projectId: 'frontendbooakdngo3',
+    storageBucket: 'frontendbooakdngo3.firebasestorage.app',
+    iosBundleId: 'com.rivierapadel.bookandgo',
   );
 
   static const FirebaseOptions web = FirebaseOptions(
