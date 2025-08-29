@@ -57,21 +57,19 @@ class _SignUpScreenState extends ConsumerState<SignUpScreen> {
       },
       child: Container(
         decoration: BoxDecoration(
-          image: PlatformC().isCurrentDesignPlatformDesktop
-              ? DecorationImage(
-                  image: AssetImage(AppImages.webStaticPage.path),
-                  fit: BoxFit.fitWidth,
-                )
-              : null,
+          // image: PlatformC().isCurrentDesignPlatformDesktop
+          //     ? DecorationImage(
+          //         image: AssetImage(AppImages.webStaticPage.path),
+          //         fit: BoxFit.fitWidth,
+          //       )
+          //     : null,
         ),
         child: GestureDetector(
           onTap: () {
             FocusScope.of(context).requestFocus(FocusNode());
           },
           child: Scaffold(
-            backgroundColor: PlatformC().isCurrentDesignPlatformDesktop
-                ? Colors.transparent
-                : AppColors.backgroundColor,
+            backgroundColor: AppColors.backgroundColor,
             body: provider.when(
               data: (data) {
                 return _SignupFlow(levelQuestions: data);

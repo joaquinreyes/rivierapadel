@@ -267,7 +267,7 @@ class _FilterRow extends ConsumerWidget {
   Widget _bottomSheet({required Widget child, required BuildContext context}) {
     bool isDesktop = PlatformC().isCurrentDesignPlatformDesktop;
     if (isDesktop) {
-      return CustomDialog(height: 550.h, child: child);
+      return CustomDialog(color: AppColors.white,height: 550.h, child: child);
     }
     return Material(
       color: Colors.transparent,

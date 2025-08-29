@@ -1,1 +1,50 @@
-{"hosting":{"site":"acepadel","public":"build/web","ignore":["firebase.json","**/.*","**/node_modules/**"],"headers":[{"source":"**","headers":[{"key":"Access-Control-Allow-Origin","value":"*"}]}]},"flutter":{"platforms":{"android":{"default":{"projectId":"frontendbooakdngo3","appId":"1:808637490319:android:71a7daa29516439b7cbcfa","fileOutput":"android/app/google-services.json"}},"ios":{"default":{"projectId":"frontendbooakdngo3","appId":"1:808637490319:ios:a856dad0685886bf7cbcfa","uploadDebugSymbols":true,"fileOutput":"ios/Runner/GoogleService-Info.plist"}},"dart":{"lib/firebase_options.dart":{"projectId":"frontendbooakdngo3","configurations":{"android":"1:808637490319:android:71a7daa29516439b7cbcfa","ios":"1:808637490319:ios:a856dad0685886bf7cbcfa"}}}}}}
+{
+  "hosting": {
+    "site": "riverapadel",
+    "public": "build/web",
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**"
+    ],
+    "headers": [
+      {
+        "source": "**",
+        "headers": [
+          {
+            "key": "Access-Control-Allow-Origin",
+            "value": "*"
+          }
+        ]
+      }
+    ]
+  },
+  "flutter": {
+    "platforms": {
+      "android": {
+        "default": {
+          "projectId": "frontendbooakdngo3",
+          "appId": "1:808637490319:android:71a7daa29516439b7cbcfa",
+          "fileOutput": "android/app/google-services.json"
+        }
+      },
+      "ios": {
+        "default": {
+          "projectId": "frontendbooakdngo3",
+          "appId": "1:808637490319:ios:a856dad0685886bf7cbcfa",
+          "uploadDebugSymbols": true,
+          "fileOutput": "ios/Runner/GoogleService-Info.plist"
+        }
+      },
+      "dart": {
+        "lib/firebase_options.dart": {
+          "projectId": "frontendbooakdngo3",
+          "configurations": {
+            "android": "1:808637490319:android:71a7daa29516439b7cbcfa",
+            "ios": "1:808637490319:ios:a856dad0685886bf7cbcfa"
+          }
+        }
+      }
+    }
+  }
+}

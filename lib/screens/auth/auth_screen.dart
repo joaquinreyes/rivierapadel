@@ -31,9 +31,7 @@ class _AuthScreenState extends ConsumerState<AuthScreen> {
     final clubLocations = ref.watch(clubLocationsProvider);
     return AuthResponsive(
       child: Scaffold(
-        backgroundColor: PlatformC().isCurrentDesignPlatformDesktop
-            ? Colors.transparent
-            : Colors.white,
+        backgroundColor: Colors.white,
         body: clubLocations.when(
           data: (data) {
             if (data == null) {

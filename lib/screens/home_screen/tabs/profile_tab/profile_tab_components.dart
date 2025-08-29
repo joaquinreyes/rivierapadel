@@ -21,7 +21,7 @@ class _HeaderInfo extends ConsumerWidget {
             onTap: () async {
               bool? logout = await showDialog(
                   context: context,
-                  builder: (_) => const _SignOutConfirmation());
+                  builder: (_) => const SignOutConfirmation());
               if (logout == true) {
                 ref.read(userManagerProvider).signout(ref);
                 ref.read(goRouterProvider).pushReplacement(RouteNames.auth);
@@ -351,8 +351,8 @@ class _PlayedHoursState extends ConsumerState<_PlayedHours> {
   }
 }
 
-class _SignOutConfirmation extends StatelessWidget {
-  const _SignOutConfirmation();
+class SignOutConfirmation extends StatelessWidget {
+  const SignOutConfirmation();
 
   @override
   Widget build(BuildContext context) {

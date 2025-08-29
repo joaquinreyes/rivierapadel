@@ -55,20 +55,18 @@ class _SigninScreenState extends ConsumerState<SigninScreen> {
         return true;
       },
       child: Container(
-        decoration: BoxDecoration(
-          image: PlatformC().isCurrentDesignPlatformDesktop
-              ? DecorationImage(
-                  image: AssetImage(AppImages.webStaticPage.path),
-                  fit: BoxFit.fitWidth,
-                )
-              : null,
-        ),
+        // decoration: BoxDecoration(
+        //   image: PlatformC().isCurrentDesignPlatformDesktop
+        //       ? DecorationImage(
+        //           image: AssetImage(AppImages.webStaticPage.path),
+        //           fit: BoxFit.fitWidth,
+        //         )
+        //       : null,
+        // ),
         child: GestureDetector(
           onTap: () => FocusScope.of(context).unfocus(),
           child: Scaffold(
-            backgroundColor: PlatformC().isCurrentDesignPlatformDesktop
-                ? Colors.transparent
-                : AppColors.backgroundColor,
+            backgroundColor: AppColors.backgroundColor,
             body: SingleChildScrollView(
               child: Center(
                 child: Container(
