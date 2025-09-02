@@ -7,7 +7,7 @@ class _ViewSelector extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final selectedIndex = ref.watch(_selectedTabIndex);
     return Container(
-      height: 50.h,
+      height: 60.h,
       padding: EdgeInsets.symmetric(horizontal: 15.w, vertical: 5.h),
       decoration: inset.BoxDecoration(
           boxShadow: kInsetShadow, color: AppColors.clay05),

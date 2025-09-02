@@ -31,7 +31,7 @@ class _AuthScreenState extends ConsumerState<AuthScreen> {
     final clubLocations = ref.watch(clubLocationsProvider);
     return AuthResponsive(
       child: Scaffold(
-        backgroundColor: Colors.white,
+        backgroundColor: Colors.transparent,
         body: clubLocations.when(
           data: (data) {
             if (data == null) {
@@ -89,6 +89,7 @@ class _Body extends ConsumerWidget {
                 MainButton(
                   label: FlutterI18n.translate(context, "SIGN_IN").toUpperCase(),
                   showArrow: true,
+                  padding: EdgeInsets.symmetric(horizontal: 10.w),
                   // height: 40.h,
                   onTap: () {
                     ref.read(goRouterProvider).push(RouteNames.signIn);

@@ -10,14 +10,14 @@ class AuthResponsive extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      // decoration: BoxDecoration(
-      //   image: PlatformC().isCurrentDesignPlatformDesktop
-      //       ? DecorationImage(
-      //           image: AssetImage(AppImages.webStaticPage.path),
-      //           fit: BoxFit.fitWidth,
-      //         )
-      //       : null,
-      // ),
+      decoration: BoxDecoration(
+        image: PlatformC().isCurrentDesignPlatformDesktop
+            ? DecorationImage(
+                image: AssetImage(AppImages.splashLogoBg.path),
+                fit: BoxFit.fitWidth,
+              )
+            : null,
+      ),
       child: child,
     );
   }
