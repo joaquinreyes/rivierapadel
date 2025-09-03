@@ -10,7 +10,7 @@ class _PlayerRanking extends StatelessWidget {
     int rounded = level.floor();
     double decimal = level - rounded.toDouble();
     return Container(
-      height: 90.h,
+      height: 100.h,
       width: double.maxFinite,
       padding:  EdgeInsets.symmetric(vertical: 10.h,horizontal: 15.w),
       decoration: BoxDecoration(

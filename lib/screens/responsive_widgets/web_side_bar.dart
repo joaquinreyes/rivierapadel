@@ -145,10 +145,10 @@ class SideNavBar extends ConsumerWidget {
                   Text(
                     text,
                     style: isSelected
-                        ? AppTextStyles.balooBold12.copyWith(
+                        ? AppTextStyles.balooBold18.copyWith(
                             color: AppColors.darkBlue,
                           )
-                        : AppTextStyles.balooMedium10.copyWith(
+                        : AppTextStyles.balooMedium16.copyWith(
                             color: AppColors.gallery,
                           ),
                   ),
