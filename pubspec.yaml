@@ -70,8 +70,15 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
   riverpod_generator: ^2.3.9
+  flutter_launcher_icons: ^0.14.4
 
-
+flutter_launcher_icons:
+  android: true
+  ios: true
+  remove_alpha_ios: true
+  image_path: "assets/images/new_logo.jpg"
+  adaptive_icon_background: "#ffffff"
+  adaptive_icon_foreground: "assets/images/new_logo.jpg"
 
 
 
