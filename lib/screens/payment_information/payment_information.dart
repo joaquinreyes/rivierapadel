@@ -297,7 +297,7 @@ class _PaymentInformationState extends ConsumerState<PaymentInformation> {
             if (!PlatformC().isCurrentDesignPlatformDesktop &&
                 !PlatformC().isCurrentOSMobile) {
               if (paymentMethod.methodType == "gopay") {
-                return Container();
+                return SizedBox();
               }
             }
             final mdr = paymentDetails.getMdr(paymentMethod.methodType ?? "");
@@ -333,11 +333,11 @@ class _PaymentInformationState extends ConsumerState<PaymentInformation> {
       return const SizedBox(); // Hide "Pay Later" if redeem is selected
     }
     if (paymentMethod.methodType == kPayLaterMethod && !widget.allowPayLater) {
-      return const SizedBox(); // Hide "Pay Later" if redeem is selected
+      return const SizedBox(); // Hide "Pay Later" if allow Wallet from Previous
     }
 
     if (paymentMethod.methodType == kWalletMethod && !widget.allowWallet) {
-      return const SizedBox(); // Hide "Pay Later" if redeem is selected
+      return const SizedBox(); // Hide "Wallet" if allow Wallet from Previous
     }
 
     return _buildPaymentMethodOption(

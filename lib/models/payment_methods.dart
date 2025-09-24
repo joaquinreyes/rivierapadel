@@ -56,10 +56,6 @@ class PaymentDetails {
     }
 
     for (var i = 0; i < (paymentMethods?.length ?? 0); i++) {
-      //REMOVE CASH
-      if (paymentMethods![i].methodName == kPayLaterMethod) {
-        continue;
-      }
       final appPayment = AppPaymentMethods(
         id: paymentMethods![i].id,
         methodTypeText: paymentMethods![i].methodName,
