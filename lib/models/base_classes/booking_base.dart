@@ -15,6 +15,8 @@ class BookingBase {
   int? maximumCapacity;
   bool? approveBeforeJoin;
   String? organizerNote;
+  bool? rankedEvent;
+  bool? scoreSubmitted;
   OpenMatchOptions? options;
   List<ServiceDetail_Coach>? coaches;
 
@@ -28,6 +30,8 @@ class BookingBase {
       this.approveBeforeJoin,
       this.coaches,
       this.organizerNote,
+      this.rankedEvent,
+      this.scoreSubmitted,
       this.isFriendlyMatch});
 
   String get openMatchLevelRange {
@@ -168,6 +172,8 @@ class BookingBase {
     organizerNote = json['organizer_notes'];
     minimumCapacity = json['minimum_capacity'];
     maximumCapacity = json['maximum_capacity'];
+    rankedEvent = json['ranked_event'];
+    scoreSubmitted = json['score_submitted'];
     if (json['openMatchOptions'] != null) {
       options = OpenMatchOptions.fromJson(json['openMatchOptions']);
     }
@@ -187,6 +193,8 @@ class BookingBase {
     data['end_time'] = endTime;
     data['approve_before_join'] = approveBeforeJoin;
     data['organizer_notes'] = organizerNote;
+    data['ranked_event'] = rankedEvent;
+    data['score_submitted'] = scoreSubmitted;
 
     return data;
   }

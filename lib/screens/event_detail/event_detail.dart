@@ -1,5 +1,6 @@
 import 'package:acepadel/components/custom_dialog.dart';
 import 'package:acepadel/repository/booking_repo.dart';
+import 'package:acepadel/components/ranked_or_friendly_widget.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/cupertino.dart';
@@ -108,6 +109,7 @@ class _DataBodyState extends ConsumerState<_DataBody> {
   @override
   Widget build(BuildContext context) {
     final ServiceDetail service = widget.service;
+    final scoreSubmitted = service.scoreSubmitted ?? false;
     final isJoined = ref.watch(_isJoined);
     return Container(
       constraints: kComponentWidthConstraint,
@@ -143,12 +145,17 @@ class _DataBodyState extends ConsumerState<_DataBody> {
               ServiceInformationText(service: service),
               ServiceCoaches(coaches: service.getCoaches),
               SizedBox(height: 20.h),
-              Align(
-                alignment: Alignment.centerLeft,
-                child: Text(
-                    // "${"PLAYERS".trU(context)} ${service.players?.length ?? 0} / ${service.getMaximumCapacity}",
-                    "${service.service?.isDoubleEvent ?? false ? "TEAMS".tr(context) : "PLAYERS".tr(context)} ${service.players?.length ?? 0} / ${service.getMaximumCapacity}",
-                    style: AppTextStyles.balooMedium17.copyWith(color: AppColors.darkGreen)),
+              Row(
+                children: [
+                  Expanded(
+                    child: Text(         scoreSubmitted ? "RANKING_POSITIONS".trU(context) :
+                        "${service.service?.isDoubleEvent ?? false ? "TEAMS".tr(context) : "PLAYERS".tr(context)} ${service.players?.length ?? 0} / ${service.getMaximumCapacity}",
+                        style: AppTextStyles.balooMedium17.copyWith(color: AppColors.darkGreen)),
+                  ),
+                  RankedOrFriendly(
+                    isRanked: service.rankedEvent ?? false,
+                  ),
+                ],
               ),
               SizedBox(height: 10.h),
               Container(
@@ -157,7 +164,7 @@ class _DataBodyState extends ConsumerState<_DataBody> {
                 width: double.infinity,
                 constraints: kComponentWidthConstraint,
                 decoration: BoxDecoration(
-                  color: AppColors.clay05,
+                  color: scoreSubmitted ? AppColors.darkBlue : AppColors.clay05,
                   borderRadius: BorderRadius.circular(12.r),
                 ),
                 child: _EventPlayersSlots(
@@ -180,11 +187,12 @@ class _DataBodyState extends ConsumerState<_DataBody> {
               ),
               SizedBox(height: 20.h),
               _secondaryBtns(isJoined, context, service),
-              _ApprovalStatus(
-                service: service,
-                onJoin: _joinAfterApprovel,
-                onWithdraw: _withdraw,
-              ),
+              if (!(service.rankedEvent ?? false) && !scoreSubmitted)
+                _ApprovalStatus(
+                  service: service,
+                  onJoin: _joinAfterApprovel,
+                  onWithdraw: _withdraw,
+                ),
             ],
           ),
         ),

@@ -279,6 +279,7 @@ class _EventPlayersSlotsState extends ConsumerState<_EventPlayersSlots> {
           widget.maxPlayers.isEven ? widget.maxPlayers : widget.maxPlayers - 1;
       return _DoubleEventsPlayers(
         onRelease: widget.onRelease,
+        textColor: widget.service.scoreSubmitted ?? false ? AppColors.white : AppColors.darkGreen ,
         isWaitingList: false,
         id: widget.id,
         service: widget.service,
@@ -289,6 +290,7 @@ class _EventPlayersSlotsState extends ConsumerState<_EventPlayersSlots> {
     }
     maxPlayers = widget.maxPlayers;
     return _SingleEventPlayers(
+      textColor: widget.service.scoreSubmitted ?? false ? AppColors.white : AppColors.darkGreen ,
       maxPlayers: maxPlayers,
       players: widget.players,
       onSlotTap: widget.onSlotTap,
