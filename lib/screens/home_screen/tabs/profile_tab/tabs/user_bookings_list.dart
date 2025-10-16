@@ -112,6 +112,7 @@ class _UpComingBookingsState extends ConsumerState<UserBookingsList> {
                     },
                     child: UserLessonsEventsCard(
                       booking: booking,
+                      isPast: widget.isPast,
                     ),
                   );
                 }

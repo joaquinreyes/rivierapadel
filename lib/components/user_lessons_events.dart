@@ -4,6 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:acepadel/app_styles/app_colors.dart';
 import 'package:acepadel/app_styles/app_text_styles.dart';
 import 'package:acepadel/components/c_divider.dart';
+import 'package:acepadel/components/ranked_component.dart';
 import 'package:acepadel/components/waiting_for_approval.dart';
 import 'package:acepadel/globals/constants.dart';
 import 'package:acepadel/globals/utils.dart';
@@ -15,9 +16,10 @@ import 'changes_cancelled_listing_card.dart';
 
 class UserLessonsEventsCard extends ConsumerWidget {
   const UserLessonsEventsCard(
-      {super.key, required this.booking, this.isLesson = false});
+      {super.key, required this.booking, this.isPast = false, this.isLesson = false});
   final UserBookings booking;
   final bool isLesson;
+  final bool isPast;
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final currentUserID = ref.read(userManagerProvider).user?.user?.id;
@@ -61,6 +63,8 @@ class UserLessonsEventsCard extends ConsumerWidget {
     final color = isCancelled ? AppColors.darkBlue : AppColors.clay05;
     final textColor = isCancelled ? AppColors.white : AppColors.darkBlue;
     final dividerColor = isCancelled ? AppColors.white25 : AppColors.darkBlue.withOpacity(0.05);
+
+    final isRankedEvent = booking.rankedEvent ?? false;
 
     // Extract data for the card
     final coachName = "${"COACH".trU(context)} ${booking.coachName?.toUpperCase() ?? ""}";
@@ -118,6 +122,8 @@ class UserLessonsEventsCard extends ConsumerWidget {
           ),
           // SizedBox(height: 6.h),
           CDivider(color: dividerColor,),
+          if (isRankedEvent)
+            Align(alignment: Alignment.centerRight, child: RankedComponent()),
           // SizedBox(height: 6.h),
           // Details section
           Row(
@@ -169,6 +175,25 @@ class UserLessonsEventsCard extends ConsumerWidget {
               ),
             ],
           ),
+          if ((booking.service?.isEvent ?? false) &&
+              isPast &&
+              (booking.scoreSubmitted ?? false) &&
+              booking.getMyPositionEvent(currentUserID ?? 0) != null)
+            Container(
+              decoration: BoxDecoration(
+                color: AppColors.blue60,
+                borderRadius: BorderRadius.circular(12.r),
+              ),
+              margin: EdgeInsets.only(top: 5),
+              padding: EdgeInsets.symmetric(vertical: 2.h, horizontal: 13.w),
+              child: Text(
+                "${(booking.getMyPositionEvent(currentUserID ?? 0) ?? 0).getUserPosition} Place",
+                style: AppTextStyles.balooMedium16.copyWith(
+                  fontSize: 14.sp,
+                  color: AppColors.white
+                ),
+              ),
+            )
         ],
       ),
     );

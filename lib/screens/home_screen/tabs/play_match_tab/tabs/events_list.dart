@@ -5,6 +5,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:acepadel/app_styles/app_colors.dart';
 import 'package:acepadel/app_styles/app_text_styles.dart';
 import 'package:acepadel/components/c_divider.dart';
+import 'package:acepadel/components/ranked_component.dart';
 import 'package:acepadel/components/secondary_text.dart';
 import 'package:acepadel/globals/utils.dart';
 import 'package:acepadel/models/events_model.dart';
@@ -163,6 +164,14 @@ class _EventsCard extends ConsumerWidget {
             ],
           ),
           const CDivider(),
+          if (event.rankedEvent ?? false)
+            Padding(
+              padding: const EdgeInsets.only(bottom: 5),
+              child: Align(
+                alignment: Alignment.centerRight,
+                child: RankedComponent(),
+              ),
+            ),
           Row(
             children: [
               Expanded(

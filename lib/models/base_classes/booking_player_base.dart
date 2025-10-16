@@ -116,8 +116,14 @@ class BookingPlayerBase {
 
   bool? reserved = false;
   int? position;
-
+  List<PlayerEventRanking>? playerEventRanking;
   Guest? guest;
+
+  int? get getPlayerPosition {
+    return (playerEventRanking?.isNotEmpty ?? false)
+        ? playerEventRanking?.last.position
+        : null;
+  }
 
   String get getCustomerName {
     if (customer == null && guest == null) {
@@ -138,6 +144,7 @@ class BookingPlayerBase {
       this.isWaiting,
       this.customer,
       this.otherPlayer,
+      this.playerEventRanking,
       this.id,
       this.isOrganizer,
       this.isCanceled,
@@ -159,6 +166,10 @@ class BookingPlayerBase {
     if (guest != null) {
       data['guest'] = guest!.toJson();
     }
+    if (playerEventRanking != null) {
+      data['PlayerEventRanking'] =
+          playerEventRanking!.map((v) => v.toJson()).toList();
+    }
     return data;
   }
 
@@ -168,6 +179,12 @@ class BookingPlayerBase {
     customer = json['customer'] != null
         ? BookingCustomerBase.fromJson(json['customer'])
         : null;
+    if (json['PlayerEventRanking'] != null) {
+      playerEventRanking = <PlayerEventRanking>[];
+      json['PlayerEventRanking'].forEach((v) {
+        playerEventRanking!.add(PlayerEventRanking.fromJson(v));
+      });
+    }
     otherPlayer = json['other_player'];
     id = json['id'];
     isOrganizer = json['is_organizer'];
@@ -175,6 +192,22 @@ class BookingPlayerBase {
     position = json['position'];
     reserved = json['reserved'] ?? false;
     guest = json['guest'] != null ? Guest.fromJson(json['guest']) : null;
+  }
+}
+
+class PlayerEventRanking {
+  int? position;
+
+  PlayerEventRanking({this.position});
+
+  PlayerEventRanking.fromJson(Map<String, dynamic> json) {
+    position = json['position'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['position'] = position;
+    return data;
   }
 }
 

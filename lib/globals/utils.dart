@@ -9,7 +9,7 @@ import 'package:acepadel/components/async_dialog.dart';
 import 'package:acepadel/components/message_dialog.dart';
 import 'package:acepadel/utils/custom_extensions.dart';
 import 'package:acepadel/utils/dubai_date_time.dart';
-import 'package:geolocator/geolocator.dart';
+import 'package:geolocator/geolocator.dart' as loc;
 import 'package:intl/intl.dart';
 import 'dart:math' as math;
 import 'package:image/image.dart' as img;
@@ -467,7 +467,7 @@ $link
   }
 
   static List<ClubLocationData> sortLocations(
-      List<ClubLocationData> locationsData, Position? userLoc) {
+      List<ClubLocationData> locationsData, loc.Position? userLoc) {
     final locations = locationsData.toSet().toList();
     locations.sort((a, b) {
       final distanceA =

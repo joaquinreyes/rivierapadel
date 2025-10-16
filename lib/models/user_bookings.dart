@@ -37,11 +37,20 @@ class UserBookings extends BookingBase {
       super.date,
       super.startTime,
       super.endTime,
+      super.rankedEvent,
+      super.scoreSubmitted,
       this.isCancelled,
       this.service,
       this.courts,
       this.players,
       this.requestWaitingList});
+
+  int? getMyPositionEvent(int customerId) {
+    final player = players?.firstWhere(
+            (e) => e.customer?.id == customerId,
+        orElse: () => Players());
+    return player?.getPlayerPosition;
+  }
 
   String get courtName {
     if (courts != null && (courts?.isNotEmpty ?? true)) {

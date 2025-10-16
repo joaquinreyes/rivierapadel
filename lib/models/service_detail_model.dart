@@ -100,6 +100,27 @@ class ServiceDetail extends BookingBase {
     if (json['openMatchOptions'] != null) {
       options = OpenMatchOptions.fromJson(json['openMatchOptions']);
     }
+    // Sort players if scores are submitted
+    if ((scoreSubmitted ?? false) && (service?.isEvent ?? false)) {
+      if (service?.isDoubleEvent ?? false) {
+        players?.map((e) {
+          e.position = e.getPlayerPosition ?? e.position;
+        }).toList();
+      } else {
+        players?.sort((a, b) {
+          final posA = a.getPlayerPosition;
+          final posB = b.getPlayerPosition;
+
+          // Players with positions come first
+          if (posA == null && posB == null) return 0;
+          if (posA == null) return 1;
+          if (posB == null) return -1;
+
+          // Sort by position ascending
+          return posA.compareTo(posB);
+        });
+      }
+    }
   }
 
   @override
