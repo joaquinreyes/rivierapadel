@@ -1,13 +1,19 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:acepadel/components/c_divider.dart';
+import 'package:acepadel/components/custom_dialog.dart';
 import 'package:acepadel/models/active_memberships.dart';
 import 'package:acepadel/utils/custom_extensions.dart';
+import 'package:flutter_inset_box_shadow/flutter_inset_box_shadow.dart' as inset;
 import '../../../../../../app_styles/app_colors.dart';
 import '../../../../../../app_styles/app_text_styles.dart';
 import '../../../../../../components/secondary_text.dart';
+import '../../../../../../globals/constants.dart';
 import '../../../../../../repository/booking_repo.dart';
 
+part 'membership_tab_component.dart';
 part 'membership_tab_provider.dart';
 
 class MembershipTab extends ConsumerWidget {
@@ -53,41 +59,40 @@ class _MembershipListComponent extends StatelessWidget {
       padding: EdgeInsets.symmetric(vertical: 10.h),
       itemBuilder: (context, index) {
         final membership = memberships[index];
-        return Container(
-          margin: EdgeInsets.only(bottom: 10.h),
-          padding: EdgeInsets.symmetric(horizontal: 15.w, vertical: 15.h),
-          decoration: BoxDecoration(
-            color: AppColors.clay05,
-            borderRadius: BorderRadius.circular(15.r),
-          ),
+        final membershipName = membership.membershipName ?? "";
+
+        return Padding(
+          padding: EdgeInsets.only(bottom: 5.h),
           child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      (membership.membershipName ?? "").toUpperCase(),
-                      style: AppTextStyles.balooMedium16,
-                    ),
-                    SizedBox(height: 5.h),
-                    Text(
-                      membership.finishDateString(context),
-                      style: AppTextStyles.sansRegular14.copyWith(
-                        color: AppColors.clay70,
-                      ),
-                    ),
-                  ],
+                flex: 4,
+                child: Text(
+                  membershipName,
+                  style: AppTextStyles.balooMedium16,
                 ),
               ),
-              Container(
-                padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 8.h),
-                decoration: BoxDecoration(
-                  color: AppColors.darkBlue,
-                  borderRadius: BorderRadius.circular(12.r),
+              InkWell(
+                onTap: () async {
+                  await showDialog(
+                    context: context,
+                    builder: (context) {
+                      return _MembershipInfoDialog(membership: membership);
+                    },
+                  );
+                },
+                child: Container(
+                  width: 120.w,
+                  margin: EdgeInsets.symmetric(horizontal: 15.w),
+                  padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 4.h),
+                  decoration: inset.BoxDecoration(
+                    color: AppColors.darkBlue,
+                    boxShadow: kInsetShadow,
+                    borderRadius: BorderRadius.circular(12.r),
+                  ),
+                  alignment: Alignment.center,
+                  child: Center(child: membership.usesLeftString(context)),
                 ),
-                child: membership.usesLeftString(context),
               ),
             ],
           ),
