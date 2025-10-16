@@ -14,6 +14,7 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import '../models/transaction_model.dart';
 import '../models/user_assessment.dart';
+import '../models/user_match_levels.dart';
 part 'user_repo.g.dart';
 
 class AuthRepo {
@@ -298,6 +299,36 @@ class AuthRepo {
     }
   }
 
+  Future<List<MatchLevel>> getUserMatchLevels(Ref ref,
+      {required int userId, required int matchNumber, required String sportName}) async {
+    try {
+      final apiManager = ref.read(apiManagerProvider);
+      final token = ref.read(userManagerProvider).user?.accessToken;
+      final Map<String, dynamic> queryParams = {
+        "match_number": matchNumber,
+        "sport_name": sportName,
+      };
+      final response = await apiManager.get(
+        ref,
+        ApiEndPoint.getUserMatchLevels,
+        pathParams: [userId.toString()],
+        queryParams: queryParams,
+        token: token,
+      );
+
+      if (response is Map<String, dynamic>) {
+        final userMatchLevels = UserMatchLevelsResponse.fromJson(response);
+        return (userMatchLevels.data ?? []).reversed.toList();
+      }
+      throw "Some error occurred";
+    } catch (e) {
+      if (e is Map<String, dynamic>) {
+        throw e['message'];
+      }
+      rethrow;
+    }
+  }
+
   Future<bool?> resetPassword(Ref ref, String email) async {
     try {
       final apiManager = ref.read(apiManagerProvider);
@@ -431,6 +462,17 @@ Future<List<TransactionModel>> transactions(TransactionsRef ref) async {
 @riverpod
 Future<void> saveFCMToken(SaveFCMTokenRef ref, String token) async {
   return ref.watch(authRepoProvider).saveFCMToken(ref, token);
+}
+
+@riverpod
+Future<List<MatchLevel>> getUserMatchLevels(GetUserMatchLevelsRef ref,
+    {required int userId, required int matchNumber, required String sportName}) async {
+  return ref.watch(authRepoProvider).getUserMatchLevels(
+    ref,
+    userId: userId,
+    matchNumber: matchNumber,
+    sportName: sportName,
+  );
 }
 
 @riverpod

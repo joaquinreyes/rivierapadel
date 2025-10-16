@@ -1337,6 +1337,172 @@ class _SaveFCMTokenProviderElement
   String get token => (origin as SaveFCMTokenProvider).token;
 }
 
+String _$getUserMatchLevelsHash() =>
+    r'fd50693f9e6c4acc846e26c23f655ec3a5bb2901';
+
+/// See also [getUserMatchLevels].
+@ProviderFor(getUserMatchLevels)
+const getUserMatchLevelsProvider = GetUserMatchLevelsFamily();
+
+/// See also [getUserMatchLevels].
+class GetUserMatchLevelsFamily extends Family<AsyncValue<List<MatchLevel>>> {
+  /// See also [getUserMatchLevels].
+  const GetUserMatchLevelsFamily();
+
+  /// See also [getUserMatchLevels].
+  GetUserMatchLevelsProvider call({
+    required int userId,
+    required int matchNumber,
+    required String sportName,
+  }) {
+    return GetUserMatchLevelsProvider(
+      userId: userId,
+      matchNumber: matchNumber,
+      sportName: sportName,
+    );
+  }
+
+  @override
+  GetUserMatchLevelsProvider getProviderOverride(
+    covariant GetUserMatchLevelsProvider provider,
+  ) {
+    return call(
+      userId: provider.userId,
+      matchNumber: provider.matchNumber,
+      sportName: provider.sportName,
+    );
+  }
+
+  static const Iterable<ProviderOrFamily>? _dependencies = null;
+
+  @override
+  Iterable<ProviderOrFamily>? get dependencies => _dependencies;
+
+  static const Iterable<ProviderOrFamily>? _allTransitiveDependencies = null;
+
+  @override
+  Iterable<ProviderOrFamily>? get allTransitiveDependencies =>
+      _allTransitiveDependencies;
+
+  @override
+  String? get name => r'getUserMatchLevelsProvider';
+}
+
+/// See also [getUserMatchLevels].
+class GetUserMatchLevelsProvider
+    extends AutoDisposeFutureProvider<List<MatchLevel>> {
+  /// See also [getUserMatchLevels].
+  GetUserMatchLevelsProvider({
+    required int userId,
+    required int matchNumber,
+    required String sportName,
+  }) : this._internal(
+          (ref) => getUserMatchLevels(
+            ref as GetUserMatchLevelsRef,
+            userId: userId,
+            matchNumber: matchNumber,
+            sportName: sportName,
+          ),
+          from: getUserMatchLevelsProvider,
+          name: r'getUserMatchLevelsProvider',
+          debugGetCreateSourceHash:
+              const bool.fromEnvironment('dart.vm.product')
+                  ? null
+                  : _$getUserMatchLevelsHash,
+          dependencies: GetUserMatchLevelsFamily._dependencies,
+          allTransitiveDependencies:
+              GetUserMatchLevelsFamily._allTransitiveDependencies,
+          userId: userId,
+          matchNumber: matchNumber,
+          sportName: sportName,
+        );
+
+  GetUserMatchLevelsProvider._internal(
+    super._createNotifier, {
+    required super.name,
+    required super.dependencies,
+    required super.allTransitiveDependencies,
+    required super.debugGetCreateSourceHash,
+    required super.from,
+    required this.userId,
+    required this.matchNumber,
+    required this.sportName,
+  }) : super.internal();
+
+  final int userId;
+  final int matchNumber;
+  final String sportName;
+
+  @override
+  Override overrideWith(
+    FutureOr<List<MatchLevel>> Function(GetUserMatchLevelsRef provider) create,
+  ) {
+    return ProviderOverride(
+      origin: this,
+      override: GetUserMatchLevelsProvider._internal(
+        (ref) => create(ref as GetUserMatchLevelsRef),
+        from: from,
+        name: null,
+        dependencies: null,
+        allTransitiveDependencies: null,
+        debugGetCreateSourceHash: null,
+        userId: userId,
+        matchNumber: matchNumber,
+        sportName: sportName,
+      ),
+    );
+  }
+
+  @override
+  AutoDisposeFutureProviderElement<List<MatchLevel>> createElement() {
+    return _GetUserMatchLevelsProviderElement(this);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return other is GetUserMatchLevelsProvider &&
+        other.userId == userId &&
+        other.matchNumber == matchNumber &&
+        other.sportName == sportName;
+  }
+
+  @override
+  int get hashCode {
+    var hash = _SystemHash.combine(0, runtimeType.hashCode);
+    hash = _SystemHash.combine(hash, userId.hashCode);
+    hash = _SystemHash.combine(hash, matchNumber.hashCode);
+    hash = _SystemHash.combine(hash, sportName.hashCode);
+
+    return _SystemHash.finish(hash);
+  }
+}
+
+@Deprecated('Will be removed in 3.0. Use Ref instead')
+// ignore: unused_element
+mixin GetUserMatchLevelsRef on AutoDisposeFutureProviderRef<List<MatchLevel>> {
+  /// The parameter `userId` of this provider.
+  int get userId;
+
+  /// The parameter `matchNumber` of this provider.
+  int get matchNumber;
+
+  /// The parameter `sportName` of this provider.
+  String get sportName;
+}
+
+class _GetUserMatchLevelsProviderElement
+    extends AutoDisposeFutureProviderElement<List<MatchLevel>>
+    with GetUserMatchLevelsRef {
+  _GetUserMatchLevelsProviderElement(super.provider);
+
+  @override
+  int get userId => (origin as GetUserMatchLevelsProvider).userId;
+  @override
+  int get matchNumber => (origin as GetUserMatchLevelsProvider).matchNumber;
+  @override
+  String get sportName => (origin as GetUserMatchLevelsProvider).sportName;
+}
+
 String _$recoverPasswordHash() => r'000818da027fa41325fb9bcc7f8c384808f0bc06';
 
 /// See also [recoverPassword].

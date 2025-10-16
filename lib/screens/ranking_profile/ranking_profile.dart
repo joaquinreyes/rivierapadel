@@ -16,6 +16,7 @@ import 'package:acepadel/models/app_user.dart';
 import 'package:acepadel/models/base_classes/booking_player_base.dart';
 import 'package:acepadel/models/service_detail_model.dart';
 import 'package:acepadel/models/user_assessment.dart';
+import 'package:acepadel/models/user_match_levels.dart';
 import 'package:acepadel/repository/user_repo.dart';
 import 'package:acepadel/routes/app_pages.dart';
 import 'package:acepadel/utils/custom_extensions.dart';

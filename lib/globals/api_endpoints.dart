@@ -58,7 +58,7 @@ enum ApiEndPoint {
       isAuthRequired: false),
   openMatchCalculatePriceApi("services/open-match-calculate-price",
       isAuthRequired: true),
-
+  getUserMatchLevels("users/get-user-matchlevels", isAuthRequired: true),
   fetchChatCount("chat-contacts", isAuthRequired: true, isWebSocketUrl: true);
 
   final String _path;
@@ -123,6 +123,9 @@ enum ApiEndPoint {
     }
     if (this == ApiEndPoint.serviceAssessment) {
       return "services/assessment/${id.first}";
+    }
+    if (this == ApiEndPoint.getUserMatchLevels) {
+      return "users/get-user-matchlevels/${id.first}";
     }
     if (this == ApiEndPoint.usersAssessments) {
       return "users/${id.first}/assessments_data";

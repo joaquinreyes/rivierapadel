@@ -387,5 +387,6 @@
   "VENUE": "Game",
   "LEVEL_RELIABILITY": "Level reliability",
   "MATCHES_PLAYED": "Matches played",
-  "SKIP" : "Skip"
+  "SKIP" : "Skip",
+  "RANKING_PROGRESSION": "Ranking Progression"
 }

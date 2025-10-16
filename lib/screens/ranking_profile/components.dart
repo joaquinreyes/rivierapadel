@@ -596,7 +596,353 @@ class _RankingProgressionState extends ConsumerState<_RankingProgression> {
 
   @override
   Widget build(BuildContext context) {
-    // For now, return empty widget until provider is implemented
-    return Container();
+    final matchLevelsAsync = ref.watch(
+      getUserMatchLevelsProvider(
+        userId: widget.userId,
+        matchNumber: selectedMatchCount,
+        sportName: widget.sportName,
+      ),
+    );
+
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          'RANKING_PROGRESSION'.trU(context),
+          style: AppTextStyles.balooMedium17,
+        ),
+        SizedBox(height: 10.h),
+        Container(
+          padding: EdgeInsets.symmetric(horizontal: 5.w, vertical: 4.h),
+          decoration: BoxDecoration(
+            color: AppColors.clay05,
+            borderRadius: BorderRadius.circular(12.r),
+          ),
+          child: Row(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              _MatchCountButton(
+                label: '10 matches',
+                isSelected: selectedMatchCount == 10,
+                onTap: () => setState(() => selectedMatchCount = 10),
+              ),
+              SizedBox(width: 10.w),
+              _MatchCountButton(
+                label: '25 matches',
+                isSelected: selectedMatchCount == 25,
+                onTap: () => setState(() => selectedMatchCount = 25),
+              ),
+            ],
+          ),
+        ),
+        matchLevelsAsync.when(
+          data: (matchLevels) {
+            if (matchLevels.isEmpty) {
+              return SecondaryText(text: "No ranking data available");
+            }
+            return _RankingChart(matchLevels: matchLevels);
+          },
+          loading: () => Container(
+            height: 200.h,
+            alignment: Alignment.center,
+            child: const CupertinoActivityIndicator(),
+          ),
+          error: (error, stackTrace) => SecondaryText(text: error.toString()),
+        ),
+      ],
+    );
   }
+}
+
+class _MatchCountButton extends StatelessWidget {
+  const _MatchCountButton({
+    required this.label,
+    required this.isSelected,
+    required this.onTap,
+  });
+
+  final String label;
+  final bool isSelected;
+  final VoidCallback onTap;
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: onTap,
+      child: Container(
+        height: 20.h,
+        padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 2.h),
+        decoration: BoxDecoration(
+          color: isSelected ? AppColors.oak : Colors.transparent,
+          borderRadius: BorderRadius.circular(20.r),
+        ),
+        child: Text(
+          label,
+          style: AppTextStyles.sansMedium15.copyWith(
+            fontSize: 14.sp,
+            color: isSelected ? AppColors.white : AppColors.darkBlue.withOpacity(0.7),
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class _RankingChart extends StatelessWidget {
+  const _RankingChart({required this.matchLevels});
+
+  final List<MatchLevel> matchLevels;
+
+  // Optimize levels list to make it user-friendly
+  List<double> _optimizeLevelsList(List<double> allLevels) {
+    if (allLevels.isEmpty) return [];
+
+    // Remove consecutive duplicates
+    final List<double> withoutConsecutiveDuplicates = [];
+    for (int i = 0; i < allLevels.length; i++) {
+      if (i == 0 || allLevels[i] != allLevels[i - 1]) {
+        withoutConsecutiveDuplicates.add(allLevels[i]);
+      }
+    }
+
+    // If still too long (more than 10 points), reduce by keeping important points
+    final int maxPoints = 10;
+    if (withoutConsecutiveDuplicates.length > maxPoints) {
+      final List<double> reduced = [];
+
+      // Always keep first point
+      reduced.add(withoutConsecutiveDuplicates.first);
+
+      // Calculate how many points to sample from the middle
+      final int middlePointsNeeded = maxPoints - 2; // -2 for first and last
+      final double step = (withoutConsecutiveDuplicates.length - 2) / middlePointsNeeded;
+
+      // Sample middle points evenly
+      for (int i = 1; i < middlePointsNeeded + 1; i++) {
+        final int index = (i * step).round();
+        if (index < withoutConsecutiveDuplicates.length - 1) {
+          reduced.add(withoutConsecutiveDuplicates[index]);
+        }
+      }
+
+      // Always keep last point
+      reduced.add(withoutConsecutiveDuplicates.last);
+
+      return reduced;
+    }
+
+    return withoutConsecutiveDuplicates;
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final allLevels = matchLevels.map((e) => e.level ?? 0.0).toList();
+
+    // Make list user-friendly: remove duplicates and limit size
+    final levels = _optimizeLevelsList(allLevels);
+
+    // Calculate min and max with better range
+    final minLevel = levels.reduce((a, b) => a < b ? a : b);
+    final maxLevel = levels.reduce((a, b) => a > b ? a : b);
+
+    // Ensure a minimum range for better visualization
+    double chartMin, chartMax;
+    final range = maxLevel - minLevel;
+
+    if (range < 0.5) {
+      // If range is too small, add padding
+      final center = (maxLevel + minLevel) / 2;
+      chartMin = center - 1.0;
+      chartMax = center + 1.0;
+    } else {
+      chartMin = minLevel - (range * 0.2);
+      chartMax = maxLevel + (range * 0.2);
+    }
+
+    // Round to nice numbers
+    chartMin = (chartMin * 2).floorToDouble() / 2; // Round down to nearest 0.5
+    chartMax = (chartMax * 2).ceilToDouble() / 2;  // Round up to nearest 0.5
+
+    return Container(
+      height: 180.h,
+      child: CustomPaint(
+        size: Size(double.infinity, 180.h),
+        painter: _ChartPainter(
+          levels: levels,
+          minLevel: chartMin,
+          maxLevel: chartMax,
+        ),
+      ),
+    );
+  }
+}
+
+class _ChartPainter extends CustomPainter {
+  final List<double> levels;
+  final double minLevel;
+  final double maxLevel;
+
+  _ChartPainter({
+    required this.levels,
+    required this.minLevel,
+    required this.maxLevel,
+  });
+
+  @override
+  void paint(Canvas canvas, Size size) {
+    if (levels.isEmpty) return;
+
+    // Define chart area
+    final chartLeft = 10.w;
+    final chartTop = 20.h;
+    final chartWidth = size.width - chartLeft - 20.w;
+    final chartHeight = size.height - chartTop - 30.h;
+    final chartBottom = chartTop + chartHeight;
+
+    // Draw white background
+    final backgroundPaint = Paint()
+      ..color = AppColors.white
+      ..style = PaintingStyle.fill;
+
+    final backgroundRect = RRect.fromRectAndRadius(
+      Rect.fromLTWH(0, 0, size.width, size.height),
+      Radius.circular(12.r),
+    );
+    canvas.drawRRect(backgroundRect, backgroundPaint);
+
+    // Grid lines paint (subtle horizontal lines)
+    final gridPaint = Paint()
+      ..color = AppColors.darkBlue.withOpacity(0.05)
+      ..strokeWidth = 1
+      ..style = PaintingStyle.stroke;
+
+    // Draw horizontal grid lines
+    final horizontalLines = 7;
+    for (int i = 0; i <= horizontalLines; i++) {
+      final y = chartTop + (chartHeight * i / horizontalLines);
+      canvas.drawLine(
+        Offset(chartLeft, y),
+        Offset(chartLeft + chartWidth, y),
+        gridPaint,
+      );
+    }
+
+    // Main chart line
+    final paint = Paint()
+      ..color = AppColors.oak
+      ..strokeWidth = 4
+      ..style = PaintingStyle.stroke
+      ..strokeCap = StrokeCap.round
+      ..strokeJoin = StrokeJoin.round;
+
+    final fillPaint = Paint()
+      ..shader = LinearGradient(
+        begin: Alignment.topCenter,
+        end: Alignment.bottomCenter,
+        colors: [
+          AppColors.oak.withOpacity(0.3),
+          AppColors.oak.withOpacity(0.05),
+        ],
+      ).createShader(Rect.fromLTWH(chartLeft, chartTop, chartWidth, chartHeight))
+      ..style = PaintingStyle.fill;
+
+    final path = Path();
+    final fillPath = Path();
+    final points = <Offset>[];
+
+    // Calculate points
+    for (int i = 0; i < levels.length; i++) {
+      double x;
+      if (levels.length == 1) {
+        // Center single point
+        x = chartLeft + chartWidth / 2;
+      } else {
+        x = chartLeft + (i / (levels.length - 1)) * chartWidth;
+      }
+
+      double normalizedLevel;
+      if (maxLevel == minLevel) {
+        // Handle case where all values are the same
+        normalizedLevel = 0.5; // Place in middle
+      } else {
+        normalizedLevel = (levels[i] - minLevel) / (maxLevel - minLevel);
+      }
+
+      final y = chartBottom - (normalizedLevel * chartHeight);
+
+      points.add(Offset(x, y));
+
+      if (i == 0) {
+        path.moveTo(x, y);
+        fillPath.moveTo(x, chartBottom);
+        fillPath.lineTo(x, y);
+      } else {
+        // Use straight lines between points
+        path.lineTo(x, y);
+        fillPath.lineTo(x, y);
+      }
+    }
+
+    // Only draw lines and fill if we have more than one point
+    if (levels.length > 1) {
+      // Complete fill path
+      fillPath.lineTo(chartLeft + chartWidth, chartBottom);
+      fillPath.lineTo(chartLeft, chartBottom);
+      fillPath.close();
+
+      // Draw filled area
+      canvas.drawPath(fillPath, fillPaint);
+
+      // Draw line
+      canvas.drawPath(path, paint);
+    }
+
+    // Draw level values above each point on the line
+    for (int i = 0; i < points.length; i++) {
+      final isLastPoint = i == points.length - 1;
+
+      if (isLastPoint) {
+        // Draw black circle for last point
+        canvas.drawCircle(points[i], 12, Paint()..color = AppColors.darkBlue);
+
+        // Draw level value in white inside the black circle
+        final textPainter = TextPainter(
+          text: TextSpan(
+            text: levels[i].toStringAsFixed(1),
+            style: TextStyle(
+              color: AppColors.white,
+              fontSize: 10.sp,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+          textDirection: TextDirection.ltr,
+        );
+        textPainter.layout();
+        textPainter.paint(
+          canvas,
+          Offset(points[i].dx - textPainter.width / 2, points[i].dy - textPainter.height / 2),
+        );
+      } else {
+        // Draw level values above the line for all other points
+        final textPainter = TextPainter(
+          text: TextSpan(
+            text: levels[i].toStringAsFixed(2),
+            style: TextStyle(
+              color: AppColors.darkBlue.withOpacity(0.7),
+              fontSize: 9.sp,
+            ),
+          ),
+          textDirection: TextDirection.ltr,
+        );
+        textPainter.layout();
+        textPainter.paint(
+          canvas,
+          Offset(points[i].dx - textPainter.width / 2, points[i].dy - 20),
+        );
+      }
+    }
+  }
+
+  @override
+  bool shouldRepaint(covariant CustomPainter oldDelegate) => true;
 }
