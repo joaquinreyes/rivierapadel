@@ -19,6 +19,7 @@ class BookCourtInfoCard extends ConsumerWidget {
     required this.courtName,
     this.textPrice,
     required this.price,
+    required this.storePrice,
     this.color = AppColors.white,
     this.textColor = AppColors.darkBlue,
     this.dividerColor,
@@ -31,6 +32,7 @@ class BookCourtInfoCard extends ConsumerWidget {
   final Color textColor;
   final Color? dividerColor;
   final double? price;
+  final double? storePrice;
   final String? textPrice;
 
   @override
@@ -47,76 +49,116 @@ class BookCourtInfoCard extends ConsumerWidget {
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
-        mainAxisSize: MainAxisSize.min,
         children: [
-          Row(
-            children: [
-              Text(
-                'LOCATION'.tr(context),
-                style: AppTextStyles.balooMedium16.copyWith(color: textColor),
-              ),
-              const Spacer(),
-              Text(
-                '${"DATE".tr(context)} & ${"TIME".tr(context)}',
-                style: AppTextStyles.balooMedium16.copyWith(color: textColor),
-              ),
-            ],
+          _infoRow(
+              "DATE".tr(context), '${startTime.format('EEEE, d MMMM yyyy')}'),
+          _infoRow("TIME".tr(context),
+              '${startTime.format('h:mm a')} - ${endTime.format('h:mm a')}'),
+          _infoRow("LOCATION".tr(context),
+              (bookings.location?.locationName ?? '').capitalizeFirst),
+          _infoRow(
+              "ACTIVITY".tr(context),
+              (bookings.sport?.sportName ?? "").capitalizeFirst),
+          _infoRow("VENUE".tr(context), courtName),
+          SizedBox(height: 8),
+          Container(
+            width: double.infinity,
+            decoration: BoxDecoration(
+              color: AppColors.clay05,
+              borderRadius: BorderRadius.circular(6.r),
+            ),
+            padding: EdgeInsets.symmetric(vertical: 4, horizontal: 8),
+            child: textPrice != null
+                ? Column(
+                    children: (textPrice ?? "").split("\n").map((e) {
+                    return Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                            e.split(":").first,
+                            style: AppTextStyles.balooMedium16
+                                .copyWith(color: textColor),
+                          ),
+                          Text(
+                            e.split(":").last,
+                            style: AppTextStyles.balooMedium16
+                                .copyWith(color: textColor),
+                            textAlign: TextAlign.right,
+                          ),
+                        ]);
+                  }).toList())
+                : Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        "PRICE".tr(context),
+                        style: AppTextStyles.balooMedium16
+                            .copyWith(color: textColor),
+                      ),
+                      if (storePrice != null && storePrice! > (price ?? 0))
+                        Row(
+                          crossAxisAlignment: CrossAxisAlignment.end,
+                          children: [
+                            Text(
+                              Utils.formatPrice(storePrice),
+                              style: AppTextStyles.sansRegular15.copyWith(
+                                color: textColor.withOpacity(0.6),
+                                decoration: TextDecoration.lineThrough,
+                              ),
+                            ),
+                            SizedBox(
+                              width: 5.w,
+                            ),
+                            Text(
+                              Utils.formatPrice(price),
+                              style: AppTextStyles.balooMedium16
+                                  .copyWith(color: textColor),
+                            ),
+                          ],
+                        )
+                      else
+                        Text(
+                          Utils.formatPrice(price),
+                          style: AppTextStyles.balooMedium16
+                              .copyWith(color: textColor),
+                        ),
+                    ],
+                  ),
           ),
-          CDivider(color: dividerColor ?? AppColors.clay05),
-          // SizedBox(height: 10.h),
-          Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Expanded(
-                flex: 2,
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      courtName.capitalizeFirst,
-                      textAlign: TextAlign.center,
-                      style: AppTextStyles.sansRegular15.copyWith(color: textColor),
-                    ),
-                    // SizedBox(height: 2.h),
-                    // Text(
-                    //   bookings.location?.locationName?.capitalizeFirst ?? '',
-                    //   style: AppTextStyles.sansRegular15.copyWith(color: textColor),
-                    // ),
-                    SizedBox(height: 2.h),
-                    Text(
-                      textPrice ??
-                          "${"PRICE".tr(context)} ${Utils.formatPrice(price)}",
-                      textAlign: TextAlign.center,
-                      style: AppTextStyles.sansRegular15.copyWith(color: textColor),
-                    ),
-                  ],
-                ),
+          SizedBox(height: 4),
+          Align(
+            alignment: Alignment.center,
+            child: Text(
+              "INCLUSIVE_OF_VAT_AND_SERVICE_FEES".tr(context),
+              style: AppTextStyles.sansRegular15.copyWith(
+                color: textColor,
+                fontStyle: FontStyle.italic,
               ),
-              Expanded(flex: 2,
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.end,
-                  children: [
-                    Text(
-                      "${startTime.format("HH:mm")} - ${endTime.format("HH:mm").toLowerCase()}",
-                      textAlign: TextAlign.center,
-                      style: AppTextStyles.sansRegular15.copyWith(color: textColor),
-                    ),
-                    SizedBox(height: 2.h),
-                    Text(
-                      startTime.format("EE dd MMM"),
-                      textAlign: TextAlign.center,
-                      style: AppTextStyles.sansRegular15.copyWith(color: textColor),
-                    ),
-                    SizedBox(height: 2.h),
-                    Text(
-                      "${bookings.duration} min",
-                      textAlign: TextAlign.center,
-                      style: AppTextStyles.sansRegular15.copyWith(color: textColor),
-                    ),
-                  ],
-                ),
-              ),
-            ],
+              textAlign: TextAlign.center,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _infoRow(String label, String value) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 2.0),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Text(
+            label,
+            style: AppTextStyles.balooMedium16.copyWith(color: textColor),
+          ),
+          Flexible(
+            child: Text(
+              value,
+              style: AppTextStyles.sansRegular15.copyWith(color: textColor),
+              textAlign: TextAlign.right,
+              overflow: TextOverflow.ellipsis,
+            ),
           ),
         ],
       ),

@@ -64,7 +64,7 @@ class _BookCourtDialogState extends ConsumerState<BookCourtDialog> {
   late final List<int> courtIdList;
 
 
-
+  double? storePrice;
 
   @override
   void initState() {
@@ -182,6 +182,10 @@ class _BookCourtDialogState extends ConsumerState<BookCourtDialog> {
                       ? value
                           .cancellationPolicy?.openMatchCancellationTimeInHours
                       : value.cancellationPolicy?.cancellationTimeInHours;
+
+                  storePrice =
+                      (isOpenMatch ? value.openMatchPrice : value.price) ??
+                          0;
                 }
                 return Column(
                   children: [
@@ -203,6 +207,7 @@ class _BookCourtDialogState extends ConsumerState<BookCourtDialog> {
                     Padding(
                       padding: EdgeInsets.symmetric(horizontal: 3.w),
                       child: BookCourtInfoCard(
+                        storePrice: storePrice,
                         textPrice: textPrice,
                         price: pricePaid,
                         bookings: widget.bookings,
@@ -344,6 +349,7 @@ class _BookCourtDialogState extends ConsumerState<BookCourtDialog> {
           context: context,
           builder: (context) {
             return CourtBookedDialog(
+              storePrice: storePrice,
               bookings: widget.bookings,
               bookingTime: widget.bookingTime,
               court: widget.court,
@@ -418,6 +424,7 @@ class _BookCourtDialogState extends ConsumerState<BookCourtDialog> {
         context: context,
         builder: (context) {
           return CourtBookedDialog(
+            storePrice: storePrice,
             bookings: widget.bookings,
             amountPaid: amountPaid,
             // amountPaid: (amount ?? 0) > 0 ? amount : null,

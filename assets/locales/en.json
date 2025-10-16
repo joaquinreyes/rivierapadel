@@ -381,5 +381,8 @@
   "ALL COACHES": "All Coaches",
   "15HRS" : "15 hrs",
   "26HRS" : "26 hrs",
-  "RANKING_POSITIONS": "Ranking Positions"
+  "RANKING_POSITIONS": "Ranking Positions",
+  "INCLUSIVE_OF_VAT_AND_SERVICE_FEES": "Inclusive of VAT and service fees",
+  "ACTIVITY": "Activity",
+  "VENUE": "Game"
 }

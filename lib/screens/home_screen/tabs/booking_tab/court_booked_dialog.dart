@@ -26,6 +26,7 @@ class CourtBookedDialog extends ConsumerStatefulWidget {
       required this.bookings,
       required this.bookingTime,
       required this.court,
+      required this.storePrice,
       this.amountPaid,
       this.refundAmount,
       required this.isOpenMatch,
@@ -36,6 +37,7 @@ class CourtBookedDialog extends ConsumerStatefulWidget {
   final Map<int, String> court;
   final bool isOpenMatch;
   final double? amountPaid;
+  final double? storePrice;
   final int? serviceID;
   final double? refundAmount;
 
@@ -67,6 +69,8 @@ class _CourtBookedDialogState extends ConsumerState<CourtBookedDialog> {
           ),
           SizedBox(height: 20.h),
           BookCourtInfoCard(
+            storePrice: widget.storePrice,
+
             textPrice: widget.refundAmount != null
                 ? "${"PRICE".tr(context)} ${Utils.formatPrice((widget.amountPaid ?? widget.bookings.price)?.toDouble())}\n${"REFUND".tr(context)} ${Utils.formatPrice(widget.refundAmount?.toDouble())}"
                 : null,

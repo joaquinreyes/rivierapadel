@@ -21,7 +21,7 @@ class CourtBookingData {
       }
     }
     durations.sort();
-    return durations;
+    return durations.reversed.toList();
   }
 
   List<int> get locations {

@@ -116,6 +116,7 @@ class _MultiBookingCourtInfoCardState
               children: [
                 SizedBox(height: 5.h),
                 BookCourtInfoCard(
+                  storePrice: null,
                   color: widget.color,
                   textColor: widget.textColor,
                   dividerColor: widget.dividerColor,
