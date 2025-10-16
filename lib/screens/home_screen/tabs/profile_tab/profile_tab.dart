@@ -5,7 +5,6 @@ import 'package:acepadel/components/custom_dialog.dart';
 import 'package:acepadel/components/secondary_text.dart';
 import 'package:acepadel/models/active_memberships.dart';
 import 'package:acepadel/repository/booking_repo.dart';
-import 'package:acepadel/screens/app_provider.dart';
 import 'package:acepadel/screens/home_screen/tabs/play_match_tab/tabs/tab_parent.dart';
 import 'package:acepadel/screens/ranking_profile/ranking_profile.dart';
 import 'package:expandable_page_view/expandable_page_view.dart';
@@ -26,13 +25,13 @@ import 'package:acepadel/managers/user_manager.dart';
 import 'package:acepadel/repository/user_repo.dart';
 import 'package:acepadel/routes/app_pages.dart';
 import 'package:acepadel/routes/app_routes.dart';
+import 'package:acepadel/screens/home_screen/tabs/profile_tab/tabs/booking_profile_tab/booking_profile_tab.dart';
+import 'package:acepadel/screens/home_screen/tabs/profile_tab/tabs/membership_tab/membership_tab.dart';
 import 'package:acepadel/screens/home_screen/tabs/profile_tab/tabs/settings.dart';
-import 'package:acepadel/screens/home_screen/tabs/profile_tab/tabs/user_bookings_list.dart';
 import 'package:acepadel/utils/custom_extensions.dart';
 import 'package:flutter_inset_box_shadow/flutter_inset_box_shadow.dart'
     as inset;
 import 'package:image_picker/image_picker.dart';
-import 'dart:math' as math;
 
 import '../play_match_tab/play_match_tab.dart';
 
@@ -48,10 +47,7 @@ class ProfileTab extends ConsumerStatefulWidget {
 }
 
 class _ProfileTabState extends ConsumerState<ProfileTab> {
-  List<Widget> _pages = [];
-  bool allowRankingProfile = false;
-
-  List<Widget> tabs = [];
+  late List<Widget> _pages = [];
 
   @override
   void initState() {
@@ -62,32 +58,16 @@ class _ProfileTabState extends ConsumerState<ProfileTab> {
   void setPages(BuildContext context) {
     Future(() {
       ref.read(_selectedTabIndex.notifier).state = 0;
-      ref.refresh(fetchUserProvider);
-      ref.refresh(fetchAllCustomFieldsProvider);
+      ref.invalidate(fetchUserProvider);
+      ref.invalidate(fetchAllCustomFieldsProvider);
     });
     _pages = [
-      const UserBookingsList(),
-      const UserBookingsList(isPast: true),
+      const BookingProfileTab(),
+      RankingProfile(
+          customerID: ref.read(userProvider)?.user?.id ?? -1, isPage: false),
       const Settings(),
+      const MembershipTab(),
     ];
-    Future(() {
-      _pages = [
-        const UserBookingsList(),
-        const UserBookingsList(isPast: true),
-        RankingProfile(
-            customerID: ref.read(userProvider)?.user?.id ?? -1, isPage: false),
-        const Settings(),
-      ];
-    }).then((e) {
-      if (context.mounted) {
-        setTabs();
-      }
-    });
-  }
-
-  void setTabs() {
-    allowRankingProfile = true;
-    setState(() {});
   }
 
   @override
@@ -104,11 +84,12 @@ class _ProfileTabState extends ConsumerState<ProfileTab> {
     return PlayTabsParentWidget(
       onRefresh: () {
         int index = ref.read(_selectedTabIndex);
-        if (index == 0 || index == 1) {
+        if (index == 0) {
           return ref.refresh(fetchUserAllBookingsProvider.future);
-        } else {
-          return ref.refresh(fetchUserProvider.future);
+        } else if (index == 3) {
+          return ref.refresh(activeMembershipProvider.future);
         }
+        return ref.refresh(fetchUserProvider.future);
       },
       child: Column(
         children: [
@@ -122,7 +103,7 @@ class _ProfileTabState extends ConsumerState<ProfileTab> {
           Container(
             width: double.infinity,
             margin: EdgeInsets.symmetric(vertical: 15.h),
-            padding: EdgeInsets.symmetric(horizontal: 20.w,vertical: 4.h),
+            padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 4.h),
             decoration: inset.BoxDecoration(
               color: AppColors.clay05,
               borderRadius: BorderRadius.all(
@@ -134,14 +115,10 @@ class _ProfileTabState extends ConsumerState<ProfileTab> {
                 mainAxisSize: MainAxisSize.min,
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  _pageSelectorItem(
-                      text: 'UPCOMING_BOOKINGS'.tr(context), index: 0),
-                  _pageSelectorItem(
-                      text: 'PAST_BOOKINGS'.tr(context), index: 1),
-                  if (allowRankingProfile)
-                    _pageSelectorItem(
-                        text: 'RANKING_PROFILE'.tr(context), index: 2),
-                  _pageSelectorItem(text: 'SETTINGS'.tr(context), index: 3),
+                  _pageSelectorItem(text: 'BOOKINGS'.tr(context), index: 0),
+                  _pageSelectorItem(text: 'RANKING_PROFILE'.tr(context), index: 1),
+                  _pageSelectorItem(text: 'SETTINGS'.tr(context), index: 2),
+                  _pageSelectorItem(text: 'PACKAGES'.tr(context), index: 3),
                 ]),
           ),
           Padding(
@@ -164,36 +141,34 @@ class _ProfileTabState extends ConsumerState<ProfileTab> {
     final selectedTab = ref.watch(_selectedTabIndex);
     bool isSelected = selectedTab == index;
     return Expanded(
-      flex: 15,
       child: InkWell(
-        borderRadius: BorderRadius.circular(5.r),
-        onTap: () {
-          if (selectedTab != index) {
-            ref.read(_selectedTabIndex.notifier).state = index;
-          }
-        },
-        child: Container(
-          height: 40.h,
-          constraints: kComponentWidthConstraint,
-          padding: EdgeInsets.symmetric(horizontal: 10.w),
-          margin: EdgeInsets.symmetric(horizontal: 2.w),
-          decoration: BoxDecoration(
-            color: isSelected ? AppColors.darkBlue : Colors.transparent,
-            borderRadius: BorderRadius.circular(15.r),
-          ),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Text(text,
-                  textAlign: TextAlign.center,
-                  style: isSelected
-                      ? AppTextStyles.sansMedium12
-                          .copyWith(color: Colors.white)
-                      : AppTextStyles.sansRegular12.copyWith(color: AppColors.clay70)),
-            ],
-          ),
-        ),
-      ),
+          onTap: () {
+            if (selectedTab != index) {
+              ref.read(_selectedTabIndex.notifier).state = index;
+            }
+          },
+          child: Container(
+            height: 40.h,
+            constraints: kComponentWidthConstraint,
+            padding: EdgeInsets.symmetric(horizontal: 10.w),
+            margin: EdgeInsets.symmetric(vertical: 4.h, horizontal: 4.w),
+            decoration: BoxDecoration(
+              color: isSelected ? AppColors.darkBlue : Colors.transparent,
+              borderRadius: BorderRadius.circular(15.r),
+            ),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(text,
+                    textAlign: TextAlign.center,
+                    style: isSelected
+                        ? AppTextStyles.sansMedium12
+                            .copyWith(color: Colors.white)
+                        : AppTextStyles.sansRegular12
+                            .copyWith(color: AppColors.clay70)),
+              ],
+            ),
+          )),
     );
   }
 }

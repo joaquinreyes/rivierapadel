@@ -388,5 +388,20 @@
   "LEVEL_RELIABILITY": "Level reliability",
   "MATCHES_PLAYED": "Matches played",
   "SKIP" : "Skip",
-  "RANKING_PROGRESSION": "Ranking Progression"
+  "RANKING_PROGRESSION": "Ranking Progression",
+  "UPCOMING": "Upcoming",
+  "PAST": "Past",
+  "BOOKINGS": "Bookings",
+  "PACKAGES": "Packages",
+  "MEMBERSHIP_INFORMATION": "Package information",
+  "MEMBERSHIPS" : "Packages",
+  "NO_MEMBERSHIP_FOUND": "No Package Found",
+  "NO_PURCHASE_MEMBERSHIP_FOUND": "You haven't bought any packages.",
+  "GET_MEMBERSHIP": "Get Package",
+  "REMAINING": "Remaining",
+  "UNLIMITED": "Unlimited",
+  "VALID_UNTIL": "Valid until",
+  "DESCRIPTION": "Description",
+  "SEND_BUY_MEMBERSHIP_MESSAGE": "Send us a message to get more information",
+  "MEMBERSHIP": "Membership"
 }
