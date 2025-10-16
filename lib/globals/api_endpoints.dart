@@ -59,7 +59,10 @@ enum ApiEndPoint {
   openMatchCalculatePriceApi("services/open-match-calculate-price",
       isAuthRequired: true),
   getUserMatchLevels("users/get-user-matchlevels", isAuthRequired: true),
-  fetchChatCount("chat-contacts", isAuthRequired: true, isWebSocketUrl: true);
+  fetchChatCount("chat-contacts", isAuthRequired: true, isWebSocketUrl: true),
+  getAllMembership("memberships", isAuthRequired: true),
+  getMembershipCategory("memberships/membership-category",
+      isAuthRequired: true);
 
   final String _path;
   final int successCode;

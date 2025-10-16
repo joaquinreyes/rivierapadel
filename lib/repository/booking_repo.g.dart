@@ -877,6 +877,66 @@ final activeMembershipProvider =
 // ignore: unused_element
 typedef ActiveMembershipRef
     = AutoDisposeFutureProviderRef<List<ActiveMemberships>>;
+String _$fetchActiveAndAllMembershipsHash() =>
+    r'6781ec7fefd91d8883fd9e1f996ed75c840468f0';
+
+/// See also [fetchActiveAndAllMemberships].
+@ProviderFor(fetchActiveAndAllMemberships)
+final fetchActiveAndAllMembershipsProvider =
+    AutoDisposeFutureProvider<UserActiveMembership>.internal(
+  fetchActiveAndAllMemberships,
+  name: r'fetchActiveAndAllMembershipsProvider',
+  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+      ? null
+      : _$fetchActiveAndAllMembershipsHash,
+  dependencies: null,
+  allTransitiveDependencies: null,
+);
+
+@Deprecated('Will be removed in 3.0. Use Ref instead')
+// ignore: unused_element
+typedef FetchActiveAndAllMembershipsRef
+    = AutoDisposeFutureProviderRef<UserActiveMembership>;
+String _$fetchAllMembershipsHash() =>
+    r'007d54c5bde5f6a62f26bf17d547f8dc03edea10';
+
+/// See also [fetchAllMemberships].
+@ProviderFor(fetchAllMemberships)
+final fetchAllMembershipsProvider =
+    AutoDisposeFutureProvider<List<MembershipModel>>.internal(
+  fetchAllMemberships,
+  name: r'fetchAllMembershipsProvider',
+  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+      ? null
+      : _$fetchAllMembershipsHash,
+  dependencies: null,
+  allTransitiveDependencies: null,
+);
+
+@Deprecated('Will be removed in 3.0. Use Ref instead')
+// ignore: unused_element
+typedef FetchAllMembershipsRef
+    = AutoDisposeFutureProviderRef<List<MembershipModel>>;
+String _$fetchMembershipCategoryHash() =>
+    r'af162354acb772960d85b39f152671a69e1c72c5';
+
+/// See also [fetchMembershipCategory].
+@ProviderFor(fetchMembershipCategory)
+final fetchMembershipCategoryProvider =
+    AutoDisposeFutureProvider<List<MembershipCategory>>.internal(
+  fetchMembershipCategory,
+  name: r'fetchMembershipCategoryProvider',
+  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+      ? null
+      : _$fetchMembershipCategoryHash,
+  dependencies: null,
+  allTransitiveDependencies: null,
+);
+
+@Deprecated('Will be removed in 3.0. Use Ref instead')
+// ignore: unused_element
+typedef FetchMembershipCategoryRef
+    = AutoDisposeFutureProviderRef<List<MembershipCategory>>;
 String _$addToCalendarHash() => r'64a254810c4801ab505e0babb496fd935dc108dc';
 
 /// See also [addToCalendar].

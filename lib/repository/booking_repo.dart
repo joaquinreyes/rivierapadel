@@ -1,6 +1,9 @@
 import 'dart:async';
 
 import 'package:acepadel/models/active_memberships.dart';
+import 'package:acepadel/models/membership_model.dart';
+import 'package:acepadel/models/membership_list_category_model.dart';
+import 'package:acepadel/models/user_membership.dart';
 import 'package:acepadel/models/multi_booking_model.dart';
 import 'package:acepadel/models/total_hours.dart';
 import 'package:add_2_calendar/add_2_calendar.dart';
@@ -368,6 +371,68 @@ class BookingRepo {
     }
   }
 
+  Future<UserActiveMembership> fetchActiveAndAllMemberships(Ref ref) async {
+    final future = await Future.wait([
+      ref.refresh(activeMembershipProvider.future),
+      ref.refresh(fetchAllMembershipsProvider.future),
+      ref.refresh(fetchMembershipCategoryProvider.future),
+    ]);
+    final activeMembershipValue = future[0] as List<ActiveMemberships>;
+    final allMembershipValue = future[1] as List<MembershipModel>;
+    final allMembershipCatValue = future[2] as List<MembershipCategory>;
+
+    return UserActiveMembership(
+        activeMembership: activeMembershipValue,
+        membershipCategories: allMembershipCatValue,
+        membershipModel: allMembershipValue);
+  }
+
+  Future<List<MembershipModel>> fetchAllMemberships(Ref ref) async {
+    try {
+      final token = ref.read(userManagerProvider).user?.accessToken ?? "";
+
+      if (token.trim().isEmpty) {
+        return [];
+      }
+
+      final response = await ref.read(apiManagerProvider).get(
+          ref, ApiEndPoint.getAllMembership,
+          token: token, queryParams: {"show_all": true});
+      final List<MembershipModel> memberships = [];
+
+      for (final membership in response['data']["memberships"]) {
+        memberships.add(MembershipModel.fromJson(membership));
+      }
+      return memberships;
+    } catch (e) {
+      return [];
+    }
+  }
+
+  Future<List<MembershipCategory>> fetchMembershipCategory(Ref ref) async {
+    try {
+      final token = ref.read(userManagerProvider).user?.accessToken ?? "";
+
+      if (token.trim().isEmpty) {
+        return [];
+      }
+
+      final response = await ref.read(apiManagerProvider).get(
+        ref,
+        ApiEndPoint.getMembershipCategory,
+        token: token,
+      );
+      final List<MembershipCategory> categories = [];
+
+      for (final category in response['data']) {
+        categories.add(MembershipCategory.fromJson(category));
+      }
+      return categories;
+    } catch (e) {
+      return [];
+    }
+  }
+
   Future<bool> addToCalendar(
       String title, DateTime startDate, DateTime endDate) async {
     try {
@@ -590,6 +655,23 @@ Future<TotalHours> playedHours(PlayedHoursRef ref) {
 @riverpod
 Future<List<ActiveMemberships>> activeMembership(ActiveMembershipRef ref) {
   return ref.read(bookingRepoProvider).fetchActiveMemberships(ref);
+}
+
+@riverpod
+Future<UserActiveMembership> fetchActiveAndAllMemberships(
+    FetchActiveAndAllMembershipsRef ref) {
+  return ref.read(bookingRepoProvider).fetchActiveAndAllMemberships(ref);
+}
+
+@riverpod
+Future<List<MembershipModel>> fetchAllMemberships(FetchAllMembershipsRef ref) {
+  return ref.read(bookingRepoProvider).fetchAllMemberships(ref);
+}
+
+@riverpod
+Future<List<MembershipCategory>> fetchMembershipCategory(
+    FetchMembershipCategoryRef ref) {
+  return ref.read(bookingRepoProvider).fetchMembershipCategory(ref);
 }
 
 @riverpod

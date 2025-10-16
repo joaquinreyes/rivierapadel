@@ -1,10 +1,14 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:acepadel/components/c_divider.dart';
 import 'package:acepadel/components/custom_dialog.dart';
 import 'package:acepadel/models/active_memberships.dart';
+import 'package:acepadel/models/membership_list_category_model.dart';
+import 'package:acepadel/models/membership_model.dart';
+import 'package:acepadel/models/user_membership.dart';
 import 'package:acepadel/utils/custom_extensions.dart';
 import 'package:flutter_inset_box_shadow/flutter_inset_box_shadow.dart' as inset;
 import '../../../../../../app_styles/app_colors.dart';
@@ -21,7 +25,7 @@ class MembershipTab extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final membership = ref.watch(activeMembershipProvider);
+    final membership = ref.watch(fetchActiveAndAllMembershipsProvider);
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -32,72 +36,37 @@ class MembershipTab extends ConsumerWidget {
         SizedBox(height: 10.h),
         membership.when(
             data: (data) {
-              if (data.isEmpty) {
+              if (data.membershipModel.isEmpty) {
                 return SecondaryText(text: "NO_MEMBERSHIP_FOUND".tr(context));
               }
-              return _MembershipListComponent(memberships: data);
+              final selectedMembershipCategory =
+                  ref.watch(selectedMembershipCatIndex);
+
+              if (data.showMembershipCategories.isNotEmpty &&
+                  selectedMembershipCategory.isEmpty) {
+                WidgetsBinding.instance.addPostFrameCallback((_) {
+                  ref.read(selectedMembershipCatIndex.notifier).state =
+                      data.showMembershipCategories.first.id;
+                });
+              }
+
+              return Column(
+                children: [
+                  if (data.showMembershipCategories.length > 1)
+                    Padding(
+                      padding: const EdgeInsets.only(bottom: 10.0),
+                      child: _MembershipCategorySelection(
+                          showMembershipCategories:
+                              data.showMembershipCategories),
+                    ),
+                  MembershipListComponent(data: data, showAllMembership: false),
+                ],
+              );
             },
             error: (e, _) =>
                 SecondaryText(text: "NO_MEMBERSHIP_FOUND".tr(context)),
             loading: () => const Center(child: CupertinoActivityIndicator()))
       ],
-    );
-  }
-}
-
-class _MembershipListComponent extends StatelessWidget {
-  final List<ActiveMemberships> memberships;
-
-  const _MembershipListComponent({required this.memberships});
-
-  @override
-  Widget build(BuildContext context) {
-    return ListView.builder(
-      shrinkWrap: true,
-      physics: const NeverScrollableScrollPhysics(),
-      itemCount: memberships.length,
-      padding: EdgeInsets.symmetric(vertical: 10.h),
-      itemBuilder: (context, index) {
-        final membership = memberships[index];
-        final membershipName = membership.membershipName ?? "";
-
-        return Padding(
-          padding: EdgeInsets.only(bottom: 5.h),
-          child: Row(
-            children: [
-              Expanded(
-                flex: 4,
-                child: Text(
-                  membershipName,
-                  style: AppTextStyles.balooMedium16,
-                ),
-              ),
-              InkWell(
-                onTap: () async {
-                  await showDialog(
-                    context: context,
-                    builder: (context) {
-                      return _MembershipInfoDialog(membership: membership);
-                    },
-                  );
-                },
-                child: Container(
-                  width: 120.w,
-                  margin: EdgeInsets.symmetric(horizontal: 15.w),
-                  padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 4.h),
-                  decoration: inset.BoxDecoration(
-                    color: AppColors.darkBlue,
-                    boxShadow: kInsetShadow,
-                    borderRadius: BorderRadius.circular(12.r),
-                  ),
-                  alignment: Alignment.center,
-                  child: Center(child: membership.usesLeftString(context)),
-                ),
-              ),
-            ],
-          ),
-        );
-      },
     );
   }
 }

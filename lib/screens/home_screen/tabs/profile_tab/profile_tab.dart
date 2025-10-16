@@ -87,7 +87,7 @@ class _ProfileTabState extends ConsumerState<ProfileTab> {
         if (index == 0) {
           return ref.refresh(fetchUserAllBookingsProvider.future);
         } else if (index == 3) {
-          return ref.refresh(activeMembershipProvider.future);
+          return ref.refresh(fetchActiveAndAllMembershipsProvider.future);
         }
         return ref.refresh(fetchUserProvider.future);
       },
