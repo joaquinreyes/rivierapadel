@@ -21,6 +21,7 @@ import 'package:acepadel/routes/app_pages.dart';
 import 'package:acepadel/utils/custom_extensions.dart';
 
 import '../../components/custom_dialog.dart';
+import '../../components/user_lessons_events.dart';
 import '../../routes/app_routes.dart';
 import '../home_screen/tabs/play_match_tab/play_match_tab.dart';
 import '../open_match_detail/match_result_dialog/enter_match_result.dart';
@@ -190,7 +191,16 @@ class _RankingProfileState extends ConsumerState<RankingProfile> {
             ),
           if (widget.isPage)
           SizedBox(height: 35.h),
-          _PlayerRanking(level: userFromAssessment.levelD(getSportsName(ref))),
+          _PlayerRanking(
+            level: userFromAssessment.levelD(getSportsName(ref)),
+            reliability: userFromAssessment.reliability(getSportsName(ref)),
+            matchPlayed: userFromAssessment.gamesPlayed(getSportsName(ref)),
+          ),
+          SizedBox(height: 20.h),
+          _RankingProgression(
+            userId: widget.customerID,
+            sportName: getSportsName(ref),
+          ),
           SizedBox(height: 20.h),
           _PlayerStats(
             customerFromAssessment: userFromAssessment,

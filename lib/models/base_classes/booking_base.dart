@@ -11,6 +11,7 @@ class BookingBase {
   String? date;
   int? id;
   bool? isFriendlyMatch;
+  bool? isPrivateMatch;
   int? minimumCapacity;
   int? maximumCapacity;
   bool? approveBeforeJoin;
@@ -29,7 +30,9 @@ class BookingBase {
       this.maximumCapacity,
       this.approveBeforeJoin,
       this.coaches,
+      this.isPrivateMatch,
       this.organizerNote,
+      this.options,
       this.rankedEvent,
       this.scoreSubmitted,
       this.isFriendlyMatch});
@@ -173,6 +176,7 @@ class BookingBase {
     minimumCapacity = json['minimum_capacity'];
     maximumCapacity = json['maximum_capacity'];
     rankedEvent = json['ranked_event'];
+    isPrivateMatch = json['is_private_match'];
     scoreSubmitted = json['score_submitted'];
     if (json['openMatchOptions'] != null) {
       options = OpenMatchOptions.fromJson(json['openMatchOptions']);
@@ -194,12 +198,12 @@ class BookingBase {
     data['approve_before_join'] = approveBeforeJoin;
     data['organizer_notes'] = organizerNote;
     data['ranked_event'] = rankedEvent;
+    data['is_private_match'] = isPrivateMatch;
     data['score_submitted'] = scoreSubmitted;
 
     return data;
   }
 }
-
 class OpenMatchOptions {
   double? maxLevel;
   double? minLevel;
@@ -209,5 +213,12 @@ class OpenMatchOptions {
   OpenMatchOptions.fromJson(Map<String, dynamic> json) {
     maxLevel = double.tryParse(json['max_level']?.toString() ?? '');
     minLevel = double.tryParse(json['min_level']?.toString() ?? '');
+  }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'max_level': maxLevel,
+      'min_level': minLevel,
+    };
   }
 }

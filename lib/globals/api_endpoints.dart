@@ -42,7 +42,8 @@ enum ApiEndPoint {
   usersWallets("users/wallets", isAuthRequired: true),
   transactions("users/transactions", isAuthRequired: true),
   serviceSubmitAssessment("services/submit-assessment"),
-  usersAssessments("users/assessments", isAuthRequired: true),
+  usersAssessments("users/assessments_data", isAuthRequired: true),
+
   serviceAssessment("services/assessment"),
   fcmToken("users/user-fcmtoken", successCode: 201),
   cancellationPolicy("services/cancellation-policy", isAuthRequired: true),
@@ -124,7 +125,7 @@ enum ApiEndPoint {
       return "services/assessment/${id.first}";
     }
     if (this == ApiEndPoint.usersAssessments) {
-      return "users/${id.first}/assessments";
+      return "users/${id.first}/assessments_data";
     }
     return _path;
   }

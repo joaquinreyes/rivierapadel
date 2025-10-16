@@ -1,5 +1,7 @@
 import 'package:acepadel/models/app_user.dart';
 import 'package:acepadel/models/service_detail_model.dart';
+import 'package:acepadel/models/user_bookings.dart';
+import 'package:acepadel/models/base_classes/booking_base.dart';
 import '../utils/dubai_date_time.dart';
 
 class UserAssessment {
@@ -37,6 +39,13 @@ class Assessments {
   Service? service;
   List<ServiceDetail_Players>? players;
   List<OpenMatchScores>? openMatchScores;
+  OpenMatchOptions? options;
+  String? startTime;
+  String? endTime;
+  bool? rankedEvent;
+  bool? scoreSubmitted;
+  int? maximumCapacity;
+  int? minimumCapacity;
 
   DateTime get bookingDate {
     if (date == null) {
@@ -96,17 +105,46 @@ class Assessments {
     }
   }
 
+  bool get isEvent {
+    return service?.event != null;
+  }
+
+  String get openMatchLevelRange {
+    String minLevel = options?.minLevel?.toString() ?? "";
+    String maxLevel = options?.maxLevel?.toString() ?? "";
+    if (minLevel.isEmpty || maxLevel.isEmpty) {
+      return "";
+    }
+    return "$minLevel - $maxLevel";
+  }
+
   Assessments({
     this.id,
     this.date,
     this.service,
     this.players,
     this.openMatchScores,
+    this.options,
+    this.startTime,
+    this.endTime,
+    this.rankedEvent,
+    this.scoreSubmitted,
+    this.maximumCapacity,
+    this.minimumCapacity,
   });
 
   Assessments.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     date = json['date'];
+    startTime = json['start_time'];
+    endTime = json['end_time'];
+    rankedEvent = json['ranked_event'];
+    scoreSubmitted = json['score_submitted'];
+    minimumCapacity = json['minimum_capacity'];
+    maximumCapacity = json['maximum_capacity'];
+    options = json['openMatchOptions'] != null
+        ? OpenMatchOptions.fromJson(json['openMatchOptions'])
+        : null;
     service =
         json['service'] != null ? Service.fromJson(json['service']) : null;
     if (json['players'] != null) {
@@ -121,12 +159,22 @@ class Assessments {
         openMatchScores!.add(OpenMatchScores.fromJson(v));
       });
     }
+    if (isEvent) {
+      service?.serviceType = "Event";
+    }
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
     data['id'] = id;
     data['date'] = date;
+    data['end_time'] = endTime;
+    data['start_time'] = startTime;
+    data['minimum_capacity'] = minimumCapacity;
+    data['maximum_capacity'] = maximumCapacity;
+    data['score_submitted'] = scoreSubmitted;
+    data['ranked_event'] = rankedEvent;
+    data['openMatchOptions'] = options;
     if (service != null) {
       data['service'] = service!.toJson();
     }
@@ -139,29 +187,25 @@ class Assessments {
     }
     return data;
   }
-}
 
-class Service {
-  String? bookingType;
-  Booking? booking;
-
-  Service({this.bookingType, this.booking});
-
-  Service.fromJson(Map<String, dynamic> json) {
-    bookingType = json['booking_type'];
-    booking =
-        json['booking'] != null ? Booking.fromJson(json['booking']) : null;
-  }
-
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = <String, dynamic>{};
-    data['booking_type'] = bookingType;
-    if (booking != null) {
-      data['booking'] = booking!.toJson();
-    }
-    return data;
+  UserBookings toUserBookings() {
+    return UserBookings(
+      id: id,
+      date: date,
+      startTime: startTime,
+      endTime: endTime,
+      service: service,
+      rankedEvent: rankedEvent,
+      minimumCapacity: maximumCapacity,
+      maximumCapacity: maximumCapacity,
+      scoreSubmitted: scoreSubmitted,
+      openMatchOptions: options,
+      players: players?.map((p) => Players.fromServiceDetailPlayer(p)).toList(),
+      coaches: service?.coaches,
+    );
   }
 }
+
 
 class Booking {
   int? id;

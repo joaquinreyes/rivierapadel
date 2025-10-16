@@ -1,16 +1,21 @@
 part of 'ranking_profile.dart';
 
 class _PlayerRanking extends StatelessWidget {
-  const _PlayerRanking({required this.level});
+  const _PlayerRanking({
+    required this.level,
+    required this.reliability,
+    required this.matchPlayed,
+  });
 
   final double level;
+  final double? reliability;
+  final int? matchPlayed;
 
   @override
   Widget build(BuildContext context) {
     int rounded = level.floor();
     double decimal = level - rounded.toDouble();
     return Container(
-      height: 100.h,
       width: double.maxFinite,
       padding:  EdgeInsets.symmetric(vertical: 10.h,horizontal: 15.w),
       decoration: BoxDecoration(
@@ -158,7 +163,71 @@ class _PlayerRanking extends StatelessWidget {
                 ],
               ),
             ],
-          )
+          ),
+          SizedBox(height: 10.h),
+          if(reliability != null && matchPlayed != null)
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              Expanded(
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    Text(
+                      'LEVEL_RELIABILITY'.tr(context),
+                      style: AppTextStyles.sansRegular13.copyWith(
+                          color: AppColors.white),
+                    ),
+                    Text(
+                      ': ',
+                      style: AppTextStyles.sansRegular13.copyWith(
+                          color: AppColors.white),
+                    ),
+                    Text(
+                      reliability != null
+                          ? '${reliability?.toStringAsFixed(0)}%'
+                          : '0%',
+                      style: AppTextStyles.sansMedium13.copyWith(
+                          color: AppColors.white),
+                    ),
+                  ],
+                ),
+              ),
+              SizedBox(width: 10.w),
+              Expanded(
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    Text(
+                      'MATCHES_PLAYED'.tr(context),
+                      style: AppTextStyles.sansRegular13.copyWith(
+                          color: AppColors.white),
+                    ),
+                    Text(
+                      ':  ',
+                      style: AppTextStyles.sansRegular13.copyWith(
+                          color: AppColors.white),
+                    ),
+                    Container(
+                      width: 35.w,
+                      padding: EdgeInsets.symmetric(vertical: 2),
+                      alignment: Alignment.center,
+                      decoration: BoxDecoration(
+                        color: AppColors.white,
+                        borderRadius: BorderRadius.circular(100.r)
+                      ),
+                      child: Text(
+                        '${matchPlayed ?? 0}',
+                        style: AppTextStyles.sansMedium13.copyWith(
+                            color: AppColors.darkBlue),
+                      )
+                    )
+
+                  ],
+                ),
+              ),
+            ],
+          ),
         ],
       ),
     );
@@ -275,6 +344,23 @@ class _PastMatches extends ConsumerWidget {
                   itemCount: assessments.length,
                   itemBuilder: (context, index) {
                     final assessment = assessments[index];
+
+                    if (assessment.isEvent) {
+                      return InkWell(
+                          onTap: () {
+                            ref
+                                .read(goRouterProvider)
+                                .push("${RouteNames.eventInfo}/${assessment.id}");
+                          },
+                          child: Padding(
+                            padding: const EdgeInsets.only(bottom: 10),
+                            child: UserLessonsEventsCard(
+                              booking: assessment.toUserBookings(),
+                              isPast: true,
+                            ),
+                          ));
+                    }
+
                     return Padding(
                       padding: const EdgeInsets.only(bottom: 10),
                       child: _PastMatchCard(assessment: assessment, ref: ref),
@@ -491,5 +577,26 @@ class _RankingLogicDialog extends StatelessWidget {
         ],
       ),
     );
+  }
+}
+
+class _RankingProgression extends ConsumerStatefulWidget {
+  const _RankingProgression({required this.userId, required this.sportName});
+
+  final int userId;
+  final String sportName;
+
+  @override
+  ConsumerState<_RankingProgression> createState() =>
+      _RankingProgressionState();
+}
+
+class _RankingProgressionState extends ConsumerState<_RankingProgression> {
+  int selectedMatchCount = 10;
+
+  @override
+  Widget build(BuildContext context) {
+    // For now, return empty widget until provider is implemented
+    return Container();
   }
 }

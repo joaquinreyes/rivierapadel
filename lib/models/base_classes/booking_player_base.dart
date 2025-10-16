@@ -247,6 +247,30 @@ class BookingCustomerBase {
 
   String? get startedPlaying => customFields['Started Playing'];
 
+  double? reliability(String sportName) {
+    if (sportsLevel.isEmpty) {
+      return null;
+    }
+    int indexOfSport = sportsLevel.indexWhere((element) =>
+        element.sportName?.toLowerCase() == sportName.toLowerCase());
+    if (indexOfSport == -1) {
+      return null;
+    }
+    return sportsLevel[indexOfSport].reliability;
+  }
+
+  int? gamesPlayed(String sportName) {
+    if (sportsLevel.isEmpty) {
+      return null;
+    }
+    int indexOfSport = sportsLevel.indexWhere((element) =>
+        element.sportName?.toLowerCase() == sportName.toLowerCase());
+    if (indexOfSport == -1) {
+      return null;
+    }
+    return sportsLevel[indexOfSport].gamesPlayed;
+  }
+
   BookingCustomerBase({
     this.id,
     this.firstName,

@@ -170,18 +170,27 @@ class User {
 class UserSportsLevel {
   String? sportName;
   double? level;
+  double? prevLevel;
+  double? reliability;
+  int? gamesPlayed;
 
-  UserSportsLevel({this.sportName, this.level});
+  UserSportsLevel({this.sportName, this.level, this.prevLevel, this.reliability, this.gamesPlayed});
 
   UserSportsLevel.fromJson(Map<String, dynamic> json) {
     sportName = json['sport_name'];
     level = double.tryParse(json['level'].toString());
+    prevLevel = double.tryParse(json['prev_level'].toString());
+    reliability = double.tryParse(json['reliability'].toString());
+    gamesPlayed = int.tryParse(json['games_played'].toString());
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
     data['sport_name'] = sportName;
     data['level'] = double.tryParse(level.toString());
+    data['prev_level'] = double.tryParse(prevLevel.toString());
+    data['reliability'] = double.tryParse(reliability.toString());
+    data['games_played'] = int.tryParse(gamesPlayed.toString());
     return data;
   }
 }

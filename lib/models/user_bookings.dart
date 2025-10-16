@@ -9,6 +9,7 @@ class UserBookings extends BookingBase {
   List<Courts>? courts;
   List<Players>? players;
   List<RequestWaitingList>? requestWaitingList;
+  OpenMatchOptions? openMatchOptions;
 
   List<ServiceDetail_Coach> get getCoaches {
     final seenIds = <dynamic>{};
@@ -34,16 +35,34 @@ class UserBookings extends BookingBase {
 
   UserBookings(
       {super.id,
-      super.date,
-      super.startTime,
-      super.endTime,
-      super.rankedEvent,
-      super.scoreSubmitted,
-      this.isCancelled,
-      this.service,
-      this.courts,
-      this.players,
-      this.requestWaitingList});
+        super.date,
+        super.startTime,
+        super.coaches,
+        super.endTime,
+        super.isPrivateMatch,
+        super.minimumCapacity,
+        super.maximumCapacity,
+        super.approveBeforeJoin,
+        super.organizerNote,
+        super.isFriendlyMatch,
+        super.rankedEvent,
+        super.scoreSubmitted,
+        super.options,
+        this.isCancelled,
+        this.service,
+        this.courts,
+        this.openMatchOptions,
+        this.players,
+        this.requestWaitingList});
+
+  String get bookingLevel {
+    if (openMatchOptions != null &&
+        openMatchOptions!.maxLevel != null &&
+        openMatchOptions!.minLevel != null) {
+      return "${openMatchOptions!.minLevel ?? ""} - ${openMatchOptions!.maxLevel ?? ""}";
+    }
+    return '';
+  }
 
   int? getMyPositionEvent(int customerId) {
     final player = players?.firstWhere(
@@ -92,6 +111,9 @@ class UserBookings extends BookingBase {
     } else {
       requestWaitingList = null;
     }
+    openMatchOptions = json['openMatchOptions'] != null
+        ? new OpenMatchOptions.fromJson(json['openMatchOptions'])
+        : null;
   }
 
   @override
@@ -106,6 +128,9 @@ class UserBookings extends BookingBase {
     }
     if (players != null) {
       data['players'] = players!.map((v) => v.toJson()).toList();
+    }
+    if (this.openMatchOptions != null) {
+      data['openMatchOptions'] = this.openMatchOptions!.toJson();
     }
     super.toJson().forEach((key, value) {
       data[key] = value;
@@ -164,6 +189,14 @@ class Service {
       json['coaches'].forEach((v) {
         coaches!.add(ServiceDetail_Coach.fromJson(v));
       });
+    }
+    // If location is not directly in service, check inside event or lesson
+    if (location == null) {
+      if (json['event'] != null && json['event']['location'] != null) {
+        location = new Location.fromJson(json['event']['location']);
+      } else if (json['lesson'] != null && json['lesson']['location'] != null) {
+        location = new Location.fromJson(json['lesson']['location']);
+      }
     }
   }
 
@@ -224,6 +257,8 @@ class Players extends BookingPlayerBase {
     super.isCanceled,
     super.position,
     super.customer,
+    super.playerEventRanking,
+    super.guest,
   });
 
   Players.fromJson(Map<String, dynamic> json) : super.fromJson(json) {
@@ -231,6 +266,30 @@ class Players extends BookingPlayerBase {
         ? BookingCustomerBase.fromJson(json['customer'])
         : null;
   }
+
+  Players.fromServiceDetailPlayer(ServiceDetail_Players player)
+      : super(
+          id: player.id,
+          position: player.position,
+          isCanceled: player.isCanceled,
+          isOrganizer: player.isOrganizer,
+          isWaiting: player.isWaiting,
+          reservedPlayersCount: player.reservedPlayersCount,
+          otherPlayer: player.otherPlayer,
+          playerEventRanking: player.playerEventRanking,
+          guest: player.guest,
+          customer: player.customer != null
+              ? BookingCustomerBase(
+                  id: player.customer!.id,
+                  firstName: player.customer!.firstName,
+                  lastName: player.customer!.lastName,
+                  customFields: player.customer!.customFields,
+                  profileUrl: player.customer!.profileUrl,
+                  last21Evaluation: player.customer!.last21Evaluation,
+                  winningStrike: player.customer!.winningStrike,
+                )
+              : null,
+        );
 }
 
 class Courts {
