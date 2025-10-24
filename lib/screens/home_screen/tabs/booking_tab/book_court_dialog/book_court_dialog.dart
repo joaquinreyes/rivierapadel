@@ -296,6 +296,7 @@ class _BookCourtDialogState extends ConsumerState<BookCourtDialog> {
             SizedBox(height: 10.h),
             MainButton(
               enabled: price > 0,
+              padding: EdgeInsets.zero,
               label:
                   isOpenMatch ? "PAY_MY_SHARE".trU(context) : "PAY".trU(context),
               isForPopup: true,
@@ -308,6 +309,7 @@ class _BookCourtDialogState extends ConsumerState<BookCourtDialog> {
             if (!widget.isOnlyOpenMatch)
               MainButton(
                 color: AppColors.white25,
+                padding: EdgeInsets.zero,
                 label: "ADD_TO_CART".trU(context),
                 isForPopup: true,
                 onTap: () {
@@ -637,6 +639,7 @@ class _BookCourtDialogLessonState extends ConsumerState<BookCourtDialogLesson> {
             MainButton(
               label: "PAY".tr(context),
               isForPopup: true,
+              padding: EdgeInsets.zero,
               onTap: () async {
                 await _payCourt(false, selectedLessonVariant);
               },

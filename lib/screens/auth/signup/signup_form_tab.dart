@@ -21,6 +21,7 @@ class _SignUpFormTabState extends ConsumerState<_SignUpFormTab> {
   final _phoneNode = FocusNode();
   final _passNode = FocusNode();
   bool isTermsChecked = false;
+  bool _isPasswordVisible = false;
   GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
   String dialCode = '+62';
@@ -169,9 +170,23 @@ class _SignUpFormTabState extends ConsumerState<_SignUpFormTab> {
                     CustomTextField(
                       controller: _passwordController,
                       node: _passNode,
-                      obscureText: true,
+                      obscureText: !_isPasswordVisible,
                       isRequired: true,
                       textInputAction: TextInputAction.done,
+                      suffixIcon: GestureDetector(
+                        onTap: () {
+                          setState(() {
+                            _isPasswordVisible = !_isPasswordVisible;
+                          });
+                        },
+                        child: Icon(
+                          _isPasswordVisible
+                              ? Icons.visibility
+                              : Icons.visibility_off,
+                          color: AppColors.darkGreen,
+                          size: 20.sp,
+                        ),
+                      ),
                       validator: (val) {
                         if ((val?.isEmpty ?? true) || (val?.length ?? 0) < 6) {
                           return "PASSWORD_MUST_BE_".tr(context);

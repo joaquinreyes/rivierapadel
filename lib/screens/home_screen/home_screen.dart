@@ -105,12 +105,14 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
     );
     final pageController = ref.watch(pageControllerProvider);
     return Scaffold(
-      bottomNavigationBar: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          const BookingCart(),
-          if (!(PlatformC().isCurrentDesignPlatformDesktop)) const NavBar(),
-        ],
+      bottomNavigationBar: SafeArea(
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            const BookingCart(),
+            if (!(PlatformC().isCurrentDesignPlatformDesktop)) const NavBar(),
+          ],
+        ),
       ),
       body: NotificationListener<OverscrollIndicatorNotification>(
         onNotification: (notification) {

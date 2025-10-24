@@ -269,36 +269,38 @@ class _FilterRow extends ConsumerWidget {
     if (isDesktop) {
       return CustomDialog(color: AppColors.white,height: 550.h, child: child);
     }
-    return Material(
-      color: Colors.transparent,
-      child: Stack(
-        children: [
-          Container(
-            width: double.infinity,
-            constraints: BoxConstraints(maxHeight: 440.h),
-            decoration: const BoxDecoration(
-              color: AppColors.backgroundColor,
-              borderRadius: BorderRadius.only(
-                topLeft: Radius.circular(20),
-                topRight: Radius.circular(20),
+    return SafeArea(
+      child: Material(
+        color: Colors.transparent,
+        child: Stack(
+          children: [
+            Container(
+              width: double.infinity,
+              constraints: BoxConstraints(maxHeight: 440.h),
+              decoration: const BoxDecoration(
+                color: AppColors.backgroundColor,
+                borderRadius: BorderRadius.only(
+                  topLeft: Radius.circular(20),
+                  topRight: Radius.circular(20),
+                ),
+                boxShadow: [
+                  kBoxShadow,
+                ],
               ),
-              boxShadow: [
-                kBoxShadow,
-              ],
+              padding: EdgeInsets.symmetric(horizontal: 20.w),
+              child: child,
             ),
-            padding: EdgeInsets.symmetric(horizontal: 20.w),
-            child: child,
-          ),
-          Positioned(
-              right: 5,
-              top: 5,
-              child: IconButton(
-                  onPressed: () {
-                    Navigator.pop(context);
-                  },
-                  icon: const Icon(Icons.close,
-                      color: AppColors.darkGreen, size: 16)))
-        ],
+            Positioned(
+                right: 5,
+                top: 5,
+                child: IconButton(
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
+                    icon: const Icon(Icons.close,
+                        color: AppColors.darkGreen, size: 16)))
+          ],
+        ),
       ),
     );
   }
