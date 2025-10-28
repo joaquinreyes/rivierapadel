@@ -403,5 +403,6 @@
   "VALID_UNTIL": "Valid until",
   "DESCRIPTION": "Description",
   "SEND_BUY_MEMBERSHIP_MESSAGE": "Send us a message to get more information",
-  "MEMBERSHIP": "Membership"
+  "MEMBERSHIP": "Membership",
+  "USAGE": "Usage"
 }

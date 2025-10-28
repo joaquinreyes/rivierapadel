@@ -33,7 +33,7 @@ class ActiveMemberships {
     return "${"VALID_UNTIL".tr(context)}:\n${finishDateTime != null ? finishDateTime!.format("dd/MM/yyyy") : "UNLIMITED".tr(context)}";
   }
 
-  Widget usesLeftString(BuildContext context) {
+  Widget usesLeftString(BuildContext context,{Color? textColor}) {
     if (usesLeft == null || usesLeft == -1) {
       return Text(
         "UNLIMITED".tr(context),
@@ -45,18 +45,18 @@ class ActiveMemberships {
       children: [
         Container(
           decoration:
-              BoxDecoration(color: AppColors.white, shape: BoxShape.circle),
+              BoxDecoration(color: textColor?.withOpacity(0.4) ?? AppColors.white, shape: BoxShape.circle),
           padding: EdgeInsets.symmetric(horizontal: 4.w, vertical: 2.h),
           alignment: Alignment.center,
           child: Text(
             usesLeft.toString(),
-            style: AppTextStyles.sansMedium12.copyWith(color: AppColors.darkBlue),
+            style: AppTextStyles.sansMedium12.copyWith(color:  textColor ?? AppColors.darkBlue),
           ),
         ),
         SizedBox(width: 5.w),
         Text(
           "REMAINING".tr(context).toLowerCase(),
-          style: AppTextStyles.sansRegular12.copyWith(color: AppColors.white),
+          style: AppTextStyles.sansRegular12.copyWith(color: textColor ?? AppColors.white),
         )
       ],
     );

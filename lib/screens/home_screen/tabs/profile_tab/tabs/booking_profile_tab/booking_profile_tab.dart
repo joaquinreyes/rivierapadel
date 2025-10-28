@@ -7,6 +7,8 @@ import 'package:acepadel/utils/custom_extensions.dart';
 import '../../../../../../app_styles/app_colors.dart';
 import '../../../../../../app_styles/app_text_styles.dart';
 import '../../../../../../globals/constants.dart';
+import 'package:flutter_inset_box_shadow/flutter_inset_box_shadow.dart'
+    as inset;
 
 part 'booking_profile_tab_provider.dart';
 
@@ -32,6 +34,11 @@ class BookingProfileTab extends ConsumerWidget {
           child: Container(
             width: 180.w,
             alignment: AlignmentDirectional.centerStart,
+            decoration: inset.BoxDecoration(
+              color: AppColors.clay05,
+              borderRadius: BorderRadius.circular(15.r),
+              boxShadow: kInsetShadow,
+            ),
             child: Row(
               mainAxisSize: MainAxisSize.min,
               mainAxisAlignment: MainAxisAlignment.center,
@@ -83,8 +90,10 @@ class BookingProfileTab extends ConsumerWidget {
                 Text(text,
                     textAlign: TextAlign.center,
                     style: isSelected
-                        ? AppTextStyles.sansMedium12.copyWith(color: Colors.white)
-                        : AppTextStyles.sansRegular12.copyWith(color: AppColors.clay70))
+                        ? AppTextStyles.sansMedium12
+                            .copyWith(color: Colors.white)
+                        : AppTextStyles.sansRegular12
+                            .copyWith(color: AppColors.clay70))
               ],
             ),
           )),

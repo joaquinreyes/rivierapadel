@@ -11,6 +11,7 @@ class _MembershipInfoDialog extends StatelessWidget {
     final membershipDuration = membership.duration ?? "";
     final membershipLocation = membership.location ?? "";
     final membershipValidity = membership.finishDateString(context);
+    final membershipUsage = membership.usesLeftString(context,textColor: AppColors.black);
 
     return CustomDialog(
       maxHeight: MediaQuery.of(context).size.height * 0.85,
@@ -52,6 +53,17 @@ class _MembershipInfoDialog extends StatelessWidget {
                       membershipValidity,
                       style: AppTextStyles.sansRegular15,
                     ),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.end,
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: [
+                        Text(
+                          "${"USAGE".tr(context)} :",
+                          style: AppTextStyles.sansRegular15,
+                        ),
+                        membershipUsage,
+                      ],
+                    )
                   ],
                 ),
               ],
