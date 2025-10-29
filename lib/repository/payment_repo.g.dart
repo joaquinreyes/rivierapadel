@@ -242,7 +242,7 @@ class _FetchPaymentDetailsProviderElement
   int? get duration => (origin as FetchPaymentDetailsProvider).duration;
 }
 
-String _$paymentProcessHash() => r'71e115acaba364c1ee420a92f7bbf4542625df08';
+String _$paymentProcessHash() => r'a708e02d2d90d5fc89655ec6cef3183565bb7fd2';
 
 /// See also [paymentProcess].
 @ProviderFor(paymentProcess)
@@ -261,7 +261,9 @@ class PaymentProcessFamily
     double? totalAmount,
     List<AppPaymentMethods>? paymentMethod,
     int? serviceID,
+    int? locationID,
     bool isJoiningApproval = false,
+    bool purchaseMembership = false,
     int? couponID,
   }) {
     return PaymentProcessProvider(
@@ -270,7 +272,9 @@ class PaymentProcessFamily
       totalAmount: totalAmount,
       paymentMethod: paymentMethod,
       serviceID: serviceID,
+      locationID: locationID,
       isJoiningApproval: isJoiningApproval,
+      purchaseMembership: purchaseMembership,
       couponID: couponID,
     );
   }
@@ -285,7 +289,9 @@ class PaymentProcessFamily
       totalAmount: provider.totalAmount,
       paymentMethod: provider.paymentMethod,
       serviceID: provider.serviceID,
+      locationID: provider.locationID,
       isJoiningApproval: provider.isJoiningApproval,
+      purchaseMembership: provider.purchaseMembership,
       couponID: provider.couponID,
     );
   }
@@ -315,7 +321,9 @@ class PaymentProcessProvider
     double? totalAmount,
     List<AppPaymentMethods>? paymentMethod,
     int? serviceID,
+    int? locationID,
     bool isJoiningApproval = false,
+    bool purchaseMembership = false,
     int? couponID,
   }) : this._internal(
           (ref) => paymentProcess(
@@ -325,7 +333,9 @@ class PaymentProcessProvider
             totalAmount: totalAmount,
             paymentMethod: paymentMethod,
             serviceID: serviceID,
+            locationID: locationID,
             isJoiningApproval: isJoiningApproval,
+            purchaseMembership: purchaseMembership,
             couponID: couponID,
           ),
           from: paymentProcessProvider,
@@ -342,7 +352,9 @@ class PaymentProcessProvider
           totalAmount: totalAmount,
           paymentMethod: paymentMethod,
           serviceID: serviceID,
+          locationID: locationID,
           isJoiningApproval: isJoiningApproval,
+          purchaseMembership: purchaseMembership,
           couponID: couponID,
         );
 
@@ -358,7 +370,9 @@ class PaymentProcessProvider
     required this.totalAmount,
     required this.paymentMethod,
     required this.serviceID,
+    required this.locationID,
     required this.isJoiningApproval,
+    required this.purchaseMembership,
     required this.couponID,
   }) : super.internal();
 
@@ -367,7 +381,9 @@ class PaymentProcessProvider
   final double? totalAmount;
   final List<AppPaymentMethods>? paymentMethod;
   final int? serviceID;
+  final int? locationID;
   final bool isJoiningApproval;
+  final bool purchaseMembership;
   final int? couponID;
 
   @override
@@ -389,7 +405,9 @@ class PaymentProcessProvider
         totalAmount: totalAmount,
         paymentMethod: paymentMethod,
         serviceID: serviceID,
+        locationID: locationID,
         isJoiningApproval: isJoiningApproval,
+        purchaseMembership: purchaseMembership,
         couponID: couponID,
       ),
     );
@@ -408,7 +426,9 @@ class PaymentProcessProvider
         other.totalAmount == totalAmount &&
         other.paymentMethod == paymentMethod &&
         other.serviceID == serviceID &&
+        other.locationID == locationID &&
         other.isJoiningApproval == isJoiningApproval &&
+        other.purchaseMembership == purchaseMembership &&
         other.couponID == couponID;
   }
 
@@ -420,7 +440,9 @@ class PaymentProcessProvider
     hash = _SystemHash.combine(hash, totalAmount.hashCode);
     hash = _SystemHash.combine(hash, paymentMethod.hashCode);
     hash = _SystemHash.combine(hash, serviceID.hashCode);
+    hash = _SystemHash.combine(hash, locationID.hashCode);
     hash = _SystemHash.combine(hash, isJoiningApproval.hashCode);
+    hash = _SystemHash.combine(hash, purchaseMembership.hashCode);
     hash = _SystemHash.combine(hash, couponID.hashCode);
 
     return _SystemHash.finish(hash);
@@ -446,8 +468,14 @@ mixin PaymentProcessRef
   /// The parameter `serviceID` of this provider.
   int? get serviceID;
 
+  /// The parameter `locationID` of this provider.
+  int? get locationID;
+
   /// The parameter `isJoiningApproval` of this provider.
   bool get isJoiningApproval;
+
+  /// The parameter `purchaseMembership` of this provider.
+  bool get purchaseMembership;
 
   /// The parameter `couponID` of this provider.
   int? get couponID;
@@ -471,8 +499,13 @@ class _PaymentProcessProviderElement
   @override
   int? get serviceID => (origin as PaymentProcessProvider).serviceID;
   @override
+  int? get locationID => (origin as PaymentProcessProvider).locationID;
+  @override
   bool get isJoiningApproval =>
       (origin as PaymentProcessProvider).isJoiningApproval;
+  @override
+  bool get purchaseMembership =>
+      (origin as PaymentProcessProvider).purchaseMembership;
   @override
   int? get couponID => (origin as PaymentProcessProvider).couponID;
 }

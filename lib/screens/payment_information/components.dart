@@ -53,6 +53,7 @@ class _PaymentButton extends ConsumerStatefulWidget {
   const _PaymentButton({
     required this.locationID,
     required this.price,
+    required this.purchaseMembership,
     required this.requestType,
     required this.isVoucherPurchase,
     required this.transactionRequestType,
@@ -64,6 +65,7 @@ class _PaymentButton extends ConsumerStatefulWidget {
   final int locationID;
   final bool isMultiBooking;
   final bool isVoucherPurchase;
+  final bool purchaseMembership;
   final double price;
   final int? serviceID;
   final PaymentProcessRequestType requestType;
@@ -97,7 +99,8 @@ class __PaymentButtonState extends ConsumerState<_PaymentButton> {
   Widget build(BuildContext context) {
     return MainButton(
       enabled: isButtonEnabled,
-      label: "PROCEED_WITH_PAYMENT".tr(context).capitalEnabled(context, canProceed: isButtonEnabled),
+      label: "PROCEED_WITH_PAYMENT".tr(context),
+      // label: "PROCEED_WITH_PAYMENT".tr(context).capitalEnabled(context, canProceed: isButtonEnabled),
       isForPopup: true,
       onTap: () {
         if (widget.isMultiBooking) {
@@ -201,7 +204,9 @@ class __PaymentButtonState extends ConsumerState<_PaymentButton> {
       totalAmount: widget.price,
       payLater: true,
       requestType: widget.requestType,
+      locationID: widget.locationID,
       serviceID: widget.serviceID,
+      purchaseMembership: widget.purchaseMembership,
       isJoiningApproval: widget.isJoiningApproval,
       couponID: couponID,
     );
@@ -252,6 +257,8 @@ class __PaymentButtonState extends ConsumerState<_PaymentButton> {
       paymentMethod: paymentMethods,
       requestType: widget.requestType,
       serviceID: widget.serviceID,
+      locationID: widget.locationID,
+      purchaseMembership: widget.purchaseMembership,
       isJoiningApproval: widget.isJoiningApproval,
       couponID: appliedCoupon?.couponId,
     );
@@ -265,7 +272,21 @@ class __PaymentButtonState extends ConsumerState<_PaymentButton> {
       context: context,
       ref: ref,
     );
+
     if (params != null && mounted) {
+      // If payment is already succeeded, return the transaction ID
+      if (widget.isVoucherPurchase || widget.purchaseMembership) {
+
+        if (params["order_id"] != null) {
+          myPrint(
+              "Voucher or Membership purchase successful with transaction ID: ${params["trans_id"]}");
+          Navigator.pop(context, true);
+        } else {
+          Navigator.pop(context, false);
+        }
+        return;
+      }
+
       final provider = fetchServiceIDWithTransactionIDProvider(
           orderID: params["order_id"],
           statusCode: params["status_code"],

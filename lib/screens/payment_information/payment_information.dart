@@ -54,12 +54,14 @@ class PaymentInformation extends ConsumerStatefulWidget {
     this.allowPayLater = true,
     this.allowWallet = true,
     this.isMultiBooking = false,
+    this.purchaseMembership = false,
   });
 
   final int locationID;
   final PaymentDetailsRequestType type;
   final bool isVoucherPurchase;
   final bool isMultiBooking;
+  final bool purchaseMembership;
   final TransactionRequestType transactionRequestType;
 
   final bool allowCoupon;
@@ -246,6 +248,7 @@ class _PaymentInformationState extends ConsumerState<PaymentInformation> {
             isMultiBooking: widget.isMultiBooking,
             price: widget.price,
             requestType: widget.requestType,
+            purchaseMembership: widget.purchaseMembership,
             serviceID: widget.serviceID,
             locationID: widget.locationID,
             isJoiningApproval: widget.isJoiningApproval,

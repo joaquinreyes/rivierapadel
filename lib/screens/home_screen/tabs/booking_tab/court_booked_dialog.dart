@@ -69,6 +69,7 @@ class _CourtBookedDialogState extends ConsumerState<CourtBookedDialog> {
           ),
           SizedBox(height: 20.h),
           BookCourtInfoCard(
+            priceColor : AppColors.clay70,
             storePrice: widget.storePrice,
 
             textPrice: widget.refundAmount != null

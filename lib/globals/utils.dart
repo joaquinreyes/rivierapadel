@@ -51,6 +51,9 @@ class Utils {
       {required BuildContext context, message}) async {
     try {
       final encodedMessage = Uri.encodeComponent(message);
+      myPrint("---------- Message -------------");
+      myPrint(message);
+      myPrint("-----------------------");
       final Uri url = Uri.parse('whatsapp://send?text=$encodedMessage');
       // final Uri url = Uri.parse('$kWhatsAppLink?text=$encodedMessage');
 

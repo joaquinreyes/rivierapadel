@@ -9,6 +9,7 @@ class ActiveMemberships {
   int? membershipId;
   String? membershipName;
   int? usesLeft;
+  int? usageDurationLeft;
   String? finishDate;
   String? duration;
   String? location;
@@ -18,6 +19,7 @@ class ActiveMemberships {
       this.membershipName,
       this.usesLeft,
       this.membershipId,
+      this.usageDurationLeft,
       this.finishDate,
       this.duration,
       this.location});
@@ -33,30 +35,41 @@ class ActiveMemberships {
     return "${"VALID_UNTIL".tr(context)}:\n${finishDateTime != null ? finishDateTime!.format("dd/MM/yyyy") : "UNLIMITED".tr(context)}";
   }
 
-  Widget usesLeftString(BuildContext context,{Color? textColor}) {
+  Widget usesLeftString(BuildContext context, {Color? textColor}) {
     if (usesLeft == null || usesLeft == -1) {
+      if (usesLeft == null && usageDurationLeft != null) {
+        return Text(
+          "${(usageDurationLeft ?? 0) / 3600} ${"HOUR".tr(context)}",
+          style: AppTextStyles.sansRegular12
+              .copyWith(color: textColor ?? AppColors.white),
+        );
+      }
       return Text(
         "UNLIMITED".tr(context),
-        style: AppTextStyles.sansRegular12.copyWith(color: AppColors.white),
+        style: AppTextStyles.sansRegular12
+            .copyWith(color: textColor ?? AppColors.white),
       );
     }
     return Row(
       mainAxisSize: MainAxisSize.min,
       children: [
         Container(
-          decoration:
-              BoxDecoration(color: textColor?.withOpacity(0.4) ?? AppColors.white, shape: BoxShape.circle),
+          decoration: BoxDecoration(
+              color: textColor?.withOpacity(0.4) ?? AppColors.white,
+              shape: BoxShape.circle),
           padding: EdgeInsets.symmetric(horizontal: 4.w, vertical: 2.h),
           alignment: Alignment.center,
           child: Text(
             usesLeft.toString(),
-            style: AppTextStyles.sansMedium12.copyWith(color:  textColor ?? AppColors.darkBlue),
+            style: AppTextStyles.sansMedium12
+                .copyWith(color: textColor ?? AppColors.darkBlue),
           ),
         ),
         SizedBox(width: 5.w),
         Text(
           "REMAINING".tr(context).toLowerCase(),
-          style: AppTextStyles.sansRegular12.copyWith(color: textColor ?? AppColors.white),
+          style: AppTextStyles.sansRegular12
+              .copyWith(color: textColor ?? AppColors.white),
         )
       ],
     );
@@ -70,6 +83,7 @@ class ActiveMemberships {
     finishDate = json['finish_date'];
     duration = json['duration'];
     location = json['location'];
+    usageDurationLeft = json['usage_duration_left'];
   }
 
   Map<String, dynamic> toJson() {
@@ -80,6 +94,7 @@ class ActiveMemberships {
     data['uses_left'] = usesLeft;
     data['finish_date'] = finishDate;
     data['duration'] = duration;
+    data['usage_duration_left'] = usageDurationLeft;
     data['location'] = location;
     return data;
   }

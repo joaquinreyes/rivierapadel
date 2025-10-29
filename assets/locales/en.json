@@ -404,5 +404,8 @@
   "DESCRIPTION": "Description",
   "SEND_BUY_MEMBERSHIP_MESSAGE": "Send us a message to get more information",
   "MEMBERSHIP": "Membership",
-  "USAGE": "Usage"
+  "USAGE": "Usage",
+  "DURATION": "Duration",
+  "HOUR": "Hour",
+  "YOU_HAVE_PURCHASED_MEMBERSHIP_SUCCESSFULLY": "You have purchased package successfully"
 }

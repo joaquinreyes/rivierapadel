@@ -16,7 +16,8 @@ part 'payment_repo.g.dart';
 enum PaymentProcessRequestType {
   join,
   reserved,
-  courtBooking;
+  courtBooking,
+  membership;
 
   String get value {
     switch (this) {
@@ -26,6 +27,8 @@ enum PaymentProcessRequestType {
         return "Reserved";
       case courtBooking:
         return "Court Booking";
+      case membership:
+        return "Membership";
     }
   }
 }
@@ -33,6 +36,7 @@ enum PaymentProcessRequestType {
 enum PaymentDetailsRequestType {
   booking,
   lesson,
+  membership,
   join;
 
   String get value {
@@ -43,6 +47,8 @@ enum PaymentDetailsRequestType {
         return "Lesson";
       case booking:
         return "Booking";
+      case membership:
+        return "Membership";
     }
   }
 }
@@ -95,6 +101,8 @@ class PaymentRepo {
       bool? payLater,
       List<AppPaymentMethods>? paymentMethod,
       double? totalAmount,
+      int? locationID,
+      required bool purchaseMembership,
       int? serviceID,
       bool isJoiningApproval = false,
       int? couponID}) async {
@@ -114,6 +122,19 @@ class PaymentRepo {
       if (couponID != null) {
         data['coupon_id'] = couponID;
       }
+
+      // Validate payment methods
+      if (payLater == true && paymentMethod != null) {
+        throw 'Cannot use pay later with other payment methods';
+      }
+      if (payLater != true && paymentMethod?.isNotEmpty == true) {
+        data['payments'] =
+            paymentMethod!.map((method) => method.toJsonForProcess()).toList();
+        if (purchaseMembership && data['payments'].isNotEmpty) {
+          data['payments'] = data['payments'].first;
+        }
+      }
+
       final Map<String, dynamic> queryParams = {};
       if (requestType != PaymentProcessRequestType.courtBooking) {
         queryParams['request_type'] = requestType.value;
@@ -123,14 +144,19 @@ class PaymentRepo {
         }
       }
 
-      final response = await ref.read(apiManagerProvider).post(
-            ref,
-            ApiEndPoint.paymentsProcess,
-            data,
-            isV2Version: true,
-            token: token,
-            queryParams: queryParams,
-          );
+      final response = purchaseMembership
+          ? await ref.read(apiManagerProvider).post(
+              ref, ApiEndPoint.membershipPurchase, data,
+              token: token,
+              pathParams: [serviceID.toString(), locationID.toString()])
+          : await ref.read(apiManagerProvider).post(
+                ref,
+                ApiEndPoint.paymentsProcess,
+                data,
+                isV2Version: true,
+                token: token,
+                queryParams: queryParams,
+              );
       // final id = response['data']['service']['serviceBookings'][0]['id'];
       if (payLater == true || paymentMethod?.last.methodType == kWalletMethod) {
         final id =
@@ -296,7 +322,9 @@ Future<(int?, String?, double?)> paymentProcess(
   double? totalAmount,
   List<AppPaymentMethods>? paymentMethod,
   int? serviceID,
+  int? locationID,
   bool isJoiningApproval = false,
+  bool purchaseMembership = false,
   int? couponID,
 }) {
   return ref.read(paymentRepoProvider).paymentProcess(ref,
@@ -305,6 +333,8 @@ Future<(int?, String?, double?)> paymentProcess(
       totalAmount: totalAmount,
       serviceID: serviceID,
       paymentMethod: paymentMethod,
+      locationID: locationID,
+      purchaseMembership: purchaseMembership,
       isJoiningApproval: isJoiningApproval,
       couponID: couponID);
 }

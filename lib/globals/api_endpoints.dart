@@ -47,6 +47,7 @@ enum ApiEndPoint {
   serviceAssessment("services/assessment"),
   fcmToken("users/user-fcmtoken", successCode: 201),
   cancellationPolicy("services/cancellation-policy", isAuthRequired: true),
+  membershipPurchase("memberships/location/purchase", isAuthRequired: true),
 
   bookingLessons("court-bookings/lessons", isAuthRequired: true),
   upgradeBookingToOpen("services/upgrade-to-open-match",
@@ -81,6 +82,9 @@ enum ApiEndPoint {
   String path({List<String> id = const [""]}) {
     if (this == ApiEndPoint.paymentDetails) {
       return "payments/${id.first}/details";
+    }
+    if (this == ApiEndPoint.membershipPurchase) {
+      return "memberships/${id.first}/location/${id.last}/purchase";
     }
     if (this == ApiEndPoint.cancellationPolicy) {
       return "services/${id.first}/cancellation-policy";

@@ -21,6 +21,12 @@ class MembershipModel {
     }
     return 0;
   }
+  String get locationName {
+    if (locations != null && locations!.isNotEmpty) {
+      return locations!.first.locationName ?? "";
+    }
+    return "";
+  }
 
   String? get categoryName {
     return membershipCategory?.categoryName;

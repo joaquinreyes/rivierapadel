@@ -31,7 +31,9 @@ class UserActiveMembership {
 
       if (!showAllMembership) {
         memberships = memberships
-            .where((element) => activeMemberships(element.id ?? 0) != null)
+            .where((element) =>
+                activeMemberships(element.id ?? 0) != null ||
+                (element.appAvailable ?? false))
             .toList();
       }
 
@@ -58,13 +60,12 @@ class UserActiveMembership {
         final categoryName = (category.categoryName ?? "").toLowerCase();
         if (categoryName.isNotEmpty) {
           if (!categoryMap.containsKey(categoryName)) {
-            categoryMap[categoryName] = ShowMembershipCategory(categoryName: categoryName);
+            categoryMap[categoryName] =
+                ShowMembershipCategory(categoryName: categoryName);
           }
           categoryMap[categoryName]!.id.add(category.id ?? 0);
         }
       }
-      myPrint("-------- Error in Membership ${membershipCategories}");
-
       showMembershipCategories = categoryMap.values.toList();
     } catch (e) {
       myPrint("-------- Error in Membership $e");

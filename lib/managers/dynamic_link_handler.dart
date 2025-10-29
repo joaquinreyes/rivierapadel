@@ -1,10 +1,10 @@
-import 'dart:developer';
-
 import 'package:app_links/app_links.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:acepadel/routes/app_pages.dart';
 import 'package:acepadel/routes/app_routes.dart';
+import '../globals/constants.dart';
 
+/// Provides methods to manage dynamic links.
 class DynamicLinkHandler {
   DynamicLinkHandler._();
 
@@ -14,66 +14,75 @@ class DynamicLinkHandler {
 
   /// Initializes the [DynamicLinkHandler].
   Future<void> initialize(WidgetRef ref) async {
-    _appLinks.uriLinkStream.listen((data) {
-      log('Link data: $data', name: 'Dynamic Link Handler');
-      _handleLinkData(data, ref);
-    }).onError((error) {
-      log('$error', name: 'Dynamic Link Handler');
-    });
-    // _checkInitialLink(ref);
+    try {
+      // Check for initial link that launched the app
+      final initialLink = await _appLinks.getInitialLink();
+      if (initialLink != null) {
+        myPrint('Initial link: $initialLink');
+        _handleLinkData(initialLink, ref);
+      }
+
+      // Listen for incoming links
+      _appLinks.uriLinkStream.listen((data) {
+        myPrint('Link data: $data');
+        _handleLinkData(data, ref);
+      }).onError((error) {
+        myPrint('Error in Deep Link ------------------------ $error');
+      });
+    } catch (e) {
+      myPrint('Error initializing deep links: $e');
+    }
   }
 
-  // /// Handle navigation if initial link is found on app start.
-  // Future<void> _checkInitialLink(WidgetRef ref) async {
-  //   final initialLink = await _appLinks.getInitialLink();
-  //   if (initialLink != null) {
-  //     // log('Link data: $data', name: 'Dynamic Link Handler');
-  //     log('Initial Link: $initialLink', name: 'Dynamic Link Handler');
-  //     _handleLinkData(initialLink, ref);
-  //   }
-  // }
-
   void _handleLinkData(Uri data, WidgetRef ref) {
-    if (data.pathSegments.length != 2) return;
-    if (data.pathSegments[0] == 'match_info') {
-      final id = int.tryParse(data.pathSegments[1]);
-      if (id != null) {
+    myPrint('Handling link: $data');
+    myPrint('Path segments: ${data.pathSegments}');
+
+    if (data.pathSegments.length != 3) {
+      myPrint('Invalid path segments length: ${data.pathSegments.length}');
+      return;
+    }
+
+    final type = data.pathSegments[1];
+    final id = int.tryParse(data.pathSegments[2]);
+    if (id == null) {
+      myPrint('Invalid ID: ${data.pathSegments[2]}');
+      return;
+    }
+
+    myPrint('Processing deep link - Type: $type, ID: $id');
+
+    switch (type) {
+      case 'match_info':
         ref.read(goRouterProvider).push("${RouteNames.matchInfo}/$id");
-      }
-    }
-    if (data.pathSegments[0] == 'event_info') {
-      final id = int.tryParse(data.pathSegments[1]);
-      if (id != null) {
+        break;
+      case 'event_info':
         ref.read(goRouterProvider).push("${RouteNames.eventInfo}/$id");
-      }
-    }
-    if (data.pathSegments[0] == 'lesson_info') {
-      final id = int.tryParse(data.pathSegments[1]);
-      if (id != null) {
-        ref.read(goRouterProvider).push("${RouteNames.lessonInfo}/$id");
-      }
-    }
-    if (data.pathSegments[0] == 'booking_info') {
-      final id = int.tryParse(data.pathSegments[1]);
-      if (id != null) {
+        break;
+      case 'booking_info':
         ref.read(goRouterProvider).push("${RouteNames.bookingInfo}/$id");
-      }
+        break;
+      case 'lesson_info':
+        ref.read(goRouterProvider).push("${RouteNames.lessonInfo}/$id");
+        break;
+      default:
+        myPrint('Unknown deep link type: $type');
     }
   }
 
   getMatchURL(int id) {
-    return 'https://app.acepadel.bookandgo.app/match_info/$id';
+    return '$kDeepLinkUrl/match_info/$id';
   }
 
   getBookingURL(int id) {
-    return 'https://app.acepadel.bookandgo.app/booking_info/$id';
+    return '$kDeepLinkUrl/booking_info/$id';
   }
 
   getEventURL(int id) {
-    return 'https://app.acepadel.bookandgo.app/event_info/$id';
+    return '$kDeepLinkUrl/event_info/$id';
   }
 
   getLessonUrl(int id) {
-    return 'https://app.acepadel.bookandgo.app/lesson_info/$id';
+    return '$kDeepLinkUrl/lesson_info/$id';
   }
 }

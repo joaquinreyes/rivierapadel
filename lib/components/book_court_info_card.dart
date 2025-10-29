@@ -18,6 +18,7 @@ class BookCourtInfoCard extends ConsumerWidget {
     required this.bookingTime,
     required this.courtName,
     this.textPrice,
+    this.priceColor,
     required this.price,
     required this.storePrice,
     this.color = AppColors.white,
@@ -29,6 +30,7 @@ class BookCourtInfoCard extends ConsumerWidget {
   final DateTime bookingTime;
   final String courtName;
   final Color color;
+  final Color? priceColor;
   final Color textColor;
   final Color? dividerColor;
   final double? price;
@@ -64,7 +66,7 @@ class BookCourtInfoCard extends ConsumerWidget {
           Container(
             width: double.infinity,
             decoration: BoxDecoration(
-              color: AppColors.clay05,
+              color:priceColor ?? AppColors.clay05,
               borderRadius: BorderRadius.circular(6.r),
             ),
             padding: EdgeInsets.symmetric(vertical: 4, horizontal: 8),

@@ -11,6 +11,7 @@ const currency = "Rp";
 const kAppName = 'Rivera Padel';
 const kWhatsAppContact = "+6281110508077";
 const kWhatsAppLink = "https://api.whatsapp.com/send";
+const kDeepLinkUrl = 'https://share.bookandgo.app/riviera';
 
 const double kDesignHeight = 844;
 const double kDesignWidth = 390;

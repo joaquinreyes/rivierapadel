@@ -13,9 +13,13 @@ import 'package:acepadel/utils/custom_extensions.dart';
 import 'package:flutter_inset_box_shadow/flutter_inset_box_shadow.dart' as inset;
 import '../../../../../../app_styles/app_colors.dart';
 import '../../../../../../app_styles/app_text_styles.dart';
+import '../../../../../../components/main_button.dart';
 import '../../../../../../components/secondary_text.dart';
 import '../../../../../../globals/constants.dart';
+import '../../../../../../globals/utils.dart';
 import '../../../../../../repository/booking_repo.dart';
+import '../../../../../../repository/payment_repo.dart';
+import '../../../../../payment_information/payment_information.dart';
 
 part 'membership_tab_component.dart';
 part 'membership_tab_provider.dart';

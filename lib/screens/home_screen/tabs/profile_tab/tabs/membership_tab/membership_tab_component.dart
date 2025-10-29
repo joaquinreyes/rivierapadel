@@ -1,17 +1,21 @@
 part of 'membership_tab.dart';
 
 class _MembershipInfoDialog extends StatelessWidget {
-  final ActiveMemberships membership;
+  final ActiveMemberships? activeMembership;
 
-  const _MembershipInfoDialog({required this.membership});
+  final MembershipModel membershipModel;
+
+  const _MembershipInfoDialog(
+      {required this.activeMembership, required this.membershipModel});
 
   @override
   Widget build(BuildContext context) {
-    final membershipName = membership.membershipName?.toUpperCase() ?? "";
-    final membershipDuration = membership.duration ?? "";
-    final membershipLocation = membership.location ?? "";
-    final membershipValidity = membership.finishDateString(context);
-    final membershipUsage = membership.usesLeftString(context,textColor: AppColors.black);
+    final membershipName = membershipModel.membershipName?.toUpperCase() ?? "";
+    final membershipDuration = membershipModel.duration ?? "";
+    final membershipLocation = membershipModel.locationName;
+    final membershipValidity = activeMembership?.finishDateString(context);
+    final membershipUsage =
+        activeMembership?.usesLeftString(context, textColor: AppColors.black);
 
     return CustomDialog(
       maxHeight: MediaQuery.of(context).size.height * 0.85,
@@ -49,27 +53,44 @@ class _MembershipInfoDialog extends StatelessWidget {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text(
-                      membershipValidity,
-                      style: AppTextStyles.sansRegular15,
-                    ),
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.end,
-                      mainAxisAlignment: MainAxisAlignment.end,
-                      children: [
-                        Text(
-                          "${"USAGE".tr(context)} :",
-                          style: AppTextStyles.sansRegular15,
-                        ),
-                        membershipUsage,
-                      ],
-                    )
+                    if (membershipValidity != null)
+                      Text(
+                        membershipValidity,
+                        style: AppTextStyles.sansRegular15,
+                      ),
+                    if (membershipDuration.isNotEmpty)
+                      Column(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            "${"DURATION".tr(context)} :",
+                            style: AppTextStyles.sansRegular15,
+                          ),
+                          Text(
+                            membershipDuration,
+                            style: AppTextStyles.sansRegular15,
+                          ),
+                        ],
+                      )
+                    // if(membershipUsage != null)
+                    // Column(
+                    //   crossAxisAlignment: CrossAxisAlignment.end,
+                    //   mainAxisAlignment: MainAxisAlignment.end,
+                    //   children: [
+                    //     Text(
+                    //       "${"USAGE".tr(context)} :",
+                    //       style: AppTextStyles.sansRegular15,
+                    //     ),
+                    //     membershipUsage,
+                    //   ],
+                    // )
                   ],
                 ),
               ],
             ),
           ),
-          if (membershipDuration.isNotEmpty || membershipLocation.isNotEmpty)
+          if (membershipLocation.isNotEmpty)
             SizedBox(
               width: double.infinity,
               child: Column(
@@ -77,20 +98,6 @@ class _MembershipInfoDialog extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
                   SizedBox(height: 15.h),
-                  if (membershipDuration.isNotEmpty) ...[
-                    Text(
-                      "${"DURATION".tr(context)} :",
-                      style: AppTextStyles.balooMedium16
-                          .copyWith(color: AppColors.white),
-                    ),
-                    SizedBox(height: 5.h),
-                    Text(
-                      membershipDuration,
-                      style: AppTextStyles.sansRegular14
-                          .copyWith(color: AppColors.white),
-                    ),
-                    SizedBox(height: 10.h),
-                  ],
                   if (membershipLocation.isNotEmpty) ...[
                     Text(
                       "${"LOCATION".tr(context)} :",
@@ -107,7 +114,30 @@ class _MembershipInfoDialog extends StatelessWidget {
                 ],
               ),
             ),
-          SizedBox(height: 25.h),
+          SizedBox(height: 10.h),
+          if (activeMembership == null)
+            Column(
+              children: [
+                SizedBox(height: 20.h),
+                Align(
+                  alignment: Alignment.centerLeft,
+                  child: Text(
+                    "BOOKING_PAYMENT".trU(context),
+                    style: AppTextStyles.balooMedium16
+                        .copyWith(color: AppColors.white),
+                  ),
+                ),
+                SizedBox(height: 10.h),
+                MainButton(
+                  isForPopup: true,
+                  label: "PROCEED_WITH_PAYMENT".trU(context),
+                  onTap: () {
+                    Navigator.pop(context, true);
+                  },
+                ),
+              ],
+            ),
+          SizedBox(height: 10.h),
         ],
       ),
     );
@@ -188,8 +218,8 @@ class MembershipListComponent extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final selectedMembershipCategory = ref.watch(selectedMembershipCatIndex);
 
-    final Map<String, List<MembershipModel>> membershipDetails =
-        data.getMembershipDetails(selectedMembershipCategory, showAllMembership);
+    final Map<String, List<MembershipModel>> membershipDetails = data
+        .getMembershipDetails(selectedMembershipCategory, showAllMembership);
 
     if (membershipDetails.isEmpty) {
       return const SizedBox();
@@ -258,21 +288,55 @@ class MembershipListComponent extends ConsumerWidget {
               ),
               InkWell(
                 onTap: () async {
-                  if (activeMembership != null) {
-                    await showDialog(
-                      context: context,
-                      builder: (context) {
-                        return _MembershipInfoDialog(membership: activeMembership);
-                      },
+                  final value = await showDialog(
+                    context: context,
+                    builder: (context) {
+                      return _MembershipInfoDialog(
+                          membershipModel: e,
+                          activeMembership: activeMembership);
+                    },
+                  );
+
+                  if (value is! bool && !value) {
+                    return;
+                  }
+
+                  final data = await showDialog(
+                    context: context,
+                    builder: (context) {
+                      return PaymentInformation(
+                        type: PaymentDetailsRequestType.membership,
+                        locationID: e.locationId,
+                        allowCoupon: false,
+                        allowMembership: false,
+                        allowWallet: false,
+                        purchaseMembership: true,
+                        price: e.price ?? 0,
+                        requestType: PaymentProcessRequestType.membership,
+                        serviceID: e.id ?? 0,
+                        startDate: null,
+                        duration: null,
+                        transactionRequestType: TransactionRequestType.normal,
+                      );
+                    },
+                  );
+                  if(data is! bool || !data){
+                   return;
+                  }
+                  if (data && context.mounted) {
+                    await Utils.showMessageDialog(
+                      context,
+                      "YOU_HAVE_PURCHASED_MEMBERSHIP_SUCCESSFULLY".tr(context),
                     );
                   }
+                  ref.invalidate(fetchActiveAndAllMembershipsProvider);
                 },
                 child: activeMembership == null
                     ? Container(
                         width: 120.w,
                         margin: EdgeInsets.symmetric(horizontal: 15.w),
-                        padding:
-                            EdgeInsets.symmetric(horizontal: 10.w, vertical: 6.h),
+                        padding: EdgeInsets.symmetric(
+                            horizontal: 10.w, vertical: 6.h),
                         decoration: inset.BoxDecoration(
                             color: AppColors.clay05,
                             boxShadow: kInsetShadow,
@@ -286,8 +350,8 @@ class MembershipListComponent extends ConsumerWidget {
                     : Container(
                         width: 120.w,
                         margin: EdgeInsets.symmetric(horizontal: 15.w),
-                        padding:
-                            EdgeInsets.symmetric(horizontal: 10.w, vertical: 4.h),
+                        padding: EdgeInsets.symmetric(
+                            horizontal: 10.w, vertical: 4.h),
                         decoration: inset.BoxDecoration(
                             color: AppColors.darkBlue,
                             boxShadow: kInsetShadow,

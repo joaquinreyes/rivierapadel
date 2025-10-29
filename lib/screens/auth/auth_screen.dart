@@ -2,6 +2,7 @@ import 'package:acepadel/components/secondary_text.dart';
 import 'package:acepadel/globals/utils.dart';
 import 'package:acepadel/repository/club_repo.dart';
 import 'package:acepadel/screens/app_provider.dart';
+import 'package:acepadel/utils/custom_extensions.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_i18n/flutter_i18n.dart';
@@ -87,7 +88,7 @@ class _Body extends ConsumerWidget {
                 ),
                 const Spacer(),
                 MainButton(
-                  label: FlutterI18n.translate(context, "SIGN_IN").toUpperCase(),
+                  label: "SIGN_IN".trU(context),
                   showArrow: true,
                   padding: EdgeInsets.symmetric(horizontal: 10.w),
                   // height: 40.h,

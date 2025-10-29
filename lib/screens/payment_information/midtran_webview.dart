@@ -107,6 +107,7 @@ class _MidtranWebviewState extends ConsumerState<MidtranWebview> {
       canPop: canPop,
       child: Scaffold(
         appBar: AppBar(
+          backgroundColor: AppColors.darkBlue,
           title: const Text("Payment"),
         ),
         body: WebViewWidget(

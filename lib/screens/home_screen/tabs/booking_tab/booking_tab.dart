@@ -452,8 +452,8 @@ class _BookingTabState extends ConsumerState<BookingTab> {
                   children: [
                     Expanded(
                       child: Text(
-                        "",
-                        // locationName.toUpperCase(),
+                        // "",
+                        locationName.toUpperCase(),
                         style: AppTextStyles.balooMedium15.copyWith(height: 1,),
                       ),
                     ),
