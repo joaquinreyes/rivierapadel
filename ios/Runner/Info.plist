@@ -32,7 +32,7 @@
 			<key>CFBundleTypeRole</key>
 			<string>Editor</string>
 			<key>CFBundleURLHost</key>
-			<string>app.acepadel.bookandgo.app</string>
+            <string>share.bookandgo.app</string>
 			<key>CFBundleURLName</key>
 			<string>com.rivierapadel.bookandgo</string>
 			<key>CFBundleURLSchemes</key>
