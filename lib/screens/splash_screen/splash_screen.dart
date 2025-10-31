@@ -95,9 +95,7 @@ class _SplashScreenState extends ConsumerState<SplashScreen> {
 }
 
 class _SplashBody extends StatelessWidget {
-  const _SplashBody({
-    super.key,
-  });
+  const _SplashBody();
 
   @override
   Widget build(BuildContext context) {
@@ -116,9 +114,7 @@ class _SplashBody extends StatelessWidget {
 }
 
 class _Logo extends StatelessWidget {
-  const _Logo({
-    super.key,
-  });
+  const _Logo();
 
   @override
   Widget build(BuildContext context) {
