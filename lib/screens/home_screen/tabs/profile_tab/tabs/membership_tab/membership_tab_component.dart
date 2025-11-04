@@ -13,6 +13,7 @@ class _MembershipInfoDialog extends StatelessWidget {
     final membershipName = membershipModel.membershipName?.toUpperCase() ?? "";
     final membershipDuration = membershipModel.duration ?? "";
     final membershipLocation = membershipModel.locationName;
+    final membershipDescription = membershipModel.description ?? "";
     final membershipValidity = activeMembership?.finishDateString(context);
     final membershipUsage =
         activeMembership?.usesLeftString(context, textColor: AppColors.black);
@@ -107,6 +108,30 @@ class _MembershipInfoDialog extends StatelessWidget {
                     SizedBox(height: 5.h),
                     Text(
                       membershipLocation.capitalizeFirst,
+                      style: AppTextStyles.sansRegular14
+                          .copyWith(color: AppColors.white),
+                    ),
+                  ],
+                ],
+              ),
+            ),
+          if (membershipDescription.isNotEmpty)
+            SizedBox(
+              width: double.infinity,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  SizedBox(height: 15.h),
+                  if (membershipDescription.isNotEmpty) ...[
+                    Text(
+                      "${"DESCRIPTION".tr(context)} :",
+                      style: AppTextStyles.balooMedium16
+                          .copyWith(color: AppColors.white),
+                    ),
+                    SizedBox(height: 5.h),
+                    Text(
+                      membershipDescription.capitalizeFirst,
                       style: AppTextStyles.sansRegular14
                           .copyWith(color: AppColors.white),
                     ),
@@ -317,6 +342,8 @@ class MembershipListComponent extends ConsumerWidget {
                         startDate: null,
                         duration: null,
                         transactionRequestType: TransactionRequestType.normal,
+                        courtId: null,
+                        isOpenMatch: false,
                       );
                     },
                   );

@@ -60,13 +60,19 @@ class PaymentRepo {
       PaymentDetailsRequestType type,
       int id,
       DateTime? startDate,
+      int? courtId,
+      bool isOpenMatch,
       int? duration) async {
     try {
       final token = ref.read(userManagerProvider).user?.accessToken!;
       final Map<String, dynamic> queryParams = {
         "booking_type": type.value,
         "booking_id": id,
+        "is_open_match": isOpenMatch
       };
+      if (courtId != null) {
+        queryParams["court_id"] = courtId;
+      }
 
       if (startDate != null) {
         queryParams["date"] = startDate.format(kFormatForAPI);
@@ -308,10 +314,12 @@ Future<PaymentDetails> fetchPaymentDetails(
     PaymentDetailsRequestType type,
     int id,
     DateTime? startDate,
+    int? courtId,
+    bool isOpenMatch,
     int? duration) {
   return ref
       .read(paymentRepoProvider)
-      .fetchPaymentDetails(locationID, ref, type, id, startDate, duration);
+      .fetchPaymentDetails(locationID, ref, type, id, startDate,courtId,isOpenMatch, duration);
 }
 
 @riverpod

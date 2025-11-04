@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:acepadel/components/custom_dialog.dart';
 import 'package:acepadel/components/secondary_textfield.dart';
 import 'package:acepadel/globals/constants.dart';
@@ -22,7 +20,6 @@ import 'package:acepadel/globals/utils.dart';
 import 'package:acepadel/models/payment_methods.dart';
 import 'package:acepadel/repository/payment_repo.dart';
 import 'package:acepadel/routes/app_pages.dart';
-import 'package:acepadel/routes/app_routes.dart';
 import 'package:acepadel/utils/custom_extensions.dart';
 
 import '../home_screen/booking_cart/booking_cart_dialog/booking_cart_dialog.dart';
@@ -55,6 +52,8 @@ class PaymentInformation extends ConsumerStatefulWidget {
     this.allowWallet = true,
     this.isMultiBooking = false,
     this.purchaseMembership = false,
+    required this.courtId,
+    required this.isOpenMatch
   });
 
   final int locationID;
@@ -67,12 +66,14 @@ class PaymentInformation extends ConsumerStatefulWidget {
   final bool allowCoupon;
   final bool allowWallet;
   final bool allowPayLater;
+  final bool isOpenMatch;
   final double price;
   final int? serviceID;
   final PaymentProcessRequestType requestType;
   final bool isJoiningApproval;
   final DateTime? startDate;
   final int? duration;
+  final int? courtId;
   final bool allowMembership;
 
   @override
@@ -105,6 +106,8 @@ class _PaymentInformationState extends ConsumerState<PaymentInformation> {
         widget.type,
         widget.serviceID ?? 0,
         widget.startDate,
+        widget.courtId,
+        widget.isOpenMatch,
         widget.duration));
 
     return CustomDialog(

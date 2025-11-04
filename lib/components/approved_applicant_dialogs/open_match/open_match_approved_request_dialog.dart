@@ -126,6 +126,8 @@ class _ApprovedRequestDialogState
           isJoiningApproval: true,
           startDate: startDate,
           duration: duration,
+          courtId: service.courtId,
+          isOpenMatch: true,
         );
       },
     );

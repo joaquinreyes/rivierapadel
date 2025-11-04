@@ -508,7 +508,9 @@ class _DataBodyState extends ConsumerState<_DataBody> {
                 : PaymentProcessRequestType.join,
             serviceID: service.id!,
             duration: service.duration2,
-            startDate: service.bookingStartTime);
+            startDate: service.bookingStartTime,
+            courtId: service.courtId,
+            isOpenMatch: true);
       },
     );
 

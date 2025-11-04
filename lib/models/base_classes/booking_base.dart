@@ -1,4 +1,3 @@
-import 'package:acepadel/models/lesson_model_new.dart';
 import 'package:acepadel/utils/dubai_date_time.dart';
 import 'package:acepadel/utils/custom_extensions.dart';
 import 'package:acepadel/globals/utils.dart';

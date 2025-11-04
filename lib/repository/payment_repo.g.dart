@@ -23,7 +23,7 @@ final paymentRepoProvider = AutoDisposeProvider<PaymentRepo>.internal(
 // ignore: unused_element
 typedef PaymentRepoRef = AutoDisposeProviderRef<PaymentRepo>;
 String _$fetchPaymentDetailsHash() =>
-    r'8ba6baadda1b1f73dab822240114c7de5583397c';
+    r'8159e26311aa603c57b9c61a85bdfdabf87e3757';
 
 /// Copied from Dart SDK
 class _SystemHash {
@@ -61,6 +61,8 @@ class FetchPaymentDetailsFamily extends Family<AsyncValue<PaymentDetails>> {
     PaymentDetailsRequestType type,
     int id,
     DateTime? startDate,
+    int? courtId,
+    bool isOpenMatch,
     int? duration,
   ) {
     return FetchPaymentDetailsProvider(
@@ -68,6 +70,8 @@ class FetchPaymentDetailsFamily extends Family<AsyncValue<PaymentDetails>> {
       type,
       id,
       startDate,
+      courtId,
+      isOpenMatch,
       duration,
     );
   }
@@ -81,6 +85,8 @@ class FetchPaymentDetailsFamily extends Family<AsyncValue<PaymentDetails>> {
       provider.type,
       provider.id,
       provider.startDate,
+      provider.courtId,
+      provider.isOpenMatch,
       provider.duration,
     );
   }
@@ -109,6 +115,8 @@ class FetchPaymentDetailsProvider
     PaymentDetailsRequestType type,
     int id,
     DateTime? startDate,
+    int? courtId,
+    bool isOpenMatch,
     int? duration,
   ) : this._internal(
           (ref) => fetchPaymentDetails(
@@ -117,6 +125,8 @@ class FetchPaymentDetailsProvider
             type,
             id,
             startDate,
+            courtId,
+            isOpenMatch,
             duration,
           ),
           from: fetchPaymentDetailsProvider,
@@ -132,6 +142,8 @@ class FetchPaymentDetailsProvider
           type: type,
           id: id,
           startDate: startDate,
+          courtId: courtId,
+          isOpenMatch: isOpenMatch,
           duration: duration,
         );
 
@@ -146,6 +158,8 @@ class FetchPaymentDetailsProvider
     required this.type,
     required this.id,
     required this.startDate,
+    required this.courtId,
+    required this.isOpenMatch,
     required this.duration,
   }) : super.internal();
 
@@ -153,6 +167,8 @@ class FetchPaymentDetailsProvider
   final PaymentDetailsRequestType type;
   final int id;
   final DateTime? startDate;
+  final int? courtId;
+  final bool isOpenMatch;
   final int? duration;
 
   @override
@@ -172,6 +188,8 @@ class FetchPaymentDetailsProvider
         type: type,
         id: id,
         startDate: startDate,
+        courtId: courtId,
+        isOpenMatch: isOpenMatch,
         duration: duration,
       ),
     );
@@ -189,6 +207,8 @@ class FetchPaymentDetailsProvider
         other.type == type &&
         other.id == id &&
         other.startDate == startDate &&
+        other.courtId == courtId &&
+        other.isOpenMatch == isOpenMatch &&
         other.duration == duration;
   }
 
@@ -199,6 +219,8 @@ class FetchPaymentDetailsProvider
     hash = _SystemHash.combine(hash, type.hashCode);
     hash = _SystemHash.combine(hash, id.hashCode);
     hash = _SystemHash.combine(hash, startDate.hashCode);
+    hash = _SystemHash.combine(hash, courtId.hashCode);
+    hash = _SystemHash.combine(hash, isOpenMatch.hashCode);
     hash = _SystemHash.combine(hash, duration.hashCode);
 
     return _SystemHash.finish(hash);
@@ -220,6 +242,12 @@ mixin FetchPaymentDetailsRef on AutoDisposeFutureProviderRef<PaymentDetails> {
   /// The parameter `startDate` of this provider.
   DateTime? get startDate;
 
+  /// The parameter `courtId` of this provider.
+  int? get courtId;
+
+  /// The parameter `isOpenMatch` of this provider.
+  bool get isOpenMatch;
+
   /// The parameter `duration` of this provider.
   int? get duration;
 }
@@ -238,6 +266,10 @@ class _FetchPaymentDetailsProviderElement
   int get id => (origin as FetchPaymentDetailsProvider).id;
   @override
   DateTime? get startDate => (origin as FetchPaymentDetailsProvider).startDate;
+  @override
+  int? get courtId => (origin as FetchPaymentDetailsProvider).courtId;
+  @override
+  bool get isOpenMatch => (origin as FetchPaymentDetailsProvider).isOpenMatch;
   @override
   int? get duration => (origin as FetchPaymentDetailsProvider).duration;
 }

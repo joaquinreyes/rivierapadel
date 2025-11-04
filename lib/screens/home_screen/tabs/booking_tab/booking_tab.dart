@@ -359,7 +359,9 @@ class _BookingTabState extends ConsumerState<BookingTab> {
                                               allowCoupon: false,
                                               allowWallet: false,
                                               duration: null,
-                                              startDate: null);
+                                              startDate: null,
+                                              courtId: null,
+                                              isOpenMatch: false);
                                         },
                                       );
                                       if (value is bool &&

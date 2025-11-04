@@ -31,7 +31,7 @@ class SecondaryImageButton extends StatelessWidget {
   final double imageWidth;
   final double fontSize;
   final Color? color;
-  EdgeInsets? padding;
+  final EdgeInsets? padding;
   final double? spacing;
   final Color? textColor;
   final Color? iconColor;
@@ -83,21 +83,19 @@ class SecondaryButton extends StatelessWidget {
   final VoidCallback? onTap;
   final Widget child;
   final bool enabled;
-  Color? color;
-  EdgeInsets? padding;
+  final Color? color;
+  final EdgeInsets? padding;
   final double borderRadius;
   final bool applyShadow;
   @override
   Widget build(BuildContext context) {
-    color ??= AppColors.darkGreen5;
-    padding ??= EdgeInsets.symmetric(horizontal: 10.w, vertical: 4.h);
     return Material(
       color: Colors.transparent,
       child: Opacity(
         opacity: enabled ? 1 : 0.5,
         child: Container(
           decoration: BoxDecoration(
-            color: color,
+            color: color ?? AppColors.darkGreen5,
             borderRadius: BorderRadius.circular(borderRadius.r),
             boxShadow: applyShadow ? [kBoxShadow] : null,
           ),
@@ -105,7 +103,7 @@ class SecondaryButton extends StatelessWidget {
             borderRadius: BorderRadius.circular(borderRadius.r),
             onTap: enabled ? onTap : null,
             child: Padding(
-              padding: padding ?? EdgeInsets.zero,
+              padding: padding ?? EdgeInsets.symmetric(horizontal: 10.w, vertical: 4.h),
               child: child,
             ),
           ),

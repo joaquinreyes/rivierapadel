@@ -41,9 +41,9 @@ class SideNavBar extends ConsumerWidget {
             // color: kPrimaryColor.withOpacity(0.25),
             decoration: BoxDecoration(
               // color: kScienceBlue,
-              color: AppColors.darkGreen25,
-              // boxShadow: kInsetShadow,
-              borderRadius: BorderRadius.circular(5.r),
+              color: AppColors.white25,
+              boxShadow: [kBoxShadow],
+              borderRadius: BorderRadius.circular(12.r),
             ),
             padding: EdgeInsets.symmetric(vertical: 10.h),
             width: 250.w,
@@ -128,7 +128,7 @@ class SideNavBar extends ConsumerWidget {
       child: Container(
         decoration: BoxDecoration(
           color: isSelected ? AppColors.oak : Colors.transparent,
-          borderRadius: BorderRadius.circular(5.r),
+          borderRadius: BorderRadius.circular(8.r),
         ),
         width: double.infinity,
         margin: EdgeInsets.symmetric(horizontal: 4.w),
@@ -145,11 +145,11 @@ class SideNavBar extends ConsumerWidget {
                   Text(
                     text,
                     style: isSelected
-                        ? AppTextStyles.balooBold18.copyWith(
-                            color: AppColors.darkBlue,
+                        ? AppTextStyles.balooMedium15.copyWith(
+                            color: AppColors.white,
                           )
-                        : AppTextStyles.balooMedium16.copyWith(
-                            color: AppColors.gallery,
+                        : AppTextStyles.balooMedium13.copyWith(
+                            color: AppColors.white,
                           ),
                   ),
                 ],

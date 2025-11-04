@@ -7,7 +7,6 @@ import 'package:acepadel/app_styles/app_text_styles.dart';
 import 'package:acepadel/components/custom_dialog.dart';
 import 'package:acepadel/globals/images.dart';
 import 'package:acepadel/utils/custom_extensions.dart';
-import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 class AsyncDialog<T> extends ConsumerWidget {
   const AsyncDialog({super.key, required this.provider});

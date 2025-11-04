@@ -38,7 +38,6 @@ class CustomDialog extends StatelessWidget {
                 ? BoxConstraints(maxHeight: maxHeight!)
                 : null,
             height: height,
-            padding: _contentPadding,
             decoration: BoxDecoration(
               color: color,
               borderRadius: BorderRadius.circular(7.r),
@@ -46,27 +45,30 @@ class CustomDialog extends StatelessWidget {
             child: SingleChildScrollView(
               primary: false,
               physics: physics ?? const BouncingScrollPhysics(),
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  if (showCloseIcon) ...[
-                    SizedBox(height: 10.h),
-                    Align(
-                      alignment: AlignmentDirectional.centerEnd,
-                      child: InkWell(
-                        onTap: () => Navigator.pop(context),
-                        child: Image.asset(
-                          AppImages.closeIcon.path,
-                          width: 12.w,
-                          height: 12.w,
-                          color: closeIconColor,
+              child: Padding(
+                padding: _contentPadding,
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    if (showCloseIcon) ...[
+                      SizedBox(height: 10.h),
+                      Align(
+                        alignment: AlignmentDirectional.centerEnd,
+                        child: InkWell(
+                          onTap: () => Navigator.pop(context),
+                          child: Image.asset(
+                            AppImages.closeIcon.path,
+                            width: 12.w,
+                            height: 12.w,
+                            color: closeIconColor,
+                          ),
                         ),
                       ),
-                    ),
-                    SizedBox(height: 5.h),
+                      SizedBox(height: 5.h),
+                    ],
+                    child,
                   ],
-                  child,
-                ],
+                ),
               ),
             ),
           ),

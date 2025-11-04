@@ -273,7 +273,9 @@ class _LessonsState extends ConsumerState<_Lessons> {
                 requestType: PaymentProcessRequestType.join,
                 serviceID: serviceBooking.id!,
                 duration: serviceBooking.duration2,
-                startDate: serviceBooking.bookingStartTime);
+                startDate: serviceBooking.bookingStartTime,
+                courtId: serviceBooking.courtId,
+                isOpenMatch: false);
           },
         );
         var (int? paymentDone, double? amount) = (null, null);

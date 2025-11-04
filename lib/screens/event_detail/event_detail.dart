@@ -385,7 +385,9 @@ class _DataBodyState extends ConsumerState<_DataBody> {
                   : PaymentProcessRequestType.join,
               serviceID: service.id!,
               duration: service.duration2,
-              startDate: service.bookingStartTime);
+              startDate: service.bookingStartTime,
+              courtId: service.courtId,
+              isOpenMatch: false);
         },
       );
       var (int? paymentDone, double? amount) = (null, null);
@@ -416,7 +418,9 @@ class _DataBodyState extends ConsumerState<_DataBody> {
             serviceID: service.id!,
             isJoiningApproval: true,
             duration: service.duration2,
-            startDate: service.bookingStartTime);
+            startDate: service.bookingStartTime,
+            courtId: service.courtId,
+            isOpenMatch: false);
       },
     );
     var (int? postPaymentServiceID, double? amount) = (null, null);

@@ -410,7 +410,9 @@ class _BookCourtDialogState extends ConsumerState<BookCourtDialog> {
             requestType: PaymentProcessRequestType.courtBooking,
             price: price,
             duration: widget.bookings.duration ?? 0,
-            startDate: time);
+            startDate: time,
+            courtId: widget.court.keys.first,
+            isOpenMatch: isOpenMatch);
       },
     );
     var (int? serviceID, double? amount) = (null, null);
@@ -685,7 +687,9 @@ class _BookCourtDialogLessonState extends ConsumerState<BookCourtDialogLesson> {
             price: price,
             serviceID: widget.lessonId,
             duration: widget.lessonTime,
-            startDate: widget.bookingTime),
+            startDate: widget.bookingTime,
+            courtId: courtId,
+            isOpenMatch: false),
       );
       var (int? serviceID, double? amount) = (null, null);
       if (data is (int, double?)) {

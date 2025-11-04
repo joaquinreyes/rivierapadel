@@ -139,6 +139,8 @@ class _BookCourtDialogState extends ConsumerState<BookingCartDialog> {
           price: price,
           startDate: data.first.bookingStartTime,
           duration: data.first.duration2,
+          courtId: data.first.courtId,
+          isOpenMatch: false,
         );
       },
     );
