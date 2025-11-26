@@ -2,10 +2,10 @@ import 'package:acepadel/globals/constants.dart';
 import 'package:acepadel/utils/custom_extensions.dart';
 import 'package:intl/intl.dart';
 
-import '../CustomDatePicker/src/date_format.dart';
 import '../globals/utils.dart';
 import '../utils/dubai_date_time.dart';
 import 'club_locations.dart';
+import 'court_booking.dart';
 
 class LessonModelNew {
   String? status;
@@ -524,46 +524,7 @@ class LessonVariants {
   }
 }
 
-class Location {
-  int? id;
-  String? currency;
-  String? locationName;
 
-  Location({this.id, this.currency, this.locationName});
-
-  Location.fromJson(Map<String, dynamic> json) {
-    id = json['id'];
-    currency = json['currency'];
-    locationName = json['location_name'];
-  }
-
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = <String, dynamic>{};
-    data['id'] = id;
-    data['currency'] = currency;
-    data['location_name'] = locationName;
-    return data;
-  }
-}
-
-class Sport {
-  int? id;
-  String? sportName;
-
-  Sport({this.id, this.sportName});
-
-  Sport.fromJson(Map<String, dynamic> json) {
-    id = json['id'];
-    sportName = json['sport_name'];
-  }
-
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = <String, dynamic>{};
-    data['id'] = id;
-    data['sport_name'] = sportName;
-    return data;
-  }
-}
 
 class Lessons {
   int? id;

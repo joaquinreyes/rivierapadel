@@ -384,7 +384,7 @@ class _DataBody extends ConsumerWidget {
                 location: booking.Location(
                     id: userBooking.service!.location!.id,
                     courts: listCourts,
-                    locationName: userBooking.service!.location!.locationName)),
+                    location: userBooking.service!.location!.locationName)),
             bookingTime: userBooking.bookingStartTime,
             court: {
               (userBooking.courts ?? []).first.id ?? 0:

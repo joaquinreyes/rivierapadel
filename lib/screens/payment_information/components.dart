@@ -60,6 +60,7 @@ class _PaymentButton extends ConsumerStatefulWidget {
     required this.isMultiBooking,
     this.serviceID,
     required this.isJoiningApproval,
+    required this.getPendingPayment
   });
 
   final int locationID;
@@ -71,6 +72,7 @@ class _PaymentButton extends ConsumerStatefulWidget {
   final PaymentProcessRequestType requestType;
   final TransactionRequestType transactionRequestType;
   final bool isJoiningApproval;
+  final bool getPendingPayment;
 
   @override
   ConsumerState<_PaymentButton> createState() => __PaymentButtonState();
@@ -205,6 +207,7 @@ class __PaymentButtonState extends ConsumerState<_PaymentButton> {
       payLater: true,
       requestType: widget.requestType,
       locationID: widget.locationID,
+      pendingPayment: widget.getPendingPayment,
       serviceID: widget.serviceID,
       purchaseMembership: widget.purchaseMembership,
       isJoiningApproval: widget.isJoiningApproval,
@@ -255,6 +258,7 @@ class __PaymentButtonState extends ConsumerState<_PaymentButton> {
     return paymentProcessProvider(
       totalAmount: widget.price,
       paymentMethod: paymentMethods,
+      pendingPayment: widget.getPendingPayment,
       requestType: widget.requestType,
       serviceID: widget.serviceID,
       locationID: widget.locationID,
@@ -276,7 +280,6 @@ class __PaymentButtonState extends ConsumerState<_PaymentButton> {
     if (params != null && mounted) {
       // If payment is already succeeded, return the transaction ID
       if (widget.isVoucherPurchase || widget.purchaseMembership) {
-
         if (params["order_id"] != null) {
           myPrint(
               "Voucher or Membership purchase successful with transaction ID: ${params["trans_id"]}");

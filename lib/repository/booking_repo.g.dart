@@ -336,7 +336,7 @@ class _BookCourtProviderElement
   bool? get approvalNeeded => (origin as BookCourtProvider).approvalNeeded;
 }
 
-String _$fetchCourtPriceHash() => r'031a11fb364c82ad7a01c92cfa5c8c027d9ef726';
+String _$fetchCourtPriceHash() => r'9f82ca7275ccc3af3280e57a202b1d233f91643a';
 
 /// See also [fetchCourtPrice].
 @ProviderFor(fetchCourtPrice)
@@ -354,6 +354,7 @@ class FetchCourtPriceFamily extends Family<AsyncValue<dynamic>> {
     required DateTime dateTime,
     required List<dynamic> courtId,
     bool? isOpenMatch,
+    bool pendingPayment = false,
     required int? coachId,
     int? reserveCounter,
     LessonVariants? lessonVariant,
@@ -365,6 +366,7 @@ class FetchCourtPriceFamily extends Family<AsyncValue<dynamic>> {
       dateTime: dateTime,
       courtId: courtId,
       isOpenMatch: isOpenMatch,
+      pendingPayment: pendingPayment,
       coachId: coachId,
       reserveCounter: reserveCounter,
       lessonVariant: lessonVariant,
@@ -382,6 +384,7 @@ class FetchCourtPriceFamily extends Family<AsyncValue<dynamic>> {
       dateTime: provider.dateTime,
       courtId: provider.courtId,
       isOpenMatch: provider.isOpenMatch,
+      pendingPayment: provider.pendingPayment,
       coachId: provider.coachId,
       reserveCounter: provider.reserveCounter,
       lessonVariant: provider.lessonVariant,
@@ -413,6 +416,7 @@ class FetchCourtPriceProvider extends AutoDisposeFutureProvider<dynamic> {
     required DateTime dateTime,
     required List<dynamic> courtId,
     bool? isOpenMatch,
+    bool pendingPayment = false,
     required int? coachId,
     int? reserveCounter,
     LessonVariants? lessonVariant,
@@ -425,6 +429,7 @@ class FetchCourtPriceProvider extends AutoDisposeFutureProvider<dynamic> {
             dateTime: dateTime,
             courtId: courtId,
             isOpenMatch: isOpenMatch,
+            pendingPayment: pendingPayment,
             coachId: coachId,
             reserveCounter: reserveCounter,
             lessonVariant: lessonVariant,
@@ -444,6 +449,7 @@ class FetchCourtPriceProvider extends AutoDisposeFutureProvider<dynamic> {
           dateTime: dateTime,
           courtId: courtId,
           isOpenMatch: isOpenMatch,
+          pendingPayment: pendingPayment,
           coachId: coachId,
           reserveCounter: reserveCounter,
           lessonVariant: lessonVariant,
@@ -462,6 +468,7 @@ class FetchCourtPriceProvider extends AutoDisposeFutureProvider<dynamic> {
     required this.dateTime,
     required this.courtId,
     required this.isOpenMatch,
+    required this.pendingPayment,
     required this.coachId,
     required this.reserveCounter,
     required this.lessonVariant,
@@ -473,6 +480,7 @@ class FetchCourtPriceProvider extends AutoDisposeFutureProvider<dynamic> {
   final DateTime dateTime;
   final List<dynamic> courtId;
   final bool? isOpenMatch;
+  final bool pendingPayment;
   final int? coachId;
   final int? reserveCounter;
   final LessonVariants? lessonVariant;
@@ -496,6 +504,7 @@ class FetchCourtPriceProvider extends AutoDisposeFutureProvider<dynamic> {
         dateTime: dateTime,
         courtId: courtId,
         isOpenMatch: isOpenMatch,
+        pendingPayment: pendingPayment,
         coachId: coachId,
         reserveCounter: reserveCounter,
         lessonVariant: lessonVariant,
@@ -517,6 +526,7 @@ class FetchCourtPriceProvider extends AutoDisposeFutureProvider<dynamic> {
         other.dateTime == dateTime &&
         other.courtId == courtId &&
         other.isOpenMatch == isOpenMatch &&
+        other.pendingPayment == pendingPayment &&
         other.coachId == coachId &&
         other.reserveCounter == reserveCounter &&
         other.lessonVariant == lessonVariant &&
@@ -531,6 +541,7 @@ class FetchCourtPriceProvider extends AutoDisposeFutureProvider<dynamic> {
     hash = _SystemHash.combine(hash, dateTime.hashCode);
     hash = _SystemHash.combine(hash, courtId.hashCode);
     hash = _SystemHash.combine(hash, isOpenMatch.hashCode);
+    hash = _SystemHash.combine(hash, pendingPayment.hashCode);
     hash = _SystemHash.combine(hash, coachId.hashCode);
     hash = _SystemHash.combine(hash, reserveCounter.hashCode);
     hash = _SystemHash.combine(hash, lessonVariant.hashCode);
@@ -557,6 +568,9 @@ mixin FetchCourtPriceRef on AutoDisposeFutureProviderRef<dynamic> {
 
   /// The parameter `isOpenMatch` of this provider.
   bool? get isOpenMatch;
+
+  /// The parameter `pendingPayment` of this provider.
+  bool get pendingPayment;
 
   /// The parameter `coachId` of this provider.
   int? get coachId;
@@ -586,6 +600,8 @@ class _FetchCourtPriceProviderElement
   List<dynamic> get courtId => (origin as FetchCourtPriceProvider).courtId;
   @override
   bool? get isOpenMatch => (origin as FetchCourtPriceProvider).isOpenMatch;
+  @override
+  bool get pendingPayment => (origin as FetchCourtPriceProvider).pendingPayment;
   @override
   int? get coachId => (origin as FetchCourtPriceProvider).coachId;
   @override

@@ -768,7 +768,7 @@ class _FetchServiceDetailProviderElement
   int get serviceID => (origin as FetchServiceDetailProvider).serviceID;
 }
 
-String _$joinServiceHash() => r'b97ae21d2377675f5ca981eef5fcb4c9be11faee';
+String _$joinServiceHash() => r'77b9c1635bf078365b822c2090b09a7790baaed7';
 
 /// See also [joinService].
 @ProviderFor(joinService)
@@ -789,6 +789,7 @@ class JoinServiceFamily extends Family<AsyncValue<double?>> {
     required bool isDouble,
     required bool isReserve,
     required bool isLesson,
+    bool? pendingPayment,
     bool isApprovalNeeded = false,
   }) {
     return JoinServiceProvider(
@@ -800,6 +801,7 @@ class JoinServiceFamily extends Family<AsyncValue<double?>> {
       isDouble: isDouble,
       isReserve: isReserve,
       isLesson: isLesson,
+      pendingPayment: pendingPayment,
       isApprovalNeeded: isApprovalNeeded,
     );
   }
@@ -817,6 +819,7 @@ class JoinServiceFamily extends Family<AsyncValue<double?>> {
       isDouble: provider.isDouble,
       isReserve: provider.isReserve,
       isLesson: provider.isLesson,
+      pendingPayment: provider.pendingPayment,
       isApprovalNeeded: provider.isApprovalNeeded,
     );
   }
@@ -848,6 +851,7 @@ class JoinServiceProvider extends AutoDisposeFutureProvider<double?> {
     required bool isDouble,
     required bool isReserve,
     required bool isLesson,
+    bool? pendingPayment,
     bool isApprovalNeeded = false,
   }) : this._internal(
           (ref) => joinService(
@@ -860,6 +864,7 @@ class JoinServiceProvider extends AutoDisposeFutureProvider<double?> {
             isDouble: isDouble,
             isReserve: isReserve,
             isLesson: isLesson,
+            pendingPayment: pendingPayment,
             isApprovalNeeded: isApprovalNeeded,
           ),
           from: joinServiceProvider,
@@ -879,6 +884,7 @@ class JoinServiceProvider extends AutoDisposeFutureProvider<double?> {
           isDouble: isDouble,
           isReserve: isReserve,
           isLesson: isLesson,
+          pendingPayment: pendingPayment,
           isApprovalNeeded: isApprovalNeeded,
         );
 
@@ -897,6 +903,7 @@ class JoinServiceProvider extends AutoDisposeFutureProvider<double?> {
     required this.isDouble,
     required this.isReserve,
     required this.isLesson,
+    required this.pendingPayment,
     required this.isApprovalNeeded,
   }) : super.internal();
 
@@ -908,6 +915,7 @@ class JoinServiceProvider extends AutoDisposeFutureProvider<double?> {
   final bool isDouble;
   final bool isReserve;
   final bool isLesson;
+  final bool? pendingPayment;
   final bool isApprovalNeeded;
 
   @override
@@ -931,6 +939,7 @@ class JoinServiceProvider extends AutoDisposeFutureProvider<double?> {
         isDouble: isDouble,
         isReserve: isReserve,
         isLesson: isLesson,
+        pendingPayment: pendingPayment,
         isApprovalNeeded: isApprovalNeeded,
       ),
     );
@@ -952,6 +961,7 @@ class JoinServiceProvider extends AutoDisposeFutureProvider<double?> {
         other.isDouble == isDouble &&
         other.isReserve == isReserve &&
         other.isLesson == isLesson &&
+        other.pendingPayment == pendingPayment &&
         other.isApprovalNeeded == isApprovalNeeded;
   }
 
@@ -966,6 +976,7 @@ class JoinServiceProvider extends AutoDisposeFutureProvider<double?> {
     hash = _SystemHash.combine(hash, isDouble.hashCode);
     hash = _SystemHash.combine(hash, isReserve.hashCode);
     hash = _SystemHash.combine(hash, isLesson.hashCode);
+    hash = _SystemHash.combine(hash, pendingPayment.hashCode);
     hash = _SystemHash.combine(hash, isApprovalNeeded.hashCode);
 
     return _SystemHash.finish(hash);
@@ -999,6 +1010,9 @@ mixin JoinServiceRef on AutoDisposeFutureProviderRef<double?> {
   /// The parameter `isLesson` of this provider.
   bool get isLesson;
 
+  /// The parameter `pendingPayment` of this provider.
+  bool? get pendingPayment;
+
   /// The parameter `isApprovalNeeded` of this provider.
   bool get isApprovalNeeded;
 }
@@ -1023,6 +1037,8 @@ class _JoinServiceProviderElement
   bool get isReserve => (origin as JoinServiceProvider).isReserve;
   @override
   bool get isLesson => (origin as JoinServiceProvider).isLesson;
+  @override
+  bool? get pendingPayment => (origin as JoinServiceProvider).pendingPayment;
   @override
   bool get isApprovalNeeded => (origin as JoinServiceProvider).isApprovalNeeded;
 }

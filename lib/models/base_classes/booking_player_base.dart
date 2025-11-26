@@ -113,6 +113,9 @@ class BookingPlayerBase {
   int? id;
   bool? isOrganizer;
   bool? isCanceled;
+  String? status;
+  double? paidPrice;
+  double? pendingPrice;
 
   bool? reserved = false;
   int? position;
@@ -148,6 +151,9 @@ class BookingPlayerBase {
       this.id,
       this.isOrganizer,
       this.isCanceled,
+      this.status,
+      this.paidPrice,
+      this.pendingPrice,
       this.position});
 
   Map<String, dynamic> toJson() {
@@ -161,6 +167,9 @@ class BookingPlayerBase {
     }
     data['is_organizer'] = isOrganizer ?? false;
     data['is_canceled'] = isCanceled ?? false;
+    data['status'] = status;
+    data['paid_price'] = paidPrice;
+    data['pending_price'] = pendingPrice;
     data['position'] = position;
     data['reserved'] = reserved;
     if (guest != null) {
@@ -189,6 +198,9 @@ class BookingPlayerBase {
     id = json['id'];
     isOrganizer = json['is_organizer'];
     isCanceled = json['is_canceled'];
+    status = json['status'];
+    paidPrice = double.tryParse(json['paid_price']?.toString() ?? '');
+    pendingPrice = double.tryParse(json['pending_price']?.toString() ?? '');
     position = json['position'];
     reserved = json['reserved'] ?? false;
     guest = json['guest'] != null ? Guest.fromJson(json['guest']) : null;

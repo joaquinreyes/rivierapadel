@@ -218,13 +218,14 @@ class PlayRepo {
       required bool isLesson,
       required bool isDouble,
       required bool isReserve,
+      required bool pendingPayment,
       bool isApprovalNeeded = false}) async {
     try {
       if (isEvent && isOpenMatch) {
         throw "Either event or open match";
       }
       final apiManager = ref.read(apiManagerProvider);
-      final token = ref.read(userManagerProvider).user?.accessToken!;
+      final token = ref.read(userManagerProvider).user?.accessToken ?? "";
       Map<String, dynamic> data = {
         "request_type": isReserve ? "Reserved" : "Join",
       };
@@ -251,6 +252,7 @@ class PlayRepo {
         isV2Version: true,
         data,
         token: token,
+        queryParams: {"pending_payment": pendingPayment},
         pathParams: [id.toString()],
       );
       if (isApprovalNeeded) {
@@ -582,6 +584,7 @@ Future<double?> joinService(JoinServiceRef ref, int id,
     required bool isDouble,
     required bool isReserve,
     required bool isLesson,
+    bool? pendingPayment,
     bool isApprovalNeeded = false}) async {
   return ref.read(playRepoProvider).joinService(
         ref,
@@ -593,6 +596,7 @@ Future<double?> joinService(JoinServiceRef ref, int id,
         isDouble: isDouble,
         isReserve: isReserve,
         isLesson: isLesson,
+        pendingPayment: pendingPayment ?? false,
         isApprovalNeeded: isApprovalNeeded,
       );
 }

@@ -20,6 +20,7 @@ import 'package:acepadel/models/court_booking.dart';
 import 'package:acepadel/repository/booking_repo.dart';
 import 'package:acepadel/repository/club_repo.dart';
 import 'package:acepadel/repository/payment_repo.dart';
+import 'package:acepadel/repository/play_repo.dart';
 import 'package:acepadel/screens/home_screen/tabs/booking_tab/court_booked_dialog.dart';
 import 'package:acepadel/screens/payment_information/payment_information.dart';
 import 'package:acepadel/utils/custom_extensions.dart';
@@ -44,6 +45,13 @@ class BookCourtDialog extends ConsumerStatefulWidget {
       this.isOnlyOpenMatch = false,
       this.showRefund = false,
       this.courtPriceRequestType,
+      this.allowPayLater = true,
+      this.getPendingPayment = false,
+      this.defaultOpenMatch = false,
+      this.eventDoubleJoin = false,
+      this.joinEvent = false,
+      this.joinOpenMatch = true,
+      this.joinLesson = false,
       required this.court});
 
   final Bookings bookings;
@@ -53,6 +61,14 @@ class BookCourtDialog extends ConsumerStatefulWidget {
   final bool isOnlyOpenMatch;
   final bool showRefund;
   final int? coachId;
+  final bool allowPayLater;
+  final bool getPendingPayment;
+  final bool joinEvent;
+  final bool joinOpenMatch;
+  final bool joinLesson;
+
+  final bool eventDoubleJoin;
+  final bool defaultOpenMatch;
 
   @override
   ConsumerState<ConsumerStatefulWidget> createState() =>
@@ -63,7 +79,6 @@ class _BookCourtDialogState extends ConsumerState<BookCourtDialog> {
   bool isPaid = true;
   late final List<int> courtIdList;
 
-
   double? storePrice;
 
   @override
@@ -73,8 +88,10 @@ class _BookCourtDialogState extends ConsumerState<BookCourtDialog> {
     Future(() {
       if (widget.isOnlyOpenMatch) {
         ref.read(_isOpenMatchProvider.notifier).state = widget.isOnlyOpenMatch;
+      } else if (widget.defaultOpenMatch) {
+        ref.read(_isOpenMatchProvider.notifier).state = true;
       } else {
-        ref.refresh(_isOpenMatchProvider);
+        ref.invalidate(_isOpenMatchProvider);
       }
       ref.refresh(_isFriendlyMatchProvider);
       ref.refresh(_isApprovePlayersProvider);
@@ -103,6 +120,7 @@ class _BookCourtDialogState extends ConsumerState<BookCourtDialog> {
         serviceId: widget.bookings.id ?? 0,
         reserveCounter: reserveSpotsForMatch,
         isOpenMatch: widget.isOnlyOpenMatch,
+        pendingPayment: widget.getPendingPayment,
         coachId: widget.coachId,
         durationInMin: widget.bookings.duration ?? 0,
         courtId: courtIdList,
@@ -184,8 +202,7 @@ class _BookCourtDialogState extends ConsumerState<BookCourtDialog> {
                       : value.cancellationPolicy?.cancellationTimeInHours;
 
                   storePrice =
-                      (isOpenMatch ? value.openMatchPrice : value.price) ??
-                          0;
+                      (isOpenMatch ? value.openMatchPrice : value.price) ?? 0;
                 }
                 return Column(
                   children: [
@@ -228,32 +245,29 @@ class _BookCourtDialogState extends ConsumerState<BookCourtDialog> {
               },
             ),
 
-            if (widget.bookings.isOpenMatch == true) ...[
+            if (!widget.getPendingPayment) SizedBox(height: 20.h),
+            if (widget.bookings.isOpenMatch == true &&
+                !widget.getPendingPayment) ...[
               SizedBox(height: 20.h),
               if (!widget.isOnlyOpenMatch)
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Row(
-                        crossAxisAlignment: CrossAxisAlignment.end,
-                        children: [
-                          Expanded(
-                            child: Text(
-                              "DO_YOU_WANT_TO_OPEN_THIS_MATCH".tr(context),
-                              style: AppTextStyles.balooMedium16.copyWith(
-                                color: AppColors.white,
-                                height: 1
-                              ),
-                            ),
-                          ),
-                          Text(
-                            " ${"OPTIONAL".tr(context).toLowerCase()}",
-                            style: AppTextStyles.sansRegular15.copyWith(
-                              color: AppColors.white,
-                            ),
-                          )
-                        ]
-                    ),
+                    Row(crossAxisAlignment: CrossAxisAlignment.end, children: [
+                      Expanded(
+                        child: Text(
+                          "DO_YOU_WANT_TO_OPEN_THIS_MATCH".tr(context),
+                          style: AppTextStyles.balooMedium16
+                              .copyWith(color: AppColors.white, height: 1),
+                        ),
+                      ),
+                      Text(
+                        " ${"OPTIONAL".tr(context).toLowerCase()}",
+                        style: AppTextStyles.sansRegular15.copyWith(
+                          color: AppColors.white,
+                        ),
+                      )
+                    ]),
                     // RichText(
                     //   text: TextSpan(
                     //     text: "DO_YOU_WANT_TO_OPEN_THIS_MATCH".tr(context),
@@ -281,7 +295,7 @@ class _BookCourtDialogState extends ConsumerState<BookCourtDialog> {
                     ),
                   ],
                 ),
-              if (isOpenMatch) const _OpenMatch(),
+              if (isOpenMatch && !widget.getPendingPayment) const _OpenMatch(),
             ],
             SizedBox(height: 20.h),
             Align(
@@ -297,8 +311,9 @@ class _BookCourtDialogState extends ConsumerState<BookCourtDialog> {
             MainButton(
               enabled: price > 0,
               padding: EdgeInsets.zero,
-              label:
-                  isOpenMatch ? "PAY_MY_SHARE".trU(context) : "PAY".trU(context),
+              label: isOpenMatch
+                  ? "PAY_MY_SHARE".trU(context)
+                  : "PAY".trU(context),
               isForPopup: true,
               onTap: () {
                 _payCourt(false, isPaid ? price : (price - refundAmount),
@@ -306,7 +321,7 @@ class _BookCourtDialogState extends ConsumerState<BookCourtDialog> {
               },
             ),
             SizedBox(height: 5.h),
-            if (!widget.isOnlyOpenMatch)
+            if (!widget.isOnlyOpenMatch && !widget.getPendingPayment)
               MainButton(
                 color: AppColors.white25,
                 padding: EdgeInsets.zero,
@@ -332,6 +347,55 @@ class _BookCourtDialogState extends ConsumerState<BookCourtDialog> {
     final matchLevel = ref.read(_matchLevelProvider);
     final maxLevel = matchLevel.isNotEmpty ? matchLevel.last : null;
     final minLevel = matchLevel.isNotEmpty ? matchLevel.first : null;
+
+    if (widget.getPendingPayment) {
+      final provider = joinServiceProvider(widget.bookings.id!,
+          position: 1,
+          pendingPayment: widget.getPendingPayment,
+          isEvent: widget.joinEvent,
+          isOpenMatch: widget.joinOpenMatch,
+          isDouble: widget.eventDoubleJoin,
+          isReserve: false,
+          isLesson: widget.joinLesson,
+          isApprovalNeeded: isApprovalNeeded);
+      final double? price =
+          await Utils.showLoadingDialog(context, provider, ref);
+
+      if (!mounted || price == null) {
+        return;
+      }
+
+      final data = await showDialog(
+        context: context,
+        builder: (context) {
+          return PaymentInformation(
+              allowPayLater: widget.allowPayLater,
+              isOpenMatch: true,
+              getPendingPayment: true,
+              type: PaymentDetailsRequestType.join,
+              locationID: widget.bookings.location!.id!,
+              isJoiningApproval: false,
+              price: price,
+              requestType: PaymentProcessRequestType.join,
+              serviceID: widget.bookings.id!,
+              duration: widget.bookings.duration,
+              startDate: widget.bookingTime,
+              transactionRequestType: TransactionRequestType.normal,
+              courtId: widget.court.keys.first);
+        },
+      );
+
+      var (int? paymentDone, double? amount) = (null, null);
+      if (data is (int, double?)) {
+        (paymentDone, amount) = data;
+      } else if (data is int) {
+        paymentDone = data;
+      }
+      if (paymentDone != null && mounted) {
+        Navigator.pop(context, true);
+      }
+      return;
+    }
 
     if (widget.isOnlyOpenMatch) {
       final provider = upgradeBookingToOpenProvider(
@@ -475,17 +539,19 @@ class BookCourtDialogLesson extends ConsumerStatefulWidget {
 
 class _BookCourtDialogLessonState extends ConsumerState<BookCourtDialogLesson> {
   late final List<int> courtIdList;
-  final _selectedLessonVariantProvider = StateProvider<LessonVariants?>((ref) => null);
+  final _selectedLessonVariantProvider =
+      StateProvider<LessonVariants?>((ref) => null);
 
-  int? courtId ;
-  String? courtName ;
+  int? courtId;
+
+  String? courtName;
 
   @override
   void initState() {
     if (widget.courts.isNotEmpty) {
       courtId = widget.courts.first.id ?? 0;
       courtName = widget.courts.first.courtName ?? "";
-      courtIdList = [courtId ?? 0 ];
+      courtIdList = [courtId ?? 0];
     } else {
       courtIdList = [];
     }

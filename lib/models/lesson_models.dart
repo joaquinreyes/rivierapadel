@@ -1,6 +1,7 @@
 import 'package:acepadel/models/base_classes/booking_base.dart';
 import 'package:acepadel/models/service_detail_model.dart';
 import 'package:acepadel/utils/custom_extensions.dart';
+import 'court_booking.dart';
 import 'lesson_model_new.dart';
 
 class LessonsModel {

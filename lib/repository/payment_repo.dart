@@ -109,6 +109,7 @@ class PaymentRepo {
       double? totalAmount,
       int? locationID,
       required bool purchaseMembership,
+      required bool pendingPayment,
       int? serviceID,
       bool isJoiningApproval = false,
       int? couponID}) async {
@@ -145,6 +146,7 @@ class PaymentRepo {
       if (requestType != PaymentProcessRequestType.courtBooking) {
         queryParams['request_type'] = requestType.value;
         queryParams['service_booking_id'] = serviceID;
+        queryParams['pending_payment'] = pendingPayment;
         if (isJoiningApproval) {
           queryParams['joninning_approval'] = isJoiningApproval;
         }
@@ -333,6 +335,7 @@ Future<(int?, String?, double?)> paymentProcess(
   int? locationID,
   bool isJoiningApproval = false,
   bool purchaseMembership = false,
+  required bool pendingPayment,
   int? couponID,
 }) {
   return ref.read(paymentRepoProvider).paymentProcess(ref,
@@ -344,6 +347,7 @@ Future<(int?, String?, double?)> paymentProcess(
       locationID: locationID,
       purchaseMembership: purchaseMembership,
       isJoiningApproval: isJoiningApproval,
+      pendingPayment: pendingPayment,
       couponID: couponID);
 }
 

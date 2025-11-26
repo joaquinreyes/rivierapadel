@@ -1,7 +1,12 @@
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:acepadel/models/base_classes/booking_base.dart';
 import 'package:acepadel/models/base_classes/booking_player_base.dart';
 import 'package:acepadel/models/service_detail_model.dart';
 import 'package:acepadel/utils/custom_extensions.dart';
+
+import '../managers/user_manager.dart';
+import 'court_booking.dart';
+import 'lesson_model_new.dart';
 
 class UserBookings extends BookingBase {
   bool? isCancelled;
@@ -10,6 +15,26 @@ class UserBookings extends BookingBase {
   List<Players>? players;
   List<RequestWaitingList>? requestWaitingList;
   OpenMatchOptions? openMatchOptions;
+
+  bool isPlayerPendingPayment(WidgetRef ref) {
+    final currentUserID = ref.read(userManagerProvider).user?.user?.id;
+    return (players ?? []).any((element) =>
+        element.customer?.id == currentUserID &&
+        (element.status ?? "").toLowerCase() == "pending payment" &&
+        !(element.isCanceled ?? false));
+  }
+
+  double pricePaid(WidgetRef ref) {
+    final currentUserID = ref.read(userManagerProvider).user?.user?.id;
+    final index2 = (players ?? []).indexWhere(
+      (element) => element.customer?.id == currentUserID,
+    );
+    if (index2 != -1) {
+      return (players?[index2].paidPrice ?? 0) +
+          (players?[index2].pendingPrice ?? 0);
+    }
+    return service?.price ?? 0;
+  }
 
   List<ServiceDetail_Coach> get getCoaches {
     final seenIds = <dynamic>{};
@@ -222,30 +247,6 @@ class Service {
   }
 }
 
-class Location {
-  int? id;
-  String? _locationName;
-  String? currency;
-
-  String get locationName => _locationName?.capitalizeFirst ?? '';
-
-  Location({this.id, String? location, this.currency})
-      : _locationName = location;
-
-  Location.fromJson(Map<String, dynamic> json) {
-    id = json['id'];
-    _locationName = json['location_name'];
-    currency = json['currency'];
-  }
-
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = <String, dynamic>{};
-    data['id'] = id;
-    data['location_name'] = locationName;
-    data['currency'] = currency;
-    return data;
-  }
-}
 
 class Players extends BookingPlayerBase {
   Players({
@@ -255,6 +256,9 @@ class Players extends BookingPlayerBase {
     super.isOrganizer,
     super.otherPlayer,
     super.isCanceled,
+    super.status,
+    super.paidPrice,
+    super.pendingPrice,
     super.position,
     super.customer,
     super.playerEventRanking,
@@ -290,25 +294,6 @@ class Players extends BookingPlayerBase {
                 )
               : null,
         );
-}
-
-class Courts {
-  int? id;
-  String? courtName;
-
-  Courts({this.id, this.courtName});
-
-  Courts.fromJson(Map<String, dynamic> json) {
-    id = json['id'];
-    courtName = json['court_name'];
-  }
-
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = <String, dynamic>{};
-    data['id'] = id;
-    data['court_name'] = courtName;
-    return data;
-  }
 }
 
 class RequestWaitingList {

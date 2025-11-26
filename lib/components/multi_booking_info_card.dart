@@ -122,7 +122,7 @@ class _MultiBookingCourtInfoCardState
                   dividerColor: widget.dividerColor,
                   bookings: Bookings(
                       duration: duration < 0 ? 0 : duration,
-                      location: Location(locationName: data.locationName)),
+                      location: Location(location: data.locationName)),
                   bookingTime: bookingTime,
                   courtName: data.courtName ?? "",
                   price: data.totalPrice,

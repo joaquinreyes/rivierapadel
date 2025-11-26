@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_i18n/flutter_i18n.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:acepadel/app_styles/app_colors.dart';
 import 'package:acepadel/components/custom_dialog.dart';
@@ -171,7 +170,7 @@ class _SigninScreenState extends ConsumerState<SigninScreen> {
                           const Spacer(),
                           MainButton(
                             enabled: canProceed,
-                            label: FlutterI18n.translate(context, "SIGN_IN").capitalEnabled(context, canProceed: canProceed),
+                            label:  "SIGN_IN".capitalEnabled(context, canProceed: canProceed),
                             showArrow: true,
                             padding: EdgeInsets.symmetric(horizontal: 10.w),
                             onTap: () async {

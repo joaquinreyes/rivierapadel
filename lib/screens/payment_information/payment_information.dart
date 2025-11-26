@@ -52,6 +52,7 @@ class PaymentInformation extends ConsumerStatefulWidget {
     this.allowWallet = true,
     this.isMultiBooking = false,
     this.purchaseMembership = false,
+    this.getPendingPayment = false,
     required this.courtId,
     required this.isOpenMatch
   });
@@ -75,6 +76,7 @@ class PaymentInformation extends ConsumerStatefulWidget {
   final int? duration;
   final int? courtId;
   final bool allowMembership;
+  final bool getPendingPayment;
 
   @override
   ConsumerState<ConsumerStatefulWidget> createState() =>
@@ -250,6 +252,7 @@ class _PaymentInformationState extends ConsumerState<PaymentInformation> {
             isVoucherPurchase: widget.isVoucherPurchase,
             isMultiBooking: widget.isMultiBooking,
             price: widget.price,
+            getPendingPayment: widget.getPendingPayment,
             requestType: widget.requestType,
             purchaseMembership: widget.purchaseMembership,
             serviceID: widget.serviceID,

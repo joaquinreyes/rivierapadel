@@ -242,14 +242,16 @@ class Bookings {
 
 class Location {
   int? id;
-  String? locationName;
+  String? _locationName;
   List<Courts>? courts;
+  String get locationName => _locationName?.capitalizeFirst ?? '';
 
-  Location({this.id, this.locationName, this.courts});
+  Location({this.id,  String? location, this.courts})
+      : _locationName = location;
 
   Location.fromJson(Map<String, dynamic> json) {
     id = json['id'];
-    locationName = json['location_name'];
+    _locationName = json['location_name'];
     if (json['courts'] != null) {
       courts = <Courts>[];
       json['courts'].forEach((v) {

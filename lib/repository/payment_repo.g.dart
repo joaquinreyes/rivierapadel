@@ -274,7 +274,7 @@ class _FetchPaymentDetailsProviderElement
   int? get duration => (origin as FetchPaymentDetailsProvider).duration;
 }
 
-String _$paymentProcessHash() => r'a708e02d2d90d5fc89655ec6cef3183565bb7fd2';
+String _$paymentProcessHash() => r'a5daf5385dc9c72f33669978e5c7a274ec600aac';
 
 /// See also [paymentProcess].
 @ProviderFor(paymentProcess)
@@ -296,6 +296,7 @@ class PaymentProcessFamily
     int? locationID,
     bool isJoiningApproval = false,
     bool purchaseMembership = false,
+    required bool pendingPayment,
     int? couponID,
   }) {
     return PaymentProcessProvider(
@@ -307,6 +308,7 @@ class PaymentProcessFamily
       locationID: locationID,
       isJoiningApproval: isJoiningApproval,
       purchaseMembership: purchaseMembership,
+      pendingPayment: pendingPayment,
       couponID: couponID,
     );
   }
@@ -324,6 +326,7 @@ class PaymentProcessFamily
       locationID: provider.locationID,
       isJoiningApproval: provider.isJoiningApproval,
       purchaseMembership: provider.purchaseMembership,
+      pendingPayment: provider.pendingPayment,
       couponID: provider.couponID,
     );
   }
@@ -356,6 +359,7 @@ class PaymentProcessProvider
     int? locationID,
     bool isJoiningApproval = false,
     bool purchaseMembership = false,
+    required bool pendingPayment,
     int? couponID,
   }) : this._internal(
           (ref) => paymentProcess(
@@ -368,6 +372,7 @@ class PaymentProcessProvider
             locationID: locationID,
             isJoiningApproval: isJoiningApproval,
             purchaseMembership: purchaseMembership,
+            pendingPayment: pendingPayment,
             couponID: couponID,
           ),
           from: paymentProcessProvider,
@@ -387,6 +392,7 @@ class PaymentProcessProvider
           locationID: locationID,
           isJoiningApproval: isJoiningApproval,
           purchaseMembership: purchaseMembership,
+          pendingPayment: pendingPayment,
           couponID: couponID,
         );
 
@@ -405,6 +411,7 @@ class PaymentProcessProvider
     required this.locationID,
     required this.isJoiningApproval,
     required this.purchaseMembership,
+    required this.pendingPayment,
     required this.couponID,
   }) : super.internal();
 
@@ -416,6 +423,7 @@ class PaymentProcessProvider
   final int? locationID;
   final bool isJoiningApproval;
   final bool purchaseMembership;
+  final bool pendingPayment;
   final int? couponID;
 
   @override
@@ -440,6 +448,7 @@ class PaymentProcessProvider
         locationID: locationID,
         isJoiningApproval: isJoiningApproval,
         purchaseMembership: purchaseMembership,
+        pendingPayment: pendingPayment,
         couponID: couponID,
       ),
     );
@@ -461,6 +470,7 @@ class PaymentProcessProvider
         other.locationID == locationID &&
         other.isJoiningApproval == isJoiningApproval &&
         other.purchaseMembership == purchaseMembership &&
+        other.pendingPayment == pendingPayment &&
         other.couponID == couponID;
   }
 
@@ -475,6 +485,7 @@ class PaymentProcessProvider
     hash = _SystemHash.combine(hash, locationID.hashCode);
     hash = _SystemHash.combine(hash, isJoiningApproval.hashCode);
     hash = _SystemHash.combine(hash, purchaseMembership.hashCode);
+    hash = _SystemHash.combine(hash, pendingPayment.hashCode);
     hash = _SystemHash.combine(hash, couponID.hashCode);
 
     return _SystemHash.finish(hash);
@@ -509,6 +520,9 @@ mixin PaymentProcessRef
   /// The parameter `purchaseMembership` of this provider.
   bool get purchaseMembership;
 
+  /// The parameter `pendingPayment` of this provider.
+  bool get pendingPayment;
+
   /// The parameter `couponID` of this provider.
   int? get couponID;
 }
@@ -538,6 +552,8 @@ class _PaymentProcessProviderElement
   @override
   bool get purchaseMembership =>
       (origin as PaymentProcessProvider).purchaseMembership;
+  @override
+  bool get pendingPayment => (origin as PaymentProcessProvider).pendingPayment;
   @override
   int? get couponID => (origin as PaymentProcessProvider).couponID;
 }

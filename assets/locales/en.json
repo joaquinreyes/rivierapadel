@@ -407,5 +407,8 @@
   "USAGE": "Usage",
   "DURATION": "Duration",
   "HOUR": "Hour",
-  "YOU_HAVE_PURCHASED_MEMBERSHIP_SUCCESSFULLY": "You have purchased package successfully"
+  "YOU_HAVE_PURCHASED_MEMBERSHIP_SUCCESSFULLY": "You have purchased package successfully",
+  "BOOKING_UNPAID": "Booking Unpaid",
+  "PAY_NOW": "Pay Now",
+  "YOU_HAVE_PAID_SUCCESSFULLY": "You have paid successfully"
 }
