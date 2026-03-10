@@ -1,3 +1,4 @@
+import 'package:dio/dio.dart';
 import 'dart:developer';
 import 'dart:isolate';
 
@@ -33,6 +34,7 @@ import 'package:acepadel/screens/app_provider.dart';
 import 'package:acepadel/utils/custom_extensions.dart';
 
 import '../../../managers/fcm_manager.dart';
+import '../../../managers/api_manager.dart';
 part 'signup_form_tab.dart';
 part 'select_your_position_tab.dart';
 part 'level_assessment_tab.dart';

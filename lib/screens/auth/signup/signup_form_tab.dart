@@ -24,6 +24,10 @@ class _SignUpFormTabState extends ConsumerState<_SignUpFormTab> {
   bool _isPasswordVisible = false;
   GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
+  String? _backendTermsText;
+  String? _backendPrivacyText;
+  bool _policiesLoaded = false;
+
   String dialCode = '+62';
   bool get _canProceed =>
       _firstNameController.text.isNotEmpty &&
@@ -40,7 +44,44 @@ class _SignUpFormTabState extends ConsumerState<_SignUpFormTab> {
     _firstNameController.text = widget.registerModel.firstName ?? '';
     _lastNameController.text = widget.registerModel.lastName ?? '';
     dialCode = widget.registerModel.phoneCode ?? '+62';
+    _fetchPolicies();
     super.initState();
+  }
+
+  Future<void> _fetchPolicies() async {
+    try {
+      final response = await Dio().get('$kBaseURL/$kClubID/policies');
+      final data = response.data?['data'];
+      if (data != null && mounted) {
+        setState(() {
+          final terms = data['terms_and_conditions'];
+          if (terms != null && terms.toString().isNotEmpty) {
+            _backendTermsText = terms.toString()
+                .replaceAll(RegExp(r'<[^>]*>'), '')
+                .replaceAll('&nbsp;', ' ')
+                .replaceAll('&amp;', '&')
+                .replaceAll('&lt;', '<')
+                .replaceAll('&gt;', '>')
+                .replaceAll('&quot;', '"')
+                .trim();
+            if (_backendTermsText!.isEmpty) _backendTermsText = null;
+          }
+          final privacy = data['privacy_policy'];
+          if (privacy != null && privacy.toString().isNotEmpty) {
+            _backendPrivacyText = privacy.toString()
+                .replaceAll(RegExp(r'<[^>]*>'), '')
+                .replaceAll('&nbsp;', ' ')
+                .replaceAll('&amp;', '&')
+                .replaceAll('&lt;', '<')
+                .replaceAll('&gt;', '>')
+                .replaceAll('&quot;', '"')
+                .trim();
+            if (_backendPrivacyText!.isEmpty) _backendPrivacyText = null;
+          }
+        });
+      }
+    } catch (_) {}
+    if (mounted) setState(() => _policiesLoaded = true);
   }
 
   @override
@@ -308,8 +349,8 @@ class _SignUpFormTabState extends ConsumerState<_SignUpFormTab> {
               SizedBox(height: 20.h),
               Text(
                 isTerms
-                    ? 'TERMS_AND_CONDITIONS_TEXT'.tr(context)
-                    : "OPT_IN_FOR_COMMUNICATIONS_TEXT".tr(context),
+                    ? _backendTermsText ?? 'TERMS_AND_CONDITIONS_TEXT'.tr(context)
+                    : _backendPrivacyText ?? "OPT_IN_FOR_COMMUNICATIONS_TEXT".tr(context),
                 textAlign: TextAlign.center,
                 style: AppTextStyles.sansRegular15,
               ),
