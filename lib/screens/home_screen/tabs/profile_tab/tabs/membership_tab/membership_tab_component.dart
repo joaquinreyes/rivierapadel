@@ -1,5 +1,13 @@
 part of 'membership_tab.dart';
 
+/// GZ#1508 — pairs a catalog membership with ONE of its active rows so the list
+/// can render a separate card per active membership of the same type.
+class _MembershipRowEntry {
+  final MembershipModel membership;
+  final ActiveMemberships? active;
+  _MembershipRowEntry({required this.membership, required this.active});
+}
+
 class _MembershipInfoDialog extends StatelessWidget {
   final ActiveMemberships? activeMembership;
 
@@ -291,14 +299,32 @@ class MembershipListComponent extends ConsumerWidget {
     required WidgetRef ref,
     required List<MembershipModel> membershipModels,
   }) {
+    // GZ#1508 — a customer may hold several active rows of the same membership
+    // type (e.g. a 0-hour pass + a freshly topped-up one). Flatten the catalog
+    // into one entry per active row so EACH renders its own card, instead of a
+    // single `lastWhere` match hiding the rest. Non-active types yield one
+    // entry with a null active row (the "GET_MEMBERSHIP" CTA).
+    final entries = <_MembershipRowEntry>[];
+    for (final e in membershipModels) {
+      final actives = data.activeMembershipsFor(e.id ?? 0);
+      if (actives.isNotEmpty) {
+        for (final am in actives) {
+          entries.add(_MembershipRowEntry(membership: e, active: am));
+        }
+      } else {
+        entries.add(_MembershipRowEntry(membership: e, active: null));
+      }
+    }
+
     return ListView.builder(
       shrinkWrap: true,
       physics: const NeverScrollableScrollPhysics(),
-      itemCount: membershipModels.length,
+      itemCount: entries.length,
       itemBuilder: (BuildContext context, int index) {
-        final e = membershipModels[index];
+        final entry = entries[index];
+        final e = entry.membership;
         final membershipName = e.membershipName ?? "";
-        final activeMembership = data.activeMemberships(e.id ?? 0);
+        final activeMembership = entry.active;
 
         return Padding(
           padding: EdgeInsets.only(bottom: 5.h),
