@@ -39,6 +39,19 @@ class AuthRepo {
     }
   }
 
+  Future<bool> setPassword(Ref ref, String email, String password) async {
+    try {
+      final apiManager = ref.read(apiManagerProvider);
+      await apiManager.post(ref, ApiEndPoint.setUserPassword, {
+        'email': email,
+        'password': password,
+      });
+      return true;
+    } catch (e) {
+      return false;
+    }
+  }
+
   Future<AppUser> signup(RegisterModel? model, Ref ref) async {
     try {
       final apiManager = ref.read(apiManagerProvider);
@@ -52,6 +65,12 @@ class AuthRepo {
       throw "Some error occured";
     } catch (e) {
       if (e is Map<String, dynamic>) {
+        if (e['message'].toString() == 'ACCOUNT_EXISTS_NO_PASSWORD') {
+          final done = await setPassword(ref, model!.email!, model.password!);
+          if (done) {
+            return signIn(model.email!, model.password!, ref);
+          }
+        }
         throw e['message'];
       }
       rethrow;

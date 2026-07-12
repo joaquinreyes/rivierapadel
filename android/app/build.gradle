@@ -60,8 +60,8 @@ android {
         // For more information, see: https://docs.flutter.dev/deployment/android#reviewing-the-gradle-build-configuration.
         minSdk = 24
         targetSdk = 35
-        versionCode 11
-        versionName '1.0.10'
+        versionCode flutterVersionCode.toInteger()
+        versionName flutterVersionName
         multiDexEnabled true
         externalNativeBuild {
             cmake {

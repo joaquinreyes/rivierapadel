@@ -287,7 +287,7 @@ class _BookingTabState extends ConsumerState<BookingTab> {
   }
 
   Widget _body(List<ClubLocationData> locationsData, CourtBookingData data) {
-    final selectedDate = ref.watch(selectedDateProvider);
+    final selectedDate = ref.read(selectedDateProvider);
     final vouchers = ref.watch(getVouchersApiProvider);
     return Column(
       mainAxisSize: MainAxisSize.min,
@@ -679,11 +679,12 @@ class _BookingTabState extends ConsumerState<BookingTab> {
   }
 
   void _invalidateDateIfBeyondFutureLimit(int futureDateLength) {
-    final selectedDate = ref.watch(selectedDateProvider);
+    if (futureDateLength <= 1) return;
+    final selectedDate = ref.read(selectedDateProvider);
     final today = DubaiDateTime.now();
     final difference =
         selectedDate.dateTime.difference(today.dateTime).inDays + 1;
-    if (difference >= futureDateLength) {
+    if (difference > futureDateLength) {
       Future(() {
         ref.invalidate(selectedDateProvider);
       });

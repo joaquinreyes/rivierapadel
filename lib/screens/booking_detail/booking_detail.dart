@@ -2,7 +2,7 @@ import 'package:acepadel/components/changes_cancelled_details_card.dart';
 import 'package:acepadel/components/custom_dialog.dart';
 import 'package:acepadel/components/main_button.dart';
 import 'package:acepadel/repository/booking_repo.dart';
-import 'package:acepadel/repository/play_repo.dart';
+import 'package:acepadel/repository/club_repo.dart';import 'package:acepadel/repository/play_repo.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -148,6 +148,10 @@ class _DataBody extends ConsumerWidget {
           ChangesCancelledDetailsCard(
             heading: "BOOKING_CANCELLED".tr(context),
             description: "CANCEL_DESC".tr(context),
+            contactPhone: ref.read(clubLocationsProvider).value
+                ?.where((l) => l.id == userBooking.service?.location?.id)
+                .firstOrNull
+                ?.locationNumber,
           ),
         SizedBox(height: 15.h),
         ],

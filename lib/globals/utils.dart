@@ -58,7 +58,7 @@ class Utils {
       // final Uri url = Uri.parse('$kWhatsAppLink?text=$encodedMessage');
 
       if (await canLaunchUrl(url)) {
-        await launchUrl(url);
+        await launchUrl(url, mode: LaunchMode.externalApplication);
       } else {
         if (!context.mounted) {
           return;
@@ -302,13 +302,14 @@ class Utils {
 
   static Future<void> openWhatsappSupport(
       {String message = "Hello $kAppName",
+      String? phone,
       required BuildContext context}) async {
     try {
       final Uri url =
-          Uri.parse('whatsapp://send?phone=$kWhatsAppContact&text=$message');
+          Uri.parse('https://wa.me/${phone ?? kWhatsAppContact}?text=${Uri.encodeComponent(message)}');
       // Uri.parse('$kWhatsAppLink?phone=$kWhatsAppContact&text=$message');
       if (await canLaunchUrl(url)) {
-        await launchUrl(url);
+        await launchUrl(url, mode: LaunchMode.externalApplication);
       } else {
         if (!context.mounted) {
           return;

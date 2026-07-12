@@ -2,7 +2,7 @@ import 'dart:math';
 
 import 'package:acepadel/components/custom_dialog.dart';
 import 'package:acepadel/repository/booking_repo.dart';
-import 'package:flutter/cupertino.dart';
+import 'package:acepadel/repository/club_repo.dart';import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';

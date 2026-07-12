@@ -1,0 +1,171 @@
+name: Deploy to App Store & Play Store
+
+on:
+  workflow_dispatch:
+    inputs:
+      platform:
+        description: "Platform to deploy"
+        required: true
+        type: choice
+        options:
+          - android
+          - ios
+          - both
+      build_number:
+        description: "Build number (e.g. 140). Leave empty to auto-increment."
+        required: false
+        type: string
+      version_name:
+        description: "Version name (e.g. 2.0.70). Leave empty to keep current."
+        required: false
+        type: string
+
+concurrency:
+  group: deploy-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  # ─── iOS ───────────────────────────────────────────────────────────────
+  ios:
+    if: ${{ github.event.inputs.platform == 'ios' || github.event.inputs.platform == 'both' }}
+    runs-on: macos-latest
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: "3.22.0"
+          channel: stable
+          cache: true
+
+      - name: Setup Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: "3.2"
+          bundler-cache: true
+          working-directory: ios
+
+      - name: Install Apple certificate and provisioning profile
+        env:
+          DISTRIBUTION_CERT_BASE64: ${{ secrets.IOS_DISTRIBUTION_CERT_BASE64 }}
+          DISTRIBUTION_CERT_PASSWORD: ${{ secrets.IOS_DISTRIBUTION_CERT_PASSWORD }}
+          PROVISIONING_PROFILE_BASE64: ${{ secrets.IOS_PROVISIONING_PROFILE_BASE64 }}
+          KEYCHAIN_PASSWORD: ${{ github.run_id }}
+        run: |
+          # Decode files
+          CERT_PATH=$RUNNER_TEMP/distribution.p12
+          PROFILE_PATH=$RUNNER_TEMP/profile.mobileprovision
+          KEYCHAIN_PATH=$RUNNER_TEMP/app-signing.keychain-db
+
+          echo -n "$DISTRIBUTION_CERT_BASE64" | base64 --decode > "$CERT_PATH"
+          echo -n "$PROVISIONING_PROFILE_BASE64" | base64 --decode > "$PROFILE_PATH"
+
+          # Create temporary keychain
+          security create-keychain -p "$KEYCHAIN_PASSWORD" "$KEYCHAIN_PATH"
+          security set-keychain-settings -lut 21600 "$KEYCHAIN_PATH"
+          security unlock-keychain -p "$KEYCHAIN_PASSWORD" "$KEYCHAIN_PATH"
+
+          # Import certificate
+          security import "$CERT_PATH" -P "$DISTRIBUTION_CERT_PASSWORD" -A -t cert -f pkcs12 -k "$KEYCHAIN_PATH"
+          security set-key-partition-list -S apple-tool:,apple: -k "$KEYCHAIN_PASSWORD" "$KEYCHAIN_PATH"
+          security list-keychain -d user -s "$KEYCHAIN_PATH"
+
+          # Install provisioning profile
+          mkdir -p ~/Library/MobileDevice/Provisioning\ Profiles
+          PROFILE_UUID=$(/usr/libexec/PlistBuddy -c "Print UUID" /dev/stdin <<< $(/usr/bin/security cms -D -i "$PROFILE_PATH"))
+          cp "$PROFILE_PATH" ~/Library/MobileDevice/Provisioning\ Profiles/"$PROFILE_UUID".mobileprovision
+
+      - name: Get dependencies
+        run: flutter pub get
+
+      - name: Build IPA
+        run: |
+          BUILD_ARGS="--release --export-options-plist=ios/ExportOptions.plist"
+          if [ -n "${{ github.event.inputs.build_number }}" ]; then
+            BUILD_ARGS="$BUILD_ARGS --build-number=${{ github.event.inputs.build_number }}"
+          fi
+          if [ -n "${{ github.event.inputs.version_name }}" ]; then
+            BUILD_ARGS="$BUILD_ARGS --build-name=${{ github.event.inputs.version_name }}"
+          fi
+          flutter build ipa $BUILD_ARGS
+
+      - name: Upload to App Store Connect
+        env:
+          APPSTORE_API_KEY_ID: ${{ secrets.APPSTORE_API_KEY_ID }}
+          APPSTORE_API_ISSUER_ID: ${{ secrets.APPSTORE_API_ISSUER_ID }}
+          APPSTORE_API_PRIVATE_KEY: ${{ secrets.APPSTORE_API_PRIVATE_KEY }}
+        working-directory: ios
+        run: bundle exec fastlane deploy
+
+      - name: Cleanup keychain
+        if: always()
+        run: security delete-keychain $RUNNER_TEMP/app-signing.keychain-db 2>/dev/null || true
+
+  # ─── Android ───────────────────────────────────────────────────────────
+  android:
+    if: ${{ github.event.inputs.platform == 'android' || github.event.inputs.platform == 'both' }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "17"
+
+      - name: Setup Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: "3.22.0"
+          channel: stable
+          cache: true
+
+      - name: Setup Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: "3.2"
+          bundler-cache: true
+          working-directory: android
+
+      - name: Decode keystore and create key.properties
+        env:
+          KEYSTORE_BASE64: ${{ secrets.ANDROID_KEYSTORE_BASE64 }}
+          KEYSTORE_PASSWORD: ${{ secrets.ANDROID_KEYSTORE_PASSWORD }}
+          KEY_ALIAS: ${{ secrets.ANDROID_KEY_ALIAS }}
+          KEY_PASSWORD: ${{ secrets.ANDROID_KEY_PASSWORD }}
+        run: |
+          KEYSTORE_PATH=$RUNNER_TEMP/keystore.jks
+          echo -n "$KEYSTORE_BASE64" | base64 --decode > "$KEYSTORE_PATH"
+
+          cat > android/key.properties <<KEYEOF
+          storePassword=$KEYSTORE_PASSWORD
+          keyPassword=$KEY_PASSWORD
+          keyAlias=$KEY_ALIAS
+          storeFile=$KEYSTORE_PATH
+          KEYEOF
+          # Remove leading whitespace from key.properties
+          sed -i 's/^[[:space:]]*//' android/key.properties
+
+      - name: Get dependencies
+        run: flutter pub get
+
+      - name: Build AAB
+        run: |
+          BUILD_ARGS="--release"
+          if [ -n "${{ github.event.inputs.build_number }}" ]; then
+            BUILD_ARGS="$BUILD_ARGS --build-number=${{ github.event.inputs.build_number }}"
+          fi
+          if [ -n "${{ github.event.inputs.version_name }}" ]; then
+            BUILD_ARGS="$BUILD_ARGS --build-name=${{ github.event.inputs.version_name }}"
+          fi
+          flutter build appbundle $BUILD_ARGS
+
+      - name: Upload to Google Play
+        env:
+          PLAY_STORE_JSON_KEY: ${{ secrets.PLAY_STORE_JSON_KEY }}
+        working-directory: android
+        run: bundle exec fastlane deploy

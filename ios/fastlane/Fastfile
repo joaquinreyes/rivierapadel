@@ -1,49 +1,46 @@
-# This file contains the fastlane.tools configuration
-# You can find the documentation at https://docs.fastlane.tools
-#
-# For a list of all available actions, check out
-#
-#     https://docs.fastlane.tools/actions
-#
-# For a list of all available plugins, check out
-#
-#     https://docs.fastlane.tools/plugins/available-plugins
-#
-
-# Uncomment the line if you want fastlane to automatically update itself
-# update_fastlane
-
 default_platform(:ios)
 
 platform :ios do
 
-  desc "Push a new beta build to TestFlight"
-  lane :beta do
-    increment_build_number(xcodeproj: "Runner.xcodeproj")
-    build_app(workspace: "Runner.xcworkspace", scheme: "Runner")
-    upload_to_testflight
-  end
-
-  desc "Submit a new Beta Build to Crashlytics Beta"
-  lane :upload_testflight do
-    upload_to_testflight
-  end
-  
-  desc "Uplaod a new release to App Store"
-  lane :release do |options|
-    bump_type = options[:bump_type]
-    unless ["patch", "minor", "major"].include?(bump_type)
-      UI.user_error!("Invalid bump type. Use 'patch', 'minor', or 'major'.")
-    end
-    new_version = increment_version_number(
-      bump_type: bump_type
-    )
-    increment_build_number(
-      build_number: "0"
+  desc "Upload pre-built IPA to App Store Connect"
+  lane :deploy do
+    api_key = app_store_connect_api_key(
+      key_id: ENV["APPSTORE_API_KEY_ID"],
+      issuer_id: ENV["APPSTORE_API_ISSUER_ID"],
+      key_content: ENV["APPSTORE_API_PRIVATE_KEY"],
+      is_key_content_base64: false
     )
 
-    build_app(workspace: "Runner.xcworkspace", scheme: "Runner")
-    upload_to_testflight
+    ipa_path = Dir.glob("../build/ios/ipa/*.ipa").first
+    UI.user_error!("No IPA found in build/ios/ipa/. Run 'flutter build ipa' first.") unless ipa_path
+
+    upload_to_app_store(
+      api_key: api_key,
+      ipa: ipa_path,
+      skip_metadata: true,
+      skip_screenshots: true,
+      precheck_include_in_app_purchases: false,
+      submit_for_review: false
+    )
   end
+
+  desc "Upload pre-built IPA to TestFlight"
+  lane :testflight_upload do
+    api_key = app_store_connect_api_key(
+      key_id: ENV["APPSTORE_API_KEY_ID"],
+      issuer_id: ENV["APPSTORE_API_ISSUER_ID"],
+      key_content: ENV["APPSTORE_API_PRIVATE_KEY"],
+      is_key_content_base64: false
+    )
+
+    ipa_path = Dir.glob("../build/ios/ipa/*.ipa").first
+    UI.user_error!("No IPA found in build/ios/ipa/. Run 'flutter build ipa' first.") unless ipa_path
+
+    upload_to_testflight(
+      api_key: api_key,
+      ipa: ipa_path,
+      skip_waiting_for_build_processing: true
+    )
+  end
+
 end
-

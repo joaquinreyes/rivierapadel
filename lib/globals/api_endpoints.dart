@@ -54,6 +54,7 @@ enum ApiEndPoint {
       isAuthRequired: true, successCode: 200),
   joinEventWaitingList("services/events/waiting-list",
       isAuthRequired: true, successCode: 201),
+  setUserPassword("users/update-account", isAuthRequired: false),
   userRecoverPassword("users/recover-password", isAuthRequired: false),
   userUpdateRecoverPassword("users/update-recover-password",
       isAuthRequired: false),
