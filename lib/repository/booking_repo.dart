@@ -10,6 +10,7 @@ import 'package:add_2_calendar/add_2_calendar.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:acepadel/globals/api_endpoints.dart';
 import 'package:acepadel/globals/constants.dart';
+import 'package:acepadel/globals/upgrade_to_open_match_result.dart';
 import 'package:acepadel/managers/api_manager.dart';
 import 'package:acepadel/managers/user_manager.dart';
 import 'package:acepadel/models/court_booking.dart';
@@ -493,7 +494,7 @@ class BookingRepo {
     }
   }
 
-  Future<double?> upgradeBookingToOpen(Ref ref,
+  Future<UpgradeToOpenMatchResult> upgradeBookingToOpen(Ref ref,
       {required Bookings booking,
       required int reservedPlayers,
       String? organizerNote,
@@ -523,7 +524,7 @@ class BookingRepo {
             data,
             token: token,
           );
-      return response['data']['service_id'].toDouble();
+      return parseUpgradeToOpenMatchResponse(response);
     } catch (e) {
       if (e is Map<String, dynamic>) {
         throw e['message'];
@@ -726,7 +727,8 @@ Future<void> bookLessonCourt(
 }
 
 @riverpod
-Future<double?> upgradeBookingToOpen(UpgradeBookingToOpenRef ref,
+Future<UpgradeToOpenMatchResult> upgradeBookingToOpen(
+    UpgradeBookingToOpenRef ref,
     {required Bookings booking,
     required int reservedPlayers,
     String? organizerNote,

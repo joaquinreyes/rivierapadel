@@ -407,25 +407,50 @@ class _BookCourtDialogState extends ConsumerState<BookCourtDialog> {
         isFriendlyMatch: isOpenMatch ? isFriendlyMatch : null,
         approvalNeeded: isOpenMatch ? isApprovalNeeded : null,
       );
-      final double? serviceId =
-          await Utils.showLoadingDialog(context, provider, ref);
+      final data = await Utils.showLoadingDialog(context, provider, ref);
       ref.invalidate(getCourtBookingProvider);
-      if (serviceId != null && mounted) {
-        await showDialog(
-          context: context,
-          builder: (context) {
-            return CourtBookedDialog(
-              storePrice: storePrice,
-              bookings: widget.bookings,
-              bookingTime: widget.bookingTime,
-              court: widget.court,
-              amountPaid: amountPaid,
-              refundAmount: refundAmount,
-              isOpenMatch: isOpenMatch,
-              serviceID: widget.bookings.id,
-            );
-          },
-        );
+      if (data is (int?, double?)) {
+        var (int? serviceId, double? amountDue) = data;
+        if (amountDue != null && mounted) {
+          final paymentData = await showDialog(
+            context: context,
+            builder: (context) {
+              return PaymentInformation(
+                  transactionRequestType: TransactionRequestType.normal,
+                  serviceID: widget.bookings.id,
+                  type: PaymentDetailsRequestType.booking,
+                  locationID: widget.bookings.location!.id!,
+                  requestType: PaymentProcessRequestType.courtBooking,
+                  price: amountDue,
+                  duration: widget.bookings.duration ?? 0,
+                  startDate: widget.bookingTime,
+                  courtId: widget.court.keys.first,
+                  isOpenMatch: isOpenMatch);
+            },
+          );
+          if (paymentData is (int, double?)) {
+            (serviceId, amountDue) = paymentData;
+          } else if (paymentData is int) {
+            serviceId = paymentData;
+          }
+        }
+        if (serviceId != null && mounted) {
+          await showDialog(
+            context: context,
+            builder: (context) {
+              return CourtBookedDialog(
+                storePrice: storePrice,
+                bookings: widget.bookings,
+                bookingTime: widget.bookingTime,
+                court: widget.court,
+                amountPaid: amountPaid,
+                refundAmount: refundAmount,
+                isOpenMatch: isOpenMatch,
+                serviceID: serviceId ?? widget.bookings.id,
+              );
+            },
+          );
+        }
       }
       ref.read(goRouterProvider).pop(widget.bookings.id);
 

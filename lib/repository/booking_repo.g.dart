@@ -1632,7 +1632,8 @@ String _$upgradeBookingToOpenHash() =>
 const upgradeBookingToOpenProvider = UpgradeBookingToOpenFamily();
 
 /// See also [upgradeBookingToOpen].
-class UpgradeBookingToOpenFamily extends Family<AsyncValue<double?>> {
+class UpgradeBookingToOpenFamily
+    extends Family<AsyncValue<UpgradeToOpenMatchResult>> {
   /// See also [upgradeBookingToOpen].
   const UpgradeBookingToOpenFamily();
 
@@ -1688,7 +1689,8 @@ class UpgradeBookingToOpenFamily extends Family<AsyncValue<double?>> {
 }
 
 /// See also [upgradeBookingToOpen].
-class UpgradeBookingToOpenProvider extends AutoDisposeFutureProvider<double?> {
+class UpgradeBookingToOpenProvider
+    extends AutoDisposeFutureProvider<UpgradeToOpenMatchResult> {
   /// See also [upgradeBookingToOpen].
   UpgradeBookingToOpenProvider({
     required Bookings booking,
@@ -1753,7 +1755,9 @@ class UpgradeBookingToOpenProvider extends AutoDisposeFutureProvider<double?> {
 
   @override
   Override overrideWith(
-    FutureOr<double?> Function(UpgradeBookingToOpenRef provider) create,
+    FutureOr<UpgradeToOpenMatchResult> Function(
+            UpgradeBookingToOpenRef provider)
+        create,
   ) {
     return ProviderOverride(
       origin: this,
@@ -1776,7 +1780,7 @@ class UpgradeBookingToOpenProvider extends AutoDisposeFutureProvider<double?> {
   }
 
   @override
-  AutoDisposeFutureProviderElement<double?> createElement() {
+  AutoDisposeFutureProviderElement<UpgradeToOpenMatchResult> createElement() {
     return _UpgradeBookingToOpenProviderElement(this);
   }
 
@@ -1809,7 +1813,8 @@ class UpgradeBookingToOpenProvider extends AutoDisposeFutureProvider<double?> {
 
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
-mixin UpgradeBookingToOpenRef on AutoDisposeFutureProviderRef<double?> {
+mixin UpgradeBookingToOpenRef
+    on AutoDisposeFutureProviderRef<UpgradeToOpenMatchResult> {
   /// The parameter `booking` of this provider.
   Bookings get booking;
 
@@ -1833,7 +1838,7 @@ mixin UpgradeBookingToOpenRef on AutoDisposeFutureProviderRef<double?> {
 }
 
 class _UpgradeBookingToOpenProviderElement
-    extends AutoDisposeFutureProviderElement<double?>
+    extends AutoDisposeFutureProviderElement<UpgradeToOpenMatchResult>
     with UpgradeBookingToOpenRef {
   _UpgradeBookingToOpenProviderElement(super.provider);
 
