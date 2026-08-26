@@ -411,7 +411,8 @@ class _BookCourtDialogState extends ConsumerState<BookCourtDialog> {
       ref.invalidate(getCourtBookingProvider);
       if (data is (int?, double?)) {
         var (int? serviceId, double? amountDue) = data;
-        if (amountDue != null && mounted) {
+        final extraDue = amountDue;
+        if (extraDue != null && mounted) {
           final paymentData = await showDialog(
             context: context,
             builder: (context) {
@@ -421,7 +422,7 @@ class _BookCourtDialogState extends ConsumerState<BookCourtDialog> {
                   type: PaymentDetailsRequestType.booking,
                   locationID: widget.bookings.location!.id!,
                   requestType: PaymentProcessRequestType.courtBooking,
-                  price: amountDue,
+                  price: extraDue,
                   duration: widget.bookings.duration ?? 0,
                   startDate: widget.bookingTime,
                   courtId: widget.court.keys.first,
